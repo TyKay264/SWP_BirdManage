@@ -1,0 +1,37 @@
+{
+  "staffs": [
+    {
+      "id": "1",
+      "username": "minhduy",
+      "email": "tnmd@gmail.com",
+      "password": "123456789",
+      "fullname": "Tran Ngo Minh Duy"
+    },
+    {
+      "id": "2",
+      "username": "quoctinh",
+      "email": "mvqt@gmail.com",
+      "password": "987654321",
+      "fullname": "Mai Van Quoc Tinh"
+    },
+    {
+      "id": "3",
+      "username": "minhduy",
+      "email": "tnmd@gmail.com",
+      "password": "123456789",
+      "fullname": "Tran Ngo Minh Duy"
+    },
+    {
+      "username": "vinh",
+      "email": "vinh@gmail.com",
+      "password": "vinh",
+      "fullname": "vinh",
+      "id": "ay1l7t1"
+    }
+  ],
+
+  "birds": [
+    { "id": "1", "name": "birds" },
+    { "id": "2", "name": "birds2" }
+  ]
+}

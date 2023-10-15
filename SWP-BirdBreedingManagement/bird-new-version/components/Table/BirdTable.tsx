@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,11 +12,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+} from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -25,8 +25,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -34,8 +34,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { birds } from "@/data/data"
+} from "@/components/ui/table";
+import { birds } from "@/data/data";
 
 // const data: Payment[] = [
 //   {
@@ -135,26 +135,24 @@ import { birds } from "@/data/data"
 //   type: string
 //   mutation: number
 
-
 // }
 
-
 export type BirdType = {
-  id: string,
-  bird_type?: string,
-  isMale?: string,
-  hatch_date?: string,
-  father_id?: string,
-  mother_id?: string,
-  cage_id?: string,
-  isAlive?: string,
-  age_range?: string,
-  mutation_rate?: number,
-  mutation_note?: string,
-  weight?: number,
-  feather_color?: string,
-  image?: string
-}
+  id: string;
+  bird_type?: string;
+  isMale?: string;
+  hatch_date?: string;
+  father_id?: string;
+  mother_id?: string;
+  cage_id?: string;
+  isAlive?: string;
+  age_range?: string;
+  mutation_rate?: number;
+  mutation_note?: string;
+  weight?: number;
+  feather_color?: string;
+  image?: string;
+};
 
 const data: BirdType[] = birds;
 
@@ -182,18 +180,19 @@ export const columns: ColumnDef<BirdType>[] = [
   {
     accessorKey: "id",
     header: () => {
-      return (
-        <div>ID</div>
-      )
+      return <div>ID</div>;
     },
-    cell: ({ row }) => <a href={`/bird/${row.original.id}`}> <div>{row.getValue("id")}</div></a>,
+    cell: ({ row }) => (
+      <a href={`/bird/${row.original.id}`}>
+        {" "}
+        <div>{row.getValue("id")}</div>
+      </a>
+    ),
   },
   {
     accessorKey: "bird_type",
     header: () => {
-      return (
-        <div>Type</div>
-      )
+      return <div>Type</div>;
     },
     cell: ({ row }) => <div>{row.getValue("bird_type")}</div>,
   },
@@ -208,39 +207,40 @@ export const columns: ColumnDef<BirdType>[] = [
           Hatch Date
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("hatch_date")}</div>,
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("hatch_date")}</div>
+    ),
   },
-
 
   {
     accessorKey: "mutation_rate",
     header: () => <div className="text-right">Mutation(%)</div>,
     cell: ({ row }) => {
-      const mutation_rate = parseFloat(row.getValue("mutation_rate"))
+      const mutation_rate = parseFloat(row.getValue("mutation_rate"));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat().format(mutation_rate)
-      return <div className="text-right font-medium">{formatted}</div>
+      const formatted = new Intl.NumberFormat().format(mutation_rate);
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     accessorKey: "weight",
     header: () => <div className="text-right">Weight(g)</div>,
     cell: ({ row }) => {
-      const weight = parseFloat(row.getValue("weight"))
+      const weight = parseFloat(row.getValue("weight"));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat().format(weight)
-      return <div className="text-right font-medium">{formatted}</div>
+      const formatted = new Intl.NumberFormat().format(weight);
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
 
       return (
         <DropdownMenu>
@@ -258,24 +258,25 @@ export const columns: ColumnDef<BirdType>[] = [
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <a href="/bird/id"><DropdownMenuItem>View details</DropdownMenuItem></a>
+            <a href="/bird/id">
+              <DropdownMenuItem>View details</DropdownMenuItem>
+            </a>
             <DropdownMenuItem>View </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
-
+      );
     },
   },
-]
+];
 
 export function BirdTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -294,7 +295,7 @@ export function BirdTable() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     // w-[45%] ml-10
@@ -330,7 +331,7 @@ export function BirdTable() {
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -346,11 +347,11 @@ export function BirdTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -410,7 +411,7 @@ export function BirdTable() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default BirdTable;
