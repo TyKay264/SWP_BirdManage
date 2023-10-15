@@ -1,0 +1,15 @@
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Khoảng cách giữa các nhóm dữ liệu */
+}
+
+.static-data {
+    flex-grow: 1; /* Để giãn phần giá trị cứng để nó chiếm hết không gian còn lại */
+    padding-left: 10px; /* Khoảng cách giữa nhãn và giá trị cứng */
+}
+
+.form-group label {
+    flex-basis: 30%; /* Độ rộng của nhãn (có thể điều chỉnh theo nhu cầu) */
+}
