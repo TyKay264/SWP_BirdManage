@@ -6,8 +6,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { CellAction } from "./cell-action";
 
 export type StaffColumn = {
+  id: string,
   username: string;
   email: string;
   fullname: string;
@@ -87,8 +89,8 @@ export const columns: ColumnDef<StaffColumn>[] = [
   //     accessorKey: "createdAt",
   //     header: "Ngày tạo",
   //   },
-  //   {
-  //     id: "actions",
-  //     cell: ({ row }) => <CellAction data={row.original} />,
-  //   },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellAction data={row.original} />,
+  },
 ];

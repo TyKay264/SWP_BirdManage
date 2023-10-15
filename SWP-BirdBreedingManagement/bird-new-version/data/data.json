@@ -27,11 +27,23 @@
       "password": "vinh",
       "fullname": "vinh",
       "id": "ay1l7t1"
+    },
+    {
+      "username": "tranngominhduy",
+      "email": "Oanhntkim68@gmail.com",
+      "password": "123",
+      "fullname": "123",
+      "id": "LYY6Ien"
     }
   ],
-
   "birds": [
-    { "id": "1", "name": "birds" },
-    { "id": "2", "name": "birds2" }
+    {
+      "id": "1",
+      "name": "birds"
+    },
+    {
+      "id": "2",
+      "name": "birds2"
+    }
   ]
 }
