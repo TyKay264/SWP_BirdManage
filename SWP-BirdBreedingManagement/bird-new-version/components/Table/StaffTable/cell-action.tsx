@@ -14,10 +14,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { StaffColumn, columns } from "./column";
+import { AlertModal } from "@/components/modals/alert-model";
+import axios from "axios";
 
 interface CellActionProps {
     data: StaffColumn;
 }
+
+// finish tự làm mấy cái kia hen
 
 export const CellAction: React.FC<CellActionProps> = ({
     data,
@@ -29,10 +33,9 @@ export const CellAction: React.FC<CellActionProps> = ({
     const onConfirm = async () => {
         try {
             setLoading(true);
+            await axios.delete(` http://localhost:3001/staffs/${data.id}`)
 
-            //   await fetch(`/api/products/${data.id}`,{
-            //     method:"DELETE"
-            //   })
+            window.location.reload();
             router.refresh();
         } catch (error) {
         } finally {
@@ -47,7 +50,12 @@ export const CellAction: React.FC<CellActionProps> = ({
 
     return (
         <>
-
+            <AlertModal
+                isOpen={open}
+                onClose={() => setOpen(false)}
+                onConfirm={onConfirm}
+                loading={loading}
+            />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">

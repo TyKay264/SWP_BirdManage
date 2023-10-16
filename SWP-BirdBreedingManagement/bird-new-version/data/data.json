@@ -17,33 +17,6 @@
       "fullname": "Mai Van Quoc Tinh",
       "createdAt": "2023-10-15T08:00:00Z",
       "roleId": 1
-    },
-    {
-      "id": "3",
-      "username": "minhduy",
-      "email": "tnmd@gmail.com",
-      "password": "123456789",
-      "fullname": "Tran Ngo Minh Duy",
-      "createdAt": "2023-10-15T08:00:00Z",
-      "roleId": 1
-    },
-    {
-      "username": "vinh",
-      "email": "vinh@gmail.com",
-      "password": "vinh",
-      "fullname": "vinh",
-      "id": "ay1l7t1",
-      "createdAt": "2023-10-15T08:00:00Z",
-      "roleId": 1
-    },
-    {
-      "username": "tranngominhduy",
-      "email": "Oanhntkim68@gmail.com",
-      "password": "123",
-      "fullname": "123",
-      "id": "LYY6Ien",
-      "createdAt": "2023-10-15T08:00:00Z",
-      "roleId": 1
     }
   ],
   "birds": [
