@@ -1,78 +1,142 @@
+'use client'
 import React from 'react'
+import axios from 'axios'
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { useForm } from 'react-hook-form'
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
+const formSchema = z.object({
+    id: z.string().min(4),
+    cageType: z.string(),
+    location: z.string(),
+})
 
 const AddCageForm = () => {
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            id: "",
+            cageType: "",
+            location: ""
+        },
+    })
+
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        //TO DO xử lý form (api)
+        console.log(values)
+        try {
+            await axios.post("http://localhost:3001/cages", values);
+            form.reset();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="card">
             <div className="card-header">
-                <h4 className="card-title">Điền Thông Tin </h4>
+                <h4 className="card-title">Điền Thông Tin Lồng</h4>
             </div>
             <div className="card-body">
                 <div className="basic-form">
-                    <form>
-                        <div className="row">
-                            <div className="col-xl-4">
-                                <div className="form-group row widget-3">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                            <div className="row">
+                                <div className="col-xl-4">
+                                </div>
 
-                                    <div className="form-input">
-                                        <label
-                                            className="labeltest"
-                                            htmlFor="file-ip-1"
-                                        >
-                                            <span>
-                                                {" "}
-                                                ... {" "}
-                                            </span>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            id="file-ip-1"
-                                            accept="image/*"
-                                            // onchange="showPreview(event);"
+                                <div className="col-xl-8">
+
+
+                                    <div className="form-group">
+                                        <FormField
+                                            control={form.control}
+                                            name="id"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormControl>
+                                                        <Input placeholder="Nhập loài lồng" {...field} className="form-control" />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
                                         />
-                                        <div className="preview">
-                                            <img
-                                                id="file-ip-1-preview"
-                                                src="#"
-                                                alt="img"
-                                            />
-                                        </div>
+                                    </div>
 
+                                    <div className="form-group">
+                                        <FormField
+                                            control={form.control}
+                                            name="cageType"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Chọn loại lồng" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Chọn loại lồng</SelectLabel>
+                                                                <SelectItem value="Lồng đơn">Lồng đơn</SelectItem>
+                                                                <SelectItem value="Lồng sinh sản">Lòng sinh sản</SelectItem>
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <FormField
+                                            control={form.control}
+                                            name="location"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormControl>
+                                                        <Input placeholder="Nhập vị trí" {...field} className="form-control" />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+
+                                    <div className="form-group text-right ">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary float-end"
+                                        >
+                                            Thêm Lồng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xl-8">
-                                <div className="form-group">
-                                    <select className="form-control form-select">
-                                        <option>Type 1</option>
-                                        <option>Type 2</option>                            
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Location"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="available"
-                                    />
-                                </div>
-
-                                <div className="form-group text-right ">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary float-end"
-                                    >
-                                        Thêm Lồng
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </Form>
                 </div>
             </div>
         </div>

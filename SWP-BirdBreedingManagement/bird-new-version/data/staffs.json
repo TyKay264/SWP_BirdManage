@@ -29,9 +29,75 @@
       "id": "ay1l7t1"
     }
   ],
-
   "birds": [
-    { "id": "1", "name": "birds" },
-    { "id": "2", "name": "birds2" }
+    {
+      "id": "A001",
+      "birdtype": {
+        "id": "1",
+        "birdtype": "Chích chòe than"
+      },
+      "sex": "male",
+      "birthday": "1/1/2023",
+      "father_id": "null",
+      "mother_id": "null",
+      "cage_id": "1",
+      "isAlive": true,
+      "age_range": "Trưởng thành",
+      "mutation_rate": 0.99,
+      "mutation_note": "bong",
+      "weight": "800",
+      "feather_color": "den trang"
+    },
+    {
+      "id": "A002",
+      "birdtype": {
+        "id": "2",
+        "birdtype": "Chính chòe lửa"
+      },
+      "sex": "female",
+      "birthday": "1/1/2023",
+      "father_id": "null",
+      "mother_id": "null",
+      "cage_id": "1",
+      "isAlive": true,
+      "age_range": "Trưởng thành",
+      "mutation_rate": 0.85,
+      "mutation_note": "bong",
+      "weight": "800",
+      "feather_color": "den trang"
+    },
+    {
+      "id": "A003",
+      "sex": "male",
+      "birthday": "2023-10-22",
+      "cageid": "A01",
+      "agerange": "truongthanh",
+      "mutationrate": "0.11",
+      "mutationnote": "siuuuuuu",
+      "weight": "800",
+      "feathercolor": "multi"
+    }
+  ],
+  "cages": [
+    {
+      "id": "A001",
+      "cageType": "Lòng đơn",
+      "location": "A"
+    },
+    {
+      "id": "A002",
+      "cageType": "Lòng đơn",
+      "location": "A"
+    },
+    {
+      "id": "A003",
+      "cageType": "Lòng đôi",
+      "location": "A"
+    },
+    {
+      "id": "A004",
+      "cageType": "Lồng sinh sản",
+      "location": "A"
+    }
   ]
 }
