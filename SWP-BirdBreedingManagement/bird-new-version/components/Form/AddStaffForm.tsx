@@ -40,7 +40,7 @@ const AddStaffForm = () => {
     //TO DO xử lý form (api)
 
     try {
-      await axios.post(" http://localhost:3001/staffs", values);
+      await axios.post("http://localhost:3001/staffs", values);
 
       form.reset();
     } catch (error) {

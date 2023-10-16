@@ -4,7 +4,7 @@ import NavHeader from "@/components/NavHeader";
 import SideBar from "@/components/SideBar";
 
 
-// npx json-server -w data/product.json -p 3001  
+// npx json-server -w data/staffs.json -p 3001
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
