@@ -8,19 +8,22 @@ import { StaffColumn } from "@/components/Table/StaffTable/column";
 
 import React from "react";
 
-const StaffIdPage = () => {
-  
+const StaffPage = () => {
+
   // step 1 -> data
   const { staffs } = useStaffs();
-
+  console.log(staffs)
   // lay ra 1 object
   const formatStaffs: StaffColumn[] = staffs.map((staff) => ({
+    id: staff.id,
     username: staff.username,
     email: staff.email,
     fullname: staff.fullname,
+    createdAt: staff.createAt,
+    roleId: staff.roleId
   }));
 
-  
+
   return (
     <>
       <div id="main-wrapper" className="show">
@@ -64,4 +67,4 @@ const StaffIdPage = () => {
   );
 };
 
-export default StaffIdPage;
+export default StaffPage;

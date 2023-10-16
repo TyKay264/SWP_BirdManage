@@ -6,8 +6,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { CellAction } from "./cell-action";
 
 export type StaffColumn = {
+  id: string,
   username: string;
   email: string;
   fullname: string;
@@ -19,17 +21,32 @@ export const columns: ColumnDef<StaffColumn>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value: any) => row.toggleSelected(!!value)}
         aria-label="Select row"
       />
     ),
+  },
+  {
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          ID
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "username",
@@ -87,8 +104,8 @@ export const columns: ColumnDef<StaffColumn>[] = [
   //     accessorKey: "createdAt",
   //     header: "Ngày tạo",
   //   },
-  //   {
-  //     id: "actions",
-  //     cell: ({ row }) => <CellAction data={row.original} />,
-  //   },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellAction data={row.original} />,
+  },
 ];

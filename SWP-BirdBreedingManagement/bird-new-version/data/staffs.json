@@ -1,34 +1,12 @@
 {
-  "staffs": [
+  "posts": [
     {
-      "id": "1",
-      "username": "minhduy",
-      "email": "tnmd@gmail.com",
-      "password": "123456789",
-      "fullname": "Tran Ngo Minh Duy"
-    },
-    {
-      "id": "2",
-      "username": "quoctinh",
-      "email": "mvqt@gmail.com",
-      "password": "987654321",
-      "fullname": "Mai Van Quoc Tinh"
-    },
-    {
-      "id": "3",
-      "username": "minhduy",
-      "email": "tnmd@gmail.com",
-      "password": "123456789",
-      "fullname": "Tran Ngo Minh Duy"
-    },
-    {
-      "username": "vinh",
-      "email": "vinh@gmail.com",
-      "password": "vinh",
-      "fullname": "vinh",
-      "id": "ay1l7t1"
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
     }
   ],
+<<<<<<< HEAD
   "birds": [
     {
       "id": "A001",
@@ -100,4 +78,16 @@
       "location": "A"
     }
   ]
+=======
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+>>>>>>> 411ec8bac8cae7e34769869e7a66de3cd5fda3fd
 }

@@ -9,9 +9,9 @@ export type StaffType = {
   fullname?: string,
   created_by?: string,
   created_date?: string,
-  role_id?: string,
+  roleId?: number,
 }
-const Profile = ({ id, username, email, password, fullname, created_by, created_date, role_id }: StaffType) => {
+const Profile = ({ id, username, email, password, fullname, created_by, created_date, roleId }: StaffType) => {
   return (
 
     <div className="card">
@@ -93,7 +93,7 @@ const Profile = ({ id, username, email, password, fullname, created_by, created_
 
                 <div className="flex justify-between mb-2.5;">
                   <label className='basis-[30%]'>Role:</label>
-                  <div className="grow pl-2.5">{role_id}</div>
+                  <div className="grow pl-2.5">{roleId}</div>
                 </div>
 
 

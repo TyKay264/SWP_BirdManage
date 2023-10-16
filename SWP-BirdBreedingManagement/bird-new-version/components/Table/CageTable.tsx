@@ -39,10 +39,9 @@ import {
 const data: Payment[] = [
   {
     id: "A01",
-    // cagetype: "",
     location: 1,
     available: "true",
-    quantity:8
+    quantity: 8
 
   },
   {
@@ -50,79 +49,79 @@ const data: Payment[] = [
     location: 2,
     available: "true",
     quantity: 10
-    },
-    
-    {
+  },
+
+  {
     id: "A03",
     location: 3,
     available: "true",
     quantity: 6
-    },
-    
-    {
+  },
+
+  {
     id: "A04",
     location: 4,
     available: "true",
     quantity: 12
-    },
-    
-    {
+  },
+
+  {
     id: "A05",
     location: 5,
     available: "true",
     quantity: 5
-    },
-    
-    {
+  },
+
+  {
     id: "A06",
     location: 6,
     available: "true",
     quantity: 9
-    },
-    
-    {
+  },
+
+  {
     id: "A07",
     location: 7,
     available: "true",
     quantity: 7
-    },
-    
-    {
+  },
+
+  {
     id: "A08",
     location: 8,
     available: "true",
     quantity: 11
-    },
-    
-    {
+  },
+
+  {
     id: "A09",
     location: 9,
     available: "true",
     quantity: 8
-    },
-    
-    {
+  },
+
+  {
     id: "A10",
     location: 10,
     available: "true",
     quantity: 4
-    },
-    
-    {
+  },
+
+  {
     id: "A11",
     location: 11,
     available: "true",
     quantity: 15
-    }
+  }
 
 ]
 
 export type Payment = {
   id: string
   // cagetype:string
-  location:number
-  available:string
-  quantity:number
+  location: number
+  available: string
+  quantity: number
 
 }
 
@@ -164,9 +163,9 @@ export const columns: ColumnDef<Payment>[] = [
         <div>Available</div>
       )
     },
-    cell: ({ row }) =>  <div>{row.getValue("available")}</div>,
+    cell: ({ row }) => <div>{row.getValue("available")}</div>,
   },
-  
+
 
 
   {

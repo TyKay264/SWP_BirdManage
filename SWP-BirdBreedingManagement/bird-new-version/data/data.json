@@ -1,0 +1,119 @@
+{
+  "staffs": [
+    {
+      "id": "1",
+      "username": "minhduy",
+      "email": "tnmd@gmail.com",
+      "password": "123456789",
+      "fullname": "Tran Ngo Minh Duy",
+      "createdAt": "2023-10-15T08:00:00Z",
+      "roleId": 1
+    },
+    {
+      "id": "2",
+      "username": "quoctinh",
+      "email": "mvqt@gmail.com",
+      "password": "987654321",
+      "fullname": "Mai Van Quoc Tinh",
+      "createdAt": "2023-10-15T08:00:00Z",
+      "roleId": 1
+    },
+    {
+      "id": "3",
+      "username": "minhduy",
+      "email": "tnmd@gmail.com",
+      "password": "123456789",
+      "fullname": "Tran Ngo Minh Duy",
+      "createdAt": "2023-10-15T08:00:00Z",
+      "roleId": 1
+    },
+    {
+      "username": "vinh",
+      "email": "vinh@gmail.com",
+      "password": "vinh",
+      "fullname": "vinh",
+      "id": "ay1l7t1",
+      "createdAt": "2023-10-15T08:00:00Z",
+      "roleId": 1
+    },
+    {
+      "username": "tranngominhduy",
+      "email": "Oanhntkim68@gmail.com",
+      "password": "123",
+      "fullname": "123",
+      "id": "LYY6Ien",
+      "createdAt": "2023-10-15T08:00:00Z",
+      "roleId": 1
+    }
+  ],
+  "birds": [
+    {
+      "id": "A01",
+      "bird_type": "Chich Choe Lua",
+      "isMale": "Trong",
+      "hatch_date": "12/02/2023",
+      "father_id": "B01",
+      "mother_id": "C01",
+      "cage_id": "D01",
+      "isAlive": "true",
+      "sex": "male",
+      "age_range": "Chim Non",
+      "mutation_rate": 1,
+      "mutation_note": "Duoi Dai",
+      "weight": 280,
+      "feather_color": "Xanh",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2FbienhoathanhsonD0%2Fchim-chich-choe-lua%2F&psig=AOvVaw0KtIVpEOiGHXfDR8RY5PYa&ust=D697427044081000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID369KO94EDFQAAAAAdAAAAABAE"
+    },
+    {
+      "id": "A02",
+      "bird_type": "Chich Choe Than",
+      "isMale": "Mai",
+      "hatch_date": "22/02/2023",
+      "father_id": "B02",
+      "mother_id": "C02",
+      "cage_id": "D02",
+      "isAlive": "true",
+      "sex": "male",
+      "age_range": "Chim Chuyen Cành",
+      "mutation_rate": 5,
+      "mutation_note": "Mat Do",
+      "weight": 300,
+      "feather_color": "Vang",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvi.alongwalker.co%2F89-hinh-anh-chim-chich-choe-than-va-chich-choe-lua-dep-nhat-s361197.html&psig=AOvVaw0KtIVpEOiGHXf1R8RY5PYa&ust=1697427044081000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID369KO94EDFQAAAAAdAAAAABAI"
+    },
+    {
+      "id": "A03",
+      "bird_type": "Chich Choe Lua",
+      "isMale": "Trong",
+      "hatch_date": "32/02/2023",
+      "father_id": "B03",
+      "mother_id": "C03",
+      "cage_id": "D03",
+      "isAlive": "true",
+      "sex": "male",
+      "age_range": "Chim Non",
+      "mutation_rate": 3,
+      "mutation_note": "",
+      "weight": 250,
+      "feather_color": "trang",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvnexpress.net%2Fhanh-khach-mat-chich-choe-10-700-usd-4033557.html&psig=AOvVaw0KtIVpEOiGHXf1R8RY5PYa&ust=1697427044081000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID369KO94EDFQAAAAAdAAAAABAO"
+    }
+  ],
+  "cages": [
+    {
+      "id": "A01",
+      "location": 1,
+      "quantity": 8
+    },
+    {
+      "id": "A02",
+      "location": 2,
+      "quantity": 10
+    },
+    {
+      "id": "A03",
+      "location": 3,
+      "quantity": 6
+    }
+  ]
+}
