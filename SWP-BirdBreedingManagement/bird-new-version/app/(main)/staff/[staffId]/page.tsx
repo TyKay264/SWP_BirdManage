@@ -26,11 +26,11 @@ const StaffIdPage = () => {
               id={IdFilter?.id}
               username={IdFilter?.username}
               email={IdFilter?.email}
-              // password={IdFilter?.password}
+              password={IdFilter?.password}
               fullname={IdFilter?.fullname}
-            // created_by={IdFilter?.created_by}
-            // created_date={IdFilter?.created_by}
-            // role_id={IdFilter?.role_id}
+              // created_by={IdFilter?.created_by}
+              // created_date={IdFilter?.createdAt}  
+              roleId={IdFilter?.roleId}
             />
           </div>
         </div>

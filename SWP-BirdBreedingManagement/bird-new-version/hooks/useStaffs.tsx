@@ -7,7 +7,10 @@ type StaffProps = {
     id: string
     username: string,
     email: string,
+    password: string,
     fullname: string,
+    createAt: Date,
+    roleId: number,
 }
 
 const useStaffs = () => {

@@ -8,7 +8,7 @@ import { StaffColumn } from "@/components/Table/StaffTable/column";
 
 import React from "react";
 
-const StaffIdPage = () => {
+const StaffPage = () => {
 
   // step 1 -> data
   const { staffs } = useStaffs();
@@ -19,6 +19,8 @@ const StaffIdPage = () => {
     username: staff.username,
     email: staff.email,
     fullname: staff.fullname,
+    createdAt: staff.createAt,
+    roleId: staff.roleId
   }));
 
 
@@ -65,4 +67,4 @@ const StaffIdPage = () => {
   );
 };
 
-export default StaffIdPage;
+export default StaffPage;

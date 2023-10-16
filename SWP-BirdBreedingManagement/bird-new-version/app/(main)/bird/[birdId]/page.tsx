@@ -1,14 +1,16 @@
 "use client"
 import Profile from '@/components/BirdId/Profile'
 import BreadScrum from '@/components/BreadScrum'
-import { birds } from '@/data/data'
+// import { birds } from '@/data/data'
+import useBirds from '@/hooks/useBirds'
+
 import { useParams } from 'next/navigation'
 
 import React from 'react'
 
 const BirdIdPage = () => {
   const params = useParams();
-
+  const { birds, loading } = useBirds()
   const IdFilter = birds.find((bird) => bird.id === params.birdId);
   return (
     <div id="main-wrapper" className="show">
@@ -22,7 +24,7 @@ const BirdIdPage = () => {
                   <Profile
                     id={IdFilter?.id}
                     bird_type={IdFilter?.bird_type}
-                    isMale={IdFilter?.isMale}
+                    isMale={IdFilter?.sex}
                     hatch_date={IdFilter?.hatch_date}
                     father_id={IdFilter?.father_id}
                     mother_id={IdFilter?.mother_id}
