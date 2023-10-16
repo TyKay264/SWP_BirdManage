@@ -115,5 +115,28 @@
       "location": 3,
       "quantity": 6
     }
+  ],
+  "processes": [
+    {
+      "id": "P01",
+      "mother_id": "B01",
+      "father_id": "B02",
+      "cage_id": "A01",
+      "bird_type": "Chich Choe Lua"
+    },
+    {
+      "id": "P02",
+      "mother_id": "B03",
+      "father_id": "B04",
+      "cage_id": "A02",
+      "bird_type": "Chich Choe Than"
+    },
+    {
+      "id": "P03",
+      "mother_id": "B05",
+      "father_id": "B06",
+      "cage_id": "A03",
+      "bird_type": "Chich Choe Lua"
+    }
   ]
 }
