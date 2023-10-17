@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { BirdColumn, columns } from "./column";
+import { useModal } from "@/hooks/useModal";
 
 interface CellActionProps {
     data: BirdColumn;
@@ -25,6 +26,8 @@ export const CellAction: React.FC<CellActionProps> = ({
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const router = useRouter();
+
+    const { onOpen } = useModal()
 
     const onConfirm = async () => {
         try {
@@ -63,7 +66,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                         <Copy className="mr-2 h-4 w-4" /> Copy Id
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                        onClick={() => router.push(`/bird/${data.id}`)}
+                        onClick={() => onOpen("EditBirdForm", { data })}
                     >
                         <Edit className="mr-2 h-4 w-4" /> detail
                     </DropdownMenuItem>

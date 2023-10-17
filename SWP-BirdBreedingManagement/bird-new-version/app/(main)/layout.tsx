@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NavHeader from "@/components/NavHeader";
 import SideBar from "@/components/SideBar";
+import ModalProvider from "@/provider/modal-provider";
 
 
 // npx json-server -w data/staffs.json -p 3001
@@ -9,11 +10,12 @@ import SideBar from "@/components/SideBar";
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
+      <ModalProvider />
       <SideBar />
       <NavHeader />
       <Header />
       {children}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

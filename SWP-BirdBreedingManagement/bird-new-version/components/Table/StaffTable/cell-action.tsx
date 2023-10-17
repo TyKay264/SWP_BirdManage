@@ -16,6 +16,7 @@ import {
 import { StaffColumn, columns } from "./column";
 import { AlertModal } from "@/components/modals/alert-model";
 import axios from "axios";
+import { useModal } from "@/hooks/useModal";
 
 interface CellActionProps {
     data: StaffColumn;
@@ -29,6 +30,8 @@ export const CellAction: React.FC<CellActionProps> = ({
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const router = useRouter();
+
+    const { onOpen } = useModal()
 
     const onConfirm = async () => {
         try {
@@ -71,7 +74,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                         <Copy className="mr-2 h-4 w-4" /> Copy Id
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                        onClick={() => router.push(`/staff/${data.id}`)}
+                        onClick={() => onOpen("EditStaffForm", { data })}
                     >
                         <Edit className="mr-2 h-4 w-4" /> detail
                     </DropdownMenuItem>
