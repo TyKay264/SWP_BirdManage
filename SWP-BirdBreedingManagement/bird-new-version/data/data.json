@@ -119,6 +119,10 @@
       "id": "A03",
       "location": 3,
       "quantity": 6
+    },
+    {
+      "id": "A001",
+      "location": "A"
     }
   ],
   "processes": [

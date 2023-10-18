@@ -13,7 +13,7 @@ const page = () => {
         <div className="content-body">
             <div className="warper container-fluid">
                 <div className="main_container">
-                <BreadScrum title='Thông tin lồng' subRouteTitle='cage' subTitle1='Tất Cả Lồng' subTitle2='Thông Tin Lồng'/>
+                    <BreadScrum title='Thông tin lồng' subRouteTitle='cage' subTitle1='Tất Cả Lồng' subTitle2='Thông Tin Lồng' />
 
                     <BirdCard />
                     <BirdCard />
@@ -75,46 +75,46 @@ const page = () => {
                                         <div className="card m-t-30">
                                             <div className="card-body">
                                                 <p className=" flex justify-between">
-                                                     <div>
-                                                     <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>NGÀY GHÉP CẶP :</label>
-                                                        <div className="grow pl-2.5 pb-1.5">11/10/2023</div>
-                                                    </div>
-
-                                                    <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>NGÀY ĐẺ TRỨNG :</label>
-                                                        <div className="grow pl-2.5 pb-1.5">30/10/2023</div>
-                                                    </div>
-
-                                                    <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>TỔNG SỐ TRỨNG:</label>
-                                                        <div className="grow pl-2.5 pb-1.5">10</div>
-                                                    </div>
-                                                        </div>               
-                                                    
-
-                                                        <div>
-                                                    <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>SỐ TRỨNG THẤT BẠI :</label>
-                                                        <div className="grow pl-2.5 pb-1.5">2</div>
-                                                    </div>
-
-                                                    <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>MÃ LỒNG :</label>
-                                                        <div className="grow pl-2.5 pb-1.5">A001</div>
-                                                    </div>
-
-                                                    <div className="flex justify-between items-center mb-2.5">
-                                                        <label className='basis-[100%]'>GIAI ĐOẠN :</label>
-                                                        <div className="grow pl-2.5 pb-2 basis-[100%]">ẤP TRỨNG</div>
-                                                    </div>
+                                                    <div>
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>NGÀY GHÉP CẶP :</label>
+                                                            <div className="grow pl-2.5 pb-1.5">11/10/2023</div>
                                                         </div>
-                                                    
-                                                    
-                                                      <br />
-                                                    
-                                                     
-                                                </p>    
+
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>NGÀY ĐẺ TRỨNG :</label>
+                                                            <div className="grow pl-2.5 pb-1.5">30/10/2023</div>
+                                                        </div>
+
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>TỔNG SỐ TRỨNG:</label>
+                                                            <div className="grow pl-2.5 pb-1.5">10</div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div>
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>SỐ TRỨNG THẤT BẠI :</label>
+                                                            <div className="grow pl-2.5 pb-1.5">2</div>
+                                                        </div>
+
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>MÃ LỒNG :</label>
+                                                            <div className="grow pl-2.5 pb-1.5">A001</div>
+                                                        </div>
+
+                                                        <div className="flex justify-between items-center mb-2.5">
+                                                            <label className='basis-[100%]'>GIAI ĐOẠN :</label>
+                                                            <div className="grow pl-2.5 pb-2 basis-[100%]">ẤP TRỨNG</div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <br />
+
+
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -149,8 +149,8 @@ const page = () => {
                     </div>
 
 
-                    
-                    <div className="row">
+
+                    {/* <div className="row">
                         <div className="col-lg-12">
                             <div className="card shadow">
                                 <div className="card-header fix-card">
@@ -163,24 +163,21 @@ const page = () => {
                                 <div className="container"><Table /></div>
                                 <div className="card-body">
                                     <div className="table-responsive">
-                                        {/* table here */}
+                                        //table here
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <div className="col-md-6 col-lg-4">
                             <NotificationCard />
                         </div>
                         <div className="col-md-6 col-lg-4">
-                            <ProcessCard />
-                        </div>
-                        <div className="col-md-6 col-lg-4">
                             <SpStaff />
                         </div>
-                     
-                        
+
+
                     </div>
                 </div>
             </div>
