@@ -23,6 +23,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { Label } from '../ui/label';
 
 const birdsType: birdType[] = [
     {
@@ -41,13 +42,13 @@ const formSchema = z.object({
     // birdtype_id: z.string().min(1),
     bird_type: z.string().min(1),
     sex: z.string().min(1),
-    birthday: z.string().min(1),
+    hatchDate: z.string().min(1),
     cageid: z.string().min(1),
-    agerange: z.string(),
-    mutationrate: z.string(),
-    mutationnote: z.string().min(1),
-    weight: z.string(),
-    feathercolor: z.string()
+    ageRange: z.string(),
+    mutationRate: z.coerce.number(),
+    mutation: z.string().min(1),
+    weight: z.coerce.number(),
+    featherColor: z.string()
 })
 
 
@@ -60,13 +61,13 @@ const AddBirdForm = () => {
             // birdtype_id: "",
             bird_type: "",
             sex: "",
-            birthday: "",
+            hatchDate: "",
             cageid: "",
-            agerange: "",
-            mutationrate: "",
-            mutationnote: "",
+            ageRange: "",
+            mutationRate: "",
+            mutation: "",
             weight: "",
-            feathercolor: ""
+            featherColor: ""
         },
     })
 
@@ -105,6 +106,7 @@ const AddBirdForm = () => {
                                             name="id"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>ID chim</FormLabel>
                                                     <FormControl>
                                                         <Input placeholder="Nhập ID chim" {...field} className="form-control" />
                                                     </FormControl>
@@ -120,6 +122,7 @@ const AddBirdForm = () => {
                                             name="bird_type"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Loài</FormLabel>
                                                     <Select disabled={isLoading}
                                                         onValueChange={field.onChange}
                                                         value={field.value}
@@ -155,6 +158,7 @@ const AddBirdForm = () => {
                                             name="sex"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Giới tính</FormLabel>
                                                     <Select disabled={isLoading}
                                                         onValueChange={field.onChange}
                                                         value={field.value}
@@ -167,8 +171,8 @@ const AddBirdForm = () => {
                                                         <SelectContent>
                                                             <SelectGroup>
                                                                 <SelectLabel>Chọn giới tính</SelectLabel>
-                                                                <SelectItem value="male">Trống</SelectItem>
-                                                                <SelectItem value="female">Mái</SelectItem>
+                                                                <SelectItem value="MALE">Trống</SelectItem>
+                                                                <SelectItem value="FEMALE">Mái</SelectItem>
                                                             </SelectGroup>
                                                         </SelectContent>
                                                     </Select>
@@ -181,9 +185,10 @@ const AddBirdForm = () => {
                                     <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="birthday"
+                                            name="hatchDate"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Ngày nở</FormLabel>
                                                     <FormControl>
                                                         <Input type="date" placeholder="Chọn ngày sinh" {...field} className="form-control" />
                                                     </FormControl>
@@ -199,6 +204,7 @@ const AddBirdForm = () => {
                                             name="cageid"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Mã lồng</FormLabel>
                                                     <FormControl>
                                                         <Input placeholder="Nhập ID lồng" {...field} className="form-control" />
                                                     </FormControl>
@@ -211,9 +217,10 @@ const AddBirdForm = () => {
                                     <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="agerange"
+                                            name="ageRange"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Lứa tuổi</FormLabel>
                                                     <Select disabled={isLoading}
                                                         onValueChange={field.onChange}
                                                         value={field.value}
@@ -241,9 +248,10 @@ const AddBirdForm = () => {
                                     <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="mutationrate"
+                                            name="mutationRate"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Tỉ lệ đột biến</FormLabel>
                                                     <FormControl>
                                                         <Input placeholder="Nhập tỉ lệ đột biến" {...field} className="form-control" />
                                                     </FormControl>
@@ -256,9 +264,10 @@ const AddBirdForm = () => {
                                     <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="mutationnote"
+                                            name="mutation"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Tính trạng đột biến</FormLabel>
                                                     <FormControl>
                                                         <Input placeholder="Nhập tính trạng đột biến" {...field} className="form-control" />
                                                     </FormControl>
@@ -274,6 +283,7 @@ const AddBirdForm = () => {
                                             name="weight"
                                             render={({ field }) => (
                                                 <FormItem>
+                                                    <FormLabel>Khối lượng</FormLabel>
                                                     <FormControl>
                                                         <Input placeholder="Nhập khối lượng" {...field} className="form-control" />
                                                     </FormControl>
@@ -286,63 +296,18 @@ const AddBirdForm = () => {
                                     <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="feathercolor"
+                                            name="featherColor"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <Select disabled={isLoading}
-                                                        onValueChange={field.onChange}
-                                                        value={field.value}
-                                                        defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Chọn màu lông" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Chọn màu lông</SelectLabel>
-                                                                <SelectItem value="black">Đen</SelectItem>
-                                                                <SelectItem value="white">Trắng</SelectItem>
-                                                                <SelectItem value="gray">Xám</SelectItem>
-                                                                <SelectItem value="multi">Nhiều màu</SelectItem>
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
+                                                    <FormLabel>Màu lông</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Nhập màu lông" {...field} className="form-control" />
+                                                    </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
                                     </div>
-
-
-
-                                    {/* <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Weight(g)"
-                                            min="0"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <select className="form-control form-select">
-                                            <option>Chim Non</option>
-                                            <option>Chim Chuyền Cành</option>
-                                            <option>Chim Trưởng Thành</option>
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <select className="form-control form-select">
-                                            <option>Chim Chích Chòe Than</option>
-                                            <option>Chim Chích Chòe Lửa</option>
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <select className="form-control form-select">
-                                            <option>Trống</option>
-                                            <option>Mái</option>
-                                        </select>
-                                    </div> */}
 
 
                                     <div className="form-group text-right ">

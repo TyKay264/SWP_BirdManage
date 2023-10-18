@@ -29,11 +29,11 @@ import axios from "axios";
 
 const rolesType: roleType[] = [
   {
-    roleId: "1",
+    roleId: "STAFF",
     name: "Nhân viên"
   },
   {
-    roleId: "2",
+    roleId: "MANAGER",
     name: "Quản lí"
   }
 ]
@@ -43,7 +43,8 @@ const formSchema = z.object({
   email: z.string().min(2),
   password: z.string().min(2),
   fullname: z.string().min(2),
-  roleId: z.coerce.number()
+  //roleId: z.coerce.number()
+  roleId: z.string()
 });
 
 const AddStaffForm = () => {

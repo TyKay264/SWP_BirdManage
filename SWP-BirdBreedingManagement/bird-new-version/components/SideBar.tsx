@@ -47,14 +47,14 @@ const SideBar = () => {
           <li className="has-submenu">
             <a href="javascript:void()" className="has-arrow mm-collapsed">
               <i className="fas fa-users" />
-              <span className="nav-label">Chích Chòe</span>
+              <span className="nav-label">Chim</span>
             </a>
             <ul className="list-unstyled mm-collapse">
               <li>
-                <a href="/add-bird">Thêm chích Chòe</a>
+                <a href="/add-bird">Thêm Chim</a>
               </li>
               <li>
-                <a href="/bird">Tất Cả Chích Chòe</a>
+                <a href="/bird">Tất Cả Chim</a>
               </li>
             </ul>
           </li>

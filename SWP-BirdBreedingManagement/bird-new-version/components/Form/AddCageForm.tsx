@@ -41,7 +41,7 @@ const locationsType: locationType[] = [
 ]
 
 const formSchema = z.object({
-    id: z.string().min(4),
+    // id: z.string().min(4),
     // cageType: z.string(),
     location: z.string(),
 })
@@ -51,7 +51,7 @@ const AddCageForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            id: "",
+            // id: "",
             // cageType: "",
             location: ""
         },
@@ -87,7 +87,7 @@ const AddCageForm = () => {
                                 <div className="col-xl-12">
 
 
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
                                             name="id"
@@ -100,7 +100,7 @@ const AddCageForm = () => {
                                                 </FormItem>
                                             )}
                                         />
-                                    </div>
+                                    </div> */}
 
                                     {/* <div className="form-group">
                                         <FormField

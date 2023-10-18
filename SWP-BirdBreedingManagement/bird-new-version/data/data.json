@@ -25,6 +25,14 @@
       "fullname": "Nguyễn Võ Đăng Khoa",
       "roleId": 2,
       "id": "sC2x9Ep"
+    },
+    {
+      "username": "quoctinh123",
+      "email": "quoctinh123@gmail.com",
+      "password": "4211241",
+      "fullname": "Mai Văn Quốc Tịnh",
+      "roleId": "MANAGER",
+      "id": "Wvzy5G8"
     }
   ],
   "birds": [
@@ -102,6 +110,18 @@
       "mutationnote": "đuôi dài",
       "weight": "500",
       "feathercolor": "black"
+    },
+    {
+      "id": "A04",
+      "bird_type": "Chích chòe lửa",
+      "sex": "male",
+      "hatchDate": "2023-10-19",
+      "cageid": "A03",
+      "ageRange": "non",
+      "mutationRate": 0.05,
+      "mutation": "none",
+      "weight": 500,
+      "featherColor": "Đen"
     }
   ],
   "cages": [
