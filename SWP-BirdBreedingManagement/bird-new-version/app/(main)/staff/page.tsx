@@ -18,9 +18,9 @@ const StaffPage = () => {
     id: staff.id,
     username: staff.username,
     email: staff.email,
-    fullname: staff.fullname,
-    createdAt: staff.createAt,
-    roleId: staff.roleId
+    fullName: staff.fullName,
+    createdAt: staff.createdDate,
+    roleId: staff.role
   }));
 
 

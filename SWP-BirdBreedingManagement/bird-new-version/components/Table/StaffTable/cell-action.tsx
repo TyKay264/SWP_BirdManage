@@ -76,6 +76,11 @@ export const CellAction: React.FC<CellActionProps> = ({
                     <DropdownMenuItem
                         onClick={() => onOpen("EditStaffForm", { data })}
                     >
+                        <Edit className="mr-2 h-4 w-4" /> Chỉnh xửa
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                        onClick={() => router.push(`staff/${data.id}`)}
+                    >
                         <Edit className="mr-2 h-4 w-4" /> detail
                     </DropdownMenuItem>
                     <DropdownMenuItem

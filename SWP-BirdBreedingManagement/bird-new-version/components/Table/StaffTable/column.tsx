@@ -12,7 +12,7 @@ export type StaffColumn = {
   id: string,
   username: string;
   email: string;
-  fullname: string;
+  fullName: string;
 };
 
 export const columns: ColumnDef<StaffColumn>[] = [
@@ -96,7 +96,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
   //     ),
   //   },
   {
-    accessorKey: "fullname",
+    accessorKey: "fullName",
     header: "Ten",
   },
 

@@ -3,19 +3,25 @@ import BreadScrum from '@/components/BreadScrum'
 
 import Profile from '@/components/StaffId/Profile'
 import useStaffs from '@/hooks/useStaffs'
+import { Staff } from '@/type'
 // import { staffs } from '@/data/data'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
-const StaffIdPage = () => {
-  const params = useParams();
+interface StaffIdPageProps {
+  params: {
+    staffId: string
+  }
+}
+
+const StaffIdPage = ({ params }: StaffIdPageProps) => {
 
   const { staffs, loading } = useStaffs()
 
   if (!loading) { return <div className='content-body'>Loading</div> }
 
-  const IdFilter = staffs.find((staff: any) => staff.id === params.staffId);
-
+  const IdFilter = staffs.find((item) => item.id === 2)
+  console.log(IdFilter);
   return (
     <div id="main-wrapper" className="show">
       <div className="content-body">
@@ -23,14 +29,14 @@ const StaffIdPage = () => {
           <div className="all-patients main_container">
             <BreadScrum title='Thông Tin Nhân Viên' subRouteTitle='staff' subTitle1='Tất Cả Nhân Viên' subTitle2='Thông Tin Nhân Viên' />
             <Profile
-              id={IdFilter?.id}
-              username={IdFilter?.username}
-              email={IdFilter?.email}
+              id={IdFilter.id}
+              username={IdFilter.username}
+              email={IdFilter.email}
               password={IdFilter?.password}
-              fullname={IdFilter?.fullname}
+              fullname={IdFilter.fullname}
               // created_by={IdFilter?.created_by}
-              // created_date={IdFilter?.createdAt}  
-              roleId={IdFilter?.roleId}
+              createdDate={IdFilter?.createdDate}
+              role={IdFilter.role}
             />
           </div>
         </div>

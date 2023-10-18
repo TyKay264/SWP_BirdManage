@@ -1,17 +1,9 @@
+import { Staff } from '@/type'
 import React from 'react'
 
 
-export type StaffType = {
-  id?: string,
-  username?: string,
-  email?: string,
-  password?: string,
-  fullname?: string,
-  created_by?: string,
-  created_date?: string,
-  roleId?: number,
-}
-const Profile = ({ id, username, email, password, fullname, created_by, created_date, roleId }: StaffType) => {
+
+const Profile = ({ id, username, email, password, fullname, createdBy, createdDate, role }: Staff) => {
   return (
 
     <div className="card">
@@ -83,17 +75,17 @@ const Profile = ({ id, username, email, password, fullname, created_by, created_
 
                 <div className="flex justify-between mb-2.5;">
                   <label className='basis-[30%]'>Created By:</label>
-                  <div className="grow pl-2.5">{created_by}</div>
+                  <div className="grow pl-2.5">{createdBy}</div>
                 </div>
 
                 <div className="flex justify-between mb-2.5;">
                   <label className='basis-[30%]'>Created Date:</label>
-                  <div className="grow pl-2.5">{created_date}</div>
+                  <div className="grow pl-2.5">{createdDate}</div>
                 </div>
 
                 <div className="flex justify-between mb-2.5;">
                   <label className='basis-[30%]'>Role:</label>
-                  <div className="grow pl-2.5">{roleId}</div>
+                  <div className="grow pl-2.5">{role}</div>
                 </div>
 
 

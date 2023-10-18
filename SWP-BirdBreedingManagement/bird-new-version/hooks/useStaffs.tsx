@@ -1,21 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Staff } from '@/type';
 
 
-type StaffProps = {
-    id: string
-    username: string,
-    email: string,
-    password: string,
-    fullname: string,
-    createAt: Date,
-    roleId: number,
-}
 
 const useStaffs = () => {
 
-    const [staffs, setStaffs] = useState<StaffProps[] | []>([]);
+    const [staffs, setStaffs] = useState<Staff[] | []>([]);
     const [loading, setLoading] = useState(false)
 
 
@@ -25,7 +17,7 @@ const useStaffs = () => {
         // Hàm fetch staff
         const fetchStaffs = async () => {
             try {
-                const res = await axios.get(" http://localhost:3001/staffs")
+                const res = await axios.get("https://bird-swp.azurewebsites.net/api/users/staffs")
 
                 setStaffs(res.data)
                 setLoading(true)
