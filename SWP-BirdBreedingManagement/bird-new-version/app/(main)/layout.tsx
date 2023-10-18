@@ -5,7 +5,7 @@ import SideBar from "@/components/SideBar";
 import ModalProvider from "@/provider/modal-provider";
 
 
-// npx json-server -w data/staffs.json -p 3001
+// npx json-server -w data/data.json -p 3001
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (

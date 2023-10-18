@@ -24,9 +24,25 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+
+const locationsType: locationType[] = [
+    {
+        location: "A",
+        name: "A - Nghỉ ngơi"
+    },
+    {
+        location: "B",
+        name: "B - Sinh sản"
+    },
+    {
+        location: "C",
+        name: "C - Bán"
+    }
+]
+
 const formSchema = z.object({
     id: z.string().min(4),
-    cageType: z.string(),
+    // cageType: z.string(),
     location: z.string(),
 })
 
@@ -36,7 +52,7 @@ const AddCageForm = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             id: "",
-            cageType: "",
+            // cageType: "",
             location: ""
         },
     })
@@ -53,10 +69,12 @@ const AddCageForm = () => {
         }
     };
 
+    const isLoading = form.formState.isSubmitting;
+
     return (
         <div className="card">
             <div className="card-header">
-                <h4 className="card-title">Điền Thông Tin Lồng</h4>
+                <h4 className="card-title">Tạo mới Lồng</h4>
             </div>
             <div className="card-body">
                 <div className="basic-form">
@@ -66,7 +84,7 @@ const AddCageForm = () => {
                                 <div className="col-xl-4">
                                 </div>
 
-                                <div className="col-xl-8">
+                                <div className="col-xl-12">
 
 
                                     <div className="form-group">
@@ -76,7 +94,7 @@ const AddCageForm = () => {
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <FormControl>
-                                                        <Input placeholder="Nhập loài lồng" {...field} className="form-control" />
+                                                        <Input placeholder="Nhập mã lồng" {...field} className="form-control" />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -84,7 +102,7 @@ const AddCageForm = () => {
                                         />
                                     </div>
 
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
                                             name="cageType"
@@ -108,7 +126,7 @@ const AddCageForm = () => {
                                                 </FormItem>
                                             )}
                                         />
-                                    </div>
+                                    </div> */}
 
                                     <div className="form-group">
                                         <FormField
@@ -116,9 +134,26 @@ const AddCageForm = () => {
                                             name="location"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormControl>
-                                                        <Input placeholder="Nhập vị trí" {...field} className="form-control" />
-                                                    </FormControl>
+                                                    <Select disabled={isLoading}
+                                                        onValueChange={field.onChange}
+                                                        value={field.value}
+                                                        defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Chọn khu vực" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Chọn khu vực</SelectLabel>
+                                                                {/* <SelectItem value="male">Nhân viên</SelectItem>
+                                                                <SelectItem value="female">Quản lí</SelectItem> */}
+                                                                {locationsType.map((item) => (
+                                                                    <SelectItem value={item.location} key={item.location}>{item.name}</SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}

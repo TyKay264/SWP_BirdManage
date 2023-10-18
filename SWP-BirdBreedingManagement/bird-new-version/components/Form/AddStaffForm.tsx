@@ -15,13 +15,35 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import axios from "axios";
+
+const rolesType: roleType[] = [
+  {
+    roleId: "1",
+    name: "Nhân viên"
+  },
+  {
+    roleId: "2",
+    name: "Quản lí"
+  }
+]
 
 const formSchema = z.object({
   username: z.string().min(2),
   email: z.string().min(2),
   password: z.string().min(2),
   fullname: z.string().min(2),
+  roleId: z.coerce.number()
 });
 
 const AddStaffForm = () => {
@@ -33,12 +55,12 @@ const AddStaffForm = () => {
       email: "",
       password: "",
       fullname: "",
+      roleId: ""
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
-
     try {
       await axios.post("http://localhost:3001/staffs", values);
 
@@ -47,6 +69,8 @@ const AddStaffForm = () => {
       console.log(error);
     }
   };
+
+  const isLoading = form.formState.isSubmitting;
 
   return (
     <div className="card">
@@ -85,7 +109,7 @@ const AddStaffForm = () => {
                         <FormItem>
                           <FormControl>
                             <Input
-                              placeholder="Nhập username..."
+                              placeholder="Nhập tài khoản."
                               {...field}
                               className="form-control"
                             />
@@ -104,7 +128,7 @@ const AddStaffForm = () => {
                         <FormItem>
                           <FormControl>
                             <Input
-                              placeholder="Nhập email..."
+                              placeholder="Nhập email"
                               {...field}
                               className="form-control"
                             />
@@ -123,7 +147,7 @@ const AddStaffForm = () => {
                         <FormItem>
                           <FormControl>
                             <Input
-                              placeholder="Nhập fullname..."
+                              placeholder="Nhập họ tên"
                               {...field}
                               className="form-control"
                             />
@@ -142,7 +166,7 @@ const AddStaffForm = () => {
                         <FormItem>
                           <FormControl>
                             <Input
-                              placeholder="Nhập password..."
+                              placeholder="Nhập mật khẩu"
                               {...field}
                               className="form-control"
                             />
@@ -153,6 +177,40 @@ const AddStaffForm = () => {
                       )}
                     />
                   </div>
+
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="roleId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Select disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn vai trò" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn vai trò</SelectLabel>
+                                {/* <SelectItem value="male">Nhân viên</SelectItem>
+                                <SelectItem value="female">Quản lí</SelectItem> */}
+                                {rolesType.map((item) => (
+                                  <SelectItem value={item.roleId} key={item.roleId}>{item.name}</SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+
 
                   {/* <div className="form-group">
                     <select className="form-control form-select">

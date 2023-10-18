@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({
   //   onDelete,
   loading,
 }: //   showDeleteButton = true,
-DataTableProps<TData, TValue>) {
+  DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -117,10 +117,10 @@ DataTableProps<TData, TValue>) {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                            
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
                       </TableHead>
                     );
                   })}

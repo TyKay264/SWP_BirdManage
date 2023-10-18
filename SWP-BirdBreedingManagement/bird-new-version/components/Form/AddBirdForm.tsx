@@ -24,15 +24,24 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+const birdsType: birdType[] = [
+    {
+        birdtype_id: "1",
+        bird_type: "Chích chòe than"
+    },
+    {
+        birdtype_id: "2",
+        bird_type: "Chích chòe lửa"
+    }
+]
+
 
 const formSchema = z.object({
-    id: z.string().min(4),
-    // birdtype: z.object({
-    //     id: z.string().min(1),
-    //     birdtype: z.string(),
-    // }),
-    sex: z.string(),
-    birthday: z.string(),
+    id: z.string().min(2),
+    // birdtype_id: z.string().min(1),
+    bird_type: z.string().min(1),
+    sex: z.string().min(1),
+    birthday: z.string().min(1),
     cageid: z.string().min(1),
     agerange: z.string(),
     mutationrate: z.string(),
@@ -40,10 +49,7 @@ const formSchema = z.object({
     weight: z.string(),
     feathercolor: z.string()
 })
-// const birdType = {
-//     id: "",
-//     birdtype: "",
-// }
+
 
 const AddBirdForm = () => {
     // 1. Define your form.
@@ -51,9 +57,8 @@ const AddBirdForm = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             id: "",
-            // birdtype: {
-            //     ...birdType
-            // },
+            // birdtype_id: "",
+            bird_type: "",
             sex: "",
             birthday: "",
             cageid: "",
@@ -67,6 +72,7 @@ const AddBirdForm = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
+        console.log(values)
         try {
             await axios.post("http://localhost:3001/birds", values);
             form.reset();
@@ -74,6 +80,8 @@ const AddBirdForm = () => {
             console.log(error);
         }
     };
+
+    const isLoading = form.formState.isSubmitting;
 
     return (
         <div className="card">
@@ -106,13 +114,16 @@ const AddBirdForm = () => {
                                         />
                                     </div>
 
-                                    {/* <div className="form-group">
+                                    <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="birdtype"
+                                            name="bird_type"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <Select disabled={isLoading}
+                                                        onValueChange={field.onChange}
+                                                        value={field.value}
+                                                        defaultValue={field.value}>
                                                         <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Chọn loài" />
@@ -121,8 +132,13 @@ const AddBirdForm = () => {
                                                         <SelectContent>
                                                             <SelectGroup>
                                                                 <SelectLabel>Chọn loài</SelectLabel>
-                                                                <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
-                                                                <SelectItem value="Chích chòe than">Chích chòe than</SelectItem>
+
+                                                                {/* <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
+                                                                <SelectItem value="Chích chòe than">Chích chòe than</SelectItem> */}
+
+                                                                {birdsType.map((item) => (
+                                                                    <SelectItem value={item.bird_type} key={item.bird_type}>{item.bird_type}</SelectItem>
+                                                                ))}
                                                             </SelectGroup>
                                                         </SelectContent>
                                                     </Select>
@@ -130,31 +146,8 @@ const AddBirdForm = () => {
                                                 </FormItem>
                                             )}
                                         />
-                                    </div> */}
+                                    </div>
 
-
-                                    {/* <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="birdtype"
-                                            render={({ field }) => (
-                                                <FormControl>
-                                                    <Select {...field} defaultValue="">
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Select bird type" />
-                                                        </SelectTrigger>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Select bird type</SelectLabel>
-                                                                <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
-                                                                <SelectItem value="Chích chòe than">Chích chòe than</SelectItem>
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                            )}
-                                        />
-                                    </div> */}
 
                                     <div className="form-group">
                                         <FormField
@@ -162,7 +155,10 @@ const AddBirdForm = () => {
                                             name="sex"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <Select disabled={isLoading}
+                                                        onValueChange={field.onChange}
+                                                        value={field.value}
+                                                        defaultValue={field.value}>
                                                         <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Chọn giới tính" />
@@ -218,7 +214,10 @@ const AddBirdForm = () => {
                                             name="agerange"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <Select disabled={isLoading}
+                                                        onValueChange={field.onChange}
+                                                        value={field.value}
+                                                        defaultValue={field.value}>
                                                         <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Chọn lứa tuổi" />
@@ -290,7 +289,10 @@ const AddBirdForm = () => {
                                             name="feathercolor"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <Select disabled={isLoading}
+                                                        onValueChange={field.onChange}
+                                                        value={field.value}
+                                                        defaultValue={field.value}>
                                                         <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Chọn màu lông" />
@@ -345,6 +347,7 @@ const AddBirdForm = () => {
 
                                     <div className="form-group text-right ">
                                         <button
+                                            disabled={isLoading}
                                             type="submit"
                                             className="btn btn-primary float-end"
                                         >
