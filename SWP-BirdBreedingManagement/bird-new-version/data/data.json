@@ -17,6 +17,14 @@
       "fullname": "Mai Van Quoc Tinh",
       "createdAt": "2023-10-15T08:00:00Z",
       "roleId": 1
+    },
+    {
+      "username": "khoadang123",
+      "email": "khoadangbe@gmail.com",
+      "password": "4211241",
+      "fullname": "Nguyễn Võ Đăng Khoa",
+      "roleId": 2,
+      "id": "sC2x9Ep"
     }
   ],
   "birds": [
@@ -70,6 +78,30 @@
       "weight": 250,
       "feather_color": "trang",
       "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvnexpress.net%2Fhanh-khach-mat-chich-choe-10-700-usd-4033557.html&psig=AOvVaw0KtIVpEOiGHXf1R8RY5PYa&ust=1697427044081000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID369KO94EDFQAAAAAdAAAAABAO"
+    },
+    {
+      "id": "A09",
+      "bird_type": "Chích chòe lửa",
+      "sex": "female",
+      "birthday": "2023-10-26",
+      "cageid": "A04",
+      "agerange": "truongthanh",
+      "mutationrate": "0.11",
+      "mutationnote": "siuuuuuu",
+      "weight": "800",
+      "feathercolor": "black"
+    },
+    {
+      "id": "A05",
+      "bird_type": "Chích chòe than",
+      "sex": "male",
+      "birthday": "2023-10-18",
+      "cageid": "A02",
+      "agerange": "truongthanh",
+      "mutationrate": "0.05",
+      "mutationnote": "đuôi dài",
+      "weight": "500",
+      "feathercolor": "black"
     }
   ],
   "cages": [

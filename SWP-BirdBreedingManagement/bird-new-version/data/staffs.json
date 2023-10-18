@@ -1,12 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-<<<<<<< HEAD
   "birds": [
     {
       "id": "A001",
@@ -54,6 +46,18 @@
       "mutationnote": "siuuuuuu",
       "weight": "800",
       "feathercolor": "multi"
+    },
+    {
+      "id": "A004",
+      "birdtype_id": "1",
+      "sex": "male",
+      "birthday": "2023-10-29",
+      "cageid": "A01",
+      "agerange": "chuyen",
+      "mutationrate": "0.11",
+      "mutationnote": "siuuuuuu",
+      "weight": "800",
+      "feathercolor": "white"
     }
   ],
   "cages": [
@@ -78,16 +82,4 @@
       "location": "A"
     }
   ]
-=======
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
->>>>>>> 411ec8bac8cae7e34769869e7a66de3cd5fda3fd
 }

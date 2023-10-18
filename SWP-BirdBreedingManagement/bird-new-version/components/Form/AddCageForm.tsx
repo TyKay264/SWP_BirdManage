@@ -76,7 +76,7 @@ const AddCageForm = () => {
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <FormControl>
-                                                        <Input placeholder="Nhập loài lồng" {...field} className="form-control" />
+                                                        <Input placeholder="Nhập mã lồng" {...field} className="form-control" />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
