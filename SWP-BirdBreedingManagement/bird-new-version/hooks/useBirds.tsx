@@ -1,28 +1,28 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Bird } from '@/type';
 
-
-type BirdProps = {
-    id: string,
-    bird_type?: string,
-    sex?: string,
-    hatch_date?: string,
-    father_id?: string,
-    mother_id?: string,
-    cage_id?: string,
-    isAlive?: string,
-    age_range?: string,
-    mutation_rate?: number,
-    mutation_note?: string,
-    weight?: number,
-    feather_color?: string,
-    image?: string
-}
+// type BirdProps = {
+//     id: string,
+//     bird_type?: string,
+//     sex?: string,
+//     hatch_date?: string,
+//     father_id?: string,
+//     mother_id?: string,
+//     cage_id?: string,
+//     isAlive?: string,
+//     age_range?: string,
+//     mutation_rate?: number,
+//     mutation_note?: string,
+//     weight?: number,
+//     feather_color?: string,
+//     image?: string
+// }
 
 const useBirds = () => {
 
-    const [birds, setBirds] = useState<BirdProps[] | []>([]);
+    const [birds, setBirds] = useState<Bird[] | []>([]);
     const [loading, setLoading] = useState(false)
 
 
@@ -32,7 +32,7 @@ const useBirds = () => {
         // Hàm fetch staff
         const fetchBirds = async () => {
             try {
-                const res = await axios.get(" http://localhost:3001/birds")
+                const res = await axios.get("https://bird-swp.azurewebsites.net/api/birds/view")
 
                 setBirds(res.data)
                 setLoading(true)

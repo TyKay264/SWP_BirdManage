@@ -1,6 +1,6 @@
 
 
-export enum StaffRole { staff = "STAFF", maneger = "MANAGER" }
+export enum StaffRole { STAFF, MANAGER }
 
 export interface Staff {
     id: string,
@@ -13,26 +13,33 @@ export interface Staff {
     role: StaffRole
 }
 
-// export interface BirdType {
-//     id: string,
-//     name: string,
-//     incubate: number,
-//     chick: number,
-//     swingBranch: number,
-//     lifeExpectancy?: string,
-//     description?: string
-// }
+export interface Birdtype {
+    id?: number;
+    name?: string;
+    description?: string;
+    incubate?: number;
+    chick?: number;
+    swingBranch?: number;
+    lifeExpectancy?: string;
 
-// export interface Cage {
-//     id: string,
-//     location: string;
-//     quantity: number;
-// }
-
-
-// export interface Bird {
-//     id: string;
-//     birdType: BirdType,
-//     cage: Cage
-
-// }
+}
+export interface Bird {
+    id: number;
+    sex: string;
+    hatchDate?: string; // Date;
+    ageRange?: string;
+    mutation?: string;
+    mutationRate?: number;
+    isAlive?: boolean;
+    image?: string;
+    featherColor?: string;
+    weight?: number;
+    birdType?: Birdtype;
+    cage?: Cage;
+}
+interface Cage {
+    cageId: number;
+    userId?: number;
+    location?: string;
+    quantity?: number;
+}

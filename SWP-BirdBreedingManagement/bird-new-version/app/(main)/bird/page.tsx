@@ -5,28 +5,19 @@ import BirdTable from "@/components/Table/BirdTable";
 import BirdClient from "@/components/Table/BirdTable/BirdClient";
 import { BirdColumn } from "@/components/Table/BirdTable/column";
 import useBirds from "@/hooks/useBirds";
+import { Bird } from "@/type";
 import React from "react";
 
 
 const BirdPage = () => {
 
   const { birds } = useBirds();
-  // console.log(birds);
+  console.log(birds);
   const formatBirds: BirdColumn[] = birds.map((bird) => ({
     id: bird.id,
-    bird_type: bird.bird_type,
-    isMale: bird.sex,
-    hatch_date: bird.hatch_date,
-    father_id: bird.father_id,
-    mother_id: bird.mother_id,
-    cage_id: bird.cage_id,
-    isAlive: bird.isAlive,
-    age_range: bird.age_range,
-    mutation_rate: bird.mutation_rate,
-    mutation_note: bird.mutation_note,
-    weight: bird.weight,
-    feather_color: bird.feather_color,
-    image: bird.image
+    type: bird.birdType?.name,
+    sex: bird.sex,
+    cage: bird.cage?.location,
   }))
 
   return (

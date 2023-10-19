@@ -9,20 +9,11 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
 export type BirdColumn = {
-    id: string,
-    bird_type?: string,
-    isMale?: string,
-    hatch_date?: string,
-    father_id?: string,
-    mother_id?: string,
-    cage_id?: string,
-    isAlive?: string,
-    age_range?: string,
-    mutation_rate?: number,
-    mutation_note?: string,
-    weight?: number,
-    feather_color?: string,
-    image?: string
+    id: number,
+    type?: string,
+    sex: string,
+    cage?: string,
+
 };
 
 export const columns: ColumnDef<BirdColumn>[] = [
@@ -59,7 +50,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
         },
     },
     {
-        accessorKey: "bird_type",
+        accessorKey: "type",
         header: ({ column }) => {
             return (
                 <Button
@@ -74,7 +65,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
         },
     },
     {
-        accessorKey: "isMale",
+        accessorKey: "sex",
         header: ({ column }) => {
             return (
                 <Button
@@ -83,6 +74,21 @@ export const columns: ColumnDef<BirdColumn>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
                 >
                     Sex
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+    },
+    {
+        accessorKey: "cage",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    className="-ml-6"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+                >
+                    Cage
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
