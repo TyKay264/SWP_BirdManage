@@ -13,6 +13,8 @@ export type StaffColumn = {
   username: string;
   email: string;
   fullName: string;
+  createdAt?: string,
+  role: string
 };
 
 export const columns: ColumnDef<StaffColumn>[] = [

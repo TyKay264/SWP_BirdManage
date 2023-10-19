@@ -28,13 +28,13 @@ const BirdIdPage = () => {
                     hatch_date={IdFilter?.hatch_date}
                     father_id={IdFilter?.father_id}
                     mother_id={IdFilter?.mother_id}
-                    cage_id={IdFilter?.cage_id}
+                    cageid={IdFilter?.cageid}
                     isAlive={IdFilter?.isAlive}
-                    age_range={IdFilter?.age_range}
-                    mutation_rate={IdFilter?.mutation_rate}
-                    mutation_note={IdFilter?.mutation_note}
+                    ageRange={IdFilter?.ageRange}
+                    mutationRate={IdFilter?.mutationRate}
+                    mutation={IdFilter?.mutation}
                     weight={IdFilter?.weight}
-                    feather_color={IdFilter?.feather_color}
+                    featherColor={IdFilter?.featherColor}
                   // image = {IdFilter?.image}
                   />
                 </div>

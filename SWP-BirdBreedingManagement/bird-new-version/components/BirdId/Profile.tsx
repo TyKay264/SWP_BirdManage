@@ -7,23 +7,23 @@ import Parent from '../BirdFamilyTree/Parent'
 
 export type BirdType = {
   id?: string,
-  bird_type?:string,
-  isMale?:string,
-  hatch_date?:string,
-  father_id?:string,
-  mother_id?:string,
-  cage_id?:string,
-  isAlive?:string,
-  age_range?:string,
-  mutation_rate?:number,
-  mutation_note?:string,
-  weight?:number,
-  feather_color?:string,
-  image?:string
+  bird_type?: string,
+  isMale?: string,
+  hatch_date?: string,
+  father_id?: string,
+  mother_id?: string,
+  cageid?: string,
+  isAlive?: string,
+  ageRange?: string,
+  mutationRate?: number,
+  mutation?: string,
+  weight?: number,
+  featherColor?: string,
+  image?: string
 }
 
-const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cage_id, isAlive, age_range, 
-  mutation_rate, mutation_note, weight, feather_color, image}:BirdType) => {
+const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cageid, isAlive, ageRange,
+  mutationRate, mutation, weight, featherColor, image }: BirdType) => {
   return (
 
     <div className="card">
@@ -37,32 +37,32 @@ const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cage
 
               <div className="image col-xl-4">
                 <div className="form-group row widget-3">
-                  
-                    <div className="form-input">
-                      <label
-                        className="labeltest"
-                        htmlFor="file-ip-1"
-                      >
-                        <span>
-                          {" "}
-                          ... {" "}
-                        </span>
-                      </label>
-                      <input
-                        type="file"
-                        id="file-ip-1"
-                        accept="image/*"
-                        // ?\\onchange="showPreview(event);"
+
+                  <div className="form-input">
+                    <label
+                      className="labeltest"
+                      htmlFor="file-ip-1"
+                    >
+                      <span>
+                        {" "}
+                        ... {" "}
+                      </span>
+                    </label>
+                    <input
+                      type="file"
+                      id="file-ip-1"
+                      accept="image/*"
+                    // ?\\onchange="showPreview(event);"
+                    />
+                    <div className="preview">
+                      <img
+                        id="file-ip-1-preview"
+                        src="#"
+                        alt="img"
                       />
-                      <div className="preview">
-                        <img
-                          id="file-ip-1-preview"
-                          src="#"
-                          alt="img"
-                        />
-                      </div>
                     </div>
-                  
+                  </div>
+
                 </div>
               </div>
 
@@ -97,10 +97,10 @@ const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cage
                   <label className='basis-[30%]'>Mother Id:</label>
                   <div className="grow pl-2.5">{mother_id}</div>
                 </div>
-                
+
                 <div className="flex justify-between items-center mb-2.5">
                   <label className='basis-[30%]'>Cage Id:</label>
-                  <div className="grow pl-2.5">{cage_id}</div>
+                  <div className="grow pl-2.5">{cageid}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
@@ -110,17 +110,17 @@ const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cage
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className='basis-[30%]'>Age Range:</label>
-                  <div className="grow pl-2.5">{age_range}</div>
+                  <div className="grow pl-2.5">{ageRange}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className='basis-[30%]'>Mutation(%):</label>
-                  <div className="grow pl-2.5">{mutation_rate}</div>
+                  <div className="grow pl-2.5">{mutationRate}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className='basis-[30%]'>Mutation Note:</label>
-                  <div className="grow pl-2.5">{mutation_note}</div>
+                  <div className="grow pl-2.5">{mutation}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
@@ -130,49 +130,49 @@ const Profile = ({ id, bird_type, isMale, hatch_date, father_id, mother_id, cage
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className='basis-[30%]'>Feather Color:</label>
-                  <div className="grow pl-2.5">{feather_color}</div>
+                  <div className="grow pl-2.5">{featherColor}</div>
                 </div>
 
-                
+
               </div>
             </div>
           </form>
         </div>
       </div>
       <div className="card-footer ">
-        <h3 className="card-title" style={{ color : "red" }}>Sơ đồ phả hệ ( Family Tree )</h3>
-              <div style={{display :"flex" , alignItems : "center"}}>
-    <p>This is the first paragraph.</p>
-    <hr style={{ display: "flex", borderTop: "3px dashed black", margin : "0 10px", width: "10%" }}/>
-    <p style={{ marginRight: "800px" }}>This is the second paragraph.</p>
+        <h3 className="card-title" style={{ color: "red" }}>Sơ đồ phả hệ ( Family Tree )</h3>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <p>This is the first paragraph.</p>
+          <hr style={{ display: "flex", borderTop: "3px dashed black", margin: "0 10px", width: "10%" }} />
+          <p style={{ marginRight: "800px" }}>This is the second paragraph.</p>
+        </div>
+        <div>
+          <div style={{ borderLeft: "1px solid black", height: "5vh", marginLeft: "170px" }} />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p style={{ marginLeft: "150px" }}>SIUUUU</p>
+            <hr style={{ display: "flex", borderTop: "3px dashed black", margin: "0 10px", width: "20%" }} />
+            <p style={{ marginRight: "800px" }}>SIUUUU</p>
           </div>
-  <div>
-    <div style={{ borderLeft : "1px solid black", height: "5vh", marginLeft : "170px" }} />
-    <div style={{display :"flex" , alignItems : "center"}}>
-      <p style={{ marginLeft: "150px" }}>SIUUUU</p>
-      <hr style={{ display: "flex", borderTop: "3px dashed black", margin : "0 10px", width: "20%" }}  />
-      <p style={{ marginRight: "800px" }}>SIUUUU</p>
-    </div>
-    <div style={{ borderLeft : "1px solid black", height: "5vh", marginLeft : "250px" }} />
-    <p style={{ marginLeft: "225px" }}>SIUUUU</p>
-  </div>
+          <div style={{ borderLeft: "1px solid black", height: "5vh", marginLeft: "250px" }} />
+          <p style={{ marginLeft: "225px" }}>SIUUUU</p>
+        </div>
 
       </div>
 
       <div className="row">
 
-                        <div className="col-md-6 col-lg-4">
-                            <Parent />
-                        </div>
-                        <div className="col-md-6 col-lg-4">
-                            <MainGeneration />
-                        </div>
-                        <div className="col-md-6 col-lg-4">
-                            <BirdChild />
-                        </div>  
-                    </div>
-            </div>
-    
+        <div className="col-md-6 col-lg-4">
+          <Parent />
+        </div>
+        <div className="col-md-6 col-lg-4">
+          <MainGeneration />
+        </div>
+        <div className="col-md-6 col-lg-4">
+          <BirdChild />
+        </div>
+      </div>
+    </div>
+
   )
 }
 

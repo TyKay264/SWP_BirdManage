@@ -10,13 +10,13 @@ type BirdProps = {
     hatch_date?: string,
     father_id?: string,
     mother_id?: string,
-    cage_id?: string,
+    cageid?: string,
     isAlive?: string,
-    age_range?: string,
-    mutation_rate?: number,
-    mutation_note?: string,
+    ageRange?: string,
+    mutationRate?: number,
+    mutation?: string,
     weight?: number,
-    feather_color?: string,
+    featherColor?: string,
     image?: string
 }
 

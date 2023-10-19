@@ -3,7 +3,7 @@ import React from 'react'
 
 
 
-const Profile = ({ id, username, email, password, fullname, createdBy, createdDate, role }: Staff) => {
+const Profile = ({ id, username, email, password, fullName, createdBy, createdDate, role }: Staff) => {
   return (
 
     <div className="card">
@@ -70,7 +70,7 @@ const Profile = ({ id, username, email, password, fullname, createdBy, createdDa
 
                 <div className="flex justify-between mb-2.5;">
                   <label className='basis-[30%]'>Full Name:</label>
-                  <div className="grow pl-2.5">{fullname}</div>
+                  <div className="grow pl-2.5">{fullName}</div>
                 </div>
 
                 <div className="flex justify-between mb-2.5;">

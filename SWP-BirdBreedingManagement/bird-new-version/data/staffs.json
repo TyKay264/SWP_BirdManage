@@ -16,7 +16,7 @@
       "mutation_rate": 0.99,
       "mutation_note": "bong",
       "weight": "800",
-      "feather_color": "den trang"
+      "featherColor": "den trang"
     },
     {
       "id": "A002",
@@ -34,7 +34,7 @@
       "mutation_rate": 0.85,
       "mutation_note": "bong",
       "weight": "800",
-      "feather_color": "den trang"
+      "featherColor": "den trang"
     },
     {
       "id": "A003",
@@ -45,7 +45,7 @@
       "mutationrate": "0.11",
       "mutationnote": "siuuuuuu",
       "weight": "800",
-      "feathercolor": "multi"
+      "featherColor": "multi"
     },
     {
       "id": "A004",
@@ -57,7 +57,7 @@
       "mutationrate": "0.11",
       "mutationnote": "siuuuuuu",
       "weight": "800",
-      "feathercolor": "white"
+      "featherColor": "white"
     }
   ],
   "cages": [

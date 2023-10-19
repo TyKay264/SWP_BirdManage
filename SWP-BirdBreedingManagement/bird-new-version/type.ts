@@ -1,12 +1,12 @@
 
 
-export enum StaffRole { staff = "STAFF", maneger = "MANAGER" }
+export enum StaffRole { STAFF = "Nhân Viên", MANAGER = "Quản Lý" }
 
 export interface Staff {
     id: string,
     username: string,
     email: string,
-    password?: string,
+    password: string,
     fullName: string,
     createdBy?: string,
     createdDate?: string,

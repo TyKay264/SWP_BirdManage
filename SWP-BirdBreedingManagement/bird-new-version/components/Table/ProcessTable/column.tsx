@@ -12,7 +12,7 @@ export type ProcessColumn = {
     id: string,
     mother_id: string,
     father_id: string,
-    cage_id: string,
+    cageid: string,
     bird_type: string
 };
 
@@ -80,7 +80,7 @@ export const columns: ColumnDef<ProcessColumn>[] = [
         },
     },
     {
-        accessorKey: "cage_id",
+        accessorKey: "cageid",
         header: ({ column }) => {
             return (
                 <Button

@@ -144,13 +144,13 @@ export type BirdType = {
   hatch_date?: string;
   father_id?: string;
   mother_id?: string;
-  cage_id?: string;
+  cageid?: string;
   isAlive?: string;
-  age_range?: string;
-  mutation_rate?: number;
+  ageRange?: string;
+  mutationRate?: number;
   mutation_note?: string;
   weight?: number;
-  feather_color?: string;
+  featherColor?: string;
   image?: string;
 };
 
@@ -215,13 +215,13 @@ export const columns: ColumnDef<BirdType>[] = [
   },
 
   {
-    accessorKey: "mutation_rate",
+    accessorKey: "mutationRate",
     header: () => <div className="text-right">Mutation(%)</div>,
     cell: ({ row }) => {
-      const mutation_rate = parseFloat(row.getValue("mutation_rate"));
+      const mutationRate = parseFloat(row.getValue("mutationRate"));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat().format(mutation_rate);
+      const formatted = new Intl.NumberFormat().format(mutationRate);
       return <div className="text-right font-medium">{formatted}</div>;
     },
   },
@@ -347,9 +347,9 @@ export function BirdTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}

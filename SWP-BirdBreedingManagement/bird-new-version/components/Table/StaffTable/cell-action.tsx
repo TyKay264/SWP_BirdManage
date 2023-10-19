@@ -22,7 +22,6 @@ interface CellActionProps {
     data: StaffColumn;
 }
 
-// finish tự làm mấy cái kia hen
 
 export const CellAction: React.FC<CellActionProps> = ({
     data,

@@ -8,11 +8,12 @@ import { StaffColumn } from "@/components/Table/StaffTable/column";
 
 import React from "react";
 
+
 const StaffPage = () => {
 
   // step 1 -> data
   const { staffs } = useStaffs();
-  console.log(staffs)
+  // console.log(staffs)
   // lay ra 1 object
   const formatStaffs: StaffColumn[] = staffs.map((staff) => ({
     id: staff.id,
@@ -20,7 +21,7 @@ const StaffPage = () => {
     email: staff.email,
     fullName: staff.fullName,
     createdAt: staff.createdDate,
-    roleId: staff.role
+    role: staff.role
   }));
 
 

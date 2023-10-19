@@ -8,6 +8,7 @@ import useBirds from "@/hooks/useBirds";
 import React from "react";
 
 
+
 const BirdPage = () => {
 
   const { birds } = useBirds();
@@ -19,13 +20,13 @@ const BirdPage = () => {
     hatch_date: bird.hatch_date,
     father_id: bird.father_id,
     mother_id: bird.mother_id,
-    cage_id: bird.cage_id,
+    cageid: bird.cageid,
     isAlive: bird.isAlive,
-    age_range: bird.age_range,
-    mutation_rate: bird.mutation_rate,
-    mutation_note: bird.mutation_note,
+    ageRange: bird.ageRange,
+    mutationRate: bird.mutationRate,
+    mutation: bird.mutation,
     weight: bird.weight,
-    feather_color: bird.feather_color,
+    featherColor: bird.featherColor,
     image: bird.image
   }))
 

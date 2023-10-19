@@ -13,7 +13,7 @@ const ProcessPage = () => {
     id: process.id,
     mother_id: process.mother_id,
     father_id: process.father_id,
-    cage_id: process.cage_id,
+    cageid: process.cageid,
     bird_type: process.bird_type
   }));
 

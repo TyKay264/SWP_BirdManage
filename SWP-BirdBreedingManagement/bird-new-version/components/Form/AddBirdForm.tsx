@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react';
 import axios from 'axios'
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -24,6 +24,11 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Label } from '../ui/label';
+import useCages from '@/hooks/useCage';
+import { FileUpload } from '../FileUpload';
+
+
+
 
 const birdsType: birdType[] = [
     {
@@ -38,7 +43,7 @@ const birdsType: birdType[] = [
 
 
 const formSchema = z.object({
-    id: z.string().min(2),
+    // id: z.string().min(2),
     // birdtype_id: z.string().min(1),
     bird_type: z.string().min(1),
     sex: z.string().min(1),
@@ -48,16 +53,20 @@ const formSchema = z.object({
     mutationRate: z.coerce.number(),
     mutation: z.string().min(1),
     weight: z.coerce.number(),
-    featherColor: z.string()
+    featherColor: z.string(),
+    image: z.string()
 })
 
 
 const AddBirdForm = () => {
+
+    const { cages } = useCages();
+    //console.log(cages)
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            id: "",
+            // id: "",
             // birdtype_id: "",
             bird_type: "",
             sex: "",
@@ -67,7 +76,8 @@ const AddBirdForm = () => {
             mutationRate: "",
             mutation: "",
             weight: "",
-            featherColor: ""
+            featherColor: "",
+            image: ""
         },
     })
 
@@ -95,12 +105,28 @@ const AddBirdForm = () => {
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-xl-4">
+                                    <FormField
+                                        control={form.control}
+                                        name="image"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <FileUpload
+                                                        endpoint="serverImage"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
                                 <div className="col-xl-8">
 
 
 
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
                                             name="id"
@@ -114,7 +140,7 @@ const AddBirdForm = () => {
                                                 </FormItem>
                                             )}
                                         />
-                                    </div>
+                                    </div> */}
 
                                     <div className="form-group">
                                         <FormField
@@ -198,7 +224,7 @@ const AddBirdForm = () => {
                                         />
                                     </div>
 
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
                                             name="cageid"
@@ -208,6 +234,45 @@ const AddBirdForm = () => {
                                                     <FormControl>
                                                         <Input placeholder="Nhập ID lồng" {...field} className="form-control" />
                                                     </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div> */}
+
+
+                                    <div className="form-group">
+                                        <FormField
+                                            control={form.control}
+                                            name="cageid"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Mã lồng</FormLabel>
+                                                    <Select
+                                                        disabled={isLoading}
+                                                        onValueChange={(value) => {
+                                                            field.onChange(value);
+                                                            form.setValue("cageid", value);
+                                                        }}
+                                                        value={field.value}
+                                                        defaultValue={field.value}
+                                                    >
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Chọn mã lồng" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Chọn mã lồng</SelectLabel>
+                                                                {cages.map((cage) => (
+                                                                    <SelectItem key={cage.id} value={cage.id}>
+                                                                        {cage.id}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}

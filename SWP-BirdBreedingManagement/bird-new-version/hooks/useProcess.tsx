@@ -7,7 +7,7 @@ type ProcessProps = {
     id: string,
     mother_id: string,
     father_id: string,
-    cage_id: string,
+    cageid: string,
     bird_type: string
 }
 

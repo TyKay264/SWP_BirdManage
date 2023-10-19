@@ -29,11 +29,11 @@ import axios from "axios";
 
 const rolesType: roleType[] = [
   {
-    roleId: "STAFF",
+    role: "STAFF",
     name: "Nhân viên"
   },
   {
-    roleId: "MANAGER",
+    role: "MANAGER",
     name: "Quản lí"
   }
 ]
@@ -41,10 +41,10 @@ const rolesType: roleType[] = [
 const formSchema = z.object({
   username: z.string().min(2),
   email: z.string().min(2),
-  password: z.string().min(2),
-  fullname: z.string().min(2),
+  password: z.string().min(1),
+  fullName: z.string().min(2),
   //roleId: z.coerce.number()
-  roleId: z.string()
+  role: z.string()
 });
 
 const AddStaffForm = () => {
@@ -55,8 +55,8 @@ const AddStaffForm = () => {
       username: "",
       email: "",
       password: "",
-      fullname: "",
-      roleId: ""
+      fullName: "",
+      role: ""
     },
   });
 
@@ -143,7 +143,7 @@ const AddStaffForm = () => {
                   <div className="form-group">
                     <FormField
                       control={form.control}
-                      name="fullname"
+                      name="fullName"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
@@ -182,7 +182,7 @@ const AddStaffForm = () => {
                   <div className="form-group">
                     <FormField
                       control={form.control}
-                      name="roleId"
+                      name="role"
                       render={({ field }) => (
                         <FormItem>
                           <Select disabled={isLoading}
@@ -200,7 +200,7 @@ const AddStaffForm = () => {
                                 {/* <SelectItem value="male">Nhân viên</SelectItem>
                                 <SelectItem value="female">Quản lí</SelectItem> */}
                                 {rolesType.map((item) => (
-                                  <SelectItem value={item.roleId} key={item.roleId}>{item.name}</SelectItem>
+                                  <SelectItem value={item.role} key={item.role}>{item.name}</SelectItem>
                                 ))}
                               </SelectGroup>
                             </SelectContent>

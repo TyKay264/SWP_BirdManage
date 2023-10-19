@@ -19,6 +19,8 @@ const useStaffs = () => {
             try {
                 const res = await axios.get("https://bird-swp.azurewebsites.net/api/users/staffs")
 
+                // const res = await axios.get("http://localhost:3001/staffs")
+
                 setStaffs(res.data)
                 setLoading(true)
             } catch (error) {

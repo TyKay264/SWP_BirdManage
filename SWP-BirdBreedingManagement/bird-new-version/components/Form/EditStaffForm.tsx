@@ -25,21 +25,48 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
 import { useRouter } from 'next/navigation'
 import axios from "axios";
 import { useModal } from "@/hooks/useModal";
+import { StaffRole } from "@/type";
+
+const roleMap: Record<string, StaffRole> = {
+    STAFF: StaffRole.STAFF,
+    MANAGER: StaffRole.MANAGER
+};
+
+console.log(roleMap)
+
+const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }))
+// console.log(rolearr)
+// console.log(roleMap)
+// const roleArr = [...roles]
+
 
 const formSchema = z.object({
     username: z.string().min(2),
     email: z.string().min(2),
     password: z.string().min(2),
-    fullname: z.string().min(2),
+    fullName: z.string().min(2),
+    role: z.string().min(1)
 });
 
 const EditStaffForm = () => {
 
     const { isOpen, type, onClose, data } = useModal();
 
+
+    // console.log(data)
     const isModalOpen = isOpen && type === "EditStaffForm";
     const router = useRouter();
     // 1. Define your form.
@@ -48,44 +75,52 @@ const EditStaffForm = () => {
         defaultValues: {
             username: "",
             email: "",
-            fullname: "",
+            password: "",
+            fullName: "",
+            role: ""
         },
     });
+
 
     useEffect(() => {
         if (data.data) {
             form.setValue("username", data.data.username);
             form.setValue("email", data.data.email);
-            form.setValue("fullname", data.data.fullname);
+            form.setValue("fullName", data.data.fullName);
+            form.setValue("password", data.data.password);
+            form.setValue("role", data.data.role);
+
         }
     }, [data, form]);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
+        console.log(values)
+        // try {
+        //     await axios.patch(`http://localhost:3001/staffs/${data.data.id}`, values);
 
-        try {
-            await axios.patch(`http://localhost:3001/staffs/${data.data.id}`, values);
+        //     router.refresh();
+        //     form.reset();
+        //     window.location.reload();
 
-            router.refresh();
-            form.reset();
-            window.location.reload();
-
-        } catch (error) {
-            console.log(error);
-        }
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 
+
+    const isLoading = form.formState.isSubmitting;
 
     return (
 
         <Dialog open={isModalOpen} onOpenChange={onClose} >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
+                    {/* <DialogDescription>
                         This action cannot be undone. This will permanently delete your account
                         and remove your data from our servers.
-                    </DialogDescription>
+                    </DialogDescription> */}
                 </DialogHeader>
 
                 <div className="card">
@@ -115,7 +150,9 @@ const EditStaffForm = () => {
                     </div>
                   </div> */}
                                         </div>
+
                                         <div className="col-xl-8">
+
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
@@ -135,6 +172,7 @@ const EditStaffForm = () => {
                                                     )}
                                                 />
                                             </div>
+
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
@@ -157,12 +195,12 @@ const EditStaffForm = () => {
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
-                                                    name="fullname"
+                                                    name="fullName"
                                                     render={({ field }) => (
                                                         <FormItem>
                                                             <FormControl>
                                                                 <Input
-                                                                    placeholder="Nhập fullname..."
+                                                                    placeholder="Nhập fullName..."
                                                                     {...field}
                                                                     className="form-control"
                                                                 />
@@ -173,6 +211,7 @@ const EditStaffForm = () => {
                                                     )}
                                                 />
                                             </div>
+
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
@@ -180,7 +219,7 @@ const EditStaffForm = () => {
                                                     render={({ field }) => (
                                                         <FormItem>
                                                             <FormControl>
-                                                                <Input
+                                                                <Input type="password"
                                                                     placeholder="Nhập password..."
                                                                     {...field}
                                                                     className="form-control"
@@ -192,6 +231,39 @@ const EditStaffForm = () => {
                                                     )}
                                                 />
                                             </div>
+
+                                            <div className="form-group">
+                                                <FormField
+                                                    control={form.control}
+                                                    name="role"
+                                                    render={({ field }) => (
+                                                        <FormItem>
+                                                            <Select
+                                                                onValueChange={field.onChange}
+                                                                value={field.value}
+                                                                defaultValue={field.value}>
+                                                                <FormControl>
+                                                                    <SelectTrigger>
+                                                                        <SelectValue placeholder="Chọn vai trò" />
+                                                                    </SelectTrigger>
+                                                                </FormControl>
+                                                                <SelectContent>
+                                                                    <SelectGroup>
+                                                                        {/* <SelectLabel>Chọn vai trò</SelectLabel> */}
+                                                                        {rolearr.map((item) => (
+
+                                                                            <SelectItem value={item.key} key={item.key}>{item.value}</SelectItem>
+                                                                        ))}
+                                                                    </SelectGroup>
+                                                                </SelectContent>
+                                                            </Select>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            </div>
+
+
 
                                             {/* <div className="form-group">
                     <select className="form-control form-select">

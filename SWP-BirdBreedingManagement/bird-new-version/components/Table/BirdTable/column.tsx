@@ -8,6 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
+import Image from 'next/image'
+
 export type BirdColumn = {
     id: string,
     bird_type?: string,
@@ -15,13 +17,13 @@ export type BirdColumn = {
     hatch_date?: string,
     father_id?: string,
     mother_id?: string,
-    cage_id?: string,
+    cageid?: string,
     isAlive?: string,
-    age_range?: string,
-    mutation_rate?: number,
-    mutation_note?: string,
+    ageRange?: string,
+    mutationRate?: number,
+    mutation?: string,
     weight?: number,
-    feather_color?: string,
+    featherColor?: string,
     image?: string
 };
 
@@ -88,23 +90,28 @@ export const columns: ColumnDef<BirdColumn>[] = [
             );
         },
     },
-    //   {
-    //     accessorKey: "image",
-    //     header: "Ảnh sản phẩm",
-    //     cell: ({ row }) => (
-    //       <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
-    //         {row.original.images.length > 0 && (
-    //           <Image
-    //             src={row.original.images[0].url}
-    //             alt="image"
-    //             fill
-    //             className="rounded-full"
-    //           />
-    //         )}
-    //         <span className="absolute right-[-22px]">({row.original.images.length})</span>
-    //       </div>
-    //     ),
-    //   },
+    {
+        accessorKey: "image",
+        header: "Ảnh Bird",
+        cell: ({ row }) => (
+            <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
+
+                {row.original.image ? <Image
+                    src={row.original.image}
+                    alt="image"
+                    fill
+                    className="rounded-full"
+                /> : <Image
+                    src="/assets/images/download.png"
+                    alt="image"
+                    fill
+                    className="rounded-full"
+                />}
+
+
+            </div>
+        ),
+    },
     // {
     //     accessorKey: "fullname",
     //     header: "Ten",
