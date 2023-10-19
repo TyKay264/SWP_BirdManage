@@ -57,7 +57,11 @@
       "bird_type": "Chích chòe than",
       "sex": "FEMALE",
       "birthday": "2023-10-26",
-      "cageid": "A03",
+      "cage": {
+        "cageId": 1,
+        "userId": 2,
+        "location": "A01"
+      },
       "weight": 800,
       "ageRange": "truongthanh",
       "mutationRate": 0.09,

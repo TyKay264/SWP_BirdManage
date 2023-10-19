@@ -3,25 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Bird } from '@/type';
 
-<<<<<<< HEAD
 
-type BirdProps = {
-    id: string,
-    bird_type?: string,
-    sex?: string,
-    hatch_date?: string,
-    father_id?: string,
-    mother_id?: string,
-    cageid?: string,
-    isAlive?: string,
-    ageRange?: string,
-    mutationRate?: number,
-    mutation?: string,
-    weight?: number,
-    featherColor?: string,
-    image?: string
-}
-=======
 // type BirdProps = {
 //     id: string,
 //     bird_type?: string,
@@ -29,16 +11,15 @@ type BirdProps = {
 //     hatch_date?: string,
 //     father_id?: string,
 //     mother_id?: string,
-//     cage_id?: string,
+//     cageid?: string,
 //     isAlive?: string,
-//     age_range?: string,
-//     mutation_rate?: number,
-//     mutation_note?: string,
+//     ageRange?: string,
+//     mutationRate?: number,
+//     mutation?: string,
 //     weight?: number,
-//     feather_color?: string,
+//     featherColor?: string,
 //     image?: string
 // }
->>>>>>> b5e9b5e065b7b11d26e016fda2aed6e41e8bbbd0
 
 const useBirds = () => {
 
@@ -53,6 +34,8 @@ const useBirds = () => {
         const fetchBirds = async () => {
             try {
                 const res = await axios.get("https://bird-swp.azurewebsites.net/api/birds/view")
+
+                //const res = await axios.get("http://localhost:3001/birds")
 
                 setBirds(res.data)
                 setLoading(true)

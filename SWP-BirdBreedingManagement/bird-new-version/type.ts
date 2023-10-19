@@ -1,10 +1,5 @@
 
-
-<<<<<<< HEAD
 export enum StaffRole { STAFF = "Nhân Viên", MANAGER = "Quản Lý" }
-=======
-export enum StaffRole { STAFF, MANAGER }
->>>>>>> b5e9b5e065b7b11d26e016fda2aed6e41e8bbbd0
 
 export interface Staff {
     id: string,
