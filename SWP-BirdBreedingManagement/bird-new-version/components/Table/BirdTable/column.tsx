@@ -11,6 +11,7 @@ import { CellAction } from "./cell-action";
 import Image from 'next/image'
 
 export type BirdColumn = {
+<<<<<<< HEAD
     id: string,
     bird_type?: string,
     isMale?: string,
@@ -25,6 +26,13 @@ export type BirdColumn = {
     weight?: number,
     featherColor?: string,
     image?: string
+=======
+    id: number,
+    type?: string,
+    sex: string,
+    cage?: string,
+
+>>>>>>> b5e9b5e065b7b11d26e016fda2aed6e41e8bbbd0
 };
 
 export const columns: ColumnDef<BirdColumn>[] = [
@@ -61,7 +69,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
         },
     },
     {
-        accessorKey: "bird_type",
+        accessorKey: "type",
         header: ({ column }) => {
             return (
                 <Button
@@ -76,7 +84,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
         },
     },
     {
-        accessorKey: "isMale",
+        accessorKey: "sex",
         header: ({ column }) => {
             return (
                 <Button
@@ -91,6 +99,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
         },
     },
     {
+<<<<<<< HEAD
         accessorKey: "image",
         header: "Ảnh Bird",
         cell: ({ row }) => (
@@ -112,6 +121,39 @@ export const columns: ColumnDef<BirdColumn>[] = [
             </div>
         ),
     },
+=======
+        accessorKey: "cage",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    className="-ml-6"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+                >
+                    Cage
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+    },
+    //   {
+    //     accessorKey: "image",
+    //     header: "Ảnh sản phẩm",
+    //     cell: ({ row }) => (
+    //       <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
+    //         {row.original.images.length > 0 && (
+    //           <Image
+    //             src={row.original.images[0].url}
+    //             alt="image"
+    //             fill
+    //             className="rounded-full"
+    //           />
+    //         )}
+    //         <span className="absolute right-[-22px]">({row.original.images.length})</span>
+    //       </div>
+    //     ),
+    //   },
+>>>>>>> b5e9b5e065b7b11d26e016fda2aed6e41e8bbbd0
     // {
     //     accessorKey: "fullname",
     //     header: "Ten",

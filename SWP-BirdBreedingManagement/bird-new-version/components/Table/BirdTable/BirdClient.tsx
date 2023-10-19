@@ -15,7 +15,7 @@ const BirdClient = ({ data }: BirdClientProps) => {
     return (
         <div>
             <DataTable
-                searchKey="bird_type"
+                searchKey="type"
                 columns={columns}
                 data={data}
                 loading={loading}
