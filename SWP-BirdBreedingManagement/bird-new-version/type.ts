@@ -1,6 +1,8 @@
 
 export enum StaffRole { STAFF = "Nhân Viên", MANAGER = "Quản Lý" }
 
+export enum BirdType { than = "Chích chòe than", lua = "Chích chòe lửa" }
+
 export interface Staff {
     id: string,
     username: string,
@@ -36,9 +38,9 @@ export interface Bird {
     birdType?: Birdtype;
     cage?: Cage;
 }
-interface Cage {
+export interface Cage {
     cageId: number;
-    userId?: number;
+  //  userId?: number;
     location?: string;
     quantity?: number;
 }

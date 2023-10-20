@@ -1,17 +1,18 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Cage } from '@/type';
 
 
-type CageProps = {
-    id: string,
-    location: string;
-    quantity: number;
-}
+// type CageProps = {
+//     cageId: string,
+//     location: string;
+//     quantity: number;
+// }
 
 const useCages = () => {
 
-    const [cages, setCages] = useState<CageProps[] | []>([]);
+    const [cages, setCages] = useState<Cage[] | []>([]);
     const [loading, setLoading] = useState(false)
 
 
@@ -21,7 +22,7 @@ const useCages = () => {
         // Hàm fetch cage
         const fetchCages = async () => {
             try {
-                const res = await axios.get(" http://localhost:3001/cages")
+                const res = await axios.get("https://bird-swp.azurewebsites.net/api/cages/view")
 
                 setCages(res.data)
                 setLoading(true)

@@ -16,6 +16,7 @@ export type BirdColumn = {
     type?: string,
     sex: string,
     cage?: string,
+    image?: string,
 
 };
 
@@ -82,30 +83,28 @@ export const columns: ColumnDef<BirdColumn>[] = [
             );
         },
     },
+
+    // {
+    //     accessorKey: "image",
+    //     header: "Ảnh Bird",
+    //     cell: ({ row }) => (
+    //         <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
+    //             {row.original.image ? <Image
+    //                 src={row.original.image}
+    //                 alt="image"
+    //                 fill
+    //                 className="rounded-full"
+    //             /> : <Image
+    //                 src="/assets/images/download.png"
+    //                 alt="image"
+    //                 fill
+    //                 className="rounded-full"
+    //             />}
+    //         </div>
+    //     ),
+    // },
+
     {
-
-        //     accessorKey: "image",
-        //     header: "Ảnh Bird",
-        //     cell: ({ row }) => (
-        //         <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
-
-        //             {row.original.image ? <Image
-        //                 src={row.original.image}
-        //                 alt="image"
-        //                 fill
-        //                 className="rounded-full"
-        //             /> : <Image
-        //                 src="/assets/images/download.png"
-        //                 alt="image"
-        //                 fill
-        //                 className="rounded-full"
-        //             />}
-
-
-        //         </div>
-        //     ),
-        // },
-
         accessorKey: "cage",
         header: ({ column }) => {
             return (
