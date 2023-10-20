@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
 
-const BirdCard = () => {
+interface BirdCardProp {
+    birdId?: string
+}
+
+const BirdCard = ({ birdId }: BirdCardProp) => {
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -19,7 +23,7 @@ const BirdCard = () => {
                                     <div className="pulse-css" />
                                 </div>
                                 <div className="media-body">
-                                    <Link href='/bird/id'><h2 className="mb-2">ID vòng: B001</h2></Link>
+                                    <Link href={`/bird/${birdId}`}><h2 className="mb-2">ID vòng: {birdId}</h2></Link>
                                     <p className="mb-md-2 mb-sm-4 mb-2">Loại : chích chòe lửa</p>
                                     <p className="mb-md-2 mb-sm-4 mb-2">Giới tính : Trống</p>
 

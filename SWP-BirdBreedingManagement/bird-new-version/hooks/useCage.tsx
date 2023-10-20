@@ -1,7 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+
 import { Cage } from '@/type';
+
 
 
 // type CageProps = {
