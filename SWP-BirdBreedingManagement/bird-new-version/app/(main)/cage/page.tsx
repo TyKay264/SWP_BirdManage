@@ -11,10 +11,12 @@ import React from 'react'
 
 const CagePage = () => {
   const { cages } = useCages();
+  // console.log(cages);
   const formatCages: CageColumn[] = cages.map((cage) => ({
-    id: cage.id,
+    cageId: cage.cageId,
     location: cage.location,
-    quantity: cage.quantity
+    quantity: cage.quantity,
+    stage: cage.reproductionProcess?.stage
   }));
 
   return (

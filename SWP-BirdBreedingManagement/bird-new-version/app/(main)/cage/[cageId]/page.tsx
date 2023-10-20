@@ -1,22 +1,32 @@
+"use client"
 import BabyBirdCard from '@/components/CageId/BabyBirdCard'
 import BirdCard from '@/components/CageId/BirdCard'
 import NotificationCard from '@/components/CageId/NotificationCard'
 import ProcessCard from '@/components/CageId/ProcessCard'
 import Table from "@/components/Table/BirdTable";
-import React from 'react'
+import React, { use } from 'react'
 import SpStaff from '@/components/CageId/SpStaff'
 import EggManage from '@/components/CageId/EggManage'
 import BreadScrum from '@/components/BreadScrum';
+import useCages from '@/hooks/useCage'
+import { useParams } from 'next/navigation'
 
-const page = () => {
+const CageIdPage = () => {
+    const { cages } = useCages();
+    // console.log(cages);
+    const params = useParams();
+    const CageIdFind = cages.find((item) => item.cageId === params.cageId)
+    console.log(CageIdFind);
     return (
         <div className="content-body">
             <div className="warper container-fluid">
                 <div className="main_container">
                     <BreadScrum title='Thông tin lồng' subRouteTitle='cage' subTitle1='Tất Cả Lồng' subTitle2='Thông Tin Lồng' />
 
-                    <BirdCard />
-                    <BirdCard />
+                    {CageIdFind?.birdReproduction?.map((item) => (
+
+                        <BirdCard birdId={item.bird?.birdId} />
+                    ))}
 
                     <div className="row">
                         <div className="col-lg-12">
@@ -101,7 +111,7 @@ const page = () => {
 
                                                         <div className="flex justify-between items-center mb-2.5">
                                                             <label className='basis-[100%]'>MÃ LỒNG :</label>
-                                                            <div className="grow pl-2.5 pb-1.5">A001</div>
+                                                            <div className="grow pl-2.5 pb-1.5">{CageIdFind?.location}</div>
                                                         </div>
 
                                                         <div className="flex justify-between items-center mb-2.5">
@@ -185,4 +195,4 @@ const page = () => {
     )
 }
 
-export default page
+export default CageIdPage

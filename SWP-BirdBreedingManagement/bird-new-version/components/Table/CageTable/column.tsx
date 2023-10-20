@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
 export type CageColumn = {
-    id: string,
-    location: string;
-    quantity: number;
+    cageId: string,
+    location?: string;
+    quantity?: number;
+    stage?: string
 };
 
 export const columns: ColumnDef<CageColumn>[] = [
@@ -33,7 +34,7 @@ export const columns: ColumnDef<CageColumn>[] = [
         ),
     },
     {
-        accessorKey: "id",
+        accessorKey: "cageId",
         header: ({ column }) => {
             return (
                 <Button
@@ -72,6 +73,21 @@ export const columns: ColumnDef<CageColumn>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
                 >
                     quantity
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+    },
+    {
+        accessorKey: "stage",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    className="-ml-6"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+                >
+                    Stage
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
