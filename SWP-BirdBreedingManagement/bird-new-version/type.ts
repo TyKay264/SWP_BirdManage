@@ -3,10 +3,10 @@ export enum StaffRole {
   MANAGER = "Quản Lý",
 }
 
-export enum BirdType {
-  than = "Chích chòe than",
-  lua = "Chích chòe lửa",
-}
+// export enum BirdType {
+//   than = "than",
+//   lua = "lua",
+// }
 
 export interface Staff {
   userId: string;
@@ -20,7 +20,7 @@ export interface Staff {
 }
 
 export interface Birdtype {
-  typeId?: string;
+  typeId: string;
   name?: string;
   description?: string;
   incubate?: number;

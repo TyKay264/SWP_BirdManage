@@ -16,7 +16,9 @@ const AddBirdPage = () => {
 
             <div className="row">
               <div className="col-md-12">
-                <div className="card">{/* <AddBirdForm /> */}</div>
+                <div className="card">
+                  <AddBirdForm />
+                </div>
               </div>
             </div>
           </div>
