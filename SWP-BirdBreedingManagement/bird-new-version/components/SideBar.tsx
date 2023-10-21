@@ -46,7 +46,7 @@ const SideBar = () => {
           </li>
           <li className="has-submenu">
             <a href="javascript:void()" className="has-arrow mm-collapsed">
-              <i className="fas fa-users" />
+              <i className="fas fa-crow" />
               <span className="nav-label">Chim</span>
             </a>
             <ul className="list-unstyled mm-collapse">
@@ -78,6 +78,14 @@ const SideBar = () => {
               </li>
             </ul>
           </li>
+
+          <li className="has-submenu">
+            <a href="/add-process">
+              <i className="fas fa-heart" />
+              <span className="nav-label">Tạo quá trình ghép giống</span>
+            </a>
+          </li>
+
           <li className="has-submenu">
             <a href="/cage-diagram">
               <i className="fas fa-pills" />
@@ -104,6 +112,8 @@ const SideBar = () => {
               <span className="nav-label">Sơ đồ khu nuôi chim</span>
             </a>
           </li>
+
+
           {/* <li className="has-submenu">
             <a href="reports.html">
               <i className="fas fa-chart-pie" />

@@ -3,6 +3,11 @@ export enum StaffRole {
   MANAGER = "Quản Lý",
 }
 
+export enum BirdType {
+  than = "Chích chòe than",
+  lua = "Chích chòe lửa",
+}
+
 export interface Staff {
   userId: string;
   username: string;

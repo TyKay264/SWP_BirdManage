@@ -77,7 +77,6 @@ export const columns: ColumnDef<BirdColumn>[] = [
     //     header: "Ảnh Bird",
     //     cell: ({ row }) => (
     //         <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
-
     //             {row.original.image ? <Image
     //                 src={row.original.image}
     //                 alt="image"

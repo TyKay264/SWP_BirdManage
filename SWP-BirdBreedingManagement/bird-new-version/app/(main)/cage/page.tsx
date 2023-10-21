@@ -10,6 +10,7 @@ import React from "react";
 
 const CagePage = () => {
   const { cages } = useCages();
+  // console.log(cages);
   const formatCages: CageColumn[] = cages.map((cage) => ({
     cageId: cage.cageId,
     user: cage?.user?.fullName,

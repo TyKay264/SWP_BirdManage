@@ -45,7 +45,7 @@ const roleMap: Record<string, StaffRole> = {
     MANAGER: StaffRole.MANAGER
 };
 
-console.log(roleMap)
+//console.log(roleMap)
 
 const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }))
 // console.log(rolearr)
@@ -89,23 +89,22 @@ const EditStaffForm = () => {
             form.setValue("fullName", data.data.fullName);
             form.setValue("password", data.data.password);
             form.setValue("role", data.data.role);
-
         }
     }, [data, form]);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
-        console.log(values)
-        // try {
-        //     await axios.patch(`http://localhost:3001/staffs/${data.data.id}`, values);
+        //console.log(values)
+        try {
+            await axios.patch(`http://localhost:3001/staffs/${data.data.id}`, values);
 
-        //     router.refresh();
-        //     form.reset();
-        //     window.location.reload();
+            router.refresh();
+            form.reset();
+            window.location.reload();
 
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
 

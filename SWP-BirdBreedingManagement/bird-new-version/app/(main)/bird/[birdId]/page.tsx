@@ -30,6 +30,7 @@ const BirdIdPage = () => {
               <div className="col-lg-12">
                 <div className="card">
                   <Profile
+                    key={IdFilter?.birdId}
                     id={IdFilter?.birdId}
                     bird_type={IdFilter?.birdType?.name}
                     isMale={IdFilter?.sex}

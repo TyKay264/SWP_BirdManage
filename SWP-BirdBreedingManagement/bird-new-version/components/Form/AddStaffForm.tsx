@@ -63,7 +63,7 @@ const AddStaffForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     try {
-      await axios.post("http://localhost:3001/staffs", values);
+      await axios.post("https://bird-swp.azurewebsites.net/api/users/create", values);
 
       form.reset();
     } catch (error) {

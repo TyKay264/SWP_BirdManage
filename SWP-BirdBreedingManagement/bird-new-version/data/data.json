@@ -128,6 +128,44 @@
       "featherColor": "Đen",
       "image": "https://utfs.io/f/b5009e27-6b7f-47b3-a286-d2a345ff661e-5nnbsq.png",
       "id": "bCu1Dli"
+    },
+    {
+      "birdTypeName": "Chích chòe lửa",
+      "sex": "FEMALE",
+      "cageId": 12,
+      "ageRange": "non",
+      "mutationRate": 9,
+      "mutation": "none",
+      "weight": 700,
+      "featherColor": "Đen",
+      "image": "",
+      "id": "Gj00iox"
+    },
+    {
+      "birdTypeName": "Chích chòe than",
+      "sex": "MALE",
+      "hatchDate": "2023-10-20",
+      "cageId": 3,
+      "ageRange": "non",
+      "mutationRate": 9,
+      "mutation": "none",
+      "weight": 600,
+      "featherColor": "Đen",
+      "image": "https://utfs.io/f/c9eea477-c181-404d-a713-10f4e602300d-oexo27.ico",
+      "id": "_HI7hnA"
+    },
+    {
+      "birdTypeName": "than",
+      "sex": "MALE",
+      "hatchDate": "2023-10-20",
+      "cageId": 5,
+      "ageRange": "non",
+      "mutationRate": 0.09,
+      "mutation": "none",
+      "weight": 800,
+      "featherColor": "vàng",
+      "image": "https://utfs.io/f/3809241c-11ba-4b90-a2b2-09aad7d0117b-oexo27.ico",
+      "id": "MDFYlRK"
     }
   ],
   "cages": [
