@@ -18,7 +18,7 @@ const useStaffs = () => {
         const fetchStaffs = async () => {
             try {
                 const res = await axios.get("https://bird-swp.azurewebsites.net/api/users/staffs")
-
+                console.log(res.data)
                 // const res = await axios.get("http://localhost:3001/staffs")
 
                 setStaffs(res.data)

@@ -80,7 +80,7 @@ const SideBar = () => {
           </li>
 
           <li className="has-submenu">
-            <a href="/cr-process">
+            <a href="/add-process">
               <i className="fas fa-heart" />
               <span className="nav-label">Tạo quá trình ghép giống</span>
             </a>

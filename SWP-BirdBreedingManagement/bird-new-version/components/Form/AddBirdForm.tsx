@@ -34,18 +34,18 @@ const birdtypeMap: Record<string, BirdType> = {
     lua: BirdType.lua
 };
 
-const birdtypearr = Object.entries(birdtypeMap).map(([key, value]) => ({ key, value }))
+//const birdtypearr = Object.entries(birdtypeMap).map(([key, value]) => ({ key, value }))
 
-// const birdsType: birdType[] = [
-//     {
-//         birdtype_id: "1",
-//         birdTypeName: "Chích chòe than"
-//     },
-//     {
-//         birdtype_id: "2",
-//         birdTypeName: "Chích chòe lửa"
-//     }
-// ]
+const birdsType: birdType[] = [
+    {
+        birdtype_id: "1",
+        birdTypeName: "Chích chòe than"
+    },
+    {
+        birdtype_id: "2",
+        birdTypeName: "Chích chòe lửa"
+    }
+]
 
 
 const formSchema = z.object({
@@ -68,6 +68,8 @@ const AddBirdForm = () => {
 
     const { cages } = useCages();
     //console.log(cages)
+
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -91,8 +93,8 @@ const AddBirdForm = () => {
         //TO DO xử lý form (api)
         console.log(values)
         try {
-            //await axios.post("https://bird-swp.azurewebsites.net/api/birds/create?fbclid=IwAR1V9U7NmFsR3xGrAzX0s178ZDheF66Y0LOSxQAxTDPemWssG1V6w8Z3d5A", values);
-            await axios.post("http://localhost:3001/birds", values);
+            await axios.post("https://bird-swp.azurewebsites.net/api/birds/create?fbclid=IwAR1V9U7NmFsR3xGrAzX0s178ZDheF66Y0LOSxQAxTDPemWssG1V6w8Z3d5A", values);
+            //await axios.post("http://localhost:3001/birds", values);
             console.log(values)
             form.reset();
         } catch (error) {
@@ -173,10 +175,15 @@ const AddBirdForm = () => {
                                                                 {/* <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
                                                                 <SelectItem value="Chích chòe than">Chích chòe than</SelectItem> */}
 
-                                                                {birdtypearr.map((item) => (
+                                                                {/* {birdtypearr.map((item) => (
 
                                                                     <SelectItem value={item.key} key={item.key}>{item.value}</SelectItem>
+                                                                ))} */}
+
+                                                                {birdsType.map((item) => (
+                                                                    <SelectItem value={item.birdTypeName} key={item.birdTypeName}>{item.birdTypeName}</SelectItem>
                                                                 ))}
+
 
                                                             </SelectGroup>
                                                         </SelectContent>
