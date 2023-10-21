@@ -91,7 +91,7 @@ const EditStaffForm = () => {
     if (data?.staff) {
       try {
         await axios.patch(
-          `http://localhost:3001/staffs/${data.staff.id}`,
+          `https://bird-swp.azurewebsites.net/api/users/${data.staff.id}`,
           values
         );
 
@@ -252,7 +252,7 @@ const EditStaffForm = () => {
                           type="submit"
                           className="btn btn-primary float-end"
                         >
-                          Thêm Nhân Viên
+                          Cập nhật thông tin
                         </button>
                       </div>
                     </div>
