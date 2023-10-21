@@ -1,24 +1,24 @@
 "use client";
 
-import EditBirdForm from '@/components/Form/EditBirdForm';
 import { useEffect, useState } from "react";
 
-import EditStaffForm from '@/components/Form/EditStaffForm'
+import EditStaffForm from "@/components/Form/EditStaffForm";
+import EditBirdForm from "@/components/Form/EditBirdForm";
 
 const ModalProvider = () => {
-    const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    if (!isMounted) return null;
-    return (
-        <>
-            <EditStaffForm />
-            <EditBirdForm />
-        </>
-    )
-}
+  if (!isMounted) return null;
+  return (
+    <>
+      <EditStaffForm />
+      <EditBirdForm />
+    </>
+  );
+};
 
-export default ModalProvider
+export default ModalProvider;

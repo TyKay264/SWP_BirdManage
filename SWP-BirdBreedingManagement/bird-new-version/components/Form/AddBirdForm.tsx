@@ -218,6 +218,41 @@ const AddBirdForm = () => {
                   <div className="form-group">
                     <FormField
                       control={form.control}
+                      name="ageRange"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Lứa tuổi</FormLabel> */}
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn lứa tuổi" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn lứa tuổi</SelectLabel>
+                                <SelectItem value="Non">Non</SelectItem>
+                                <SelectItem value="Chuy">Chuyền</SelectItem>
+                                <SelectItem value="Trưởng thành">
+                                  Trưởng thành
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
                       name="hatchDate"
                       render={({ field }) => (
                         <FormItem>

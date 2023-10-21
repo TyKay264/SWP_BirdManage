@@ -16,6 +16,13 @@ export type BirdColumn = {
   sex: string;
   cage?: string;
   hatchDate?: string;
+  ageRange?: string;
+  mutation?: string;
+  mutationRate?: number;
+  isAlive?: boolean;
+  image?: string;
+  featherColor?: string;
+  weight?: string;
 };
 
 export const columns: ColumnDef<BirdColumn>[] = [

@@ -18,6 +18,13 @@ const BirdPage = () => {
     type: bird.birdType?.name,
     sex: bird.sex,
     cage: bird.cage?.location,
+    ageRange: bird?.ageRange,
+    mutation: bird?.mutation,
+    mutationRate: bird?.mutationRate,
+    isAlive: bird?.isAlive,
+    image: bird?.image,
+    featherColor: bird?.featherColor,
+    weight: bird?.weight,
     hatchDate: bird.hatchDate
       ? format(new Date(bird.hatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,

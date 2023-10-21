@@ -13,13 +13,21 @@ type StaffColumn = {
 
 type BirdColumn = {
   birdId: string;
-  type?: string;
+  type: string;
   sex: string;
   cage?: string;
+  hatchDate: string;
+  ageRange: string;
+  mutation: string;
+  mutationRate: number;
+  isAlive?: boolean;
+  image: string;
+  featherColor: string;
+  weight: number;
 };
 
 interface ModalData {
-  data?: BirdColumn;
+  bird?: BirdColumn;
   staff?: StaffColumn;
 }
 
