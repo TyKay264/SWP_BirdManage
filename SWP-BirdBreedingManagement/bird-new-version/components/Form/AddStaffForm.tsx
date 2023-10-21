@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { StaffRole } from "@/type";
 
 import {
   Select,
@@ -23,20 +24,15 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 import axios from "axios";
 
-const rolesType: roleType[] = [
-  {
-    role: "STAFF",
-    name: "Nhân viên"
-  },
-  {
-    role: "MANAGER",
-    name: "Quản lí"
-  }
-]
+const roleMap: Record<string, StaffRole> = {
+  STAFF: StaffRole.STAFF,
+  MANAGER: StaffRole.MANAGER,
+};
+const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }));
 
 const formSchema = z.object({
   username: z.string().min(2),
@@ -44,7 +40,7 @@ const formSchema = z.object({
   password: z.string().min(1),
   fullName: z.string().min(2),
   //roleId: z.coerce.number()
-  role: z.string()
+  role: z.string(),
 });
 
 const AddStaffForm = () => {
@@ -56,14 +52,17 @@ const AddStaffForm = () => {
       email: "",
       password: "",
       fullName: "",
-      role: ""
+      role: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     try {
-      await axios.post("https://bird-swp.azurewebsites.net/api/users/create", values);
+      await axios.post(
+        "https://bird-swp.azurewebsites.net/api/users/create",
+        values
+      );
 
       form.reset();
     } catch (error) {
@@ -185,10 +184,12 @@ const AddStaffForm = () => {
                       name="role"
                       render={({ field }) => (
                         <FormItem>
-                          <Select disabled={isLoading}
+                          <Select
+                            disabled={isLoading}
                             onValueChange={field.onChange}
                             value={field.value}
-                            defaultValue={field.value}>
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Chọn vai trò" />
@@ -199,8 +200,10 @@ const AddStaffForm = () => {
                                 <SelectLabel>Chọn vai trò</SelectLabel>
                                 {/* <SelectItem value="male">Nhân viên</SelectItem>
                                 <SelectItem value="female">Quản lí</SelectItem> */}
-                                {rolesType.map((item) => (
-                                  <SelectItem value={item.role} key={item.role}>{item.name}</SelectItem>
+                                {rolearr.map((item) => (
+                                  <SelectItem value={item.key} key={item.key}>
+                                    {item.value}
+                                  </SelectItem>
                                 ))}
                               </SelectGroup>
                             </SelectContent>
@@ -210,8 +213,6 @@ const AddStaffForm = () => {
                       )}
                     />
                   </div>
-
-
 
                   {/* <div className="form-group">
                     <select className="form-control form-select">
