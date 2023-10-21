@@ -7,20 +7,21 @@ import { BirdColumn } from "@/components/Table/BirdTable/column";
 import useBirds from "@/hooks/useBirds";
 import { Bird } from "@/type";
 import React from "react";
-
-
+import format from "date-fns/format";
+import vi from "date-fns/locale/vi";
 
 const BirdPage = () => {
-
   const { birds } = useBirds();
   console.log(birds);
   const formatBirds: BirdColumn[] = birds.map((bird) => ({
-    id: bird.id,
+    birdId: bird.birdId,
     type: bird.birdType?.name,
     sex: bird.sex,
     cage: bird.cage?.location,
-
-  }))
+    hatchDate: bird.hatchDate
+      ? format(new Date(bird.hatchDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+  }));
 
   return (
     <>
@@ -28,7 +29,11 @@ const BirdPage = () => {
         <div className="content-body">
           <div className="warper container-fluid">
             <div className="all-patients main_container">
-              <BreadScrum title='Tất Cả Chích Chòe ' subRouteTitle='bird' subTitle1='Tất Cả Chích Chòe' />
+              <BreadScrum
+                title="Tất Cả Chích Chòe "
+                subRouteTitle="bird"
+                subTitle1="Tất Cả Chích Chòe"
+              />
 
               <div className="row">
                 <div className="col-lg-12">
@@ -48,8 +53,9 @@ const BirdPage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="container"><BirdClient data={formatBirds} /></div>
-
+                    <div className="container">
+                      <BirdClient data={formatBirds} />
+                    </div>
                   </div>
                 </div>
               </div>

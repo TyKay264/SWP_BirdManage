@@ -1,132 +1,125 @@
-'use client'
-import React, { useState } from 'react';
-import axios from 'axios'
+"use client";
+import React, { useState } from "react";
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useForm } from 'react-hook-form'
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Label } from '../ui/label';
-import useCages from '@/hooks/useCage';
-import { FileUpload } from '../FileUpload';
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "../ui/label";
+import useCages from "@/hooks/useCage";
+import { FileUpload } from "../FileUpload";
 
-
-
-
-const birdsType: birdType[] = [
-    {
-        birdtype_id: "1",
-        bird_type: "Chích chòe than"
-    },
-    {
-        birdtype_id: "2",
-        bird_type: "Chích chòe lửa"
-    }
-]
-
+const birdsType = [
+  {
+    typeId: "1",
+    name: "than",
+  },
+  {
+    typeId: "2",
+    name: "lua",
+  },
+];
 
 const formSchema = z.object({
-    // id: z.string().min(2),
-    // birdtype_id: z.string().min(1),
-    bird_type: z.string().min(1),
-    sex: z.string().min(1),
-    hatchDate: z.string().min(1),
-    cageid: z.string().min(1),
-    ageRange: z.string(),
-    mutationRate: z.coerce.number(),
-    mutation: z.string().min(1),
-    weight: z.coerce.number(),
-    featherColor: z.string(),
-    image: z.string()
-})
-
+  // id: z.string().min(2),
+  // birdtype_id: z.string().min(1),
+  typeId: z.string().min(1),
+  sex: z.string().min(1),
+  hatchDate: z.string().min(1),
+  cageId: z.string().min(1),
+  ageRange: z.string(),
+  mutationRate: z.coerce.number(),
+  mutation: z.string().min(1),
+  weight: z.coerce.number(),
+  featherColor: z.string(),
+  image: z.string(),
+});
 
 const AddBirdForm = () => {
+  const { cages } = useCages();
+  //console.log(cages)
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      // id: "",
+      // birdtype_id: "",
+      typeId: "",
+      sex: "",
+      hatchDate: "",
+      cageId: "",
+      ageRange: "",
+      mutationRate: 0,
+      mutation: "",
+      weight: 0,
+      featherColor: "",
+      image: "",
+    },
+  });
 
-    const { cages } = useCages();
-    //console.log(cages)
-    // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            // id: "",
-            // birdtype_id: "",
-            bird_type: "",
-            sex: "",
-            hatchDate: "",
-            cageid: "",
-            ageRange: "",
-            mutationRate: "",
-            mutation: "",
-            weight: "",
-            featherColor: "",
-            image: ""
-        },
-    })
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    //TO DO xử lý form (api)
+    console.log(values);
+    try {
+      //   await axios.post("http://localhost:3001/birds", values);
 
-    const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        //TO DO xử lý form (api)
-        console.log(values)
-        try {
-            await axios.post("http://localhost:3001/birds", values);
-            form.reset();
-        } catch (error) {
-            console.log(error);
-        }
-    };
+      await axios.post("“bird-swp.azurewebsites.net/api/birds/create", values);
+      form.reset();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting;
 
-    return (
-        <div className="card">
-            <div className="card-header ">
-                <h4 className="card-title ">Điền Thông Tin</h4>
-            </div>
-            <div className="card-body">
-                <div className="basic-form">
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)}>
-                            <div className="row">
-                                <div className="col-xl-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="image"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <FileUpload
-                                                        endpoint="serverImage"
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="col-xl-8">
-
-
-
-                                    {/* <div className="form-group">
+  return (
+    <div className="card">
+      <div className="card-header ">
+        <h4 className="card-title ">Điền Thông Tin</h4>
+      </div>
+      <div className="card-body">
+        <div className="basic-form">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="row">
+                <div className="col-xl-4">
+                  <FormField
+                    control={form.control}
+                    name="image"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <FileUpload
+                            endpoint="serverImage"
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="col-xl-8">
+                  {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
                                             name="id"
@@ -142,92 +135,105 @@ const AddBirdForm = () => {
                                         />
                                     </div> */}
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="bird_type"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Loài</FormLabel>
-                                                    <Select disabled={isLoading}
-                                                        onValueChange={field.onChange}
-                                                        value={field.value}
-                                                        defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Chọn loài" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Chọn loài</SelectLabel>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="typeId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Loài</FormLabel>
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn loài" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn loài</SelectLabel>
 
-                                                                {/* <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
+                                {/* <SelectItem value="Chích chòe lửa">Chích chòe lửa</SelectItem>
                                                                 <SelectItem value="Chích chòe than">Chích chòe than</SelectItem> */}
 
-                                                                {birdsType.map((item) => (
-                                                                    <SelectItem value={item.bird_type} key={item.bird_type}>{item.bird_type}</SelectItem>
-                                                                ))}
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                                {birdsType.map((item) => (
+                                  <SelectItem
+                                    value={item.typeId}
+                                    key={item.name}
+                                  >
+                                    {item.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="sex"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Giới tính</FormLabel>
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn giới tính" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn giới tính</SelectLabel>
+                                <SelectItem value="MALE">Trống</SelectItem>
+                                <SelectItem value="FEMALE">Mái</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="hatchDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Ngày nở</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="date"
+                              placeholder="Chọn ngày sinh"
+                              {...field}
+                              className="form-control"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* <div className="form-group">
                                         <FormField
                                             control={form.control}
-                                            name="sex"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Giới tính</FormLabel>
-                                                    <Select disabled={isLoading}
-                                                        onValueChange={field.onChange}
-                                                        value={field.value}
-                                                        defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Chọn giới tính" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Chọn giới tính</SelectLabel>
-                                                                <SelectItem value="MALE">Trống</SelectItem>
-                                                                <SelectItem value="FEMALE">Mái</SelectItem>
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="hatchDate"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Ngày nở</FormLabel>
-                                                    <FormControl>
-                                                        <Input type="date" placeholder="Chọn ngày sinh" {...field} className="form-control" />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-
-                                    {/* <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="cageid"
+                                            name="cageId"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <FormLabel>Mã lồng</FormLabel>
@@ -240,161 +246,179 @@ const AddBirdForm = () => {
                                         />
                                     </div> */}
 
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="cageId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Mã lồng</FormLabel>
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={(value) => {
+                              field.onChange(value);
+                              form.setValue("cageId", value);
+                            }}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn mã lồng" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn mã lồng</SelectLabel>
+                                {cages.map((cage) => (
+                                  <SelectItem
+                                    key={cage.cageId}
+                                    value={cage.cageId}
+                                  >
+                                    {cage.cageId}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="cageid"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Mã lồng</FormLabel>
-                                                    <Select
-                                                        disabled={isLoading}
-                                                        onValueChange={(value) => {
-                                                            field.onChange(value);
-                                                            form.setValue("cageid", value);
-                                                        }}
-                                                        value={field.value}
-                                                        defaultValue={field.value}
-                                                    >
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Chọn mã lồng" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Chọn mã lồng</SelectLabel>
-                                                                {cages.map((cage) => (
-                                                                    <SelectItem key={cage.id} value={cage.id}>
-                                                                        {cage.id}
-                                                                    </SelectItem>
-                                                                ))}
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="ageRange"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Lứa tuổi</FormLabel>
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn lứa tuổi" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn lứa tuổi</SelectLabel>
+                                <SelectItem value="non">Non</SelectItem>
+                                <SelectItem value="chuyen">Chuyền</SelectItem>
+                                <SelectItem value="truongthanh">
+                                  Trưởng thành
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="ageRange"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Lứa tuổi</FormLabel>
-                                                    <Select disabled={isLoading}
-                                                        onValueChange={field.onChange}
-                                                        value={field.value}
-                                                        defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Chọn lứa tuổi" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectLabel>Chọn lứa tuổi</SelectLabel>
-                                                                <SelectItem value="non">Non</SelectItem>
-                                                                <SelectItem value="chuyen">Chuyền</SelectItem>
-                                                                <SelectItem value="truongthanh">Trưởng thành</SelectItem>
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="mutationRate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tỉ lệ đột biến</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Nhập tỉ lệ đột biến"
+                              {...field}
+                              className="form-control"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="mutationRate"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Tỉ lệ đột biến</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="Nhập tỉ lệ đột biến" {...field} className="form-control" />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="mutation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tính trạng đột biến</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Nhập tính trạng đột biến"
+                              {...field}
+                              className="form-control"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="mutation"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Tính trạng đột biến</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="Nhập tính trạng đột biến" {...field} className="form-control" />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="weight"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Khối lượng</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Nhập khối lượng"
+                              {...field}
+                              className="form-control"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="weight"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Khối lượng</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="Nhập khối lượng" {...field} className="form-control" />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="featherColor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Màu lông</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Nhập màu lông"
+                              {...field}
+                              className="form-control"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                                    <div className="form-group">
-                                        <FormField
-                                            control={form.control}
-                                            name="featherColor"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Màu lông</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="Nhập màu lông" {...field} className="form-control" />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-
-
-                                    <div className="form-group text-right ">
-                                        <button
-                                            disabled={isLoading}
-                                            type="submit"
-                                            className="btn btn-primary float-end"
-                                        >
-                                            Thêm Chích Chòe
-                                        </button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </form>
-                    </Form>
+                  <div className="form-group text-right ">
+                    <button
+                      disabled={isLoading}
+                      type="submit"
+                      className="btn btn-primary float-end"
+                    >
+                      Thêm Chích Chòe
+                    </button>
+                  </div>
                 </div>
-            </div>
+              </div>
+            </form>
+          </Form>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default AddBirdForm
+export default AddBirdForm;

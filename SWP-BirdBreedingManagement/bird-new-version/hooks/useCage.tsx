@@ -1,41 +1,34 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-
-
-type CageProps = {
-    id: string,
-    location: string;
-    quantity: number;
-}
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Cage } from "@/type";
 
 const useCages = () => {
+  const [cages, setCages] = useState<Cage[] | []>([]);
+  const [loading, setLoading] = useState(false);
 
-    const [cages, setCages] = useState<CageProps[] | []>([]);
-    const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    // CALL API (GET)
 
+    // Hàm fetch cage
+    const fetchCages = async () => {
+      try {
+        const res = await axios.get(
+          "https://bird-swp.azurewebsites.net/api/cages/view"
+        );
 
-    useEffect(() => {
-        // CALL API (GET)
+        setCages(res.data);
+        setLoading(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-        // Hàm fetch cage
-        const fetchCages = async () => {
-            try {
-                const res = await axios.get(" http://localhost:3001/cages")
+    //Gọi lại hàm để chạy
+    fetchCages();
+  }, []);
 
-                setCages(res.data)
-                setLoading(true)
-            } catch (error) {
-                console.log(error)
-            }
-        }
+  return { cages, loading };
+};
 
-
-        //Gọi lại hàm để chạy
-        fetchCages();
-    }, [])
-
-    return { cages, loading }
-}
-
-export default useCages
+export default useCages;

@@ -1,39 +1,36 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Staff } from '@/type';
-
-
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Staff } from "@/type";
 
 const useStaffs = () => {
+  const [staffs, setStaffs] = useState<Staff[] | []>([]);
+  const [loading, setLoading] = useState(false);
 
-    const [staffs, setStaffs] = useState<Staff[] | []>([]);
-    const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    // CALL API (GET)
 
+    // Hàm fetch staff
+    const fetchStaffs = async () => {
+      try {
+        const res = await axios.get(
+          "https://bird-swp.azurewebsites.net/api/users/staffs/view"
+        );
 
-    useEffect(() => {
-        // CALL API (GET)
+        // const res = await axios.get("http://localhost:3001/staffs")
 
-        // Hàm fetch staff
-        const fetchStaffs = async () => {
-            try {
-                const res = await axios.get("https://bird-swp.azurewebsites.net/api/users/staffs")
+        setStaffs(res.data);
+        setLoading(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-                // const res = await axios.get("http://localhost:3001/staffs")
+    //Gọi lại hàm để chạy
+    fetchStaffs();
+  }, []);
 
-                setStaffs(res.data)
-                setLoading(true)
-            } catch (error) {
-                console.log(error)
-            }
-        }
+  return { staffs, loading };
+};
 
-
-        //Gọi lại hàm để chạy
-        fetchStaffs();
-    }, [])
-
-    return { staffs, loading }
-}
-
-export default useStaffs
+export default useStaffs;

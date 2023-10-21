@@ -4,22 +4,6 @@ import axios from 'axios'
 import { Bird } from '@/type';
 
 
-// type BirdProps = {
-//     id: string,
-//     bird_type?: string,
-//     sex?: string,
-//     hatch_date?: string,
-//     father_id?: string,
-//     mother_id?: string,
-//     cageid?: string,
-//     isAlive?: string,
-//     ageRange?: string,
-//     mutationRate?: number,
-//     mutation?: string,
-//     weight?: number,
-//     featherColor?: string,
-//     image?: string
-// }
 
 const useBirds = () => {
 

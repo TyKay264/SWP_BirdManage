@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({
   //   onDelete,
   loading,
 }: //   showDeleteButton = true,
-  DataTableProps<TData, TValue>) {
+DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -76,7 +76,7 @@ export function DataTable<TData, TValue>({
       <div>
         <div className="flex items-center py-4">
           <Input
-            placeholder="Nhập tên để tìm sản phẩm"
+            placeholder="Tìm kiếm...."
             value={
               (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
             }
@@ -117,10 +117,9 @@ export function DataTable<TData, TValue>({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                       </TableHead>
                     );
                   })}

@@ -68,7 +68,12 @@ export const CellAction: React.FC<CellActionProps> = ({
                     <DropdownMenuItem
                         onClick={() => onOpen("EditBirdForm", { data })}
                     >
-                        <Edit className="mr-2 h-4 w-4" /> detail
+                        <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                        onClick={() => router.push(`/bird/${data.birdId}`)}
+                    >
+                        <Edit className="mr-2 h-4 w-4" /> Chi tiết
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         onClick={() => setOpen(true)}

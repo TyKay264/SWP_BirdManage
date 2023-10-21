@@ -2,19 +2,23 @@ import { create } from "zustand";
 
 export type ModalStyle = "EditStaffForm" | "EditBirdForm"
 
-type StaffColumn = {
+export type StaffColumn = {
     id: string,
     username: string;
     email: string;
-    fullname: string;
-}
+    fullName: string;
+    createdAt?: string,
+    role: string
+};
 
 type BirdColumn = {
-    id: string,
-    username: string;
-    email: string;
-    fullname: string;
-}
+
+    birdId: string,
+    type?: string,
+    sex: string,
+    cage?: string,
+
+};
 
 
 interface ModalData {

@@ -1,20 +1,20 @@
 "use client";
 
-import BreadScrum from '@/components/BreadScrum'
-import CageTable from '@/components/Table/CageTable';
-import CageClient from '@/components/Table/CageTable/CageClient';
-import { CageColumn } from '@/components/Table/CageTable/column';
-import useCages from '@/hooks/useCage';
+import BreadScrum from "@/components/BreadScrum";
+import CageTable from "@/components/Table/CageTable";
+import CageClient from "@/components/Table/CageTable/CageClient";
+import { CageColumn } from "@/components/Table/CageTable/column";
+import useCages from "@/hooks/useCage";
 
-
-import React from 'react'
+import React from "react";
 
 const CagePage = () => {
   const { cages } = useCages();
   const formatCages: CageColumn[] = cages.map((cage) => ({
-    id: cage.id,
+    cageId: cage.cageId,
+    user: cage?.user?.fullName,
     location: cage.location,
-    quantity: cage.quantity
+    quantity: cage.quantity,
   }));
 
   return (
@@ -23,7 +23,11 @@ const CagePage = () => {
         <div className="content-body">
           <div className="warper container-fluid">
             <div className="all-patients main_container">
-              <BreadScrum title='Tất Cả Lồng' subRouteTitle='cage' subTitle1='Tất Cả Lồng' />
+              <BreadScrum
+                title="Tất Cả Lồng"
+                subRouteTitle="cage"
+                subTitle1="Tất Cả Lồng"
+              />
               <div className="row">
                 <div className="col-lg-12">
                   <div className="card">
@@ -42,7 +46,7 @@ const CagePage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className='container'>
+                    <div className="container">
                       {/* <CageTable /> */}
                       <CageClient data={formatCages} />
                     </div>
@@ -57,4 +61,4 @@ const CagePage = () => {
   );
 };
 
-export default CagePage
+export default CagePage;
