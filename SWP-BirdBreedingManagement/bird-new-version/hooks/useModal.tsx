@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ModalStyle = "EditStaffForm" | "EditBirdForm";
+export type ModalStyle = "EditStaffForm" | "EditBirdForm" | "EditCageForm";
 
 type StaffColumn = {
   id: string;
@@ -26,9 +26,17 @@ type BirdColumn = {
   weight: number;
 };
 
+type CageColumn = {
+  cageId: string;
+  user?: string;
+  location: string;
+  quantity: number;
+};
+
 interface ModalData {
   bird?: BirdColumn;
   staff?: StaffColumn;
+  cage?: CageColumn;
 }
 
 interface ModalStore {
