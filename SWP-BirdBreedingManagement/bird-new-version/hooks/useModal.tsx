@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ModalStyle = "EditStaffForm" | "EditBirdForm";
+export type ModalStyle = "EditStaffForm" | "EditBirdForm" | "EditCageForm";
 
 type StaffColumn = {
   id: string;

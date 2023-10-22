@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 
 import axios from "axios";
+import { FileUpload } from "../FileUpload";
 
 const roleMap: Record<string, StaffRole> = {
   STAFF: StaffRole.STAFF,
@@ -35,6 +36,7 @@ const roleMap: Record<string, StaffRole> = {
 const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }));
 
 const formSchema = z.object({
+  image: z.string(),
   username: z.string().min(2),
   email: z.string().min(2),
   password: z.string().min(1),
@@ -48,6 +50,7 @@ const AddStaffForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      image: "",
       username: "",
       email: "",
       password: "",
@@ -99,6 +102,22 @@ const AddStaffForm = () => {
                       </div>
                     </div>
                   </div> */}
+                  <FormField
+                    control={form.control}
+                    name="image"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <FileUpload
+                            endpoint="serverImage"
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 <div className="col-xl-8">
                   <div className="form-group">

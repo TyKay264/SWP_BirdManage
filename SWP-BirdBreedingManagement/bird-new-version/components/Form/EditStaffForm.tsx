@@ -39,6 +39,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useModal } from "@/hooks/useModal";
 import { StaffRole } from "@/type";
+import { FileUpload } from "../FileUpload";
 
 const roleMap: Record<string, StaffRole> = {
   STAFF: StaffRole.STAFF,
@@ -57,6 +58,7 @@ const formSchema = z.object({
   email: z.string().min(2),
   fullName: z.string().min(2),
   role: z.string().min(1),
+  image: z.string()
 });
 
 const EditStaffForm = () => {
@@ -73,6 +75,7 @@ const EditStaffForm = () => {
       email: "",
       fullName: "",
       role: "",
+      image: ""
     },
   });
 
@@ -82,6 +85,7 @@ const EditStaffForm = () => {
       form.setValue("email", data.staff.email);
       form.setValue("fullName", data.staff.fullName);
       form.setValue("role", data.staff.role);
+      form.setValue("image", data.staff.image);
     }
   }, [data, form]);
 
@@ -108,7 +112,7 @@ const EditStaffForm = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="sm:min-w-[750px]">
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
           {/* <DialogDescription>
@@ -126,7 +130,7 @@ const EditStaffForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
-                    <div className="col-xl-4">
+                    <div className="col-xl-6">
                       {/* <div className="form-group row widget-3">
                     <div className="form-input">
                       <label className="labeltest" htmlFor="file-ip-1">
@@ -143,9 +147,25 @@ const EditStaffForm = () => {
                       </div>
                     </div>
                   </div> */}
+                      <FormField
+                        control={form.control}
+                        name="image"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <FileUpload
+                                endpoint="serverImage"
+                                value={field.value}
+                                onChange={field.onChange}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
 
-                    <div className="col-xl-8">
+                    <div className="col-xl-6">
                       <div className="form-group">
                         <FormField
                           control={form.control}

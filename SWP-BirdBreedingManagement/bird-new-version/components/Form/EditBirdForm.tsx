@@ -131,8 +131,8 @@ const EditBirdForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent>
+    <Dialog open={isModalOpen} onOpenChange={onClose} >
+      <DialogContent className="sm:min-w-[750px]">
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
           {/* <DialogDescription>
@@ -149,7 +149,7 @@ const EditBirdForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
-                    <div className="col-xl-4">
+                    <div className="col-xl-6">
                       <FormField
                         control={form.control}
                         name="image"
@@ -167,14 +167,14 @@ const EditBirdForm = () => {
                         )}
                       />
                     </div>
-                    <div className="col-xl-8">
-                      <div className="form-group">
+                    <div className="col-xl-6">
+                      <div className="form-group ">
                         <FormField
                           control={form.control}
                           name="birdTypeName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Loài</FormLabel>
+                              {/* <FormLabel>Loài</FormLabel> */}
                               <Select
                                 disabled={isLoading}
                                 onValueChange={(value) => field.onChange(value)}
@@ -213,7 +213,7 @@ const EditBirdForm = () => {
                           name="sex"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Giới tính</FormLabel>
+                              {/* <FormLabel>Giới tính</FormLabel> */}
                               <Select
                                 disabled={isLoading}
                                 onValueChange={field.onChange}
@@ -282,7 +282,7 @@ const EditBirdForm = () => {
                           name="hatchDate"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Ngày nở</FormLabel>
+                              {/* <FormLabel>Ngày nở</FormLabel> */}
                               <FormControl>
                                 <Input
                                   type="date"
@@ -303,7 +303,7 @@ const EditBirdForm = () => {
                           name="mutationRate"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Tỉ lệ đột biến</FormLabel>
+                              {/* <FormLabel>Tỉ lệ đột biến</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập tỉ lệ đột biến"
@@ -323,7 +323,7 @@ const EditBirdForm = () => {
                           name="mutation"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Tính trạng đột biến</FormLabel>
+                              {/* <FormLabel>Tính trạng đột biến</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập tính trạng đột biến"
@@ -343,7 +343,7 @@ const EditBirdForm = () => {
                           name="weight"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Khối lượng</FormLabel>
+                              {/* <FormLabel>Khối lượng</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập khối lượng"
@@ -362,7 +362,7 @@ const EditBirdForm = () => {
                           name="cageId"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Khối lượng</FormLabel>
+                              {/* <FormLabel>Khối lượng</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập khối lượng"
@@ -384,7 +384,7 @@ const EditBirdForm = () => {
                           name="featherColor"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Màu lông</FormLabel>
+                              {/* <FormLabel>Màu lông</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập màu lông"
