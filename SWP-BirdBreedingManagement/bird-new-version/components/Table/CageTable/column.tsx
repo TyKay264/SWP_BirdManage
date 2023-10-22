@@ -11,8 +11,8 @@ import { CellAction } from "./cell-action";
 export type CageColumn = {
   cageId: string;
   user?: string;
-  location?: string;
-  quantity?: number;
+  location: string;
+  quantity: number;
 };
 
 export const columns: ColumnDef<CageColumn>[] = [

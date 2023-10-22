@@ -336,10 +336,10 @@ const AddBirdForm = () => {
                       name="cageId"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Khối lượng</FormLabel>
+                          <FormLabel>Mã lồng</FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="Nhập khối lượng"
+                              placeholder="Chọn mã lồng"
                               {...field}
                               className="form-control"
                             />

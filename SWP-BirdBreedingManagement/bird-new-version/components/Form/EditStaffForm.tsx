@@ -58,7 +58,7 @@ const formSchema = z.object({
   email: z.string().min(2),
   fullName: z.string().min(2),
   role: z.string().min(1),
-  image: z.string()
+  // image: z.string()
 });
 
 const EditStaffForm = () => {
@@ -75,7 +75,7 @@ const EditStaffForm = () => {
       email: "",
       fullName: "",
       role: "",
-      image: ""
+      // image: ""
     },
   });
 
@@ -85,7 +85,7 @@ const EditStaffForm = () => {
       form.setValue("email", data.staff.email);
       form.setValue("fullName", data.staff.fullName);
       form.setValue("role", data.staff.role);
-      form.setValue("image", data.staff.image);
+      // form.setValue("image", data.staff.image);
     }
   }, [data, form]);
 
@@ -131,23 +131,7 @@ const EditStaffForm = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
                     <div className="col-xl-6">
-                      {/* <div className="form-group row widget-3">
-                    <div className="form-input">
-                      <label className="labeltest" htmlFor="file-ip-1">
-                        <span> ... </span>
-                      </label>
-                      <input
-                        type="file"
-                        id="file-ip-1"
-                        accept="image/*"
-                        // onchange="showPreview(event);"
-                      />
-                      <div className="preview">
-                        <img id="file-ip-1-preview" src="#" alt="img" />
-                      </div>
-                    </div>
-                  </div> */}
-                      <FormField
+                      {/* <FormField
                         control={form.control}
                         name="image"
                         render={({ field }) => (
@@ -162,7 +146,7 @@ const EditStaffForm = () => {
                             <FormMessage />
                           </FormItem>
                         )}
-                      />
+                      /> */}
                     </div>
 
                     <div className="col-xl-6">

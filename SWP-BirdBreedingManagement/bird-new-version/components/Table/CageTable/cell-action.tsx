@@ -24,8 +24,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
   const { onOpen } = useModal();
+
 
   const onConfirm = async () => {
     try {
@@ -68,6 +68,11 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem onClick={() => router.push(`/cage/${data.cageId}`)}>
             <Edit className="mr-2 h-4 w-4" /> Chi tiết
           </DropdownMenuItem>
+          {/* <DropdownMenuItem
+            onClick={() => onOpen("EditCageForm", { cage: data })}
+          >
+            <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
+          </DropdownMenuItem> */}
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Xóa
           </DropdownMenuItem>
