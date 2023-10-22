@@ -64,7 +64,7 @@ const formSchema = z.object({
   hatchDate: z.string().min(1),
   cageId: z.string(),
   ageRange: z.string(),
-  mutationRate: z.coerce.number(),
+  //mutationRate: z.coerce.number(),
   mutation: z.string().min(1),
   weight: z.coerce.number(),
   featherColor: z.string(),
@@ -72,7 +72,7 @@ const formSchema = z.object({
 });
 
 const AddBirdForm = () => {
-  // const { cages } = useCages();
+  //const { cages } = useCages();
   //console.log(cages)
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -86,7 +86,7 @@ const AddBirdForm = () => {
       hatchDate: "",
       cageId: "",
       ageRange: "",
-      mutationRate: 0,
+      //mutationRate: 0,
       mutation: "",
       weight: 0,
       featherColor: "",
@@ -221,7 +221,7 @@ const AddBirdForm = () => {
                       name="ageRange"
                       render={({ field }) => (
                         <FormItem>
-                          {/* <FormLabel>Lứa tuổi</FormLabel> */}
+                          <FormLabel>Lứa tuổi</FormLabel>
                           <Select
                             disabled={isLoading}
                             onValueChange={field.onChange}
@@ -274,6 +274,44 @@ const AddBirdForm = () => {
                   <div className="form-group">
                     <FormField
                       control={form.control}
+                      name="cageId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Mã lồng</FormLabel>
+                          <Select
+                            disabled={isLoading}
+                            onValueChange={(value) => {
+                              field.onChange(value);
+                              form.setValue("cageId", value);
+                            }}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn mã lồng" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn mã lồng</SelectLabel>
+                                {cages.map((cage) => (
+                                  <SelectItem key={cage.cageId} value={cage.cageId}>
+                                    {cage.cageId}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* <div className="form-group">
+                    <FormField
+                      control={form.control}
                       name="mutationRate"
                       render={({ field }) => (
                         <FormItem>
@@ -289,7 +327,7 @@ const AddBirdForm = () => {
                         </FormItem>
                       )}
                     />
-                  </div>
+                  </div> */}
 
                   <div className="form-group">
                     <FormField
@@ -330,7 +368,8 @@ const AddBirdForm = () => {
                       )}
                     />
                   </div>
-                  <div className="form-group">
+
+                  {/* <div className="form-group">
                     <FormField
                       control={form.control}
                       name="cageId"
@@ -348,7 +387,7 @@ const AddBirdForm = () => {
                         </FormItem>
                       )}
                     />
-                  </div>
+                  </div> */}
 
                   {/*
                    */}
