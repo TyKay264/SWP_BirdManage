@@ -8,11 +8,10 @@ import { Bird } from "@/type";
 import React from "react";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
+import Loading from "@/components/LoadingComponent";
 
 const BirdPage = () => {
   const { birds, loading } = useBirds();
-
-  if (!loading) return <div>loading</div>;
 
   const formatBirds: BirdColumn[] = birds.map((bird) => ({
     birdId: bird.birdId,
@@ -30,6 +29,13 @@ const BirdPage = () => {
       ? format(new Date(bird.hatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
   }));
+
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
 
   return (
     <>

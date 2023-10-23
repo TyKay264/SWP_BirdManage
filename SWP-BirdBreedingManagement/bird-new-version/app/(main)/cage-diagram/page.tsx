@@ -1,8 +1,24 @@
+"use client";
+
 import BreadScrum from "@/components/BreadScrum";
 import CageDiagramList from "@/components/CageDiagram/CageDiagramList";
+import Loading from "@/components/LoadingComponent";
+import useCages from "@/hooks/useCage";
 import React from "react";
 
-const page = () => {
+const CageDiagramPage = () => {
+  const { cages, loading } = useCages();
+  const CageFilterLocationB = cages.filter(
+    (cage) => cage.location.charAt(0) === "B"
+  );
+
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+
   return (
     <>
       <div id="main-wrapper" className="show">
@@ -14,7 +30,7 @@ const page = () => {
                 subRouteTitle="cage-diagram"
                 subTitle1="Sơ Đồ Lồng"
               />
-              <CageDiagramList />
+              <CageDiagramList cages={cages} />
             </div>
           </div>
         </div>
@@ -23,4 +39,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CageDiagramPage;

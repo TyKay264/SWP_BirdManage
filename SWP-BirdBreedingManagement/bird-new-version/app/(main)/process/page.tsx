@@ -2,18 +2,29 @@
 import BreadScrum from "@/components/BreadScrum";
 import ProcessClient from "@/components/Table/ProcessTable/ProcessClient";
 import { ProcessColumn } from "@/components/Table/ProcessTable/column";
+import Loading from "@/components/LoadingComponent";
 import useProcesses from "@/hooks/useProcess";
 
 import React from "react";
 
 const ProcessPage = () => {
-  const { processes } = useProcesses();
+  const { processes, loading } = useProcesses();
+  // console.log(processes);
+
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+
+  if (!processes) return null;
   const formatProcesses: ProcessColumn[] = processes.map((process) => ({
-    id: process.id,
-    mother_id: process.mother_id,
-    father_id: process.father_id,
-    cageid: process.cageid,
-    bird_type: process.bird_type,
+    id: process.processId,
+    motherId: process.henReproduction.bird?.birdId,
+    fatherId: process.cockReproduction.bird?.birdId,
+    cage: process.cage.location,
+    type: process.henReproduction.bird?.birdType.name,
   }));
 
   return (

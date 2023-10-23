@@ -54,19 +54,22 @@ export interface Cage {
 export interface Reproduction_process {
   processId: string;
   pairingDate?: string; // Date;
+  eggLaidDate?: string;
   expEggHatchDate?: string; // Date;
   expSwingBranch?: string; // Date;
   expAdultBirdDate?: string; // Date;
   totalEgg?: number;
   failEgg?: number;
-  cageId?: number;
   stage?: string;
   isDone?: boolean;
   separateDate?: string; //Date
+  cage: Cage;
+  cockReproduction: Bird_reproduction;
+  henReproduction: Bird_reproduction;
 }
 export interface Bird_reproduction {
   reproductionId: string;
-  bird?: Bird;
+  bird: Bird;
   processId?: string;
   reproductionRole?: string;
   eggLaidDate?: string; // Date;
@@ -78,3 +81,35 @@ export interface Bird_reproduction {
   isFail?: boolean;
   failDate?: string; // Date;
 }
+
+/******** COLUMN TABLE ********/
+export type StaffColumn = {
+  id: string;
+  username: string;
+  email: string;
+  fullName: string;
+  createdAt?: string;
+  role: string;
+};
+
+export type BirdColumn = {
+  birdId: string;
+  type: string;
+  sex: string;
+  cage?: string;
+  hatchDate: string;
+  ageRange: string;
+  mutation: string;
+  mutationRate: number;
+  isAlive: boolean;
+  image: string;
+  featherColor: string;
+  weight: number;
+};
+
+export type CageColumn = {
+  cageId: string;
+  user?: string;
+  location: string;
+  quantity: number;
+};

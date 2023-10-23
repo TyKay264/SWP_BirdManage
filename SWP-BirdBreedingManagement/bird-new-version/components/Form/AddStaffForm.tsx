@@ -28,6 +28,7 @@ import {
 
 import axios from "axios";
 import { FileUpload } from "../FileUpload";
+import { toast } from "react-toastify";
 
 const roleMap: Record<string, StaffRole> = {
   STAFF: StaffRole.STAFF,
@@ -37,9 +38,11 @@ const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }));
 
 const formSchema = z.object({
   image: z.string(),
-  username: z.string().min(2),
-  email: z.string().min(2),
-  password: z.string().min(1),
+  username: z.string().min(2, { message: "Tên tài khoản có ít nhật 2 kí tự" }),
+  email: z.string().email({ message: "Email không hợp lệ" }),
+  password: z.string().refine((value) => /^[A-Z].*$/.test(value), {
+    message: "Password phải bắt đầu bằng một chữ cái viết hoa",
+  }),
   fullName: z.string().min(2),
   //roleId: z.coerce.number()
   role: z.string(),
@@ -67,8 +70,11 @@ const AddStaffForm = () => {
         values
       );
 
+      toast.success("Thêm nhân viên thành công");
+
       form.reset();
     } catch (error) {
+      toast.error("Email đã tồn tại");
       console.log(error);
     }
   };
