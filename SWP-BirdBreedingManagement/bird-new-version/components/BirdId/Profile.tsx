@@ -1,7 +1,9 @@
+import { Router } from "@/node_modules/next/router";
 import React from "react";
 import BirdChild from "../BirdFamilyTree/BirdChild";
 import MainGeneration from "../BirdFamilyTree/MainGeneration";
 import Parent from "../BirdFamilyTree/Parent";
+import NotificationCard from "../CageId/NotificationCard";
 
 type BirdType = {
   id?: string;
@@ -55,7 +57,7 @@ const Profile = ({
                       type="file"
                       id="file-ip-1"
                       accept="image/*"
-                      // ?\\onchange="showPreview(event);"
+                    // ?\\onchange="showPreview(event);"
                     />
                     <div className="preview">
                       <img id="file-ip-1-preview" src="#" alt="img" />
@@ -138,55 +140,66 @@ const Profile = ({
           </form>
         </div>
       </div>
-      <div className="card-footer ">
-        <h3 className="card-title" style={{ color: "red" }}>
+
+      <div>
+
+      </div>
+      <div className="card-footer">
+        <h3 className="card-title text-[red]">
           Sơ đồ phả hệ ( Family Tree )
         </h3>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <p>This is the first paragraph.</p>
+        <div className="flex align-baseline">
+          <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-blue-300 ">
+            <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
+              <div className="fas fa-venus text-center "></div>
+              <div>
+                <div className="text-center break-words ">3 </div>
+                <div className="text-center break-words">01/02/2023</div>
+              </div>
+            </div>
+          </div>
+          {/* className="flex border-t-dashed border-[3px] border-black w-[25%] */}
           <hr
             style={{
               display: "flex",
               borderTop: "3px dashed black",
               margin: "0 10px",
-              width: "10%",
+              width: "20%",
+              marginTop: "9%"
             }}
           />
-          <p style={{ marginRight: "800px" }}>This is the second paragraph.</p>
+          <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-pink-200 ">
+            <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
+              <div className="fas fa-mars text-center "></div>
+              <div>
+                {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
+                <div className="text-center break-words" >2 </div>
+                <div className="text-center break-words">15/05/2023</div>
+              </div>
+            </div>
+
+
+          </div>
         </div>
+
         <div>
           <div
             style={{
               borderLeft: "1px solid black",
-              height: "5vh",
-              marginLeft: "170px",
+              height: "15vh",
+              marginLeft: "41%",
             }}
           />
           <div style={{ display: "flex", alignItems: "center" }}>
-            <p style={{ marginLeft: "150px" }}>SIUUUU</p>
-            <hr
-              style={{
-                display: "flex",
-                borderTop: "3px dashed black",
-                margin: "0 10px",
-                width: "20%",
-              }}
-            />
-            <p style={{ marginRight: "800px" }}>SIUUUU</p>
+            <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center ml-[26%] mt-[1%] rounded-[15px] bg-yellow-200">
+              <div className="text-center break-words mt-[15%]">1 </div>
+            </div>
           </div>
-          <div
-            style={{
-              borderLeft: "1px solid black",
-              height: "5vh",
-              marginLeft: "250px",
-            }}
-          />
-          <p style={{ marginLeft: "225px" }}>SIUUUU</p>
         </div>
       </div>
 
       <div className="row">
-        <div className="col-md-6 col-lg-4">
+        {/* <div className="col-md-6 col-lg-4">
           <Parent />
         </div>
         <div className="col-md-6 col-lg-4">
@@ -194,9 +207,14 @@ const Profile = ({
         </div>
         <div className="col-md-6 col-lg-4">
           <BirdChild />
+        </div> */}
+
+        <div className="col-md-6 col-lg-4">
+          <NotificationCard />
         </div>
+
       </div>
-    </div>
+    </div >
   );
 };
 

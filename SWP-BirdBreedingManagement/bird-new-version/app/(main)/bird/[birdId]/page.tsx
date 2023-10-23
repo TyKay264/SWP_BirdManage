@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 import React from "react";
+import NotificationCard from "@/components/CageId/NotificationCard";
 
 const BirdIdPage = () => {
   const params = useParams();
@@ -37,8 +38,8 @@ const BirdIdPage = () => {
                     hatch_date={
                       IdFilter?.hatchDate
                         ? format(new Date(IdFilter?.hatchDate), "do-M-yyyy", {
-                            locale: vi,
-                          })
+                          locale: vi,
+                        })
                         : "N/A"
                     }
                     // father_id={IdFilter?.father_id}
@@ -50,7 +51,7 @@ const BirdIdPage = () => {
                     mutation={IdFilter?.mutation}
                     weight={IdFilter?.weight}
                     featherColor={IdFilter?.featherColor}
-                    // image = {IdFilter?.image}
+                  // image = {IdFilter?.image}
                   />
                 </div>
               </div>
@@ -58,6 +59,7 @@ const BirdIdPage = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

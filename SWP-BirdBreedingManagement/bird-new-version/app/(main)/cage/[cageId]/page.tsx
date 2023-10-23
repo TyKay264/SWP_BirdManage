@@ -206,9 +206,9 @@ const CageIdPage = () => {
                         </div>
                     </div> */}
           <div className="row">
-            <div className="col-md-6 col-lg-4">
+            {/* <div className="col-md-6 col-lg-4">
               <NotificationCard />
-            </div>
+            </div> */}
             <div className="col-md-6 col-lg-4">
               {FindCageById?.user && (
                 <SpStaff
