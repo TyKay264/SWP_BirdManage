@@ -77,7 +77,7 @@ const EditCageForm = () => {
     console.log(values);
     try {
       await axios.patch(
-        `http://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
+        `https://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
         values
       );
       form.reset();

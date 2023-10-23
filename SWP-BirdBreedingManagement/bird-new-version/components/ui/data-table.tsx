@@ -62,10 +62,10 @@ DataTableProps<TData, TValue>) {
     },
   });
 
-  const seletedIds = table.getFilteredSelectedRowModel().flatRows.map((row) => {
-    const data: any = { ...row.original };
-    return data.id;
-  });
+  // const seletedIds = table.getFilteredSelectedRowModel().flatRows.map((row) => {
+  //   const data: any = { ...row.original };
+  //   return data.id;
+  // });
 
   //   const onConfirm = () => {
   //     onDelete(seletedIds);

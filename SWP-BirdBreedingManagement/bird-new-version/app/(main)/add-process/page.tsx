@@ -17,7 +17,7 @@ const page = () => {
 
               <div className="row">
                 <div className="col-md-12">
-                  <div className="card"><AddProcessForm /></div>
+                  {/* <div className="card"><AddProcessForm /></div> */}
                 </div>
               </div>
             </div>

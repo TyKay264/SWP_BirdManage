@@ -21,7 +21,7 @@ export interface Staff {
 
 export interface Birdtype {
   typeId: string;
-  name?: string;
+  name: string;
   description?: string;
   incubate?: number;
   chick?: number;
@@ -31,21 +31,21 @@ export interface Birdtype {
 export interface Bird {
   birdId: string;
   sex: string;
-  hatchDate?: Date; // Date;
-  ageRange?: string;
-  mutation?: string;
-  mutationRate?: number;
-  isAlive?: boolean;
-  image?: string;
-  featherColor?: string;
-  weight?: number;
-  birdType?: Birdtype;
-  cage?: Cage;
+  hatchDate: Date; // Date;
+  ageRange: string;
+  mutation: string;
+  mutationRate: number;
+  isAlive: boolean;
+  image: string;
+  featherColor: string;
+  weight: number;
+  birdType: Birdtype;
+  cage: Cage;
 }
 export interface Cage {
   cageId: string;
-  location?: string;
-  quantity?: number;
+  location: string;
+  quantity: number;
   reproductionProcess?: Reproduction_process;
   birdReproduction?: Bird_reproduction[];
   user: Staff;

@@ -70,7 +70,7 @@ const AddCageForm = () => {
     console.log(values);
     try {
       await axios.post(
-        "http://bird-swp.azurewebsites.net/api/cages/create",
+        "https://bird-swp.azurewebsites.net/api/cages/create",
         values
       );
       form.reset();
