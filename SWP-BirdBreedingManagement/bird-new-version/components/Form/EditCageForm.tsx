@@ -57,7 +57,7 @@ const formSchema = z.object({
 
 const EditCageForm = () => {
   const { isOpen, onClose, data, type } = useModal();
-
+  console.log(data);
   const isModalOpen = isOpen && type === "EditCageForm";
   const router = useRouter();
   // 1. Define your form.
@@ -89,7 +89,7 @@ const EditCageForm = () => {
 
   useEffect(() => {
     if (data && data.cage) {
-      form.setValue("location", data.cage.location);
+      form.setValue("location", data.cage.location.charAt(0));
     }
   }, [data, form]);
 
