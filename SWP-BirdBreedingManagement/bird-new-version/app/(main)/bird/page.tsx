@@ -1,7 +1,6 @@
 "use client";
 
 import BreadScrum from "@/components/BreadScrum";
-import BirdTable from "@/components/Table/BirdTable";
 import BirdClient from "@/components/Table/BirdTable/BirdClient";
 import { BirdColumn } from "@/components/Table/BirdTable/column";
 import useBirds from "@/hooks/useBirds";
@@ -11,11 +10,13 @@ import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 
 const BirdPage = () => {
-  const { birds } = useBirds();
-  console.log(birds);
+  const { birds, loading } = useBirds();
+
+  if (!loading) return <div>loading</div>;
+
   const formatBirds: BirdColumn[] = birds.map((bird) => ({
     birdId: bird.birdId,
-    type: bird.birdType?.name,
+    type: bird.birdType.name,
     sex: bird.sex,
     cage: bird.cage?.location,
     ageRange: bird?.ageRange,
@@ -23,7 +24,7 @@ const BirdPage = () => {
     mutationRate: bird?.mutationRate,
     isAlive: bird?.isAlive,
     image: bird?.image,
-    featherColor: bird?.featherColor,
+    featherColor: bird.featherColor,
     weight: bird?.weight,
     hatchDate: bird.hatchDate
       ? format(new Date(bird.hatchDate), "do-M-yyyy", { locale: vi })

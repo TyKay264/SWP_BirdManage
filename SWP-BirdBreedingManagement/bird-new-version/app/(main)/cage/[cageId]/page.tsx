@@ -4,26 +4,39 @@ import BabyBirdCard from "@/components/CageId/BabyBirdCard";
 import BirdCard from "@/components/CageId/BirdCard";
 import NotificationCard from "@/components/CageId/NotificationCard";
 import ProcessCard from "@/components/CageId/ProcessCard";
-import Table from "@/components/Table/BirdTable";
 import React from "react";
 import SpStaff from "@/components/CageId/SpStaff";
-import EggManage from "@/components/CageId/EggManage";
 import BreadScrum from "@/components/BreadScrum";
 import useCages from "@/hooks/useCage";
 import { useParams } from "next/navigation";
+import { EggColumn } from "@/components/Table/EggTable/column";
+import EggClient from "@/components/Table/EggTable/EggClient";
 
 const CageIdPage = () => {
   const { cages, loading } = useCages();
   const params = useParams();
+  if (!loading) return <div className="content-body">....loading</div>;
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
+
   const FilterCageByRole = FindCageById?.birdReproduction?.filter(
     (item) =>
       item.reproductionRole === "MOTHER" || item.reproductionRole === "FATHER"
   );
-  console.log(FindCageById);
 
-  if (!loading) return <div className="content-body">....loading</div>;
+  const listEgg = FindCageById?.birdReproduction?.filter(
+    (item) =>
+      item.reproductionRole === "EGG" || item.reproductionRole === "CHILD"
+  );
+
+  if (!listEgg) {
+    return;
+  }
+  const formatEggs: EggColumn[] = listEgg?.map((item) => ({
+    id: item.reproductionId,
+    eggStatus: item.eggStatus,
+    eggLaidDate: item.eggLaidDate,
+  }));
 
   return (
     <div className="content-body">
@@ -35,14 +48,14 @@ const CageIdPage = () => {
             subTitle1="Tất Cả Lồng"
             subTitle2="Thông Tin Lồng"
           />
-          {FilterCageByRole?.map((item) => (
+          {/* {FilterCageByRole?.map((item) => (
             <BirdCard
               birdRole={item.reproductionRole}
               birdId={item.bird?.birdId}
               image={item.bird?.image}
               birdType={item.bird?.birdType?.name}
             />
-          ))}
+          ))} */}
 
           <div className="row">
             <div className="col-lg-12">
@@ -179,7 +192,7 @@ const CageIdPage = () => {
                     role="tabpanel"
                     aria-labelledby="contact-tab"
                   >
-                    <EggManage />
+                    <EggClient data={formatEggs} />
                   </div>
                 </div>
               </div>

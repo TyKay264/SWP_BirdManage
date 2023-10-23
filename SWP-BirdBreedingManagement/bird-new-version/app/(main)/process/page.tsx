@@ -1,11 +1,10 @@
 "use client";
-import BreadScrum from '@/components/BreadScrum';
-import ProcessTable from '@/components/Table/ProcessTable';
-import ProcessClient from '@/components/Table/ProcessTable/ProcessClient';
-import { ProcessColumn } from '@/components/Table/ProcessTable/column';
-import useProcesses from '@/hooks/useProcess';
+import BreadScrum from "@/components/BreadScrum";
+import ProcessClient from "@/components/Table/ProcessTable/ProcessClient";
+import { ProcessColumn } from "@/components/Table/ProcessTable/column";
+import useProcesses from "@/hooks/useProcess";
 
-import React from 'react'
+import React from "react";
 
 const ProcessPage = () => {
   const { processes } = useProcesses();
@@ -14,7 +13,7 @@ const ProcessPage = () => {
     mother_id: process.mother_id,
     father_id: process.father_id,
     cageid: process.cageid,
-    bird_type: process.bird_type
+    bird_type: process.bird_type,
   }));
 
   return (
@@ -23,7 +22,11 @@ const ProcessPage = () => {
         <div className="content-body">
           <div className="warper container-fluid">
             <div className="all-patients main_container">
-              <BreadScrum title='Danh Sách Quá Trình' subRouteTitle='process' subTitle1='Danh Sách Quá Trình' />
+              <BreadScrum
+                title="Danh Sách Quá Trình"
+                subRouteTitle="process"
+                subTitle1="Danh Sách Quá Trình"
+              />
               <div className="row">
                 <div className="col-lg-12">
                   <div className="card">
@@ -46,7 +49,6 @@ const ProcessPage = () => {
                       {/* <ProcessTable /> */}
                       <ProcessClient data={formatProcesses} />
                     </div>
-
                   </div>
                 </div>
               </div>

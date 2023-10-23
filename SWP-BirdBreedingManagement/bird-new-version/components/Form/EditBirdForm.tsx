@@ -63,7 +63,7 @@ const formSchema = z.object({
   sex: z.string().min(1),
   isAlive: z?.boolean(),
   hatchDate: z.string().min(1),
-  cageId: z.string(),
+  // cageId: z.string(),
   ageRange: z.string(),
   // mutationRate: z.coerce.number(),
   mutation: z.string().min(1),
@@ -87,7 +87,7 @@ const EditBirdForm = () => {
       isAlive: true,
       sex: "",
       hatchDate: "",
-      cageId: "",
+      // cageId: "",
       ageRange: "",
       // mutationRate: 0,
       mutation: "",
@@ -109,7 +109,7 @@ const EditBirdForm = () => {
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("hatchDate", data.bird.hatchDate);
-      form.setValue("cageId", data.bird.cageId);
+      // form.setValue("cageId", data.bird.);
     }
   }, [data, form]);
 
@@ -135,7 +135,7 @@ const EditBirdForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose} >
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="sm:min-w-[1000px]">
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
@@ -173,8 +173,7 @@ const EditBirdForm = () => {
                     </div>
 
                     <div className="col-xl-8">
-
-                      <div className='flex justify-between'>
+                      <div className="flex justify-between">
                         <div className="form-group w-[48%]">
                           <FormField
                             control={form.control}
@@ -184,7 +183,9 @@ const EditBirdForm = () => {
                                 {/* <FormLabel>Loài</FormLabel> */}
                                 <Select
                                   disabled={isLoading}
-                                  onValueChange={(value) => field.onChange(value)}
+                                  onValueChange={(value) =>
+                                    field.onChange(value)
+                                  }
                                   value={field.value}
                                   defaultValue={field.value}
                                 >
@@ -235,8 +236,12 @@ const EditBirdForm = () => {
                                   <SelectContent>
                                     <SelectGroup>
                                       <SelectLabel>Chọn giới tính</SelectLabel>
-                                      <SelectItem value="MALE">Trống</SelectItem>
-                                      <SelectItem value="FEMALE">Mái</SelectItem>
+                                      <SelectItem value="MALE">
+                                        Trống
+                                      </SelectItem>
+                                      <SelectItem value="FEMALE">
+                                        Mái
+                                      </SelectItem>
                                     </SelectGroup>
                                   </SelectContent>
                                 </Select>
@@ -246,7 +251,6 @@ const EditBirdForm = () => {
                           />
                         </div>
                       </div>
-
 
                       <div className="form-group">
                         <FormField
@@ -305,16 +309,12 @@ const EditBirdForm = () => {
                           )}
                         />
                       </div>
-
-
-
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <FormField
                           control={form.control}
                           name="cageId"
                           render={({ field }) => (
                             <FormItem>
-                              {/* <FormLabel>Mã lồng</FormLabel> */}
                               <Select
                                 disabled={isLoading}
                                 onValueChange={(value) => {
@@ -333,7 +333,10 @@ const EditBirdForm = () => {
                                   <SelectGroup>
                                     <SelectLabel>Chọn mã lồng</SelectLabel>
                                     {cages.map((cage) => (
-                                      <SelectItem key={cage.cageId} value={cage.cageId}>
+                                      <SelectItem
+                                        key={cage.cageId}
+                                        value={cage.cageId}
+                                      >
                                         {cage.cageId}
                                       </SelectItem>
                                     ))}
@@ -344,7 +347,7 @@ const EditBirdForm = () => {
                             </FormItem>
                           )}
                         />
-                      </div>
+                      </div> */}
 
                       {/* <div className="form-group">
                         <FormField
@@ -407,7 +410,6 @@ const EditBirdForm = () => {
                           />
                         </div>
 
-
                         <div className="form-group w-[48%]">
                           <FormField
                             control={form.control}
@@ -428,8 +430,6 @@ const EditBirdForm = () => {
                           />
                         </div>
                       </div>
-
-
 
                       <div className="form-group text-right ">
                         <button

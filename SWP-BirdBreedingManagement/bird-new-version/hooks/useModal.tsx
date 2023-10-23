@@ -20,7 +20,7 @@ type BirdColumn = {
   ageRange: string;
   mutation: string;
   mutationRate: number;
-  isAlive?: boolean;
+  isAlive: boolean;
   image: string;
   featherColor: string;
   weight: number;

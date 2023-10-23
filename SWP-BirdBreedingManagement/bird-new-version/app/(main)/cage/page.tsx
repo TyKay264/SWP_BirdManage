@@ -1,7 +1,6 @@
 "use client";
 
 import BreadScrum from "@/components/BreadScrum";
-import CageTable from "@/components/Table/CageTable";
 import CageClient from "@/components/Table/CageTable/CageClient";
 import { CageColumn } from "@/components/Table/CageTable/column";
 import useCages from "@/hooks/useCage";
@@ -17,6 +16,8 @@ const CagePage = () => {
     location: cage.location,
     quantity: cage.quantity,
   }));
+
+  console.log(formatCages);
 
   return (
     <>
