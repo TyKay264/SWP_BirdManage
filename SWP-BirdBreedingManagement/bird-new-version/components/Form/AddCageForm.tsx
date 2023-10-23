@@ -48,8 +48,8 @@ const formSchema = z.object({
   // id: z.string().min(4),
   // cageType: z.string(),
   location: z.string(),
-  available: z.boolean(),
-  quantity: z.coerce.number(),
+  // available: z.boolean(),
+  // quantity: z.coerce.number(),
 });
 
 const AddCageForm = () => {
@@ -60,8 +60,8 @@ const AddCageForm = () => {
       // id: "",
       // cageType: "",
       location: "",
-      available: false,
-      quantity: 0,
+      // available: false,
+      // quantity: 0,
     },
   });
 

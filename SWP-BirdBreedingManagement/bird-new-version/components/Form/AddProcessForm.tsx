@@ -82,8 +82,8 @@ const birdsType: birdType[] = [
 const formSchema = z.object({
     birdTypeName: z.string().min(1),
     purpose: z.string().min(1),
-    IdMale: z.string().min(1),
-    IdFeMale: z.string().min(1),
+    cockId: z.string().min(1),
+    henId: z.string().min(1),
     cageId: z.coerce.number(),
 })
 

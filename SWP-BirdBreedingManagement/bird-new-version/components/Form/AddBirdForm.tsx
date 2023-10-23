@@ -47,11 +47,11 @@ type BirdtypeCustom = {
 const birdsType: BirdtypeCustom[] = [
   {
     typeId: "1",
-    birdTypeName: "than",
+    birdTypeName: "chích chòe than",
   },
   {
     typeId: "2",
-    birdTypeName: "lua",
+    birdTypeName: "chích chòe lửa",
   },
 ];
 
