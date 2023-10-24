@@ -21,7 +21,7 @@ const Header = () => {
               </li>
 
               <li className="nav-link btn">
-                <a href="/cr-process">
+                <a href="/add-process">
                   <i className="far fa-file-alt" />{" "}
                   <span> Tạo Quá Trình</span>
                 </a>

@@ -125,7 +125,6 @@ const EditBirdForm = () => {
           `https://bird-swp.azurewebsites.net/api/birds/${data.bird.birdId}`,
           values
         );
-
         form.reset();
       } catch (error) {
         console.log(error);

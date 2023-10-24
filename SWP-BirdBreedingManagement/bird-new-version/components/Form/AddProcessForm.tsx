@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/popover"
 import axios from "axios";
 import useCageB from "@/hooks/useCageB"
-import useCageA from "@/hooks/useCageA"
+
 
 const birdtypesA = [
   {
@@ -63,8 +63,8 @@ const birdtypesA = [
     label: "5",
   },
   {
-    value: "a06",
-    label: "6",
+    value: "31",
+    label: "31",
   },
 ]
 
@@ -91,8 +91,8 @@ const birdtypesB = [
     label: "11",
   },
   {
-    value: "a12",
-    label: "12",
+    value: "32",
+    label: "32",
   },
 ]
 
@@ -140,7 +140,7 @@ const AddProcessForm = () => {
       cageId: "",
     },
   })
-  const { cages } = useCageA();
+  const { cages } = useCageB();
   //console.log(cages)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

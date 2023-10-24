@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import AddEggForm from "../Form/AddEggForm";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,7 +41,7 @@ export function DataTable<TData, TValue>({
   //   onDelete,
   loading,
 }: //   showDeleteButton = true,
-DataTableProps<TData, TValue>) {
+  DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -84,7 +85,7 @@ DataTableProps<TData, TValue>) {
               table.getColumn(searchKey)?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
-          />
+          /><AddEggForm />
         </div>
         <div className="flex w-full items-center justify-between">
           {/* {showDeleteButton ? (
@@ -117,9 +118,9 @@ DataTableProps<TData, TValue>) {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     );
                   })}

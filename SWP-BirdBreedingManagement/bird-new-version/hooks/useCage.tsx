@@ -14,7 +14,7 @@ const useCages = () => {
     const fetchCages = async () => {
       try {
         const res = await axios.get(
-          "https://bird-swp.azurewebsites.net/api/cages/view"
+          "https://bird-swp.azurewebsites.net/api/cages/all"
         );
 
         setCages(res.data);
