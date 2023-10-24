@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.login-page {
+  background-size: cover;
+  background-position: center;
+   background-image: url(../public/assets/images/hoa-mi-background.jpg);
+ }
