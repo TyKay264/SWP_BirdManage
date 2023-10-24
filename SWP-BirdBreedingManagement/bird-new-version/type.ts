@@ -64,8 +64,14 @@ export interface Reproduction_process {
   isDone?: boolean;
   separateDate?: string; //Date
   cage: Cage;
-  cockReproduction: Bird_reproduction;
-  henReproduction: Bird_reproduction;
+  eggsList: Bird_reproduction[],
+  cageId?:string;
+
+  // cockReproduction: Bird_reproduction;
+  // henReproduction: Bird_reproduction;
+  henId: string
+  cockId: string,
+
 }
 export interface Bird_reproduction {
   reproductionId: string;
@@ -76,11 +82,16 @@ export interface Bird_reproduction {
   actEggHatchDate?: string; // Date;
   actSwingBranch?: string; // Date;
   actAdultBirdDate?: string; // Date;
+  expEggHatchDate?: string; // DATE
+  expSwingBranch?:string;  // DATE
+  expAdultBirdDate:string;  // DATE
   eggType?: string;
   eggStatus?: string;
   isFail?: boolean;
   failDate?: string; // Date;
 }
+
+
 
 /******** COLUMN TABLE ********/
 export type StaffColumn = {

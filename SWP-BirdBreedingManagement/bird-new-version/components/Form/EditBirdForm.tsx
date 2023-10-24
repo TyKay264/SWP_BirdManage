@@ -49,7 +49,7 @@ type BirdtypeCustom = {
 const birdsType: BirdtypeCustom[] = [
   {
     typeId: "1",
-    birdTypeName: "chích chòe than",
+    birdTypeName: "Chích chòe than",
   },
   {
     typeId: "2",
@@ -75,7 +75,6 @@ const formSchema = z.object({
 
 const EditBirdForm = () => {
   const { isOpen, type, onClose, data } = useModal();
-
   const isModalOpen = isOpen && type === "EditBirdForm";
 
   // 1. Define your form.

@@ -106,12 +106,12 @@ const SideBar = () => {
               </li>
             </ul>
           </li> */}
-          <li className="has-submenu">
+          {/* <li className="has-submenu">
             <a href="/cage-diagram-single">
               <i className="fas fa-calendar-alt" />
               <span className="nav-label">Sơ đồ khu nuôi chim</span>
             </a>
-          </li>
+          </li> */}
 
 
           {/* <li className="has-submenu">

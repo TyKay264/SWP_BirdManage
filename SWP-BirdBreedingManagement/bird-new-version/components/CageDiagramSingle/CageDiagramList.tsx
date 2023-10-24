@@ -1,4 +1,5 @@
 import React from 'react'
+import AddEggForm from '../Form/AddEggForm'
 import CageDiagramItem from './CageDiagramItem'
 const CageDiagramList = () => {
     return (
@@ -6,7 +7,7 @@ const CageDiagramList = () => {
             <div className="col-lg-12">
                 <div className="widget-media list-doctors best-doctor">
                     <div className="timeline row">
-
+                        <AddEggForm />
                         {/* {birds.map((bird) => (
                         <CageDiagramItem
                             key={bird.id}

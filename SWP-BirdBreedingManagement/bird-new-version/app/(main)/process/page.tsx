@@ -18,13 +18,16 @@ const ProcessPage = () => {
       </div>
     );
 
-  if (!processes) return null;
+  // if (!processes) return null;
   const formatProcesses: ProcessColumn[] = processes.map((process) => ({
     id: process.processId,
-    motherId: process.henReproduction.bird?.birdId,
-    fatherId: process.cockReproduction.bird?.birdId,
-    cage: process.cage.location,
-    type: process.henReproduction.bird?.birdType.name,
+    motherId: process.henId,
+    fatherId: process.cockId,
+    cage: process.cageId,
+    // motherId: process.henReproduction.bird?.birdId,
+    // fatherId: process.cockReproduction.bird?.birdId,
+    // cage: process.cage.location,
+    // type: process.henReproduction.bird?.birdType.name,
   }));
 
   return (

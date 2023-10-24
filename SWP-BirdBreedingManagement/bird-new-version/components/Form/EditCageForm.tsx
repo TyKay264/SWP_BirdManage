@@ -96,7 +96,7 @@ const EditCageForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
+    <Dialog >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
@@ -110,7 +110,7 @@ const EditCageForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
-                    <div className="col-xl-4"></div>
+                    {/* <div className="col-xl-4"></div> */}
 
                     <div className="col-xl-12">
                       <div className="form-group">

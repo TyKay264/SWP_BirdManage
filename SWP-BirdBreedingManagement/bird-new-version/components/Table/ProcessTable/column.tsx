@@ -13,7 +13,7 @@ export type ProcessColumn = {
   motherId: string;
   fatherId: string;
   cage: string;
-  type: string;
+  type?: string;
 };
 
 export const columns: ColumnDef<ProcessColumn>[] = [
