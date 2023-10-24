@@ -7,10 +7,11 @@ import useStaffs from "@/hooks/useStaffs";
 import { StaffColumn } from "@/components/Table/StaffTable/column";
 
 import React from "react";
+import Loading from "@/components/LoadingComponent";
 
 const StaffPage = () => {
   // step 1 -> data
-  const { staffs } = useStaffs();
+  const { staffs, loading } = useStaffs();
   // console.log(staffs)
   // lay ra 1 object
   const formatStaffs: StaffColumn[] = staffs.map((staff) => ({
@@ -21,6 +22,13 @@ const StaffPage = () => {
     createdAt: staff.createdDate,
     role: staff.role,
   }));
+
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
 
   return (
     <>

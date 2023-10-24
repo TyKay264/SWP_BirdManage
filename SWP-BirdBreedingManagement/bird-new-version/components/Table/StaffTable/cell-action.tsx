@@ -29,32 +29,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const { onOpen } = useModal();
 
-  const onConfirm = async () => {
-    try {
-      setLoading(true);
-      await axios.delete(` http://localhost:3001/staffs/${data.id}`);
-
-      window.location.reload();
-      router.refresh();
-    } catch (error) {
-    } finally {
-      setLoading(false);
-      setOpen(false);
-    }
-  };
-
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
   };
 
   return (
     <>
-      <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onConfirm}
-        loading={loading}
-      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -64,9 +44,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => {}}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
-          </DropdownMenuItem>
+
           <DropdownMenuItem
             onClick={() => onOpen("EditStaffForm", { staff: data })}
           >
@@ -74,9 +52,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push(`staff/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" /> detail
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Xóa
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

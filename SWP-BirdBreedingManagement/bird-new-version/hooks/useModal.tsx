@@ -1,37 +1,11 @@
+import { BirdColumn, CageColumn, StaffColumn } from "@/type";
 import { create } from "zustand";
 
-export type ModalStyle = "EditStaffForm" | "EditBirdForm" | "EditCageForm";
-
-type StaffColumn = {
-  id: string;
-  username: string;
-  email: string;
-  fullName: string;
-  createdAt?: string;
-  role: string;
-};
-
-type BirdColumn = {
-  birdId: string;
-  type: string;
-  sex: string;
-  cage?: string;
-  hatchDate: string;
-  ageRange: string;
-  mutation: string;
-  mutationRate: number;
-  isAlive: boolean;
-  image: string;
-  featherColor: string;
-  weight: number;
-};
-
-type CageColumn = {
-  cageId: string;
-  user?: string;
-  location: string;
-  quantity: number;
-};
+export type ModalStyle =
+  | "EditStaffForm"
+  | "EditBirdForm"
+  | "EditCageForm"
+  | "EditProcessForm";
 
 interface ModalData {
   bird?: BirdColumn;

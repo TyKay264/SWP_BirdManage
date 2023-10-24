@@ -11,11 +11,11 @@ import useCages from "@/hooks/useCage";
 import { useParams } from "next/navigation";
 import { EggColumn } from "@/components/Table/EggTable/column";
 import EggClient from "@/components/Table/EggTable/EggClient";
+import Loading from "@/components/LoadingComponent";
 
 const CageIdPage = () => {
   const { cages, loading } = useCages();
   const params = useParams();
-  if (!loading) return <div className="content-body">....loading</div>;
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
 
@@ -28,10 +28,21 @@ const CageIdPage = () => {
     (item) =>
       item.reproductionRole === "EGG" || item.reproductionRole === "CHILD"
   );
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+
+  if (!FindCageById?.reproductionProcess) {
+    return <div className="content-body  h-[650px]">hello world</div>;
+  }
 
   if (!listEgg) {
     return;
   }
+
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
     id: item.reproductionId,
     eggStatus: item.eggStatus,
@@ -50,6 +61,7 @@ const CageIdPage = () => {
           />
           {FilterCageByRole?.map((item) => (
             <BirdCard
+              key={item.bird?.birdId}
               birdRole={item.reproductionRole}
               birdId={item.bird?.birdId}
               image={item.bird?.image}
@@ -210,7 +222,9 @@ const CageIdPage = () => {
                               <label className="basis-[100%]">
                                 TỔNG SỐ TRỨNG:
                               </label>
-                              <div className="grow pl-2.5 pb-1.5">10</div>
+                              <div className="grow pl-2.5 pb-1.5">
+                                {FindCageById?.reproductionProcess?.totalEgg}
+                              </div>
                             </div>
                           </div>
 
