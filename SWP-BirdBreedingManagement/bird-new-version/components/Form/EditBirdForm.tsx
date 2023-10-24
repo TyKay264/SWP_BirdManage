@@ -39,6 +39,7 @@ import axios from "axios";
 import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useCages from "@/hooks/useCage";
+import useCageA from "@/hooks/useCageA";
 
 type BirdtypeCustom = {
   typeId: string;
@@ -87,7 +88,7 @@ const EditBirdForm = () => {
       isAlive: true,
       sex: "",
       hatchDate: "",
-      // cageId: "",
+      cageId: "",
       ageRange: "",
       // mutationRate: 0,
       mutation: "",
@@ -109,11 +110,11 @@ const EditBirdForm = () => {
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("hatchDate", data.bird.hatchDate);
-      // form.setValue("cageId", data.bird.);
+      form.setValue("cageId", data.bird.cageId);
     }
   }, [data, form]);
 
-  const { cages } = useCages();
+  const { cages } = useCageA();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
@@ -309,7 +310,8 @@ const EditBirdForm = () => {
                           )}
                         />
                       </div>
-                      {/* <div className="form-group">
+
+                      <div className="form-group">
                         <FormField
                           control={form.control}
                           name="cageId"
@@ -347,7 +349,7 @@ const EditBirdForm = () => {
                             </FormItem>
                           )}
                         />
-                      </div> */}
+                      </div>
 
                       {/* <div className="form-group">
                         <FormField
