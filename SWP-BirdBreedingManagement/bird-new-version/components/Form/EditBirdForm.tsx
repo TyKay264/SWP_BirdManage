@@ -108,7 +108,7 @@ const EditBirdForm = () => {
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("hatchDate", data.bird.hatchDate);
-      form.setValue("cageId", data.bird.cage);
+      // form.setValue("cageId", data.bird.cage);
     }
   }, [data, form]);
 

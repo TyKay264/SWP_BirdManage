@@ -1,9 +1,9 @@
-'use client'
-import React, { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useForm } from 'react-hook-form'
-import { Button } from "@/components/ui/button"
+"use client";
+import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -21,7 +21,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 // import useCages from "@/hooks/useCage"
 // import { Check, ChevronsUpDown } from "lucide-react"
 // import { cn } from "@/lib/utils"
@@ -38,8 +38,7 @@ import {
 //   PopoverTrigger,
 // } from "@/components/ui/popover"
 import axios from "axios";
-import useCageB from "@/hooks/useCageB"
-
+import useCageB from "@/hooks/useCageB";
 
 const birdtypesA = [
   {
@@ -69,9 +68,8 @@ const birdtypesA = [
   {
     value: "44",
     label: "44",
-  }
-]
-
+  },
+];
 
 const birdtypesB = [
   {
@@ -98,65 +96,67 @@ const birdtypesB = [
     value: "45",
     label: "45",
   },
-]
+];
 
 // type birdType = {
 //   birdtype_id: string,
 //   birdTypeName: string
 // }
 
-const birdsType: birdType[] = [
+type BirdtypeCustom = {
+  birdtype_id: string;
+  birdTypeName: string;
+};
+
+const birdsType: BirdtypeCustom[] = [
   {
     birdtype_id: "1",
-    birdTypeName: "Chích chòe than"
+    birdTypeName: "Chích chòe than",
   },
   {
     birdtype_id: "2",
-    birdTypeName: "Chích chòe lửa"
-  }
-]
-
+    birdTypeName: "Chích chòe lửa",
+  },
+];
 
 const formSchema = z.object({
-  // birdTypeName: z.string().min(1),
+  birdTypeName: z.string().min(1),
   // purpose: z.string().min(1),
   cockId: z.string().min(1),
   henId: z.string().min(1),
   cageId: z.string(),
-})
-
+});
 
 const AddProcessForm = () => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
-
-  const [open1, setOpen1] = useState(false)
-  const [value1, setValue1] = useState("")
+  const [open1, setOpen1] = useState(false);
+  const [value1, setValue1] = useState("");
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // birdTypeName: "",
+      birdTypeName: "",
       // purpose: "",
       cockId: "",
       henId: "",
       cageId: "",
     },
-  })
+  });
   const { cages } = useCageB();
   //console.log(cages)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //console.log("Submit button clicked");
     //TO DO xử lý form (api)
-    console.log(values)
+    console.log(values);
     try {
       await axios.post(
         "https://bird-swp.azurewebsites.net/api/reproductionprocess/create",
         values
       );
-      console.log(values)
+      console.log(values);
       form.reset();
     } catch (error) {
       console.log(error);
@@ -176,7 +176,6 @@ const AddProcessForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-xl-8">
-
                   <div className="form-group">
                     <FormField
                       control={form.control}
@@ -184,10 +183,12 @@ const AddProcessForm = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Loài</FormLabel>
-                          <Select disabled={isLoading}
+                          <Select
+                            disabled={isLoading}
                             onValueChange={field.onChange}
                             value={field.value}
-                            defaultValue={field.value}>
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Chọn loài" />
@@ -203,9 +204,13 @@ const AddProcessForm = () => {
                                 ))} */}
 
                                 {birdsType.map((item) => (
-                                  <SelectItem value={item.birdTypeName} key={item.birdTypeName}>{item.birdTypeName}</SelectItem>
+                                  <SelectItem
+                                    value={item.birdTypeName}
+                                    key={item.birdTypeName}
+                                  >
+                                    {item.birdTypeName}
+                                  </SelectItem>
                                 ))}
-
                               </SelectGroup>
                             </SelectContent>
                           </Select>
@@ -304,16 +309,20 @@ const AddProcessForm = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>ID chim trống</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Chọn ID chim trống" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-
                               {birdtypesA.map((item) => (
-                                <SelectItem value={item.label} key={item.label}>{item.label}</SelectItem>
+                                <SelectItem value={item.label} key={item.label}>
+                                  {item.label}
+                                </SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -330,16 +339,20 @@ const AddProcessForm = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>ID chim mái</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Chọn ID chim trống" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-
                               {birdtypesB.map((item) => (
-                                <SelectItem value={item.label} key={item.label}>{item.label}</SelectItem>
+                                <SelectItem value={item.label} key={item.label}>
+                                  {item.label}
+                                </SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -374,7 +387,10 @@ const AddProcessForm = () => {
                               <SelectGroup>
                                 <SelectLabel>Chọn mã lồng</SelectLabel>
                                 {cages.map((cage) => (
-                                  <SelectItem key={cage.cageId} value={cage.cageId}>
+                                  <SelectItem
+                                    key={cage.cageId}
+                                    value={cage.cageId}
+                                  >
                                     {cage.cageId}
                                   </SelectItem>
                                 ))}
@@ -402,10 +418,9 @@ const AddProcessForm = () => {
           </Form>
         </div>
       </div>
-    </div >
-
-  )
-}
+    </div>
+  );
+};
 export default AddProcessForm;
 
 // const AddProcessForm = () => {

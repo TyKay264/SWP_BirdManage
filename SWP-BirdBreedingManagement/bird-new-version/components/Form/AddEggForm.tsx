@@ -1,5 +1,5 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,12 +18,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
-import { Label } from "@/components/ui/label"
+import { Label } from "@/components/ui/label";
 import { useModal } from "@/hooks/useModal";
 import {
   Form,
@@ -36,10 +36,9 @@ import {
 } from "@/components/ui/form";
 
 const formSchema = z.object({
-  number: z.coerce.number(),
+  number: z.string(),
   laidDate: z.string(),
 });
-
 
 const AddEggForm = () => {
   const { isOpen, type, onClose, data } = useModal();
@@ -51,7 +50,7 @@ const AddEggForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       number: "",
-      laidDate: ""
+      laidDate: "",
     },
   });
 
@@ -73,8 +72,7 @@ const AddEggForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-
-    <Dialog >
+    <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Thêm trứng</Button>
       </DialogTrigger>
@@ -157,7 +155,6 @@ const AddEggForm = () => {
                           Chỉnh sửa lồng
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </form>

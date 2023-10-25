@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -36,7 +36,6 @@ import {
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { FileUpload } from "../FileUpload";
-
 
 const formSchema = z.object({
   eggStatus: z.string().min(1),
@@ -64,7 +63,7 @@ const AddBirdChildForm = () => {
       hatchDate: "",
       image: "",
       eggStatus: "",
-      weight: ""
+      weight: 0,
     },
   });
 
@@ -86,7 +85,7 @@ const AddBirdChildForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog >
+    <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Cập nhật chim con</Button>
       </DialogTrigger>
@@ -121,7 +120,9 @@ const AddBirdChildForm = () => {
                                 // onValueChange={field.onChange}
                                 onValueChange={(value) => {
                                   field.onChange(value);
-                                  setIsDisabled(value === "inProcess" || value === "broken");
+                                  setIsDisabled(
+                                    value === "inProcess" || value === "broken"
+                                  );
                                 }}
                                 value={field.value}
                                 defaultValue={field.value}
@@ -134,10 +135,10 @@ const AddBirdChildForm = () => {
                                 </FormControl>
                                 <SelectContent>
                                   <SelectGroup>
-                                    <SelectLabel>Cập nhật tình trạng trứng</SelectLabel>
-                                    <SelectItem value="broken" >
-                                      Hỏng
-                                    </SelectItem>
+                                    <SelectLabel>
+                                      Cập nhật tình trạng trứng
+                                    </SelectLabel>
+                                    <SelectItem value="broken">Hỏng</SelectItem>
                                     <SelectItem value="inProcess">
                                       Đang phát triển
                                     </SelectItem>
@@ -163,7 +164,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                              // disabled={isDisabled}
+                                // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />
@@ -285,7 +286,6 @@ const AddBirdChildForm = () => {
                           Chỉnh sửa lồng
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </form>
@@ -294,7 +294,7 @@ const AddBirdChildForm = () => {
           </div>
         </div>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 };
 

@@ -24,10 +24,12 @@ const ProcessPage = () => {
     motherId: process.henId,
     fatherId: process.cockId,
     cage: process.cageId,
+    isDone: process.isDone,
     // motherId: process.henReproduction.bird?.birdId,
     // fatherId: process.cockReproduction.bird?.birdId,
     // cage: process.cage.location,
-    //type: process.birdTypeName
+    type: process.birdTypeName,
+    eggList: process.eggsList,
   }));
 
   return (

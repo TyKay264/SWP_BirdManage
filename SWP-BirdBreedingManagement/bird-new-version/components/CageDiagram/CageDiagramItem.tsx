@@ -22,9 +22,9 @@ const CageDiagramItem = ({
   imageSrc,
   crowIcons,
   eggIcons,
-  // cock,
-  // hen
-}: CageDiagramItemProps) => {
+}: // cock,
+// hen
+CageDiagramItemProps) => {
   const crowIconsCount = crowIcons || 0;
   const eggIconsCount = eggIcons || 0;
   const updatedImageSrc =
@@ -53,10 +53,14 @@ const CageDiagramItem = ({
             </div>
           ) : (
             <div className="flex justify-between mx-10">
-              <div className="flex justify-start mr-8">
+              <div className="flex justify-start mr-8 relative">
                 <div className="media">
                   <img src={updatedImageSrc} alt="image" />
                 </div>
+                <span className="relative flex h-3 w-3 top-0 right-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
               </div>
               <div className="flex justify-center items-start flex-col space-y-4">
                 <div className="text-sm text-black">Id trống: 4 </div>

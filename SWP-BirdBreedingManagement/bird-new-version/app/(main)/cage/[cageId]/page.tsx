@@ -213,9 +213,7 @@ const CageIdPage = () => {
                               <label className="basis-[100%]">
                                 NGÀY ĐẺ TRỨNG :
                               </label>
-                              <div className="grow pl-2.5 pb-1.5">
-                                ????
-                              </div>
+                              <div className="grow pl-2.5 pb-1.5">????</div>
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">
@@ -238,7 +236,9 @@ const CageIdPage = () => {
 
                             <div className="flex justify-between items-center mb-2.5">
                               <label className="basis-[100%]">MÃ LỒNG :</label>
-                              <div className="grow pl-2.5 pb-1.5">{FindCageById?.cageId}</div>
+                              <div className="grow pl-2.5 pb-1.5">
+                                {FindCageById?.cageId}
+                              </div>
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">
