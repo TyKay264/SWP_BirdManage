@@ -30,7 +30,7 @@ const CageDiagramPage = () => {
                 subRouteTitle="cage-diagram"
                 subTitle1="Sơ Đồ Lồng"
               />
-              <CageDiagramList cages={cages} />
+              <CageDiagramList cages={CageFilterLocationB} />
             </div>
           </div>
         </div>

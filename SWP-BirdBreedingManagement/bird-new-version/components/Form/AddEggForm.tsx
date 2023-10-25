@@ -43,7 +43,7 @@ const formSchema = z.object({
 
 const AddEggForm = () => {
   const { isOpen, type, onClose, data } = useModal();
-  console.log(data.cage?.id)
+
   const isModalOpen = isOpen && type === "AddEggForm";
 
   // 1. Define your form.
@@ -57,11 +57,11 @@ const AddEggForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
+    //console.log(data.cage?.cageId)
     console.log(values);
-    // console.log(data.Reproduction_process?.processId)
     try {
       await axios.post(
-        "https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/5",
+        "https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/2",
         values
       );
       form.reset();

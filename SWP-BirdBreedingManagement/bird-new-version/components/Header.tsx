@@ -171,7 +171,7 @@ const Header = () => {
               <div className="account-control">
                 <a className="login header-profile" href="#" title="Sign in">
                   <div className="header-info">
-                    <span>Dr Roberts</span>
+                    <span>Đăng Khoa</span>
                     <small>Admin</small>
                   </div>
                   <img

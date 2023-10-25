@@ -11,6 +11,8 @@ interface CageDiagramItemProps {
   crowIcons: number;
   eggIcons?: number;
   process?: boolean;
+  // cock?: string,
+  // hen?: string
 }
 
 const CageDiagramItem = ({
@@ -20,6 +22,8 @@ const CageDiagramItem = ({
   imageSrc,
   crowIcons,
   eggIcons,
+  // cock,
+  // hen
 }: CageDiagramItemProps) => {
   const crowIconsCount = crowIcons || 0;
   const eggIconsCount = eggIcons || 0;
@@ -55,8 +59,8 @@ const CageDiagramItem = ({
                 </div>
               </div>
               <div className="flex justify-center items-start flex-col space-y-4">
-                <div className="text-sm text-black">Id trống:123 </div>
-                <div className="text-sm text-black">Id mái: 123</div>
+                <div className="text-sm text-black">Id trống: 4 </div>
+                <div className="text-sm text-black">Id mái: 7</div>
               </div>
             </div>
           )}

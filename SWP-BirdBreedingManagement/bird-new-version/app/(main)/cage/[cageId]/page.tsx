@@ -35,9 +35,9 @@ const CageIdPage = () => {
       </div>
     );
 
-  if (!FindCageById?.reproductionProcess) {
-    return <div className="content-body  h-[650px]">hello world</div>;
-  }
+  // if (!FindCageById?.reproductionProcess) {
+  //   return <div className="content-body  h-[650px]">none process</div>;
+  // }
 
   if (!listEgg) {
     return;
@@ -205,7 +205,7 @@ const CageIdPage = () => {
                                 NGÀY GHÉP CẶP :
                               </label>
                               <div className="grow pl-2.5 pb-1.5">
-                                11/10/2023
+                                {FindCageById?.reproductionProcess?.pairingDate}
                               </div>
                             </div>
 
@@ -214,7 +214,7 @@ const CageIdPage = () => {
                                 NGÀY ĐẺ TRỨNG :
                               </label>
                               <div className="grow pl-2.5 pb-1.5">
-                                30/10/2023
+                                ????
                               </div>
                             </div>
 
@@ -238,7 +238,7 @@ const CageIdPage = () => {
 
                             <div className="flex justify-between items-center mb-2.5">
                               <label className="basis-[100%]">MÃ LỒNG :</label>
-                              <div className="grow pl-2.5 pb-1.5">A001</div>
+                              <div className="grow pl-2.5 pb-1.5">{FindCageById?.cageId}</div>
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">
@@ -246,7 +246,7 @@ const CageIdPage = () => {
                                 GIAI ĐOẠN :
                               </label>
                               <div className="grow pl-2.5 pb-2 basis-[100%]">
-                                ẤP TRỨNG
+                                {FindCageById?.reproductionProcess?.stage}
                               </div>
                             </div>
                           </div>
