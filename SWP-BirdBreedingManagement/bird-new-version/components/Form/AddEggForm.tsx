@@ -43,7 +43,7 @@ const formSchema = z.object({
 
 const AddEggForm = () => {
   const { isOpen, type, onClose, data } = useModal();
-
+  //console.log(data.cage)
   const isModalOpen = isOpen && type === "AddEggForm";
 
   // 1. Define your form.
@@ -61,7 +61,7 @@ const AddEggForm = () => {
     console.log(values);
     try {
       await axios.post(
-        "https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/2",
+        `https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/${data.cage?.cageId}`,
         values
       );
       form.reset();

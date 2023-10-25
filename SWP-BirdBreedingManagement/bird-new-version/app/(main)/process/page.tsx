@@ -27,7 +27,7 @@ const ProcessPage = () => {
     // motherId: process.henReproduction.bird?.birdId,
     // fatherId: process.cockReproduction.bird?.birdId,
     // cage: process.cage.location,
-    // type: process.henReproduction.bird?.birdType.name,
+    //type: process.birdTypeName
   }));
 
   return (

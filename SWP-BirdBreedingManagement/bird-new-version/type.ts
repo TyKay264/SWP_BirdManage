@@ -66,10 +66,10 @@ export interface Reproduction_process {
   cage: Cage;
   eggsList: Bird_reproduction[],
   cageId?:string;
-
+  birdTypeName?:string,
   // cockReproduction: Bird_reproduction;
   // henReproduction: Bird_reproduction;
-  henId: string
+  henId: string,
   cockId: string,
 
 }

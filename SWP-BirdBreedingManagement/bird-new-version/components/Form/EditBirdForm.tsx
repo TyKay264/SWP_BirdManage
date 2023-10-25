@@ -38,7 +38,6 @@ import {
 import axios from "axios";
 import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
-import useCages from "@/hooks/useCage";
 import useCageA from "@/hooks/useCageA";
 
 type BirdtypeCustom = {
@@ -53,7 +52,7 @@ const birdsType: BirdtypeCustom[] = [
   },
   {
     typeId: "2",
-    birdTypeName: "chích chòe lửa",
+    birdTypeName: "Chích chòe lửa",
   },
 ];
 

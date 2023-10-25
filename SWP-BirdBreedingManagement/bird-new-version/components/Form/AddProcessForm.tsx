@@ -22,21 +22,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import useCages from "@/hooks/useCage"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+// import useCages from "@/hooks/useCage"
+// import { Check, ChevronsUpDown } from "lucide-react"
+// import { cn } from "@/lib/utils"
+// import {
+//   Command,
+//   CommandEmpty,
+//   CommandGroup,
+//   CommandInput,
+//   CommandItem,
+// } from "@/components/ui/command"
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from "@/components/ui/popover"
 import axios from "axios";
 import useCageB from "@/hooks/useCageB"
 
@@ -66,6 +66,10 @@ const birdtypesA = [
     value: "31",
     label: "31",
   },
+  {
+    value: "44",
+    label: "44",
+  }
 ]
 
 
@@ -91,8 +95,8 @@ const birdtypesB = [
     label: "11",
   },
   {
-    value: "32",
-    label: "32",
+    value: "45",
+    label: "45",
   },
 ]
 
@@ -101,16 +105,16 @@ const birdtypesB = [
 //   birdTypeName: string
 // }
 
-// const birdsType: birdType[] = [
-//   {
-//     birdtype_id: "1",
-//     birdTypeName: "Chích chòe than"
-//   },
-//   {
-//     birdtype_id: "2",
-//     birdTypeName: "Chích chòe lửa"
-//   }
-// ]
+const birdsType: birdType[] = [
+  {
+    birdtype_id: "1",
+    birdTypeName: "Chích chòe than"
+  },
+  {
+    birdtype_id: "2",
+    birdTypeName: "Chích chòe lửa"
+  }
+]
 
 
 const formSchema = z.object({
@@ -172,43 +176,44 @@ const AddProcessForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-xl-8">
-                  {/* <div className="form-group">
-                  <FormField
-                    control={form.control}
-                    name="birdTypeName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Loài</FormLabel>
-                        <Select disabled={isLoading}
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Chọn loài" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectLabel>Chọn loài</SelectLabel>
 
-                              {birdtypearr.map((item) => (
+                  <div className="form-group">
+                    <FormField
+                      control={form.control}
+                      name="birdTypeName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Loài</FormLabel>
+                          <Select disabled={isLoading}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn loài" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Chọn loài</SelectLabel>
 
-                                <SelectItem value={item.key} key={item.key}>{item.value}</SelectItem>
-                              ))}
+                                {/* {birdtypearr.map((item) => (
 
-                              {birdsType.map((item) => (
-                                <SelectItem value={item.birdTypeName} key={item.birdTypeName}>{item.birdTypeName}</SelectItem>
-                              ))}
+                                  <SelectItem value={item.key} key={item.key}>{item.value}</SelectItem>
+                                ))} */}
 
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div> */}
+                                {birdsType.map((item) => (
+                                  <SelectItem value={item.birdTypeName} key={item.birdTypeName}>{item.birdTypeName}</SelectItem>
+                                ))}
+
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   {/* <div className="form-group">
                   <FormField

@@ -96,7 +96,7 @@ const EditCageForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog >
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
