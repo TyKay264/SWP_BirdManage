@@ -73,7 +73,7 @@ const AddBirdChildForm = () => {
     console.log(values);
     try {
       await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
+        `bird-swp.azurewebsites.net/api/birdreproductions/{data.egg?.id}`,
         values
       );
       form.reset();

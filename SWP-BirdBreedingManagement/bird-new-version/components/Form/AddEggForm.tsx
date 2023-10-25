@@ -152,7 +152,7 @@ const AddEggForm = () => {
                       <div className="form-group text-right ">
                         <button
                           type="submit"
-                          className="btn btn-primary float-end"
+                          className="btn btn-primary float-end "
                         >
                           Chỉnh sửa lồng
                         </button>
