@@ -64,7 +64,7 @@ const formSchema = z.object({
   sex: z.string().min(1),
   isAlive: z?.boolean(),
   hatchDate: z.string().min(1),
-  // cageId: z.string(),
+  cageId: z.string(),
   ageRange: z.string(),
   // mutationRate: z.coerce.number(),
   mutation: z.string().min(1),
@@ -109,7 +109,7 @@ const EditBirdForm = () => {
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("hatchDate", data.bird.hatchDate);
-      form.setValue("cageId", data.bird.cageId);
+      form.setValue("cageId", data.bird.cage);
     }
   }, [data, form]);
 
