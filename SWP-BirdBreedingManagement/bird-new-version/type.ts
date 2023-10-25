@@ -61,37 +61,35 @@ export interface Reproduction_process {
   totalEgg?: number;
   failEgg?: number;
   stage?: string;
-  isDone?: boolean;
+  isDone: boolean;
   separateDate?: string; //Date
   cage: Cage;
-  eggsList: Bird_reproduction[],
-  cageId?:string;
-  birdTypeName?:string,
+  eggsList: Bird_reproduction[];
+  cageId: string;
+  birdTypeName: string;
   // cockReproduction: Bird_reproduction;
   // henReproduction: Bird_reproduction;
-  henId: string,
-  cockId: string,
-
+  henId: string;
+  cockId: string;
 }
 export interface Bird_reproduction {
   reproductionId: string;
   bird: Bird;
   processId?: string;
   reproductionRole?: string;
-  eggLaidDate?: string; // Date;
+  eggLaidDate: string; // Date;
   actEggHatchDate?: string; // Date;
   actSwingBranch?: string; // Date;
   actAdultBirdDate?: string; // Date;
   expEggHatchDate?: string; // DATE
-  expSwingBranch?:string;  // DATE
-  expAdultBirdDate:string;  // DATE
+  expSwingBranch?: string; // DATE
+  expAdultBirdDate: string; // DATE
   eggType?: string;
-  eggStatus?: string;
-  isFail?: boolean;
+  eggStatus: string;
+  fail: boolean;
   failDate?: string; // Date;
+  reproductionProcessId: string;
 }
-
-
 
 /******** COLUMN TABLE ********/
 export type StaffColumn = {
@@ -123,4 +121,14 @@ export type CageColumn = {
   user?: string;
   location: string;
   quantity: number;
+};
+
+export type ProcessColumn = {
+  id: string;
+  motherId: string;
+  fatherId: string;
+  cage: string;
+  type: string;
+  isDone: boolean;
+  eggList: Bird_reproduction[];
 };

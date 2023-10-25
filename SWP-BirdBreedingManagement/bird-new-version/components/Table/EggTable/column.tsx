@@ -12,6 +12,9 @@ export type EggColumn = {
   id: string;
   eggLaidDate?: string;
   eggStatus?: string;
+  actEggHatchDate?: string;
+  actSwingBranch?: string;
+  actAdultBirdDate?: string;
 };
 
 export const columns: ColumnDef<EggColumn>[] = [
@@ -56,6 +59,48 @@ export const columns: ColumnDef<EggColumn>[] = [
         >
           Ngày đẻ trứng
           <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "actEggHatchDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6 "
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          Ngày nở
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "actSwingBranch",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6 "
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          Chim chuyền
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "actAdultBirdDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6 "
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          Trưởng thành
         </Button>
       );
     },

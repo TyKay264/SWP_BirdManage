@@ -7,13 +7,16 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
+import { Bird_reproduction } from "@/type";
 
 export type ProcessColumn = {
   id: string;
   motherId: string;
   fatherId: string;
   cage: string;
-  type?: string;
+  type: string;
+  isDone: boolean;
+  eggList: Bird_reproduction[];
 };
 
 export const columns: ColumnDef<ProcessColumn>[] = [
@@ -60,7 +63,7 @@ export const columns: ColumnDef<ProcessColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          ID chim mái
+          <span>ID mái</span>
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -75,7 +78,7 @@ export const columns: ColumnDef<ProcessColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          ID chim trống
+          ID trống
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -110,6 +113,26 @@ export const columns: ColumnDef<ProcessColumn>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "isDone",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          Trạng thái
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div>
+        {row.original.isDone ? <div>Kết thúc</div> : <div>Tiến hành</div>}
+      </div>
+    ),
   },
   //   {
   //     accessorKey: "image",

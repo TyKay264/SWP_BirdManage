@@ -92,14 +92,13 @@ const EditStaffForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     //console.log(values)
-    console.log(data.staff.id)
+
     if (data?.staff) {
       try {
         await axios.patch(
           `https://bird-swp.azurewebsites.net/api/users/${data.staff.id}`,
           values
         );
-
 
         router.refresh();
         form.reset();
