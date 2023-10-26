@@ -3,8 +3,11 @@
 import React, { useEffect, useState } from "react";
 import "./globals.css";
 
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -453,7 +456,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "/assets/js/toggleFullScreen.js",
       "/assets/js/main.js",
       "/assets/js/option-themes.js",
-
     ];
 
     const loadScript = (src: string) => {
@@ -544,7 +546,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, []);
   return (
     <html lang="en">
-      <body >
+      <body>
         {isLoading ? (
           <div className="preloader">
             <div className="lds-ellipsis">
@@ -554,9 +556,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         ) : (
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
         )}
       </body>
     </html>
