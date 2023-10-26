@@ -49,21 +49,6 @@ export const columns: ColumnDef<EggColumn>[] = [
     },
   },
   {
-    accessorKey: "eggLaidDate",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="-ml-6"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
-        >
-          Ngày đẻ trứng
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
     accessorKey: "actEggHatchDate",
     header: ({ column }) => {
       return (

@@ -12,6 +12,8 @@ import { EggColumn } from "@/components/Table/EggTable/column";
 import EggClient from "@/components/Table/EggTable/EggClient";
 import Loading from "@/components/LoadingComponent";
 import AddEggForm from "@/components/Form/AddEggForm";
+import format from "date-fns/format";
+import vi from "date-fns/locale/vi";
 
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
@@ -46,7 +48,18 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
     id: item.reproductionId,
     eggStatus: item.eggStatus,
-    eggLaidDate: item.eggLaidDate,
+    eggLaidDate: item.eggLaidDate
+      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    actEggHatchDate: item.actEggHatchDate
+      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    actSwingBranch: item.actSwingBranch
+      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    actAdultBirdDate: item.actAdultBirdDate
+      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
   return (
