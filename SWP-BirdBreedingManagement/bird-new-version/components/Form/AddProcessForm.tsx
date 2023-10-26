@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation"
 import {
   Form,
   FormControl,
@@ -38,86 +39,7 @@ import {
 //   PopoverTrigger,
 // } from "@/components/ui/popover"
 import axios from "axios";
-import useCageB from "@/hooks/useCageB";
-
-const birdtypesA = [
-  {
-    value: "a01",
-    label: "1",
-  },
-  {
-    value: "a02",
-    label: "2",
-  },
-  {
-    value: "a03",
-    label: "3",
-  },
-  {
-    value: "a04",
-    label: "4",
-  },
-  {
-    value: "a05",
-    label: "5",
-  },
-  {
-    value: "31",
-    label: "31",
-  },
-  {
-    value: "44",
-    label: "44",
-  },
-];
-
-const birdtypesB = [
-  {
-    value: "a07",
-    label: "7",
-  },
-  {
-    value: "a08",
-    label: "8",
-  },
-  {
-    value: "a09",
-    label: "9",
-  },
-  {
-    value: "a10",
-    label: "10",
-  },
-  {
-    value: "a11",
-    label: "11",
-  },
-  {
-    value: "45",
-    label: "45",
-  },
-];
-
-// type birdType = {
-//   birdtype_id: string,
-//   birdTypeName: string
-// }
-
-type BirdtypeCustom = {
-  birdtype_id: string;
-  birdTypeName: string;
-};
-
-const birdsType: BirdtypeCustom[] = [
-  {
-    birdtype_id: "1",
-    birdTypeName: "Chích chòe than",
-  },
-  {
-    birdtype_id: "2",
-    birdTypeName: "Chích chòe lửa",
-  },
-];
+import useBirdTypeProcess from "@/hooks/useBirdTypeProcess";
 
 const formSchema = z.object({
   birdTypeName: z.string().min(1),
@@ -128,11 +50,22 @@ const formSchema = z.object({
 });
 
 const AddProcessForm = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
-  const [open1, setOpen1] = useState(false);
-  const [value1, setValue1] = useState("");
+  const [selectedBirdType, setSelectedBirdType] = useState("");
+  const router = useRouter();
+
+  const { birdTypeProcess, cageProcess, loading } = useBirdTypeProcess();
+  // console.log(birdTypeProcess)
+  // console.log(cageProcess)
+
+  // console.log(selectedBirdType)
+  const birdTypeProcess1 = birdTypeProcess.find((item) => item.typeId === "1")
+  const birdTypeProcess2 = birdTypeProcess.find((item) => item.typeId === "2")
+
+  // console.log(birdTypeProcess)
+  // console.log(birdTypeProcess1)
+  // console.log(birdTypeProcess2)
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -144,8 +77,8 @@ const AddProcessForm = () => {
       cageId: "",
     },
   });
-  const { cages } = useCageB();
-  //console.log(cages)
+
+
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //console.log("Submit button clicked");
@@ -158,12 +91,17 @@ const AddProcessForm = () => {
       );
       console.log(values);
       form.reset();
+      window.location.reload()
+
     } catch (error) {
       console.log(error);
     }
   };
 
   const isLoading = form.formState.isSubmitting;
+
+  if (!loading) return <div className="content-body">...loading</div>
+
 
   return (
     <div className="card">
@@ -176,6 +114,7 @@ const AddProcessForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-xl-8">
+
                   <div className="form-group">
                     <FormField
                       control={form.control}
@@ -185,7 +124,10 @@ const AddProcessForm = () => {
                           <FormLabel>Loài</FormLabel>
                           <Select
                             disabled={isLoading}
-                            onValueChange={field.onChange}
+                            onValueChange={(value: any) => {
+                              field.onChange(value);
+                              setSelectedBirdType(value);
+                            }}
                             value={field.value}
                             defaultValue={field.value}
                           >
@@ -197,18 +139,12 @@ const AddProcessForm = () => {
                             <SelectContent>
                               <SelectGroup>
                                 <SelectLabel>Chọn loài</SelectLabel>
-
-                                {/* {birdtypearr.map((item) => (
-
-                                  <SelectItem value={item.key} key={item.key}>{item.value}</SelectItem>
-                                ))} */}
-
-                                {birdsType.map((item) => (
+                                {birdTypeProcess?.map((item) => (
                                   <SelectItem
-                                    value={item.birdTypeName}
-                                    key={item.birdTypeName}
+                                    value={item.name}
+                                    key={item.name}
                                   >
-                                    {item.birdTypeName}
+                                    {item.name}
                                   </SelectItem>
                                 ))}
                               </SelectGroup>
@@ -220,147 +156,133 @@ const AddProcessForm = () => {
                     />
                   </div>
 
-                  {/* <div className="form-group">
-                  <FormField
-                    control={form.control}
-                    name="purpose"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Chọn mục đích phối giống</FormLabel>
-                        <Select disabled={isLoading}
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Chọn mục đích phối giống" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectLabel>Mục đích phối giống</SelectLabel>
-                              <SelectItem value="nhieu">Năng suất cao</SelectItem>
-                              <SelectItem value="mutation">Có đột biến</SelectItem>
-                              <SelectItem value="none">Bình thường</SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div> */}
-
-                  <div className="form-group">
-                    {/* <FormField
-                      control={form.control}
-                      name="cockId"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Chọn chim trống</FormLabel>
-                          <Popover open={open} onOpenChange={setOpen}>
-                            <PopoverTrigger asChild>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={open}
-                                className="justify-between"
+                  {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
+                    <>
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="cockId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID chim trống</FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
                               >
-                                {value
-                                  ? birdtypesA.find((birdtype) => birdtype.value === value)?.label
-                                  : "Chọn id chim bố..."}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-[200px] p-0">
-                              <Command>
-                                <CommandInput placeholder="Chọn id chim bố..." />
-                                <CommandEmpty>Không tìm thấy.</CommandEmpty>
-                                <CommandGroup>
-                                  {birdtypesA.map((birdtype) => (
-                                    <CommandItem
-                                      key={birdtype.value}
-                                      onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
-                                        setOpen(false)
-                                      }}
-                                    >
-                                      <Check
-                                        className={cn(
-                                          "mr-2 h-4 w-4",
-                                          value === birdtype.value ? "opacity-100" : "opacity-0"
-                                        )}
-                                      />
-                                      {birdtype.label}
-                                    </CommandItem>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {birdTypeProcess1.cock.map((item) => (
+                                    <SelectItem value={item.birdId} key={item.birdId}>
+                                      {item.birdId}
+                                    </SelectItem>
                                   ))}
-                                </CommandGroup>
-                              </Command>
-                            </PopoverContent>
-                          </Popover>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    /> */}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
 
-                    <FormField
-                      control={form.control}
-                      name="cockId"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>ID chim trống</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Chọn ID chim trống" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {birdtypesA.map((item) => (
-                                <SelectItem value={item.label} key={item.label}>
-                                  {item.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="henId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID chim mái</FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {birdTypeProcess1.hen.map((item) => (
+                                    <SelectItem value={item.birdId} key={item.birdId}>
+                                      {item.birdId}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </>
+                  )}
 
-                  <div className="form-group">
-                    <FormField
-                      control={form.control}
-                      name="henId"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>ID chim mái</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Chọn ID chim trống" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {birdtypesB.map((item) => (
-                                <SelectItem value={item.label} key={item.label}>
-                                  {item.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  {selectedBirdType === "Chích chòe lửa" && birdTypeProcess2 && (
+                    <>
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="cockId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID chim trống</FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {birdTypeProcess2.cock.map((item) => (
+                                    <SelectItem value={item.birdId} key={item.birdId}>
+                                      {item.birdId}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="henId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID chim mái</FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {birdTypeProcess2.hen.map((item) => (
+                                    <SelectItem value={item.birdId} key={item.birdId}>
+                                      {item.birdId}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </>
+                  )}
 
                   <div className="form-group">
                     <FormField
@@ -386,7 +308,7 @@ const AddProcessForm = () => {
                             <SelectContent>
                               <SelectGroup>
                                 <SelectLabel>Chọn mã lồng</SelectLabel>
-                                {cages.map((cage) => (
+                                {cageProcess.map((cage) => (
                                   <SelectItem
                                     key={cage.cageId}
                                     value={cage.cageId}
@@ -412,6 +334,7 @@ const AddProcessForm = () => {
                       Tạo quá trình
                     </button>
                   </div>
+
                 </div>
               </div>
             </form>
@@ -422,9 +345,3 @@ const AddProcessForm = () => {
   );
 };
 export default AddProcessForm;
-
-// const AddProcessForm = () => {
-//   return <div>AddProcessForm</div>;
-// };
-
-// export default AddProcessForm;

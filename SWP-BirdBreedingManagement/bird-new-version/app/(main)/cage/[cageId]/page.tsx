@@ -8,16 +8,16 @@ import React from "react";
 import SpStaff from "@/components/CageId/SpStaff";
 import BreadScrum from "@/components/BreadScrum";
 import useCages from "@/hooks/useCage";
-import { useParams } from "next/navigation";
 import { EggColumn } from "@/components/Table/EggTable/column";
 import EggClient from "@/components/Table/EggTable/EggClient";
 import Loading from "@/components/LoadingComponent";
+import AddEggForm from "@/components/Form/AddEggForm";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 
-const CageIdPage = () => {
+
+const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const { cages, loading } = useCages();
-  const params = useParams();
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
 
@@ -138,59 +138,7 @@ const CageIdPage = () => {
                   >
                     <div className="card m-t-30">
                       <div className="card-body ">
-                        {/* <p className=" flex justify-between">
-                          <div>
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                NGÀY GHÉP CẶP :
-                              </label>
-                              <div className="grow pl-2.5 pb-1.5">
-                                11/10/2023
-                              </div>
-                            </div>
 
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                NGÀY ĐẺ TRỨNG :
-                              </label>
-                              <div className="grow pl-2.5 pb-1.5">
-                                30/10/2023
-                              </div>
-                            </div>
-
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                TỔNG SỐ TRỨNG:
-                              </label>
-                              <div className="grow pl-2.5 pb-1.5">10</div>
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                SỐ TRỨNG THẤT BẠI :
-                              </label>
-                              <div className="grow pl-2.5 pb-1.5">2</div>
-                            </div>
-
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">MÃ LỒNG :</label>
-                              <div className="grow pl-2.5 pb-1.5">A001</div>
-                            </div>
-
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                GIAI ĐOẠN :
-                              </label>
-                              <div className="grow pl-2.5 pb-2 basis-[100%]">
-                                ẤP TRỨNG
-                              </div>
-                            </div>
-                          </div>
-
-                          <br />
-                        </p> */}
                         <div className="col-md-6 col-lg-4">
                           {FindCageById?.user && (
                             <SpStaff
@@ -275,6 +223,8 @@ const CageIdPage = () => {
                     role="tabpanel"
                     aria-labelledby="contact-tab"
                   >
+                    <AddEggForm cageId={params.cageId} />
+
                     <EggClient data={formatEggs} />
                   </div>
                 </div>

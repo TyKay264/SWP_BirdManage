@@ -86,7 +86,7 @@ export function DataTable<TData, TValue>({
               table.getColumn(searchKey)?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
-          /><AddEggForm />
+          />
         </div>
         <div className="flex w-full items-center justify-between">
           {/* {showDeleteButton ? (

@@ -3,6 +3,7 @@
 import { DataTable } from "@/components/ui/data-table";
 import { EggColumn, columns } from "./column";
 import { useState } from "react";
+import AddEggForm from "@/components/Form/AddEggForm";
 
 interface EggClientProps {
   data: EggColumn[];
