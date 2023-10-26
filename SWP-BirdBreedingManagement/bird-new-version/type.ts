@@ -144,3 +144,22 @@ export type ProcessColumn = {
   isDone: boolean;
   eggList: Bird_reproduction[];
 };
+
+export type EggColumn = {
+  reproductionId: string;
+  bird: Bird;
+  processId?: string;
+  reproductionRole?: string;
+  eggLaidDate: string; // Date;
+  actEggHatchDate?: string; // Date;
+  actSwingBranch?: string; // Date;
+  actAdultBirdDate?: string; // Date;
+  expEggHatchDate?: string; // DATE
+  expSwingBranch?: string; // DATE
+  expAdultBirdDate: string; // DATE
+  eggType?: string;
+  eggStatus: string;
+  fail: boolean;
+  failDate?: string; // Date;
+  reproductionProcessId: string;
+};

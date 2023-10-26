@@ -85,10 +85,10 @@ const AddBirdChildForm = () => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
+      {/* <DialogTrigger asChild>
         <Button variant="outline">Cập nhật chim con</Button>
-      </DialogTrigger>
+      </DialogTrigger> */}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin trứng</DialogTitle>
@@ -164,7 +164,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                                // disabled={isDisabled}
+                              // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />

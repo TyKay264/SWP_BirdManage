@@ -1,4 +1,4 @@
-import { BirdColumn, CageColumn, ProcessColumn, StaffColumn } from "@/type";
+import { BirdColumn, CageColumn, ProcessColumn, StaffColumn, EggColumn } from "@/type";
 import { create } from "zustand";
 
 export type ModalStyle =
@@ -15,6 +15,7 @@ interface ModalData {
   staff?: StaffColumn;
   cage?: CageColumn;
   process?: ProcessColumn;
+  egg?: EggColumn;
 }
 
 interface ModalStore {

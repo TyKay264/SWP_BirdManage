@@ -30,17 +30,17 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const { onOpen } = useModal();
 
   const onConfirm = async () => {
-    try {
-      setLoading(true);
-      await axios.delete(` http://localhost:3001/staffs/${data.id}`);
+    // try {
+    //   setLoading(true);
+    //   await axios.delete(` http://localhost:3001/staffs/${data.id}`);
 
-      window.location.reload();
-      router.refresh();
-    } catch (error) {
-    } finally {
-      setLoading(false);
-      setOpen(false);
-    }
+    //   window.location.reload();
+    //   router.refresh();
+    // } catch (error) {
+    // } finally {
+    //   setLoading(false);
+    //   setOpen(false);
+    // }
   };
 
   const onCopy = (id: string) => {
@@ -64,14 +64,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => {}}>
+          <DropdownMenuItem onClick={() => { }}>
             <Copy className="mr-2 h-4 w-4" /> Copy Id
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}}>
-            <Edit className="mr-2 h-4 w-4" /> Chỉnh xửa
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`staff/${data.id}`)}>
-            <Edit className="mr-2 h-4 w-4" /> detail
+          <DropdownMenuItem onClick={() => onOpen("AddBirdChildForm", { egg: data })}
+          >
+            <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Xóa
