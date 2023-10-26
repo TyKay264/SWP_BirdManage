@@ -46,6 +46,7 @@ export interface Cage {
   cageId: string;
   location: string;
   quantity: number;
+  available: boolean;
   reproductionProcess?: Reproduction_process;
   birdReproduction?: Bird_reproduction[];
   user: Staff;

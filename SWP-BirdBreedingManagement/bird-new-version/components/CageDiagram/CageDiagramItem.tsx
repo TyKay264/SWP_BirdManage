@@ -1,5 +1,6 @@
 "use client";
 
+import { Bird_reproduction } from "@/type";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -11,6 +12,7 @@ interface CageDiagramItemProps {
   crowIcons: number;
   eggIcons?: number;
   process?: boolean;
+  birdReproduction?: Bird_reproduction[];
   // cock?: string,
   // hen?: string
 }
@@ -22,6 +24,7 @@ const CageDiagramItem = ({
   imageSrc,
   crowIcons,
   eggIcons,
+  birdReproduction,
 }: // cock,
 // hen
 CageDiagramItemProps) => {
@@ -29,7 +32,7 @@ CageDiagramItemProps) => {
   const eggIconsCount = eggIcons || 0;
   const updatedImageSrc =
     crowIconsCount === 0 && eggIconsCount === 0
-      ? "https://i.vimeocdn.com/portrait/1274237_640x640" // Replace with the path to your empty image
+      ? "https://i.vimeocdn.com/portrait/1274237_640x640"
       : "/assets/images/logo-chim.png";
 
   // Create an array of the specified length for crow and egg icons
@@ -40,6 +43,13 @@ CageDiagramItemProps) => {
   const eggIconsArray = Array.from({ length: eggIconsCount }, (_, index) => (
     <i key={index} className="fa fa-egg text-gray" />
   ));
+
+  const cock = birdReproduction?.find(
+    (cock) => cock.reproductionRole === "FATHER"
+  );
+  const hen = birdReproduction?.find(
+    (hen) => hen.reproductionRole === "MOTHER"
+  );
 
   return (
     <div className="col-sm-6 col-lg-4">
@@ -63,8 +73,12 @@ CageDiagramItemProps) => {
                 </span>
               </div>
               <div className="flex justify-center items-start flex-col space-y-4">
-                <div className="text-sm text-black">Id trống: 4 </div>
-                <div className="text-sm text-black">Id mái: 7</div>
+                <div className="text-sm text-black">
+                  Id trống: {cock?.bird.birdId}{" "}
+                </div>
+                <div className="text-sm text-black">
+                  Id mái: {hen?.bird.birdId}
+                </div>
               </div>
             </div>
           )}
