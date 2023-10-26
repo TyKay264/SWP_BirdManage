@@ -15,7 +15,6 @@ import AddEggForm from "@/components/Form/AddEggForm";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 
-
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const { cages, loading } = useCages();
 
@@ -37,12 +36,79 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
       </div>
     );
 
-  // if (!FindCageById?.reproductionProcess) {
-  //   return <div className="content-body  h-[650px]">none process</div>;
-  // }
+  if (!FindCageById?.reproductionProcess) {
+    return (
+      <div className="content-body">
+        <div className="warper container-fluid">
+          <div className="main_container">
+            <BreadScrum
+              title="Thông tin lồng"
+              subRouteTitle="cage"
+              subTitle1="Tất Cả Lồng"
+              subTitle2="Thông Tin Lồng"
+            />
+            {FilterCageByRole?.map((item) => (
+              <BirdCard
+                key={item.bird?.birdId}
+                birdRole={item.reproductionRole}
+                birdId={item.bird?.birdId}
+                image={item.bird?.image}
+                birdType={item.bird?.birdType?.name}
+              />
+            ))}
+
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="doctor-info-content">
+                  <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item col-md-4" role="presentation">
+                      <button
+                        className="nav-link  active"
+                        id="home-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#home"
+                        type="button"
+                        role="tab"
+                        aria-controls="home"
+                        aria-selected="true"
+                      >
+                        Nhân viên phụ trách
+                      </button>
+                    </li>
+                  </ul>
+                  <div className="tab-content" id="myTabContent">
+                    <div
+                      className="tab-pane active"
+                      id="home"
+                      role="tabpanel"
+                      aria-labelledby="home-tab"
+                    >
+                      <div className="card m-t-30">
+                        <div className="card-body ">
+                          <div className="col-md-6 col-lg-4">
+                            {FindCageById?.user && (
+                              <SpStaff
+                                id={FindCageById.user.userId}
+                                name={FindCageById.user.fullName}
+                                role={FindCageById.user.role}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!listEgg) {
-    return;
+    return null;
   }
 
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
@@ -138,7 +204,6 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                   >
                     <div className="card m-t-30">
                       <div className="card-body ">
-
                         <div className="col-md-6 col-lg-4">
                           {FindCageById?.user && (
                             <SpStaff
@@ -223,9 +288,13 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     role="tabpanel"
                     aria-labelledby="contact-tab"
                   >
-                    <AddEggForm cageId={params.cageId} />
+                    {listEgg && (
+                      <>
+                        <AddEggForm cageId={params.cageId} />
 
-                    <EggClient data={formatEggs} />
+                        <EggClient data={formatEggs} />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

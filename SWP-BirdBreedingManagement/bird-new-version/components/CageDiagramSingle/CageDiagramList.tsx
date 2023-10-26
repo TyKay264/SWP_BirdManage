@@ -1,32 +1,35 @@
-import React from 'react'
-import AddBirdChildForm from '../Form/AddBirdChildForm'
-import CageDiagramItem from './CageDiagramItem'
-const CageDiagramList = () => {
-    return (
-        <div className="row">
-            <div className="col-lg-12">
-                <div className="widget-media list-doctors best-doctor">
-                    <div className="timeline row">
+"use client";
 
-                        {/* {birds.map((bird) => (
-                        <CageDiagramItem
-                            key={bird.id}
-                            id={bird.id}
-                            name={bird.name}
-                            specialty={bird.specialty}
-                            imageSrc={bird.imageSrc}
-                            starReview={bird.starReview}
-                            process={bird.process}
-                        />
+import React from "react";
+import AddBirdChildForm from "../Form/AddBirdChildForm";
+import CageDiagramItem from "./CageDiagramItem";
+import { Cage } from "@/type";
 
-                    ))} */}
-                        <AddBirdChildForm />
-                        <CageDiagramItem />
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+interface CageDiagramListProps {
+  cages: Cage[];
 }
+const CageDiagramList = ({ cages }: CageDiagramListProps) => {
+  return (
+    <div className="row">
+      <div className="col-lg-12">
+        <div className="widget-media list-doctors best-doctor">
+          <div className="timeline row">
+            <AddBirdChildForm />
 
-export default CageDiagramList
+            {cages.map((cage) => (
+              <CageDiagramItem
+                key={cage.cageId}
+                cageId={cage.cageId}
+                location={cage.location}
+                available={cage.available}
+                quantity={cage.quantity}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CageDiagramList;

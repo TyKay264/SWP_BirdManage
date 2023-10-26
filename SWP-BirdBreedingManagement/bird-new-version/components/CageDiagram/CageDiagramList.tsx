@@ -19,8 +19,7 @@ const CageDiagramList = ({ cages }: CageDiagramListProps) => {
                 id={item.cageId}
                 crowIcons={item.quantity}
                 eggIcons={item.reproductionProcess?.totalEgg}
-              // cock={item.reproductionProcess?.cockId}
-              // hen={item.reproductionProcess?.henId}
+                birdReproduction={item.birdReproduction}
               />
             ))}
           </div>
