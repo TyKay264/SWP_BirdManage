@@ -15,7 +15,6 @@ const EggClient = ({ data }: EggClientProps) => {
   // dữ liệu bên đây truyền qua table để xử lý
   return (
     <div>
-      <AddEggForm />
       <DataTable
         searchKey="eggLaidDate"
         columns={columns}

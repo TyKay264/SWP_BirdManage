@@ -91,6 +91,18 @@ export interface Bird_reproduction {
   reproductionProcessId: string;
 }
 
+export interface BirdTypeProccess {
+  typeId: string;
+  name: string;
+  description?: string;
+  incubate?: number;
+  chick?: number;
+  swingBranch?: number;
+  lifeExpectancy?: string;
+  hen: Bird[];
+  cock: Bird[];
+}
+
 /******** COLUMN TABLE ********/
 export type StaffColumn = {
   id: string;

@@ -40,10 +40,11 @@ const formSchema = z.object({
   laidDate: z.string(),
 });
 
-const AddEggForm = () => {
-  const { isOpen, type, onClose, data } = useModal();
-  //console.log(data.cage)
-  const isModalOpen = isOpen && type === "AddEggForm";
+interface AddEggFormProps {
+  cageId: string
+}
+
+const AddEggForm = ({ cageId }: AddEggFormProps) => {
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +61,7 @@ const AddEggForm = () => {
     console.log(values);
     try {
       await axios.post(
-        `https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/${data.cage?.cageId}`,
+        `https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/${cageId}`,
         values
       );
       form.reset();
@@ -74,7 +75,7 @@ const AddEggForm = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Thêm trứng</Button>
+        <Button variant="success">Thêm trứng</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -89,7 +90,6 @@ const AddEggForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
-                    {/* <div className="col-xl-4"></div> */}
 
                     <div className="col-xl-12">
                       <div className="form-group">
