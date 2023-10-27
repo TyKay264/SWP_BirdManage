@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
 export type EggColumn = {
-  id: string;
+  birdId: string;
+  reproductionId: string;
   eggLaidDate?: string;
   eggStatus?: string;
   actEggHatchDate?: string;
@@ -19,7 +20,7 @@ export type EggColumn = {
 
 export const columns: ColumnDef<EggColumn>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "birdId",
     header: ({ column }) => {
       return (
         <Button

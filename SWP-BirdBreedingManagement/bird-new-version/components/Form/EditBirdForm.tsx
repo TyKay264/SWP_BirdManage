@@ -108,7 +108,7 @@ const EditBirdForm = () => {
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("hatchDate", data.bird.hatchDate);
-      // form.setValue("cageId", data.bird.cage);
+      form.setValue("cageId", data.bird.cage);
     }
   }, [data, form]);
 
@@ -117,6 +117,7 @@ const EditBirdForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
+    console.log(data.bird.cage)
     if (data && data?.bird) {
       try {
         await axios.patch(
@@ -436,7 +437,7 @@ const EditBirdForm = () => {
                           type="submit"
                           className="btn btn-primary float-end"
                         >
-                          Thêm Chích Chòe
+                          Cập Nhật Chích Chòe
                         </button>
                       </div>
                     </div>

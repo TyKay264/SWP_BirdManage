@@ -51,9 +51,7 @@ const AddBirdChildForm = () => {
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(true);
 
-  // const handleClick = () => {
-  //   setIsDisabled(!isDisabled)
-  // };
+
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,16 +65,25 @@ const AddBirdChildForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (data && data.egg) {
+      form.setValue("eggStatus", data.egg.eggStatus);
+    }
+  }, [data, form]);
+
+  //console.log(data.egg.eggStatus)
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
+    //console.log(data.egg.reproductionId)
     try {
       await axios.patch(
-        `bird-swp.azurewebsites.net/api/birdreproductions/{data.egg?.id}`,
+        `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
         values
       );
       form.reset();
       router.refresh();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -86,9 +93,6 @@ const AddBirdChildForm = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      {/* <DialogTrigger asChild>
-        <Button variant="outline">Cập nhật chim con</Button>
-      </DialogTrigger> */}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin trứng</DialogTitle>
@@ -121,7 +125,7 @@ const AddBirdChildForm = () => {
                                 onValueChange={(value) => {
                                   field.onChange(value);
                                   setIsDisabled(
-                                    value === "inProcess" || value === "broken"
+                                    value === "In development" || value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -138,11 +142,11 @@ const AddBirdChildForm = () => {
                                     <SelectLabel>
                                       Cập nhật tình trạng trứng
                                     </SelectLabel>
-                                    <SelectItem value="broken">Hỏng</SelectItem>
-                                    <SelectItem value="inProcess">
+                                    <SelectItem value="Broken">Hỏng</SelectItem>
+                                    <SelectItem value="In development">
                                       Đang phát triển
                                     </SelectItem>
-                                    <SelectItem value="hatched">
+                                    <SelectItem value="Hatched">
                                       Đã nở
                                     </SelectItem>
                                   </SelectGroup>

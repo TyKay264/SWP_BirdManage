@@ -35,6 +35,7 @@ export interface Bird {
   ageRange: string;
   mutation: string;
   mutationRate: number;
+  superReproduct: number;
   isAlive: boolean;
   image: string;
   featherColor: string;
@@ -147,20 +148,11 @@ export type ProcessColumn = {
 };
 
 export type EggColumn = {
+  birdId: string;
   reproductionId: string;
-  bird: Bird;
-  processId?: string;
-  reproductionRole?: string;
-  eggLaidDate: string; // Date;
-  actEggHatchDate?: string; // Date;
-  actSwingBranch?: string; // Date;
-  actAdultBirdDate?: string; // Date;
-  expEggHatchDate?: string; // DATE
-  expSwingBranch?: string; // DATE
-  expAdultBirdDate: string; // DATE
-  eggType?: string;
-  eggStatus: string;
-  fail: boolean;
-  failDate?: string; // Date;
-  reproductionProcessId: string;
+  eggLaidDate?: string;
+  eggStatus?: string;
+  actEggHatchDate?: string;
+  actSwingBranch?: string;
+  actAdultBirdDate?: string;
 };

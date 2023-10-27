@@ -177,7 +177,7 @@ const AddProcessForm = () => {
                                 <SelectContent>
                                   {birdTypeProcess1.cock.map((item) => (
                                     <SelectItem value={item.birdId} key={item.birdId}>
-                                      {item.birdId}
+                                      <strong>ID:</strong> {item.birdId}  <strong> - Tỉ lệ đột biến:</strong> {item.mutationRate}%  <strong> - Tỉ lệ sinh sản thành công:</strong> {item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -201,13 +201,13 @@ const AddProcessForm = () => {
                               >
                                 <FormControl>
                                   <SelectTrigger>
-                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                    <SelectValue placeholder="Chọn ID chim mái" />
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
                                   {birdTypeProcess1.hen.map((item) => (
                                     <SelectItem value={item.birdId} key={item.birdId}>
-                                      {item.birdId}
+                                      {`${item.birdId} - Tỉ lệ đột biến: ${item.mutationRate}%`}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -241,7 +241,7 @@ const AddProcessForm = () => {
                                 <SelectContent>
                                   {birdTypeProcess2.cock.map((item) => (
                                     <SelectItem value={item.birdId} key={item.birdId}>
-                                      {item.birdId}
+                                      {`${item.birdId} - Tỉ lệ đột biến: ${item.mutationRate}%`}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -265,13 +265,13 @@ const AddProcessForm = () => {
                               >
                                 <FormControl>
                                   <SelectTrigger>
-                                    <SelectValue placeholder="Chọn ID chim trống" />
+                                    <SelectValue placeholder="Chọn ID chim mái" />
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
                                   {birdTypeProcess2.hen.map((item) => (
                                     <SelectItem value={item.birdId} key={item.birdId}>
-                                      {item.birdId}
+                                      {`${item.birdId} - Tỉ lệ đột biến: ${item.mutationRate}%`}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>

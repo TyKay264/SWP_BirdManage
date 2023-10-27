@@ -22,6 +22,16 @@ interface CellActionProps {
   data: EggColumn;
 }
 
+// export type EggColumn = {
+//   id: string;
+//   eggLaidDate?: string;
+//   eggStatus?: string;
+//   actEggHatchDate?: string;
+//   actSwingBranch?: string;
+//   actAdultBirdDate?: string;
+// };
+
+
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -69,7 +79,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onOpen("AddBirdChildForm", { egg: data })}
           >
-            <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
+            <Edit className="mr-2 h-4 w-4" /> Cập nhật trạng thái
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Xóa

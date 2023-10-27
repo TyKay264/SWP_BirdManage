@@ -112,7 +112,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   }
 
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
-    id: item.bird?.birdId,
+    birdId: item.bird?.birdId,
+    reproductionId: item.reproductionId,
     eggStatus: item.eggStatus,
     eggLaidDate: item.eggLaidDate
       ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })

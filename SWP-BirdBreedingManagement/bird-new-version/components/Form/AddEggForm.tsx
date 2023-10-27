@@ -65,6 +65,7 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
         values
       );
       form.reset();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -111,7 +112,7 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
                                 </FormControl>
                                 <SelectContent>
                                   <SelectGroup>
-                                    <SelectLabel>Chọn khu vực</SelectLabel>
+                                    <SelectLabel>Chọn số lượng trứng</SelectLabel>
                                     <SelectItem value="1">1</SelectItem>
                                     <SelectItem value="2">2</SelectItem>
                                     <SelectItem value="3">3</SelectItem>
