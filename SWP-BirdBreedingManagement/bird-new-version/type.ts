@@ -51,6 +51,7 @@ export interface Cage {
   reproductionProcess?: Reproduction_process;
   birdReproduction?: Bird_reproduction[];
   user: Staff;
+  bird: Bird[]
 }
 
 export interface Reproduction_process {
