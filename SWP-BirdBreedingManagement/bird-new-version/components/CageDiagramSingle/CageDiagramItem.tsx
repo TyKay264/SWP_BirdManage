@@ -16,11 +16,12 @@ const CageDiagramItem = ({
   available,
   quantity,
 }: // cock,
-// hen
-CageDiagramItemProps) => {
-  //   const updatedImageSrc =
-  //       ? "https://i.vimeocdn.com/portrait/1274237_640x640"
-  //       : "/assets/images/logo-chim.png";
+  // hen
+  CageDiagramItemProps) => {
+  const updatedImageSrc =
+    quantity === 0
+      ? "https://i.vimeocdn.com/portrait/1274237_640x640"
+      : "/assets/images/logo-chim.png";
 
   return (
     <div className="col-sm-6 col-lg-4">
@@ -29,7 +30,7 @@ CageDiagramItemProps) => {
           <div className="flex justify-between items-center mx-8">
             <div className="flex relative">
               <div className="media">
-                <img src="/assets/images/logo-chim.png" alt="image" />
+                <img src={updatedImageSrc} alt="image" />
               </div>
               {available && (
                 <span className="relative flex h-3 w-3 top-0 right-0">
@@ -53,6 +54,17 @@ CageDiagramItemProps) => {
                   Vị trí lồng: {location}{" "}
                 </span>
               </h4>
+              <div className="star-review">
+                <div className="flex items-center justify-center space-x-10">
+                  {!!quantity && (
+                    <div className="flex justify-center items-center space-x-1">
+                      <i key={quantity} className="fa fa-crow text-orange" />
+                      <span>x</span>
+                      <span className="text-black text-lg">{quantity}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

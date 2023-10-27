@@ -36,6 +36,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
       </div>
     );
 
+  console.log(FindCageById?.reproductionProcess?.processId);
   if (!FindCageById?.reproductionProcess) {
     return (
       <div className="content-body">
@@ -47,13 +48,12 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               subTitle1="Tất Cả Lồng"
               subTitle2="Thông Tin Lồng"
             />
-            {FilterCageByRole?.map((item) => (
+            {FindCageById?.bird?.map((item) => (
               <BirdCard
-                key={item.bird?.birdId}
-                birdRole={item.reproductionRole}
-                birdId={item.bird?.birdId}
-                image={item.bird?.image}
-                birdType={item.bird?.birdType?.name}
+                key={item.birdId}
+                birdId={item.birdId}
+                image={item.image}
+                birdType={item.birdType?.name}
               />
             ))}
 

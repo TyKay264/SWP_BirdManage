@@ -21,7 +21,7 @@ const BirdCard = ({ birdRole, birdId, image, birdType }: BirdCardProps) => {
                     alt="image"
                     className="rounded-circle shadow"
                     width={90}
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/98/Copsychus_malabaricus_male_-_Khao_Yai.jpg"
+                    src={image}
                   />
                   <div className="pulse-css" />
                 </div>
