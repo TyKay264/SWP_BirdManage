@@ -42,8 +42,8 @@ const BirdIdPage = () => {
                         })
                         : "N/A"
                     }
-                    // father_id={IdFilter?.father_id}
-                    // mother_id={IdFilter?.mother_id}
+                    father_id={IdFilter?.father.birdId}
+                    mother_id={IdFilter?.mother.birdId}
                     cageid={IdFilter?.cage?.cageId}
                     isAlive={IdFilter?.isAlive}
                     ageRange={IdFilter?.ageRange}

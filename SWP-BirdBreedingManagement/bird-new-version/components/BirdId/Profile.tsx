@@ -60,7 +60,7 @@ const Profile = ({
                     // ?\\onchange="showPreview(event);"
                     />
                     <div className="preview">
-                      <img id="file-ip-1-preview" src="#" alt="img" />
+                      <img id="file-ip-1-preview" src="" alt="img" />
                     </div>
                   </div>
                 </div>
@@ -153,8 +153,8 @@ const Profile = ({
             <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
               <div className="fas fa-venus text-center "></div>
               <div>
-                <div className="text-center break-words ">3 </div>
-                <div className="text-center break-words">01/02/2023</div>
+                <div className="text-center break-words ">ID CHIM BỐ :{father_id} </div>
+                <div className="text-center break-words">LOẠI : {bird_type}</div>
               </div>
             </div>
           </div>
@@ -173,8 +173,8 @@ const Profile = ({
               <div className="fas fa-mars text-center "></div>
               <div>
                 {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
-                <div className="text-center break-words" >2 </div>
-                <div className="text-center break-words">15/05/2023</div>
+                <div className="text-center break-words" >ID CHIM MẸ : {mother_id} </div>
+                <div className="text-center break-words">LOẠI : {bird_type}</div>
               </div>
             </div>
 
@@ -192,7 +192,7 @@ const Profile = ({
           />
           <div style={{ display: "flex", alignItems: "center" }}>
             <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center ml-[26%] mt-[1%] rounded-[15px] bg-yellow-200">
-              <div className="text-center break-words mt-[15%]">1 </div>
+              <div className="text-center break-words mt-[15%]">ID CHIM : {id} </div>
             </div>
           </div>
         </div>

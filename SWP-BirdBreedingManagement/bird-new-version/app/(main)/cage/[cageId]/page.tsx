@@ -24,6 +24,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const router = useRouter();
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
+  //Data for process' info
+  const failEggs = FindCageById?.birdReproduction?.filter((item) => item.eggStatus === "Broken");
+  const hatchedEggs = FindCageById?.birdReproduction?.filter((item) => item.eggStatus === "Hatched");
 
   const listEgg = FindCageById?.birdReproduction?.filter(
     (item) =>
@@ -43,7 +46,10 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
   const handleRemove = async () => {
     try {
+      //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
+      await axios.patch(`https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${FindCageById?.reproductionProcess?.processId}`)
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
+
       router.push('/cage-diagram')
 
     } catch (error) {
@@ -125,7 +131,6 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   if (!listEgg) {
     return null;
   }
-
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
     birdId: item.bird?.birdId,
     cages: cages,
@@ -155,7 +160,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
             subTitle1="Tất Cả Lồng"
             subTitle2="Thông Tin Lồng"
           />
-          <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
+          {/* <div className="text-center mb-3">
+            <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
+          </div> */}
 
           {FilterCageByRole?.map((item) => (
             <BirdCard
@@ -243,6 +250,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     aria-labelledby="profile-tab"
                   >
                     <div className="card m-t-30">
+                      <div className="text-center mt-3">
+                        <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
+                      </div>
                       <div className="card-body">
                         <p className=" flex justify-between">
                           <div>
@@ -257,17 +267,19 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
                             <div className="flex justify-between items-center mb-2.5">
                               <label className="basis-[100%]">
-                                NGÀY ĐẺ TRỨNG :
-                              </label>
-                              <div className="grow pl-2.5 pb-1.5">????</div>
-                            </div>
-
-                            <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
                                 TỔNG SỐ TRỨNG:
                               </label>
                               <div className="grow pl-2.5 pb-1.5">
                                 {FindCageById?.reproductionProcess?.totalEgg}
+                              </div>
+                            </div>
+
+                            <div className="flex justify-between items-center mb-2.5">
+                              <label className="basis-[100%]">
+                                SỐ TRỨNG HỎNG :
+                              </label>
+                              <div className="grow pl-2.5 pb-1.5">
+                                {failEggs?.length}
                               </div>
                             </div>
                           </div>
@@ -275,9 +287,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                           <div>
                             <div className="flex justify-between items-center mb-2.5">
                               <label className="basis-[100%]">
-                                SỐ TRỨNG THẤT BẠI :
+                                SỐ TRỨNG ĐÃ NỞ :
                               </label>
-                              <div className="grow pl-2.5 pb-1.5">2</div>
+                              <div className="grow pl-2.5 pb-1.5">{hatchedEggs?.length}</div>
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">
@@ -288,11 +300,11 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">
-                              <label className="basis-[100%]">
-                                GIAI ĐOẠN :
+                              <label className="basis-[300%]">
+                                ID QUÁ TRÌNH :
                               </label>
                               <div className="grow pl-2.5 pb-2 basis-[100%]">
-                                {FindCageById?.reproductionProcess?.stage}
+                                {FindCageById?.reproductionProcess.processId}
                               </div>
                             </div>
                           </div>
