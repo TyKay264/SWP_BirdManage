@@ -14,20 +14,25 @@ import Loading from "@/components/LoadingComponent";
 import AddEggForm from "@/components/Form/AddEggForm";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
+import axios from "axios"
+import { useRouter } from 'next/navigation'
+
+import { Button } from "@/components/ui/button";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const { cages, loading } = useCages();
+  const router = useRouter();
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
-
-  const FilterCageByRole = FindCageById?.birdReproduction?.filter(
-    (item) =>
-      item.reproductionRole === "MOTHER" || item.reproductionRole === "FATHER"
-  );
 
   const listEgg = FindCageById?.birdReproduction?.filter(
     (item) =>
       item.reproductionRole === "EGG" || item.reproductionRole === "CHILD"
+  );
+
+  const FilterCageByRole = FindCageById?.birdReproduction?.filter(
+    (item) =>
+      item.reproductionRole === "MOTHER" || item.reproductionRole === "FATHER"
   );
   if (!loading)
     return (
@@ -35,6 +40,16 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
         <Loading />
       </div>
     );
+
+  const handleRemove = async () => {
+    try {
+      // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
+      router.push('/cage-diagram')
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   console.log(FindCageById?.reproductionProcess?.processId);
   if (!FindCageById?.reproductionProcess) {
@@ -113,6 +128,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
     birdId: item.bird?.birdId,
+    cages: cages,
     reproductionId: item.reproductionId,
     eggStatus: item.eggStatus,
     eggLaidDate: item.eggLaidDate
@@ -139,6 +155,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
             subTitle1="Tất Cả Lồng"
             subTitle2="Thông Tin Lồng"
           />
+          <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
+
           {FilterCageByRole?.map((item) => (
             <BirdCard
               key={item.bird?.birdId}
@@ -148,6 +166,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               birdType={item.bird?.birdType?.name}
             />
           ))}
+
 
           <div className="row">
             <div className="col-lg-12">

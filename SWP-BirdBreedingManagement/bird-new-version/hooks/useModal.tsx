@@ -8,7 +8,8 @@ export type ModalStyle =
   | "EditProcessForm"
   | "AddEggForm"
   | "AddBirdChildForm"
-  | "ViewProcessForm";
+  | "ViewProcessForm"
+  | "ChangeCageForm";
 
 interface ModalData {
   bird?: BirdColumn;

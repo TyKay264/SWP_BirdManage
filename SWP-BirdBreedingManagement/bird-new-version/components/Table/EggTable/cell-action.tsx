@@ -22,14 +22,6 @@ interface CellActionProps {
   data: EggColumn;
 }
 
-// export type EggColumn = {
-//   id: string;
-//   eggLaidDate?: string;
-//   eggStatus?: string;
-//   actEggHatchDate?: string;
-//   actSwingBranch?: string;
-//   actAdultBirdDate?: string;
-// };
 
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -52,7 +44,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     //   setOpen(false);
     // }
   };
-
+  //console.log(data)
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
   };
@@ -74,8 +66,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => { }}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
+          <DropdownMenuItem onClick={() => onOpen("ChangeCageForm", { egg: data })}
+          >
+            <Edit className="mr-2 h-4 w-4" /> Cập nhật lồng
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onOpen("AddBirdChildForm", { egg: data })}
           >
