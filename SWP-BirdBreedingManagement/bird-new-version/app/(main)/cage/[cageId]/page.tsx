@@ -250,7 +250,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     aria-labelledby="profile-tab"
                   >
                     <div className="card m-t-30">
-                      <div className="text-center mt-3">
+                      <div className="text-center mt-3 m-3">
                         <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
                       </div>
                       <div className="card-body">

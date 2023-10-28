@@ -76,16 +76,20 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="success">Thêm trứng</Button>
+        <div className="text-center mt-5">
+          <Button variant="success" style={{ backgroundColor: 'dodgerblue', borderColor: 'dodgerblue' }}>
+            Thêm trứng
+          </Button>
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Thêm trứng</DialogTitle>
         </DialogHeader>
         <div className="card">
-          <div className="card-header">
+          {/* <div className="card-header">
             <h4 className="card-title">Nhập thông tin trứng</h4>
-          </div>
+          </div> */}
           <div className="card-body">
             <div className="basic-form">
               <Form {...form}>
@@ -148,12 +152,12 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
                         />
                       </div>
 
-                      <div className="form-group text-right ">
+                      <div className="form-group d-flex justify-content-center ">
                         <button
                           type="submit"
                           className="btn btn-primary float-end "
                         >
-                          Chỉnh sửa lồng
+                          Thêm trứng
                         </button>
                       </div>
                     </div>
