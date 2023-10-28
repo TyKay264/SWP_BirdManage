@@ -17,7 +17,7 @@ const BirdPage = () => {
     birdId: bird.birdId,
     type: bird.birdType.name,
     sex: bird.sex,
-    cage: bird.cage?.location,
+    cage: bird.cage?.cageId,
     ageRange: bird?.ageRange,
     mutation: bird?.mutation,
     mutationRate: bird?.mutationRate,

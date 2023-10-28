@@ -117,7 +117,7 @@ const EditBirdForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    console.log(data.bird.cage)
+    //console.log(data.bird.cage.cageId)
     if (data && data?.bird) {
       try {
         await axios.patch(
@@ -125,6 +125,7 @@ const EditBirdForm = () => {
           values
         );
         form.reset();
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }
