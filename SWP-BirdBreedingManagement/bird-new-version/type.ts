@@ -44,6 +44,7 @@ export interface Bird {
   cage: Cage;
   father: Bird;
   mother: Bird;
+  birdTypeName: string;
 }
 export interface Cage {
   cageId: string;
