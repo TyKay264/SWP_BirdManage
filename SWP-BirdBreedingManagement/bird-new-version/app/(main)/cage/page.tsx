@@ -4,11 +4,12 @@ import BreadScrum from "@/components/BreadScrum";
 import CageClient from "@/components/Table/CageTable/CageClient";
 import { CageColumn } from "@/components/Table/CageTable/column";
 import useCages from "@/hooks/useCage";
+import Loading from "@/components/LoadingComponent";
 
 import React from "react";
 
 const CagePage = () => {
-  const { cages } = useCages();
+  const { cages, loading } = useCages();
   // console.log(cages);
   const formatCages: CageColumn[] = cages.map((cage) => ({
     cageId: cage.cageId,
@@ -17,8 +18,12 @@ const CagePage = () => {
     quantity: cage.quantity,
   }));
 
-  console.log(formatCages);
-
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
   return (
     <>
       <div id="main-wrapper" className="show">

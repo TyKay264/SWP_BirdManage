@@ -37,25 +37,25 @@ const BirdIdPage = () => {
                   <Profile
                     key={bird?.birdId}
                     id={bird?.birdId}
-                    bird_type={bird?.birdType?.name}
+                    bird_type={bird?.birdTypeName}
                     isMale={bird?.sex}
                     hatch_date={
                       bird?.hatchDate
                         ? format(new Date(bird?.hatchDate), "do-M-yyyy", {
-                            locale: vi,
-                          })
+                          locale: vi,
+                        })
                         : "N/A"
                     }
                     father_id={bird?.father?.birdId}
                     mother_id={bird?.mother?.birdId}
-                    cageid={bird?.cage?.cageId}
+                    cageid={bird?.cageId}
                     isAlive={bird?.isAlive}
                     ageRange={bird?.ageRange}
                     mutationRate={bird?.mutationRate}
                     mutation={bird?.mutation}
                     weight={bird?.weight}
                     featherColor={bird?.featherColor}
-                    image = {bird?.image}
+                    image={bird?.image}
                   />
                 </div>
               </div>

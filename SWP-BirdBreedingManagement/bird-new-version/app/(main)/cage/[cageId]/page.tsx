@@ -139,14 +139,14 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     eggLaidDate: item.eggLaidDate
       ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
-    actEggHatchDate: item.actEggHatchDate
-      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+    expEggHatchDate: item.expEggHatchDate
+      ? format(new Date(item.expEggHatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
-    actSwingBranch: item.actSwingBranch
-      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+    expSwingBranch: item.expSwingBranch
+      ? format(new Date(item.expSwingBranch), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
-    actAdultBirdDate: item.actAdultBirdDate
-      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+    expAdultBirdDate: item.expAdultBirdDate
+      ? format(new Date(item.expAdultBirdDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
@@ -260,8 +260,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                               <label className="basis-[100%]">
                                 NGÀY GHÉP CẶP :
                               </label>
-                              <div className="grow pl-2.5 pb-1.5">
-                                {FindCageById?.reproductionProcess?.pairingDate}
+                              <div className="grow pl-2.5 pb-1.5 w-80">
+                                {FindCageById?.reproductionProcess?.pairingDate ? format(new Date(FindCageById?.reproductionProcess?.pairingDate), "do-M-yyyy", { locale: vi })
+                                  : "N/A"}
                               </div>
                             </div>
 

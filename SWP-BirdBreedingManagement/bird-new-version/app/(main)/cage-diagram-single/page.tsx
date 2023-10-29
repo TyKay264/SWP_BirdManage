@@ -2,6 +2,7 @@
 
 import BreadScrum from "@/components/BreadScrum";
 import CageDiagramList from "@/components/CageDiagramSingle/CageDiagramList";
+import Loading from "@/components/LoadingComponent";
 import useCages from "@/hooks/useCage";
 import React from "react";
 
@@ -11,6 +12,13 @@ const CageDiagramSinglePage = () => {
   const CageFilterLocationA = cages.filter(
     (cage) => cage.location.charAt(0) === "A"
   );
+
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
   return (
     <>
       <div id="main-wrapper" className="show">
