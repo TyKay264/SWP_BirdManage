@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Bird } from '@/type';
+import { useParams } from 'next/navigation';
 
 
+const useBirdId = () => {
 
-const useBirdId = (id: any) => {
+    const params = useParams();
 
-    const [birdId, setBirds] = useState<Bird | []>([]);
+    const [bird, setBird] = useState<Bird | null>(null);
     const [loading, setLoading] = useState(false)
-
 
     useEffect(() => {
         // CALL API (GET)
@@ -17,11 +18,11 @@ const useBirdId = (id: any) => {
         // Hàm fetch staff
         const fetchBirds = async () => {
             try {
-                const res = await axios.get(`https://bird-swp.azurewebsites.net/api/birds/view/${id}`)
+                const res = await axios.get(`https://bird-swp.azurewebsites.net/api/birds/view/${params.birdId}`)
 
                 //const res = await axios.get("http://localhost:3001/birds")
 
-                setBirds(res.data)
+                setBird(res.data)
                 //console.log(res.data)
                 setLoading(true)
             } catch (error) {
@@ -31,9 +32,9 @@ const useBirdId = (id: any) => {
 
         //Gọi lại hàm để chạy
         fetchBirds();
-    }, [])
+    }, [params.birdId])
 
-    return { birdId, loading }
+    return { bird, loading }
 }
 
 export default useBirdId

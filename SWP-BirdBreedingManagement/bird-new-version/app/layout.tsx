@@ -452,7 +452,7 @@ export default function RootLayout({
       "/assets/plugins/chart/apexcharts-bundle/js/apexcharts.min.js",
 
       // "/assets/js/init-tdatatable.js",
-      "/assets/js/charts-custom.js",
+      // "/assets/js/charts-custom.js",
       "/assets/js/toggleFullScreen.js",
       "/assets/js/main.js",
       "/assets/js/option-themes.js",
@@ -508,7 +508,7 @@ export default function RootLayout({
         "/assets/plugins/chart/apexcharts-bundle/js/apexcharts.min.js",
 
         // "/assets/js/init-tdatatable.js",
-        "/assets/js/charts-custom.js",
+        // "/assets/js/charts-custom.js",
         "/assets/js/toggleFullScreen.js",
         "/assets/js/main.js",
         "/assets/js/option-themes.js",

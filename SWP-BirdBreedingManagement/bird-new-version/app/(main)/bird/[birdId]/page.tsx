@@ -2,22 +2,23 @@
 import Profile from "@/components/BirdId/Profile";
 import BreadScrum from "@/components/BreadScrum";
 // import { birds } from '@/data/data'
-import useBirds from "@/hooks/useBirds";
 
-import { useParams } from "next/navigation";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NotificationCard from "@/components/CageId/NotificationCard";
 import useBirdId from "@/hooks/useBirdId";
+import Loading from "@/components/LoadingComponent";
 
 const BirdIdPage = () => {
-  const params = useParams();
-  const { birds, loading } = useBirds();
-  // const { bird, loading } = useBirdId(params.birdId);
+  const { bird, loading } = useBirdId();
 
-  if (!loading) return <div>...Loading</div>;
-  const IdFilter = birds.find((bird) => bird.birdId === params.birdId);
+  if (!loading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
 
   return (
     <div id="main-wrapper" className="show">
@@ -34,27 +35,27 @@ const BirdIdPage = () => {
               <div className="col-lg-12">
                 <div className="card">
                   <Profile
-                    key={IdFilter?.birdId}
-                    id={IdFilter?.birdId}
-                    bird_type={IdFilter?.birdType?.name}
-                    isMale={IdFilter?.sex}
+                    key={bird?.birdId}
+                    id={bird?.birdId}
+                    bird_type={bird?.birdType?.name}
+                    isMale={bird?.sex}
                     hatch_date={
-                      IdFilter?.hatchDate
-                        ? format(new Date(IdFilter?.hatchDate), "do-M-yyyy", {
-                          locale: vi,
-                        })
+                      bird?.hatchDate
+                        ? format(new Date(bird?.hatchDate), "do-M-yyyy", {
+                            locale: vi,
+                          })
                         : "N/A"
                     }
-                    father_id={IdFilter?.father?.birdId}
-                    mother_id={IdFilter?.mother?.birdId}
-                    cageid={IdFilter?.cage?.cageId}
-                    isAlive={IdFilter?.isAlive}
-                    ageRange={IdFilter?.ageRange}
-                    mutationRate={IdFilter?.mutationRate}
-                    mutation={IdFilter?.mutation}
-                    weight={IdFilter?.weight}
-                    featherColor={IdFilter?.featherColor}
-                  // image = {IdFilter?.image}
+                    father_id={bird?.father?.birdId}
+                    mother_id={bird?.mother?.birdId}
+                    cageid={bird?.cage?.cageId}
+                    isAlive={bird?.isAlive}
+                    ageRange={bird?.ageRange}
+                    mutationRate={bird?.mutationRate}
+                    mutation={bird?.mutation}
+                    weight={bird?.weight}
+                    featherColor={bird?.featherColor}
+                    image = {bird?.image}
                   />
                 </div>
               </div>
@@ -62,7 +63,6 @@ const BirdIdPage = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
