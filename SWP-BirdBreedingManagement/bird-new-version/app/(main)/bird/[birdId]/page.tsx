@@ -9,13 +9,16 @@ import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 import React from "react";
 import NotificationCard from "@/components/CageId/NotificationCard";
+import useBirdId from "@/hooks/useBirdId";
 
 const BirdIdPage = () => {
   const params = useParams();
   const { birds, loading } = useBirds();
+  // const { bird, loading } = useBirdId(params.birdId);
 
   if (!loading) return <div>...Loading</div>;
   const IdFilter = birds.find((bird) => bird.birdId === params.birdId);
+
   return (
     <div id="main-wrapper" className="show">
       <div className="content-body">
