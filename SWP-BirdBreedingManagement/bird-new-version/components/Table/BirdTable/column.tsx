@@ -12,7 +12,7 @@ import Image from "next/image";
 
 export type BirdColumn = {
   birdId: string;
-  type: string;
+  birdTypeName: string;
   sex: string;
   cage?: string;
   hatchDate: string;

@@ -15,7 +15,7 @@ const BirdPage = () => {
 
   const formatBirds: BirdColumn[] = birds.map((bird) => ({
     birdId: bird.birdId,
-    type: bird.birdType.name,
+    type: bird.birdTypeName,
     sex: bird.sex,
     cage: bird.cage?.cageId,
     ageRange: bird?.ageRange,

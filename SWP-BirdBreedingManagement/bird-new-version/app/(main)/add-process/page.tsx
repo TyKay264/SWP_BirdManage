@@ -10,7 +10,7 @@ const page = () => {
           <div className="warper container-fluid">
             <div className="all-patients main_container">
               <BreadScrum
-                title="Tạo Quá Tình"
+                title="Tạo Quá Trình"
                 subRouteTitle="cr-process"
                 subTitle1="Tạo Quá Tình"
               />

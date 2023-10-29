@@ -1,9 +1,12 @@
 "use client";
-
+import { cn } from "@/lib/utils"
 import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { format, parseISO, parse } from 'date-fns';
+import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
+
 import {
   Form,
   FormControl,
@@ -14,6 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
 
 import {
   Dialog,
@@ -40,6 +50,7 @@ import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useCageA from "@/hooks/useCageA";
 
+
 type BirdtypeCustom = {
   typeId: string;
   birdTypeName: string;
@@ -62,14 +73,15 @@ const formSchema = z.object({
   birdTypeName: z.string().min(1),
   sex: z.string().min(1),
   isAlive: z?.boolean(),
-  hatchDate: z.string().min(1),
+  // hatchDate: z.string().min(1),
+  hatchDate: z.date(),
   cageId: z.string(),
   ageRange: z.string(),
   // mutationRate: z.coerce.number(),
-  mutation: z.string().min(1),
+  mutation: z.string(),
   weight: z.coerce.number(),
   featherColor: z.string(),
-  image: z.string(),
+  image: z.string().optional(),
 });
 
 const EditBirdForm = () => {
@@ -80,15 +92,12 @@ const EditBirdForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // id: "",
-      // birdtype_id: "",
       birdTypeName: "",
       isAlive: true,
       sex: "",
       hatchDate: "",
       cageId: "",
       ageRange: "",
-      // mutationRate: 0,
       mutation: "",
       weight: 0,
       featherColor: "",
@@ -99,25 +108,32 @@ const EditBirdForm = () => {
   useEffect(() => {
     if (data && data.bird) {
       form.setValue("birdTypeName", data.bird.type);
-      //   form.setValue("cageId", data.bird?.);
       form.setValue("ageRange", data.bird.ageRange);
-      // form.setValue("mutationRate", data.bird.mutationRate);
       form.setValue("mutation", data.bird.mutation);
       form.setValue("weight", data.bird.weight);
       form.setValue("featherColor", data.bird.featherColor);
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
-      form.setValue("hatchDate", data.bird.hatchDate);
       form.setValue("cageId", data.bird.cage);
+      if (data.bird.hatchDate) {
+        const hatchDate = parse(data.bird.hatchDate, 'd-M-yyyy', new Date());
+        if (!isNaN(hatchDate.getTime())) {
+          form.setValue("hatchDate", hatchDate);
+        }
+      }
+      // if (data && data.bird && data.bird.hatchDate) {
+      //   const formattedDate = format(data.bird.hatchDate, 'dd-MM-yyyy');
+      //   form.setValue('hatchDate', formattedDate);
+      // }
     }
   }, [data, form]);
 
   const { cages } = useCageA();
-
+  // console.log(data.bird.hatchDate)
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    //console.log(data.bird.cage.cageId)
+
     if (data && data?.bird) {
       try {
         await axios.patch(
@@ -139,10 +155,6 @@ const EditBirdForm = () => {
       <DialogContent className="sm:min-w-[1000px]">
         <DialogHeader>
           <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
-          {/* <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription> */}
         </DialogHeader>
         <div className="card">
           <div className="card-header ">
@@ -289,86 +301,133 @@ const EditBirdForm = () => {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <FormField
-                          control={form.control}
-                          name="hatchDate"
-                          render={({ field }) => (
-                            <FormItem>
-                              {/* <FormLabel>Ngày nở</FormLabel> */}
-                              <FormControl>
-                                <Input
-                                  type="date"
-                                  placeholder="Chọn ngày sinh"
-                                  {...field}
-                                  className="form-control"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <FormField
-                          control={form.control}
-                          name="cageId"
-                          render={({ field }) => (
-                            <FormItem>
-                              <Select
-                                disabled={isLoading}
-                                onValueChange={(value) => {
-                                  field.onChange(value);
-                                  form.setValue("cageId", value);
-                                }}
-                                value={field.value}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Chọn mã lồng" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Chọn mã lồng</SelectLabel>
-                                    {cages.map((cage) => (
-                                      <SelectItem
-                                        key={cage.cageId}
-                                        value={cage.cageId}
+                      <div className="flex justify-between">
+                        <div className="form-group">
+                          <FormField
+                            control={form.control}
+                            name="hatchDate"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-col">
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <FormControl>
+                                      <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                          "w-[240px] pl-3 text-left font-normal",
+                                          !field.value && "text-muted-foreground"
+                                        )}
                                       >
-                                        {cage.cageId}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                                        {field.value ? format(new Date(field.value), 'dd-MM-yyyy') : <span>Pick a date</span>}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      </Button>
+                                    </FormControl>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                      mode="single"
+                                      selected={field.value}
+                                      onSelect={field.onChange}
+                                      disabled={(date: any) =>
+                                        date > new Date() || date < new Date("1900-01-01")
+                                      }
+                                      initialFocus
+                                    />
+                                  </PopoverContent>
+                                </Popover>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* <div className="form-group">
+                          <FormField
+                            control={form.control}
+                            name="hatchDate"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-col">
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <FormControl>
+                                      <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                          "w-[240px] pl-3 text-left font-normal",
+                                          !field.value && "text-muted-foreground"
+                                        )}
+                                      >
+                                        {field.value ? (
+                                          format(new Date(field.value), "d-M-yyyy")
+                                        ) : (
+                                          <span>Chọn ngày ra đời</span>
+                                        )}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      </Button>
+                                    </FormControl>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                      mode="single"
+                                      selected={field.value ? new Date(field.value) : null}
+                                      onSelect={(date) => {
+                                        const selectedDate = new Date(date);
+                                        selectedDate.setDate(selectedDate.getDate() + 1);
+                                        field.onChange(selectedDate.toISOString().split("T")[0]);
+                                      }}
+                                      disabled={(date) => date > new Date() || date < new Date("2000-01-01")}
+                                      initialFocus
+                                    />
+                                  </PopoverContent>
+                                </Popover>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div> */}
+
+
+                        <div className="form-group w-[48%]">
+                          <FormField
+                            control={form.control}
+                            name="cageId"
+                            render={({ field }) => (
+                              <FormItem>
+                                <Select
+                                  disabled={isLoading}
+                                  onValueChange={(value) => {
+                                    field.onChange(value);
+                                    form.setValue("cageId", value);
+                                  }}
+                                  value={field.value}
+                                  defaultValue={field.value}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Chọn mã lồng" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectLabel>Chọn mã lồng</SelectLabel>
+                                      {cages.map((cage) => (
+                                        <SelectItem
+                                          key={cage.cageId}
+                                          value={cage.cageId}
+                                        >
+                                          {cage.cageId}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
                       </div>
 
-                      {/* <div className="form-group">
-                        <FormField
-                          control={form.control}
-                          name="mutationRate"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Tỉ lệ đột biến</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Nhập tỉ lệ đột biến"
-                                  {...field}
-                                  className="form-control"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div> */}
 
                       <div className="form-group">
                         <FormField
@@ -449,7 +508,7 @@ const EditBirdForm = () => {
           </div>
         </div>
       </DialogContent>
-    </Dialog>
+    </Dialog >
   );
 };
 

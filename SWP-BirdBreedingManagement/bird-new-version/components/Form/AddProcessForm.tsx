@@ -40,6 +40,48 @@ import {
 // } from "@/components/ui/popover"
 import axios from "axios";
 import useBirdTypeProcess from "@/hooks/useBirdTypeProcess";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const formSchema = z.object({
   birdTypeName: z.string().min(1),
@@ -186,6 +228,46 @@ const AddProcessForm = () => {
                             </FormItem>
                           )}
                         />
+                        <div className="mt-1">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="default">Xem hồ sơ chim</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px]">
+                              <DialogHeader>
+                                <DialogTitle>Xem hồ sơ chim</DialogTitle>
+                              </DialogHeader>
+                              {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
+                                <>
+                                  {/* ... */}
+                                  <table>
+                                    <thead>
+                                      <tr>
+                                        <th>ID</th>
+                                        <th>Tỉ lệ đột biến</th>
+                                        <th>Tỉ lệ sinh sản thành công</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {/* Render rows for cock */}
+                                      {birdTypeProcess1.cock.map((item) => (
+                                        <tr key={item.birdId}>
+                                          <td>{item.birdId}</td>
+                                          <td>{item.mutationRate}%</td>
+                                          <td>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</td>
+                                        </tr>
+                                      ))}
+
+                                    </tbody>
+                                  </table>
+                                  {/* ... */}
+                                </>
+                              )}
+
+                            </DialogContent>
+                          </Dialog>
+                        </div>
+
                       </div>
 
                       <div className="form-group">
