@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,60 +22,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import useCages from "@/hooks/useCage"
-// import { Check, ChevronsUpDown } from "lucide-react"
-// import { cn } from "@/lib/utils"
-// import {
-//   Command,
-//   CommandEmpty,
-//   CommandGroup,
-//   CommandInput,
-//   CommandItem,
-// } from "@/components/ui/command"
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover"
+
 import axios from "axios";
 import useBirdTypeProcess from "@/hooks/useBirdTypeProcess";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
+
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -94,6 +55,12 @@ const formSchema = z.object({
 const AddProcessForm = () => {
 
   const [selectedBirdType, setSelectedBirdType] = useState("");
+
+  // chosing form table
+  const [selectTableValueChange, setSelectTableValueChange] = useState("");
+  const [selectTableValueChange1, setSelectTableValueChange1] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const router = useRouter();
 
   const { birdTypeProcess, cageProcess, loading } = useBirdTypeProcess();
@@ -139,6 +106,16 @@ const AddProcessForm = () => {
       console.log(error);
     }
   };
+
+  const handleValueChange = (value: string) => {
+    setSelectTableValueChange(value)
+    setIsOpen(false)
+  }
+
+  const handleValueChange1 = (value1: string) => {
+    setSelectTableValueChange(value1)
+    setIsOpen(false)
+  }
 
   const isLoading = form.formState.isSubmitting;
 
@@ -208,7 +185,10 @@ const AddProcessForm = () => {
                             <FormItem>
                               <FormLabel>ID chim trống</FormLabel>
                               <Select
-                                onValueChange={field.onChange}
+                                value={selectTableValueChange}
+                                onValueChange={(value) => {
+                                  field.onChange(setSelectTableValueChange(value))
+                                }}
                                 defaultValue={field.value}
                               >
                                 <FormControl>
@@ -229,45 +209,44 @@ const AddProcessForm = () => {
                           )}
                         />
                         <div className="mt-1">
-                          <Dialog>
+                          <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
                             <DialogTrigger asChild>
                               <Button variant="default">Xem hồ sơ chim</Button>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px]">
+                            <DialogContent className="sm:min-w-[800px]">
                               <DialogHeader>
                                 <DialogTitle>Xem hồ sơ chim</DialogTitle>
                               </DialogHeader>
+
                               {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
                                 <>
-                                  {/* ... */}
-                                  <table>
-                                    <thead>
-                                      <tr>
-                                        <th>ID</th>
-                                        <th>Tỉ lệ đột biến</th>
-                                        <th>Tỉ lệ sinh sản thành công</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {/* Render rows for cock */}
+                                  <Table>
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                        <TableHead>Tỉ lệ đột biến</TableHead>
+                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
+                                        {/* <TableHead className="text-right">Amount</TableHead> */}
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
                                       {birdTypeProcess1.cock.map((item) => (
-                                        <tr key={item.birdId}>
-                                          <td>{item.birdId}</td>
-                                          <td>{item.mutationRate}%</td>
-                                          <td>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</td>
-                                        </tr>
+                                        <TableRow key={item.birdId} onClick={() => handleValueChange(item.birdId)
+                                        }>
+                                          <TableCell className="font-medium">{item.birdId}</TableCell>
+                                          <TableCell>{item.mutationRate}%</TableCell>
+                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
+                                          {/* <TableCell className="text-right">{item.superReproduct}</TableCell> */}
+                                        </TableRow>
                                       ))}
-
-                                    </tbody>
-                                  </table>
-                                  {/* ... */}
+                                    </TableBody>
+                                  </Table>
                                 </>
                               )}
 
                             </DialogContent>
                           </Dialog>
                         </div>
-
                       </div>
 
                       <div className="form-group">
@@ -278,7 +257,10 @@ const AddProcessForm = () => {
                             <FormItem>
                               <FormLabel>ID chim mái</FormLabel>
                               <Select
-                                onValueChange={field.onChange}
+                                value={selectTableValueChange1}
+                                onValueChange={(value) => {
+                                  field.onChange(setSelectTableValueChange1(value))
+                                }}
                                 defaultValue={field.value}
                               >
                                 <FormControl>
@@ -298,6 +280,43 @@ const AddProcessForm = () => {
                             </FormItem>
                           )}
                         />
+                        {/* <div className="mt-1">
+                          <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
+                            <DialogTrigger asChild>
+                              <Button variant="default">Xem hồ sơ chim</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:min-w-[800px]">
+                              <DialogHeader>
+                                <DialogTitle>Xem hồ sơ chim</DialogTitle>
+                              </DialogHeader>
+
+                              {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
+                                <>
+                                  <Table>
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                        <TableHead>Tỉ lệ đột biến</TableHead>
+                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                      {birdTypeProcess1.hen.map((item) => (
+                                        <TableRow key={item.birdId} onClick={() => handleValueChange1(item.birdId)
+                                        }>
+                                          <TableCell className="font-medium">{item.birdId}</TableCell>
+                                          <TableCell>{item.mutationRate}%</TableCell>
+                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
+                                        </TableRow>
+                                      ))}
+                                    </TableBody>
+                                  </Table>
+                                </>
+                              )}
+
+                            </DialogContent>
+                          </Dialog>
+                        </div> */}
                       </div>
                     </>
                   )}
@@ -312,7 +331,10 @@ const AddProcessForm = () => {
                             <FormItem>
                               <FormLabel>ID chim trống</FormLabel>
                               <Select
-                                onValueChange={field.onChange}
+                                value={selectTableValueChange}
+                                onValueChange={(value) => {
+                                  field.onChange(setSelectTableValueChange(value))
+                                }}
                                 defaultValue={field.value}
                               >
                                 <FormControl>
@@ -332,6 +354,45 @@ const AddProcessForm = () => {
                             </FormItem>
                           )}
                         />
+                        <div className="mt-1">
+                          <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
+                            <DialogTrigger asChild>
+                              <Button variant="default">Xem hồ sơ chim</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:min-w-[800px]">
+                              <DialogHeader>
+                                <DialogTitle>Xem hồ sơ chim</DialogTitle>
+                              </DialogHeader>
+
+                              {selectedBirdType === "Chích chòe lửa" && birdTypeProcess2 && (
+                                <>
+                                  <Table>
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                        <TableHead>Tỉ lệ đột biến</TableHead>
+                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
+                                        {/* <TableHead className="text-right">Amount</TableHead> */}
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                      {birdTypeProcess2.cock.map((item) => (
+                                        <TableRow key={item.birdId} onClick={() => handleValueChange(item.birdId)
+                                        }>
+                                          <TableCell className="font-medium">{item.birdId}</TableCell>
+                                          <TableCell>{item.mutationRate}%</TableCell>
+                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
+                                          {/* <TableCell className="text-right">{item.superReproduct}</TableCell> */}
+                                        </TableRow>
+                                      ))}
+                                    </TableBody>
+                                  </Table>
+                                </>
+                              )}
+
+                            </DialogContent>
+                          </Dialog>
+                        </div>
                       </div>
 
                       <div className="form-group">

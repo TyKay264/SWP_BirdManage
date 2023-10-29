@@ -36,6 +36,15 @@ import {
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { FileUpload } from "../FileUpload";
+// import { CalendarIcon } from "@radix-ui/react-icons";  
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
 
 const formSchema = z.object({
   eggStatus: z.string().min(1),
@@ -50,6 +59,7 @@ const AddBirdChildForm = () => {
   const isModalOpen = isOpen && type === "AddBirdChildForm";
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(true);
+
 
 
 
@@ -239,27 +249,49 @@ const AddBirdChildForm = () => {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <FormField
-                          control={form.control}
-                          name="hatchDate"
-                          render={({ field }) => (
-                            <FormItem>
-                              {/* <FormLabel>Ngày nở</FormLabel> */}
-                              <FormControl>
-                                <Input
-                                  type="date"
-                                  placeholder="Chọn ngày sinh"
-                                  {...field}
-                                  className="form-control"
-                                  disabled={isDisabled}
+                      <FormField
+                        control={form.control}
+                        name="hatchDate"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-col">
+                            <FormLabel>Date of birth</FormLabel>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <FormControl>
+                                  <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                      "w-[240px] pl-3 text-left font-normal",
+                                      !field.value && "text-muted-foreground"
+                                    )}
+                                  >
+                                    {field.value ? (
+                                      format(field.value, "dd-MM-yyyy")
+                                    ) : (
+                                      <span>Pick a date</span>
+                                    )}
+                                  </Button>
+                                </FormControl>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
+                                  mode="single"
+                                  selected={field.value}
+                                  onSelect={field.onChange}
+                                  disabled={(date) =>
+                                    date > new Date() || date < new Date("1900-01-01")
+                                  }
+                                  initialFocus
                                 />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                              </PopoverContent>
+                            </Popover>
+                            <FormDescription>
+                              Your date of birth is used to calculate your age.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
                       <div className="form-group">
                         <FormField
