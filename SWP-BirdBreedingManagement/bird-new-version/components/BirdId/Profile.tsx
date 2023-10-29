@@ -48,20 +48,9 @@ const Profile = ({
           <form>
             <div className="row">
               <div className="image col-xl-4">
-                <div className="form-group row widget-3">
-                  <div className="form-input">
-                    <label className="labeltest" htmlFor="file-ip-1">
-                      <span> ... </span>
-                    </label>
-                    <input
-                      type="file"
-                      id="file-ip-1"
-                      accept="image/*"
-                    // ?\\onchange="showPreview(event);"
-                    />
-                    <div className="preview">
-                      <img id="file-ip-1-preview" src="" alt="img" />
-                    </div>
+                <div className="flex justify-center items-center">
+                  <div className="w-[300px] h-[300px]">
+                    <img src={image} alt="image" className="rounded-md " />
                   </div>
                 </div>
               </div>
@@ -141,20 +130,20 @@ const Profile = ({
         </div>
       </div>
 
-      <div>
-
-      </div>
+      <div></div>
       <div className="card-footer">
-        <h3 className="card-title text-[red]">
-          Sơ đồ phả hệ ( Family Tree )
-        </h3>
+        <h3 className="card-title text-[red]">Sơ đồ phả hệ ( Family Tree )</h3>
         <div className="flex align-baseline">
           <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-blue-300 ">
             <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
               <div className="fas fa-venus text-center "></div>
               <div>
-                <div className="text-center break-words ">ID CHIM BỐ :{father_id} </div>
-                <div className="text-center break-words">LOẠI : {bird_type}</div>
+                <div className="text-center break-words ">
+                  ID CHIM BỐ :{father_id}{" "}
+                </div>
+                <div className="text-center break-words">
+                  LOẠI : {bird_type}
+                </div>
               </div>
             </div>
           </div>
@@ -165,7 +154,7 @@ const Profile = ({
               borderTop: "3px dashed black",
               margin: "0 10px",
               width: "20%",
-              marginTop: "9%"
+              marginTop: "9%",
             }}
           />
           <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-pink-200 ">
@@ -173,12 +162,14 @@ const Profile = ({
               <div className="fas fa-mars text-center "></div>
               <div>
                 {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
-                <div className="text-center break-words" >ID CHIM MẸ : {mother_id} </div>
-                <div className="text-center break-words">LOẠI : {bird_type}</div>
+                <div className="text-center break-words">
+                  ID CHIM MẸ : {mother_id}{" "}
+                </div>
+                <div className="text-center break-words">
+                  LOẠI : {bird_type}
+                </div>
               </div>
             </div>
-
-
           </div>
         </div>
 
@@ -192,7 +183,9 @@ const Profile = ({
           />
           <div style={{ display: "flex", alignItems: "center" }}>
             <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center ml-[26%] mt-[1%] rounded-[15px] bg-yellow-200">
-              <div className="text-center break-words mt-[15%]">ID CHIM : {id} </div>
+              <div className="text-center break-words mt-[15%]">
+                ID CHIM : {id}{" "}
+              </div>
             </div>
           </div>
         </div>
@@ -212,9 +205,8 @@ const Profile = ({
         <div className="col-md-6 col-lg-4">
           <NotificationCard />
         </div>
-
       </div>
-    </div >
+    </div>
   );
 };
 
