@@ -49,7 +49,7 @@ const Profile = ({
             <div className="row">
               <div className="image col-xl-4">
                 <div className="flex justify-center items-center">
-                  <div className="w-[300px] h-[300px]">
+                  <div className="w-[300px] h-[300px] mt-5">
                     <img src={image} alt="image" className="rounded-md " />
                   </div>
                 </div>
@@ -76,7 +76,7 @@ const Profile = ({
                   <div className="grow pl-2.5">{hatch_date}</div>
                 </div>
 
-                <div className="flex justify-between items-center mb-2.5">
+                {/* <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Father Id:</label>
                   <div className="grow pl-2.5">{father_id}</div>
                 </div>
@@ -84,19 +84,23 @@ const Profile = ({
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Mother Id:</label>
                   <div className="grow pl-2.5">{mother_id}</div>
-                </div>
+                </div> */}
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Cage Id:</label>
-                  <div className="grow pl-2.5">{cageid}</div>
+                  <label className="basis-[30%] ">Cage Id:</label>
+                  {cageid ? (
+                    <div className="grow pl-2.5">{cageid}</div>
+                  ) : (
+                    <div className="grow pl-2.5 text-danger">Chưa vào lồng</div>
+                  )}
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Alive:</label>
                   {isAlive ? (
-                    <div className="grow pl-2.5">Còn sống</div>
+                    <div className="grow pl-2.5 text-success">Còn sống</div>
                   ) : (
-                    <div className="grow pl-2.5">Đã chết</div>
+                    <div className="grow pl-2.5 text-danger">Đã chết</div>
                   )}
                 </div>
 
@@ -106,23 +110,31 @@ const Profile = ({
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Mutation(%):</label>
+                  <label className="basis-[30%]">Tỉ lệ con non đã đột biến:</label>
                   <div className="grow pl-2.5">{mutationRate}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Mutation Note:</label>
-                  <div className="grow pl-2.5">{mutation}</div>
+                  {mutation ? (
+                    <div className="grow pl-2.5">{mutation}</div>
+                  ) : (
+                    <div className="grow pl-2.5">Không đột biến</div>
+                  )}
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Weight(g):</label>
-                  <div className="grow pl-2.5">{weight}</div>
+                  <label className="basis-[30%]">Weight:</label>
+                  <div className="grow pl-2.5">{weight} (g)</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Feather Color:</label>
-                  <div className="grow pl-2.5">{featherColor}</div>
+                  {featherColor ? (
+                    <div className="grow pl-2.5">{featherColor}</div>
+                  ) : (
+                    <div className="grow pl-2.5">Chưa xác định</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -132,7 +144,10 @@ const Profile = ({
 
       <div></div>
       <div className="card-footer">
-        <h3 className="card-title text-[red]">Sơ đồ phả hệ ( Family Tree )</h3>
+        {/* <h3 className="card-title text-[red]">Sơ đồ phả hệ ( Family Tree )</h3> */}
+        <div className="card-header mt-5">
+          <h4 className="mt-3">Thông tin phả hệ</h4>
+        </div>
         <div className="flex align-baseline">
           <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-blue-300 ">
             <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
@@ -186,6 +201,7 @@ const Profile = ({
               <div className="text-center break-words mt-[15%]">
                 ID CHIM : {id}{" "}
               </div>
+
             </div>
           </div>
         </div>

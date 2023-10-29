@@ -14,9 +14,12 @@ export type EggColumn = {
   reproductionId: string;
   eggLaidDate?: string;
   eggStatus?: string;
-  actEggHatchDate?: string;
-  actSwingBranch?: string;
-  actAdultBirdDate?: string;
+  // actEggHatchDate?: string;
+  // actSwingBranch?: string;
+  // actAdultBirdDate?: string;
+  expEggHatchDate?: string;
+  expSwingBranch?: string;
+  expAdultBirdDate?: string
 };
 
 export const columns: ColumnDef<EggColumn>[] = [
@@ -51,7 +54,7 @@ export const columns: ColumnDef<EggColumn>[] = [
     },
   },
   {
-    accessorKey: "actEggHatchDate",
+    accessorKey: "expEggHatchDate",
     header: ({ column }) => {
       return (
         <Button
@@ -59,13 +62,13 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Ngày nở
+          Ngày nở (dự kiến)
         </Button>
       );
     },
   },
   {
-    accessorKey: "actSwingBranch",
+    accessorKey: "expSwingBranch",
     header: ({ column }) => {
       return (
         <Button
@@ -73,13 +76,13 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Chim chuyền
+          Chim chuyền (dự kiến)
         </Button>
       );
     },
   },
   {
-    accessorKey: "actAdultBirdDate",
+    accessorKey: "expAdultBirdDate",
     header: ({ column }) => {
       return (
         <Button
@@ -87,7 +90,7 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Trưởng thành
+          Trưởng thành (dự kiến)
         </Button>
       );
     },

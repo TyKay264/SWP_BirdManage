@@ -7,9 +7,9 @@ const Footer = () => {
         <p className="mb-0">
           Copyright © Designed &amp; Developed by{" "}
           <a href="uxign.com" target="_blank">
-            Uxign
+            ChíchChòeTeam
           </a>
-          2022
+          FA23
         </p>
       </div>
     </div>
