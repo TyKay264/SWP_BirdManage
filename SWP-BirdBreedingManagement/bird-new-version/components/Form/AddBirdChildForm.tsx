@@ -36,7 +36,7 @@ import {
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { FileUpload } from "../FileUpload";
-// import { CalendarIcon } from "@radix-ui/react-icons";  
+// import { CalendarIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -59,9 +59,6 @@ const AddBirdChildForm = () => {
   const isModalOpen = isOpen && type === "AddBirdChildForm";
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(true);
-
-
-
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -87,13 +84,15 @@ const AddBirdChildForm = () => {
     console.log(values);
     //console.log(data.egg.reproductionId)
     try {
-      await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
-        values
-      );
-      form.reset();
-      router.refresh();
-      // window.location.reload();
+      if (data && data.egg) {
+        await axios.patch(
+          `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
+          values
+        );
+        form.reset();
+        router.refresh();
+        // window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -135,7 +134,8 @@ const AddBirdChildForm = () => {
                                 onValueChange={(value) => {
                                   field.onChange(value);
                                   setIsDisabled(
-                                    value === "In development" || value === "Broken"
+                                    value === "In development" ||
+                                      value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -178,7 +178,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                              // disabled={isDisabled}
+                                // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />
@@ -248,7 +248,7 @@ const AddBirdChildForm = () => {
                           )}
                         />
                       </div>
-
+                      {/* 
                       <FormField
                         control={form.control}
                         name="hatchDate"
@@ -273,13 +273,17 @@ const AddBirdChildForm = () => {
                                   </Button>
                                 </FormControl>
                               </PopoverTrigger>
-                              <PopoverContent className="w-auto p-0" align="start">
+                              <PopoverContent
+                                className="w-auto p-0"
+                                align="start"
+                              >
                                 <Calendar
                                   mode="single"
                                   selected={field.value}
                                   onSelect={field.onChange}
                                   disabled={(date) =>
-                                    date > new Date() || date < new Date("1900-01-01")
+                                    date > new Date() ||
+                                    date < new Date("1900-01-01")
                                   }
                                   initialFocus
                                 />
@@ -291,7 +295,7 @@ const AddBirdChildForm = () => {
                             <FormMessage />
                           </FormItem>
                         )}
-                      />
+                      /> */}
 
                       <div className="form-group">
                         <FormField

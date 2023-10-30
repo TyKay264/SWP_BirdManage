@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
 import Image from "next/image";
+import { Cage } from "@/type";
 
 export type BirdColumn = {
   birdId: string;
-  birdTypeName: string;
+  type: string;
   sex: string;
-  cage?: string;
+  cageId: string;
+  location: string;
   hatchDate: string;
   ageRange: string;
   mutation: string;
@@ -99,7 +101,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
     //     ),
     // },
 
-    accessorKey: "cage",
+    accessorKey: "location",
     header: ({ column }) => {
       return (
         <Button
@@ -107,7 +109,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Cage
+          Location
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

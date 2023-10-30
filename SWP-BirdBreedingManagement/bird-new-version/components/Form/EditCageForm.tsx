@@ -26,6 +26,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type locationType = {
   location: string;
@@ -80,7 +81,12 @@ const EditCageForm = () => {
         `https://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
         values
       );
+      toast.success("Cập nhật lồng thành công");
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      onClose();
       form.reset();
+      window.location.reload();
+
       router.refresh();
     } catch (error) {
       console.log(error);

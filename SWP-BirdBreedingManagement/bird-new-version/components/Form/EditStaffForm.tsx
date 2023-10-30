@@ -40,6 +40,7 @@ import axios from "axios";
 import { useModal } from "@/hooks/useModal";
 import { StaffRole } from "@/type";
 import { FileUpload } from "../FileUpload";
+import { toast } from "react-toastify";
 
 const roleMap: Record<string, StaffRole> = {
   STAFF: StaffRole.STAFF,
@@ -100,7 +101,10 @@ const EditStaffForm = () => {
           values
         );
 
-        router.refresh();
+        toast.success("Cập nhật nhân viên thành công");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        onClose();
+
         form.reset();
         window.location.reload();
       } catch (error) {

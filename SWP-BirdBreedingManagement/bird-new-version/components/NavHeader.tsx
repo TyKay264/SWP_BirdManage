@@ -1,27 +1,29 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 const NavHeader = () => {
   return (
     <div className="nav-header">
       <div className="brand-logo">
-        <a href="/">
+        <Link href="/">
           {" "}
           <img
             className="logo-tabib"
             src="/assets/images/download.png"
             alt=""
           />
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/">
           <img
-            className="brand-title" style={{ width: "100px", height: "60px" }}
+            className="brand-title"
+            style={{ width: "100px", height: "60px" }}
             src="/assets/images/logo.png"
             alt=""
           />
-        </a>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NavHeader
+export default NavHeader;
