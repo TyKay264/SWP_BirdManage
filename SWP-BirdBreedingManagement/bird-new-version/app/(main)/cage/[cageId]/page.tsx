@@ -14,8 +14,8 @@ import Loading from "@/components/LoadingComponent";
 import AddEggForm from "@/components/Form/AddEggForm";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
-import axios from "axios"
-import { useRouter } from 'next/navigation'
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
@@ -25,8 +25,12 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
   //Data for process' info
-  const failEggs = FindCageById?.birdReproduction?.filter((item) => item.eggStatus === "Broken");
-  const hatchedEggs = FindCageById?.birdReproduction?.filter((item) => item.eggStatus === "Hatched");
+  const failEggs = FindCageById?.birdReproduction?.filter(
+    (item) => item.eggStatus === "Broken"
+  );
+  const hatchedEggs = FindCageById?.birdReproduction?.filter(
+    (item) => item.eggStatus === "Hatched"
+  );
 
   const listEgg = FindCageById?.birdReproduction?.filter(
     (item) =>
@@ -47,15 +51,16 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const handleRemove = async () => {
     try {
       //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
-      await axios.patch(`https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${FindCageById?.reproductionProcess?.processId}`)
+      await axios.patch(
+        `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${FindCageById?.reproductionProcess?.processId}`
+      );
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 
-      router.push('/cage-diagram')
-
+      router.push("/cage-diagram");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   console.log(FindCageById?.reproductionProcess?.processId);
   if (!FindCageById?.reproductionProcess) {
@@ -135,7 +140,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     birdId: item.bird?.birdId,
     cages: cages,
     reproductionId: item.reproductionId,
-    eggStatus: item.eggStatus,
+    eggStatus: item?.eggStatus,
     eggLaidDate: item.eggLaidDate
       ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
@@ -173,7 +178,6 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               birdType={item.bird?.birdType?.name}
             />
           ))}
-
 
           <div className="row">
             <div className="col-lg-12">
@@ -251,7 +255,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                   >
                     <div className="card m-t-30">
                       <div className="text-center mt-3 m-3">
-                        <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
+                        <Button variant="destructive" onClick={handleRemove}>
+                          Kết thúc quá trình
+                        </Button>
                       </div>
                       <div className="card-body">
                         <p className=" flex justify-between">
@@ -261,7 +267,14 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                                 NGÀY GHÉP CẶP :
                               </label>
                               <div className="grow pl-2.5 pb-1.5 w-80">
-                                {FindCageById?.reproductionProcess?.pairingDate ? format(new Date(FindCageById?.reproductionProcess?.pairingDate), "do-M-yyyy", { locale: vi })
+                                {FindCageById?.reproductionProcess?.pairingDate
+                                  ? format(
+                                      new Date(
+                                        FindCageById?.reproductionProcess?.pairingDate
+                                      ),
+                                      "do-M-yyyy",
+                                      { locale: vi }
+                                    )
                                   : "N/A"}
                               </div>
                             </div>
@@ -290,7 +303,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                               <label className="basis-[100%]">
                                 SỐ TRỨNG ĐÃ NỞ :
                               </label>
-                              <div className="grow pl-2.5 pb-1.5">{hatchedEggs?.length}</div>
+                              <div className="grow pl-2.5 pb-1.5">
+                                {hatchedEggs?.length}
+                              </div>
                             </div>
 
                             <div className="flex justify-between items-center mb-2.5">

@@ -36,7 +36,7 @@ import {
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { FileUpload } from "../FileUpload";
-// import { CalendarIcon } from "@radix-ui/react-icons";  
+// import { CalendarIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -49,7 +49,7 @@ import { format, parseISO, parse } from "date-fns";
 const formSchema = z.object({
   eggStatus: z.string().min(1),
   sex: z.string(),
-  hatchDate: z.string(),
+  hatchDate: z.date(),
   weight: z.coerce.number(),
   image: z.string(),
   eggLaidDate: z.string()
@@ -60,9 +60,6 @@ const AddBirdChildForm = () => {
   const isModalOpen = isOpen && type === "AddBirdChildForm";
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(true);
-
-
-
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -76,16 +73,16 @@ const AddBirdChildForm = () => {
       eggLaidDate: ""
     },
   });
+  const [parsedDate, setParsedDate] = useState<Date | null>(null);
 
   useEffect(() => {
 
     if (data && data.egg) {
       const customFormat = "dd-MM-yyyy";
-      const parsedDate = parse(data.egg.eggLaidDate, customFormat, new Date());
-
-      if (!isNaN(parsedDate)) {
-        const formattedDate = format(parsedDate, "yyyy-MM-dd");
-        console.log(formattedDate);
+      const parsedDateValue = parse(data.egg.eggLaidDate, customFormat, new Date());
+      if (!isNaN(parsedDateValue)) {
+        setParsedDate(parsedDateValue); // Set the parsed date in state
+        form.setValue("eggStatus", data.egg.eggStatus);
       } else {
         console.error("Invalid date format:", data.egg.eggLaidDate);
       }
@@ -93,19 +90,25 @@ const AddBirdChildForm = () => {
     }
   }, [data, form]);
 
-  //console.log(data.egg.eggStatus)
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    //console.log(data.egg.reproductionId)
+    console.log(typeof data.egg.eggLaidDate)
+    const formatDate = parseISO(data.egg.eggLaidDate);
+    console.log(formatDate)
+    console.log(typeof data.egg.eggLaidDate)
+
     try {
-      await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
-        values
-      );
-      form.reset();
-      router.refresh();
-      // window.location.reload();
+      if (data && data.egg) {
+        await axios.patch(
+          `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
+          values
+        );
+        form.reset();
+        router.refresh();
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -147,7 +150,8 @@ const AddBirdChildForm = () => {
                                 onValueChange={(value) => {
                                   field.onChange(value);
                                   setIsDisabled(
-                                    value === "In development" || value === "Broken"
+                                    value === "In development" ||
+                                    value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -266,7 +270,7 @@ const AddBirdChildForm = () => {
                         name="hatchDate"
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
-                            <FormLabel>Date of birth</FormLabel>
+                            <FormLabel>Ngày sinh</FormLabel>
                             <Popover>
                               <PopoverTrigger asChild>
                                 <FormControl>
@@ -285,13 +289,17 @@ const AddBirdChildForm = () => {
                                   </Button>
                                 </FormControl>
                               </PopoverTrigger>
-                              <PopoverContent className="w-auto p-0" align="start">
+                              <PopoverContent
+                                className="w-auto p-0"
+                                align="start"
+                              >
                                 <Calendar
                                   mode="single"
                                   selected={field.value}
                                   onSelect={field.onChange}
-                                  disabled={(date: any) =>
-                                    date <= new Date() || date > new Date("2024-01-01")
+                                  disabled={(date) =>
+                                    (parsedDate && date < parsedDate) ||
+                                    date > new Date("2100-01-01")
                                   }
                                   initialFocus
                                 />

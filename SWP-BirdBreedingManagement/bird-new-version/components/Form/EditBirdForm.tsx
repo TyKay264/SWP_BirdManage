@@ -1,9 +1,9 @@
 "use client";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { format, parseISO, parse } from 'date-fns';
+import { format, parseISO, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
@@ -17,13 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 import {
   Dialog,
@@ -49,7 +49,7 @@ import axios from "axios";
 import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useCageA from "@/hooks/useCageA";
-
+import { toast } from "react-toastify";
 
 type BirdtypeCustom = {
   typeId: string;
@@ -78,16 +78,16 @@ const formSchema = z.object({
   cageId: z.string(),
   ageRange: z.string(),
   // mutationRate: z.coerce.number(),
-  mutation: z.string(),
+  mutation: z?.string(),
   weight: z.coerce.number(),
   featherColor: z.string(),
-  image: z.string().optional(),
+  image: z.string(),
 });
 
 const EditBirdForm = () => {
   const { isOpen, type, onClose, data } = useModal();
   const isModalOpen = isOpen && type === "EditBirdForm";
-
+  const { cages, loading } = useCageA();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -95,7 +95,7 @@ const EditBirdForm = () => {
       birdTypeName: "",
       isAlive: true,
       sex: "",
-      hatchDate: "",
+      hatchDate: new Date(),
       cageId: "",
       ageRange: "",
       mutation: "",
@@ -114,9 +114,9 @@ const EditBirdForm = () => {
       form.setValue("featherColor", data.bird.featherColor);
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
-      form.setValue("cageId", data.bird.cage);
+      form.setValue("cageId", data.bird.cageId);
       if (data.bird.hatchDate) {
-        const hatchDate = parse(data.bird.hatchDate, 'd-M-yyyy', new Date());
+        const hatchDate = parse(data.bird.hatchDate, "d-M-yyyy", new Date());
         if (!isNaN(hatchDate.getTime())) {
           form.setValue("hatchDate", hatchDate);
         }
@@ -128,7 +128,6 @@ const EditBirdForm = () => {
     }
   }, [data, form]);
 
-  const { cages } = useCageA();
   // console.log(data.bird.hatchDate)
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
@@ -140,6 +139,9 @@ const EditBirdForm = () => {
           `https://bird-swp.azurewebsites.net/api/birds/${data.bird.birdId}`,
           values
         );
+        toast.success("Cập nhật chim thành công");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        onClose();
         form.reset();
         window.location.reload();
       } catch (error) {
@@ -315,21 +317,33 @@ const EditBirdForm = () => {
                                         variant={"outline"}
                                         className={cn(
                                           "w-[240px] pl-3 text-left font-normal",
-                                          !field.value && "text-muted-foreground"
+                                          !field.value &&
+                                            "text-muted-foreground"
                                         )}
                                       >
-                                        {field.value ? format(new Date(field.value), 'dd-MM-yyyy') : <span>Pick a date</span>}
+                                        {field.value ? (
+                                          format(
+                                            new Date(field.value),
+                                            "dd-MM-yyyy"
+                                          )
+                                        ) : (
+                                          <span>Pick a date</span>
+                                        )}
                                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                       </Button>
                                     </FormControl>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-auto p-0" align="start">
+                                  <PopoverContent
+                                    className="w-auto p-0"
+                                    align="start"
+                                  >
                                     <Calendar
                                       mode="single"
                                       selected={field.value}
                                       onSelect={field.onChange}
                                       disabled={(date: any) =>
-                                        date > new Date() || date < new Date("1900-01-01")
+                                        date > new Date() ||
+                                        date < new Date("1900-01-01")
                                       }
                                       initialFocus
                                     />
@@ -386,7 +400,6 @@ const EditBirdForm = () => {
                           />
                         </div> */}
 
-
                         <div className="form-group w-[48%]">
                           <FormField
                             control={form.control}
@@ -397,7 +410,7 @@ const EditBirdForm = () => {
                                   disabled={isLoading}
                                   onValueChange={(value) => {
                                     field.onChange(value);
-                                    form.setValue("cageId", value);
+                                    // form.setValue("cageId", value);
                                   }}
                                   value={field.value}
                                   defaultValue={field.value}
@@ -415,7 +428,7 @@ const EditBirdForm = () => {
                                           key={cage.cageId}
                                           value={cage.cageId}
                                         >
-                                          {cage.cageId}
+                                          {cage.location}
                                         </SelectItem>
                                       ))}
                                     </SelectGroup>
@@ -427,7 +440,6 @@ const EditBirdForm = () => {
                           />
                         </div>
                       </div>
-
 
                       <div className="form-group">
                         <FormField
@@ -508,7 +520,7 @@ const EditBirdForm = () => {
           </div>
         </div>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 };
 

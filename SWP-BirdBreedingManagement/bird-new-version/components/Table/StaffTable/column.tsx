@@ -44,7 +44,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          ID
+          ID nhân viên
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -59,7 +59,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          username
+          Tài khoản
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -74,7 +74,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          email
+          Email
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -99,7 +99,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
   //   },
   {
     accessorKey: "fullName",
-    header: "Ten",
+    header: "Họ và tên",
   },
 
   //   {

@@ -26,6 +26,7 @@ const ViewProcessForm = () => {
   if (!listEgg) return null;
 
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
+    birdId: item.bird.birdId,
     reproductionId: item.reproductionId,
     eggStatus: item.eggStatus,
     eggLaidDate: item.eggLaidDate,

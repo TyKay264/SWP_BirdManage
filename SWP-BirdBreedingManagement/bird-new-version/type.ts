@@ -37,7 +37,7 @@ export interface Bird {
   mutationRate: number;
   superReproduct: number;
   isAlive: boolean;
-  image?: string;
+  image: string;
   featherColor: string;
   weight: number;
   birdType: Birdtype;
@@ -129,7 +129,8 @@ export type BirdColumn = {
   birdId: string;
   type: string;
   sex: string;
-  cage?: string;
+  cageId: string;
+  location: string;
   hatchDate: string;
   ageRange: string;
   mutation: string;
@@ -162,7 +163,7 @@ export type EggColumn = {
   birdId: string;
   reproductionId: string;
   eggLaidDate?: string;
-  eggStatus?: string;
+  eggStatus: string;
 
   actEggHatchDate?: string;
   actSwingBranch?: string;

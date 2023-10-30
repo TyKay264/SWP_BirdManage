@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
@@ -12,26 +13,22 @@ const Header = () => {
           </div>
           <div className="left-header content-header__menu">
             <ul className="list-unstyled">
-
               <li className="nav-link btn">
-                <a href="/process">
+                <Link href="/process">
                   <i className="far fa-calendar-check" />{" "}
                   <span> Xem quá trình</span>
-                </a>
+                </Link>
               </li>
 
               <li className="nav-link btn">
-                <a href="/add-process">
-                  <i className="far fa-file-alt" />{" "}
-                  <span> Tạo Quá Trình</span>
-                </a>
+                <Link href="/add-process">
+                  <i className="far fa-file-alt" /> <span> Tạo Quá Trình</span>
+                </Link>
               </li>
-
             </ul>
           </div>
           <div className="left-header content-header__menu">
-            <ul className="list-unstyled">
-            </ul>
+            <ul className="list-unstyled"></ul>
           </div>
         </div>
         <div className="header-right">
@@ -40,7 +37,7 @@ const Header = () => {
               <a
                 className="text-dark"
                 href="#!"
-              // onclick="javascript:toggleFullScreen()"
+                // onclick="javascript:toggleFullScreen()"
               >
                 <i className="fas fa-expand" />
               </a>

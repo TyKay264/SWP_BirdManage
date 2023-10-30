@@ -26,6 +26,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type locationType = {
   location: string;
@@ -67,7 +68,7 @@ const EditCageForm = () => {
       // id: "",
       // cageType: "",
       location: "",
-      available: "",
+      available: false,
       quantity: 0,
     },
   });
@@ -76,17 +77,26 @@ const EditCageForm = () => {
     //TO DO xử lý form (api)
     console.log(values);
     console.log(data.cage?.available)
-    try {
-      await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
-        values
-      );
-      form.reset();
-      router.refresh();
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
+
+    if (data && data.cage) {
+      try {
+        await axios.patch(
+          `https://bird-swp.azurewebsites.net/api/cages/${data.cage.cageId}`,
+          values
+        );
+        toast.success("Cập nhật lồng thành công");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        onClose();
+        form.reset();
+        window.location.reload();
+
+        router.refresh();
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
     }
+
   };
   //console.log(data.cage.available)
   useEffect(() => {
@@ -123,7 +133,7 @@ const EditCageForm = () => {
                             <FormItem>
                               <FormLabel>Khu vực</FormLabel>
                               <Select
-                                disabled={isLoading}
+                                disabled={data.cage.quantity !== 0}
                                 onValueChange={field.onChange}
                                 value={field.value}
                                 defaultValue={field.value}
@@ -163,9 +173,13 @@ const EditCageForm = () => {
                               <FormLabel>Tình trạng</FormLabel>
                               <Select
                                 disabled={isLoading}
-                                onValueChange={field.onChange}
-                                value={field.value}
-                                defaultValue={field.value}
+                                onValueChange={(selectedValue: any) => {
+                                  // Convert the selected string value to a boolean
+                                  const newValue = selectedValue === "true";
+                                  form.setValue("available", newValue);
+                                }}
+                                value={field.value ? "true" : "false"}
+                                defaultValue={field.value ? "true" : "false"}
                               >
                                 <FormControl>
                                   <SelectTrigger>

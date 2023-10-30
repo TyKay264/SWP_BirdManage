@@ -13,13 +13,13 @@ export type EggColumn = {
   birdId: string;
   reproductionId: string;
   eggLaidDate?: string;
-  eggStatus?: string;
+  eggStatus: string;
   // actEggHatchDate?: string;
   // actSwingBranch?: string;
   // actAdultBirdDate?: string;
   expEggHatchDate?: string;
   expSwingBranchDate?: string;
-  expAdultBirdDate?: string
+  expAdultBirdDate?: string;
 };
 
 export const columns: ColumnDef<EggColumn>[] = [

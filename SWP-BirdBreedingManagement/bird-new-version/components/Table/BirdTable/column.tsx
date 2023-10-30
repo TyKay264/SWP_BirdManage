@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 
 import Image from "next/image";
+import { Cage } from "@/type";
 
 export type BirdColumn = {
   birdId: string;
-  birdTypeName: string;
+  type: string;
   sex: string;
-  cage?: string;
+  cageId: string;
+  location: string;
   hatchDate: string;
   ageRange: string;
   mutation: string;
@@ -60,7 +62,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
   {
     accessorKey: "type",
     header: ({ column }) => {
-      return <div className="cursor-pointer">Bird Type</div>;
+      return <div className="cursor-pointer">Loài</div>;
     },
   },
   {
@@ -72,7 +74,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Sex
+          Giới tính
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -98,8 +100,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
     //         </div>
     //     ),
     // },
-
-    accessorKey: "cage",
+    accessorKey: "location",
     header: ({ column }) => {
       return (
         <Button
@@ -107,7 +108,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Cage
+          Vị trí lồng
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -122,7 +123,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          hatchDate
+          Ngày nở
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
