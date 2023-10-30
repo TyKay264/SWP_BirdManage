@@ -220,27 +220,73 @@ const AddProcessForm = () => {
 
                               {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
                                 <>
-                                  <Table>
-                                    <TableHeader>
-                                      <TableRow>
-                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
-                                        <TableHead>Tỉ lệ đột biến</TableHead>
-                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
-                                        {/* <TableHead className="text-right">Amount</TableHead> */}
-                                      </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                      {birdTypeProcess1.cock.map((item) => (
-                                        <TableRow key={item.birdId} onClick={() => handleValueChange(item.birdId)
-                                        }>
-                                          <TableCell className="font-medium">{item.birdId}</TableCell>
-                                          <TableCell>{item.mutationRate}%</TableCell>
-                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
-                                          {/* <TableCell className="text-right">{item.superReproduct}</TableCell> */}
+                                  {/* <div className="mt-1" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                                    <Table>
+                                      <TableHeader>
+                                        <TableRow>
+                                          <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                          <TableHead>Tỉ lệ đột biến</TableHead>
+                                          <TableHead>Tỉ lệ sinh sản thành công </TableHead>
+                                          <TableHead className="text-right">Amount</TableHead>
                                         </TableRow>
-                                      ))}
-                                    </TableBody>
-                                  </Table>
+                                      </TableHeader>
+                                      <TableBody>
+                                        {birdTypeProcess1.cock.map((item) => (
+                                          <TableRow key={item.birdId} onClick={() => handleValueChange(item.birdId)}>
+                                            <TableCell className="font-medium">{item.birdId}</TableCell>
+                                            <TableCell>{item.mutationRate}%</TableCell>
+                                            <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
+                                            <TableCell className="text-right">{item.superReproduct}</TableCell>
+                                          </TableRow>
+                                        ))}
+                                      </TableBody>
+                                    </Table>
+                                  </div> */}
+
+                                  <div className="mt-1">
+                                    <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
+                                      <DialogTrigger asChild>
+                                        <Button variant="default">Xem hồ sơ chim</Button>
+                                      </DialogTrigger>
+                                      <DialogContent className="sm:min-w-[500px]">
+                                        <DialogHeader>
+                                          <DialogTitle>Xem hồ sơ chim</DialogTitle>
+                                        </DialogHeader>
+
+                                        {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
+                                          <>
+                                            <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+                                              <Table>
+                                                <TableHeader>
+                                                  <TableRow>
+                                                    <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                                    <TableHead>Tỉ lệ đột biến</TableHead>
+                                                    <TableHead>Tỉ lệ sinh sản thành công </TableHead>
+                                                  </TableRow>
+                                                </TableHeader>
+                                                <TableBody>
+                                                  {birdTypeProcess1.hen.map((item) => (
+                                                    <TableRow
+                                                      key={item.birdId}
+                                                      onClick={() => handleValueChange1(item.birdId)}
+                                                    >
+                                                      <TableCell className="font-medium">{item.birdId}</TableCell>
+                                                      <TableCell>{item.mutationRate}%</TableCell>
+                                                      <TableCell>
+                                                        {item.superReproduct != null
+                                                          ? `${item.superReproduct}%`
+                                                          : "Chưa có thông tin"}
+                                                      </TableCell>
+                                                    </TableRow>
+                                                  ))}
+                                                </TableBody>
+                                              </Table>
+                                            </div>
+                                          </>
+                                        )}
+                                      </DialogContent>
+                                    </Dialog>
+                                  </div>
                                 </>
                               )}
 
@@ -280,43 +326,7 @@ const AddProcessForm = () => {
                             </FormItem>
                           )}
                         />
-                        {/* <div className="mt-1">
-                          <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
-                            <DialogTrigger asChild>
-                              <Button variant="default">Xem hồ sơ chim</Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:min-w-[800px]">
-                              <DialogHeader>
-                                <DialogTitle>Xem hồ sơ chim</DialogTitle>
-                              </DialogHeader>
 
-                              {selectedBirdType === "Chích chòe than" && birdTypeProcess1 && (
-                                <>
-                                  <Table>
-                                    <TableHeader>
-                                      <TableRow>
-                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
-                                        <TableHead>Tỉ lệ đột biến</TableHead>
-                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
-                                      </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                      {birdTypeProcess1.hen.map((item) => (
-                                        <TableRow key={item.birdId} onClick={() => handleValueChange1(item.birdId)
-                                        }>
-                                          <TableCell className="font-medium">{item.birdId}</TableCell>
-                                          <TableCell>{item.mutationRate}%</TableCell>
-                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
-                                        </TableRow>
-                                      ))}
-                                    </TableBody>
-                                  </Table>
-                                </>
-                              )}
-
-                            </DialogContent>
-                          </Dialog>
-                        </div> */}
                       </div>
                     </>
                   )}
@@ -359,37 +369,42 @@ const AddProcessForm = () => {
                             <DialogTrigger asChild>
                               <Button variant="default">Xem hồ sơ chim</Button>
                             </DialogTrigger>
-                            <DialogContent className="sm:min-w-[800px]">
+                            <DialogContent className="sm:min-w-[500px]">
                               <DialogHeader>
                                 <DialogTitle>Xem hồ sơ chim</DialogTitle>
                               </DialogHeader>
 
                               {selectedBirdType === "Chích chòe lửa" && birdTypeProcess2 && (
                                 <>
-                                  <Table>
-                                    <TableHeader>
-                                      <TableRow>
-                                        <TableHead className="w-[100px]">ID chim đực</TableHead>
-                                        <TableHead>Tỉ lệ đột biến</TableHead>
-                                        <TableHead>Tỉ lệ sinh sản thành công </TableHead>
-                                        {/* <TableHead className="text-right">Amount</TableHead> */}
-                                      </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                      {birdTypeProcess2.cock.map((item) => (
-                                        <TableRow key={item.birdId} onClick={() => handleValueChange(item.birdId)
-                                        }>
-                                          <TableCell className="font-medium">{item.birdId}</TableCell>
-                                          <TableCell>{item.mutationRate}%</TableCell>
-                                          <TableCell>{item.superReproduct != null ? `${item.superReproduct}%` : "Chưa có thông tin"}</TableCell>
-                                          {/* <TableCell className="text-right">{item.superReproduct}</TableCell> */}
+                                  <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+                                    <Table>
+                                      <TableHeader>
+                                        <TableRow>
+                                          <TableHead className="w-[100px]">ID chim đực</TableHead>
+                                          <TableHead>Tỉ lệ đột biến</TableHead>
+                                          <TableHead>Tỉ lệ sinh sản thành công </TableHead>
                                         </TableRow>
-                                      ))}
-                                    </TableBody>
-                                  </Table>
+                                      </TableHeader>
+                                      <TableBody>
+                                        {birdTypeProcess2.cock.map((item) => (
+                                          <TableRow
+                                            key={item.birdId}
+                                            onClick={() => handleValueChange1(item.birdId)}
+                                          >
+                                            <TableCell className="font-medium">{item.birdId}</TableCell>
+                                            <TableCell>{item.mutationRate}%</TableCell>
+                                            <TableCell>
+                                              {item.superReproduct != null
+                                                ? `${item.superReproduct}%`
+                                                : "Chưa có thông tin"}
+                                            </TableCell>
+                                          </TableRow>
+                                        ))}
+                                      </TableBody>
+                                    </Table>
+                                  </div>
                                 </>
                               )}
-
                             </DialogContent>
                           </Dialog>
                         </div>

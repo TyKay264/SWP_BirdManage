@@ -27,6 +27,11 @@ import { Label } from "../ui/label";
 import useCages from "@/hooks/useCage";
 import { FileUpload } from "../FileUpload";
 import { Birdtype } from "@/type";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { Calendar } from "../ui/calendar";
+import { format } from "date-fns";
 
 // const birdtypeMap: Record<string, Birdtype> = {
 //   than: Birdtype,
@@ -61,7 +66,7 @@ const formSchema = z.object({
   birdTypeName: z.string().min(1),
   sex: z.string().min(1),
   isAlive: z?.boolean(),
-  hatchDate: z.string().min(1),
+  hatchDate: z.date(),
   cageId: z.string(),
   ageRange: z.string(),
   //mutationRate: z.coerce.number(),
@@ -250,8 +255,8 @@ const AddBirdForm = () => {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <FormField
+                  <div className="form-group w-[500%]">
+                    {/* <FormField
                       control={form.control}
                       name="hatchDate"
                       render={({ field }) => (
@@ -265,6 +270,47 @@ const AddBirdForm = () => {
                               className="form-control"
                             />
                           </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    /> */}
+                    <FormField
+                      control={form.control}
+                      name="hatchDate"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <FormLabel>Ngày sinh</FormLabel>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant={"outline"}
+                                  className={cn(
+                                    "w-[240px] pl-3 text-left font-normal",
+                                    !field.value && "text-muted-foreground"
+                                  )}
+                                >
+                                  {field.value ? (
+                                    format(field.value, "dd-MM-yyyy")
+                                  ) : (
+                                    <span>Chọn ngày nở</span>
+                                  )}
+                                  {/* <CalendarIcon className="ml-auto h-4 w-4 opacity-50" /> */}
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                disabled={(date) =>
+                                  date > new Date() || date < new Date("1900-01-01")
+                                }
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
                           <FormMessage />
                         </FormItem>
                       )}

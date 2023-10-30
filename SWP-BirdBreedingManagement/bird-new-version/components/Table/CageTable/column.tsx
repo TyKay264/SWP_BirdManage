@@ -13,6 +13,7 @@ export type CageColumn = {
   user?: string;
   location: string;
   quantity: number;
+  available: boolean;
 };
 
 export const columns: ColumnDef<CageColumn>[] = [

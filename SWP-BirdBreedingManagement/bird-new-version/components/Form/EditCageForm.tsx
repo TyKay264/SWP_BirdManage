@@ -51,7 +51,7 @@ const formSchema = z.object({
   // id: z.string().min(4),
   // cageType: z.string(),
   location: z.string(),
-  available: z.boolean(),
+  available: z.coerce.boolean(),
   quantity: z.coerce.number(),
 });
 
@@ -75,6 +75,7 @@ const EditCageForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
+    console.log(data.cage?.available)
     try {
       await axios.patch(
         `https://bird-swp.azurewebsites.net/api/cages/${data.cage?.cageId}`,
@@ -82,14 +83,16 @@ const EditCageForm = () => {
       );
       form.reset();
       router.refresh();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
-
+  //console.log(data.cage.available)
   useEffect(() => {
     if (data && data.cage) {
       form.setValue("location", data.cage.location.charAt(0));
+      form.setValue("available", data?.cage?.available);
     }
   }, [data, form]);
 
@@ -110,7 +113,6 @@ const EditCageForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
-                    {/* <div className="col-xl-4"></div> */}
 
                     <div className="col-xl-12">
                       <div className="form-group">
@@ -119,6 +121,7 @@ const EditCageForm = () => {
                           name="location"
                           render={({ field }) => (
                             <FormItem>
+                              <FormLabel>Khu vực</FormLabel>
                               <Select
                                 disabled={isLoading}
                                 onValueChange={field.onChange}
@@ -150,6 +153,39 @@ const EditCageForm = () => {
                           )}
                         />
                       </div>
+
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="available"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Tình trạng</FormLabel>
+                              <Select
+                                disabled={isLoading}
+                                onValueChange={field.onChange}
+                                value={field.value}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn trạng thái" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    <SelectLabel>Chọn trạng thái</SelectLabel>
+                                    <SelectItem value="true">Khả dụng</SelectItem>
+                                    <SelectItem value="false">Không khả dụng</SelectItem>
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
 
                       <div className="form-group text-right ">
                         <button
