@@ -18,7 +18,7 @@ export type EggColumn = {
   // actSwingBranch?: string;
   // actAdultBirdDate?: string;
   expEggHatchDate?: string;
-  expSwingBranch?: string;
+  expSwingBranchDate?: string;
   expAdultBirdDate?: string
 };
 
@@ -68,7 +68,7 @@ export const columns: ColumnDef<EggColumn>[] = [
     },
   },
   {
-    accessorKey: "expSwingBranch",
+    accessorKey: "expSwingBranchDate",
     header: ({ column }) => {
       return (
         <Button

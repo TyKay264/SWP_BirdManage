@@ -142,8 +142,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     expEggHatchDate: item.expEggHatchDate
       ? format(new Date(item.expEggHatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
-    expSwingBranch: item.expSwingBranch
-      ? format(new Date(item.expSwingBranch), "do-M-yyyy", { locale: vi })
+    expSwingBranchDate: item.expSwingBranchDate
+      ? format(new Date(item.expSwingBranchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
     expAdultBirdDate: item.expAdultBirdDate
       ? format(new Date(item.expAdultBirdDate), "do-M-yyyy", { locale: vi })
