@@ -67,7 +67,7 @@ const EditCageForm = () => {
       // id: "",
       // cageType: "",
       location: "",
-      available: true,
+      available: "",
       quantity: 0,
     },
   });

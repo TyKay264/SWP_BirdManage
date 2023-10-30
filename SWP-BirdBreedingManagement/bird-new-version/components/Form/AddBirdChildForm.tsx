@@ -44,7 +44,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { format, parseISO, parse } from "date-fns";
 
 const formSchema = z.object({
   eggStatus: z.string().min(1),
@@ -52,6 +52,7 @@ const formSchema = z.object({
   hatchDate: z.string(),
   weight: z.coerce.number(),
   image: z.string(),
+  eggLaidDate: z.string()
 });
 
 const AddBirdChildForm = () => {
@@ -72,11 +73,22 @@ const AddBirdChildForm = () => {
       image: "",
       eggStatus: "",
       weight: 0,
+      eggLaidDate: ""
     },
   });
 
   useEffect(() => {
+
     if (data && data.egg) {
+      const customFormat = "dd-MM-yyyy";
+      const parsedDate = parse(data.egg.eggLaidDate, customFormat, new Date());
+
+      if (!isNaN(parsedDate)) {
+        const formattedDate = format(parsedDate, "yyyy-MM-dd");
+        console.log(formattedDate);
+      } else {
+        console.error("Invalid date format:", data.egg.eggLaidDate);
+      }
       form.setValue("eggStatus", data.egg.eggStatus);
     }
   }, [data, form]);
@@ -278,16 +290,14 @@ const AddBirdChildForm = () => {
                                   mode="single"
                                   selected={field.value}
                                   onSelect={field.onChange}
-                                  disabled={(date) =>
-                                    date > new Date() || date < new Date("1900-01-01")
+                                  disabled={(date: any) =>
+                                    date <= new Date() || date > new Date("2024-01-01")
                                   }
                                   initialFocus
                                 />
                               </PopoverContent>
                             </Popover>
-                            <FormDescription>
-                              Your date of birth is used to calculate your age.
-                            </FormDescription>
+
                             <FormMessage />
                           </FormItem>
                         )}
@@ -299,7 +309,7 @@ const AddBirdChildForm = () => {
                           name="weight"
                           render={({ field }) => (
                             <FormItem>
-                              {/* <FormLabel>Khối lượng</FormLabel> */}
+                              <FormLabel>Khối lượng</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Nhập khối lượng"
