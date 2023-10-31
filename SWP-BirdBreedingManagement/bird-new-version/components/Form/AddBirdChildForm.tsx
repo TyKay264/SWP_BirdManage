@@ -52,7 +52,7 @@ const formSchema = z.object({
   hatchDate: z.date(),
   weight: z.coerce.number(),
   image: z.string(),
-  eggLaidDate: z.string()
+  eggLaidDate: z.string(),
 });
 
 const AddBirdChildForm = () => {
@@ -70,16 +70,19 @@ const AddBirdChildForm = () => {
       image: "",
       eggStatus: "",
       weight: 0,
-      eggLaidDate: ""
+      eggLaidDate: "",
     },
   });
   const [parsedDate, setParsedDate] = useState<Date | null>(null);
 
   useEffect(() => {
-
     if (data && data.egg) {
       const customFormat = "dd-MM-yyyy";
-      const parsedDateValue = parse(data.egg.eggLaidDate, customFormat, new Date());
+      const parsedDateValue = parse(
+        data.egg.eggLaidDate,
+        customFormat,
+        new Date()
+      );
       if (!isNaN(parsedDateValue)) {
         setParsedDate(parsedDateValue); // Set the parsed date in state
         form.setValue("eggStatus", data.egg.eggStatus);
@@ -89,7 +92,6 @@ const AddBirdChildForm = () => {
       form.setValue("eggStatus", data.egg.eggStatus);
     }
   }, [data, form]);
-
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
@@ -312,7 +314,6 @@ const AddBirdChildForm = () => {
                           )}
                         />
                       </div>
-
 
                       <div className="form-group">
                         <FormField

@@ -51,14 +51,14 @@ export default function Home() {
                   <WaveChart />
                 </div>
                 <div className="col-lg-4">
-                  <NewBirdList />
+                  <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
                 </div>
                 <div className="col-lg-6">
                   <PieChart
-                  // totalAdult={formatDashboard?.totalAdult ?? 0}
-                  // totalSwingbranch={formatDashboard?.totalSwingbranch ?? 0}
-                  // totalBaby={formatDashboard?.totalBaby ?? 0}
-                  // totalEgg={formatDashboard?.totalEgg ?? 0}
+                    totalAdult={formatDashboard?.totalAdult ?? 0}
+                    totalSwingbranch={formatDashboard?.totalSwingbranch ?? 0}
+                    totalBaby={formatDashboard?.totalBaby ?? 0}
+                    totalEgg={formatDashboard?.totalEgg ?? 0}
                   />
                 </div>
                 <div className="col-lg-6">
