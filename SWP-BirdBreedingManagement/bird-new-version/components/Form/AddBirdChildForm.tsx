@@ -52,7 +52,7 @@ const formSchema = z.object({
   hatchDate: z.date(),
   weight: z.coerce.number(),
   image: z.string(),
-  eggLaidDate: z.string()
+  eggLaidDate: z.string(),
 });
 
 const AddBirdChildForm = () => {
@@ -70,16 +70,19 @@ const AddBirdChildForm = () => {
       image: "",
       eggStatus: "",
       weight: 0,
-      eggLaidDate: ""
+      eggLaidDate: "",
     },
   });
   const [parsedDate, setParsedDate] = useState<Date | null>(null);
 
   useEffect(() => {
-
     if (data && data.egg) {
       const customFormat = "dd-MM-yyyy";
-      const parsedDateValue = parse(data.egg.eggLaidDate, customFormat, new Date());
+      const parsedDateValue = parse(
+        data.egg.eggLaidDate,
+        customFormat,
+        new Date()
+      );
       if (!isNaN(parsedDateValue)) {
         setParsedDate(parsedDateValue); // Set the parsed date in state
         form.setValue("eggStatus", data.egg.eggStatus);
@@ -90,14 +93,13 @@ const AddBirdChildForm = () => {
     }
   }, [data, form]);
 
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    console.log(typeof data.egg.eggLaidDate)
+    console.log(typeof data.egg.eggLaidDate);
     const formatDate = parseISO(data.egg.eggLaidDate);
-    console.log(formatDate)
-    console.log(typeof data.egg.eggLaidDate)
+    console.log(formatDate);
+    console.log(typeof data.egg.eggLaidDate);
 
     try {
       if (data && data.egg) {
@@ -151,7 +153,7 @@ const AddBirdChildForm = () => {
                                   field.onChange(value);
                                   setIsDisabled(
                                     value === "In development" ||
-                                    value === "Broken"
+                                      value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -194,7 +196,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                              // disabled={isDisabled}
+                                // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />
@@ -312,7 +314,6 @@ const AddBirdChildForm = () => {
                           )}
                         />
                       </div>
-
 
                       <div className="form-group">
                         <FormField
