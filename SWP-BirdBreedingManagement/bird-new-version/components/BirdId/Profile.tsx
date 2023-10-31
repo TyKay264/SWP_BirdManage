@@ -161,8 +161,9 @@ const Profile = ({
               <div className="fas fa-venus text-center "></div>
               <div>
                 <div className="text-center break-words ">
+                  ID CHIM BỐ :
                   <Link href={`/bird/${father_id}`}>
-                    ID CHIM BỐ :{father_id}{" "}
+                    {father_id}{" "}
                   </Link>
                 </div>
                 <div className="text-center break-words">
@@ -187,8 +188,9 @@ const Profile = ({
               <div>
                 {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
                 <div className="text-center break-words">
+                  ID CHIM MẸ :
                   <Link href={`/bird/${father_id}`}>
-                    ID CHIM MẸ : {mother_id}{" "}
+                    {mother_id}{" "}
                   </Link>
                 </div>
                 <div className="text-center break-words">
