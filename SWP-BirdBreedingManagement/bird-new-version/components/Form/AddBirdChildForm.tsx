@@ -94,10 +94,10 @@ const AddBirdChildForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    console.log(typeof data.egg.eggLaidDate)
-    const formatDate = parseISO(data.egg.eggLaidDate);
-    console.log(formatDate)
-    console.log(typeof data.egg.eggLaidDate)
+    // console.log(typeof data.egg.eggLaidDate)
+    // const formatDate = parseISO(data.egg.eggLaidDate);
+    // console.log(formatDate)
+    // console.log(typeof data.egg.eggLaidDate)
 
     try {
       if (data && data.egg) {
