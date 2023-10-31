@@ -115,6 +115,19 @@ export interface BirdTypeProccess {
   cock: Bird[];
 }
 
+export interface DashBoard {
+  totalBird: number;
+  totalMutation: number;
+  totalProcess: number;
+  totalEgg: number;
+  totalUser: number;
+  totalAdult: number;
+  totalSwingbranch: number;
+  totalBaby: number;
+  top5Birds: Bird[];
+  totalEggIn7Day?: string;
+}
+
 /******** COLUMN TABLE ********/
 export type StaffColumn = {
   id: string;
