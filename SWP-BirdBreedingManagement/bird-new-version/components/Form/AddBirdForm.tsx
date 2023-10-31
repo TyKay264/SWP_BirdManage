@@ -243,7 +243,7 @@ const AddBirdForm = () => {
                               <SelectGroup>
                                 <SelectLabel>Chọn lứa tuổi</SelectLabel>
                                 <SelectItem value="Non">Non</SelectItem>
-                                <SelectItem value="Chuy">Chuyền</SelectItem>
+                                <SelectItem value="Chuyền">Chuyền</SelectItem>
                                 <SelectItem value="Trưởng thành">
                                   Trưởng thành
                                 </SelectItem>
