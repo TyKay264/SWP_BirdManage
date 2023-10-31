@@ -70,6 +70,7 @@ const BirdIdPage = () => {
                     weight={bird?.weight}
                     featherColor={bird?.featherColor}
                     image={bird?.image}
+
                   />
                 </div>
               </div>

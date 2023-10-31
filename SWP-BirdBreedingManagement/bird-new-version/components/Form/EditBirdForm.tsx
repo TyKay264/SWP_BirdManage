@@ -72,16 +72,15 @@ const formSchema = z.object({
   // birdtype_id: z.string().min(1),
   birdTypeName: z.string().min(1),
   sex: z.string().min(1),
-  isAlive: z?.boolean(),
-  // hatchDate: z.string().min(1),
+  isAlive: z.coerce.boolean(),
   hatchDate: z.date(),
-  cageId: z.string(),
+  cageId: z.string().optional(),
   ageRange: z.string(),
-  // mutationRate: z.coerce.number(),
   mutation: z?.string(),
   weight: z.coerce.number(),
   featherColor: z.string(),
   image: z.string(),
+  status: z.string()
 });
 
 const EditBirdForm = () => {
@@ -93,7 +92,7 @@ const EditBirdForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       birdTypeName: "",
-      isAlive: true,
+      isAlive: false,
       sex: "",
       hatchDate: new Date(),
       cageId: "",
@@ -102,6 +101,7 @@ const EditBirdForm = () => {
       weight: 0,
       featherColor: "",
       image: "",
+      status: ""
     },
   });
 
@@ -110,21 +110,19 @@ const EditBirdForm = () => {
       form.setValue("birdTypeName", data.bird.type);
       form.setValue("ageRange", data.bird.ageRange);
       form.setValue("mutation", data.bird.mutation);
+      form.setValue("isAlive", data?.bird?.isAlive);
       form.setValue("weight", data.bird.weight);
       form.setValue("featherColor", data.bird.featherColor);
       form.setValue("image", data.bird.image);
       form.setValue("sex", data.bird.sex);
       form.setValue("cageId", data.bird.cageId);
+      form.setValue("status", data.bird.status);
       if (data.bird.hatchDate) {
         const hatchDate = parse(data.bird.hatchDate, "d-M-yyyy", new Date());
         if (!isNaN(hatchDate.getTime())) {
           form.setValue("hatchDate", hatchDate);
         }
       }
-      // if (data && data.bird && data.bird.hatchDate) {
-      //   const formattedDate = format(data.bird.hatchDate, 'dd-MM-yyyy');
-      //   form.setValue('hatchDate', formattedDate);
-      // }
     }
   }, [data, form]);
 
@@ -318,7 +316,7 @@ const EditBirdForm = () => {
                                         className={cn(
                                           "w-[240px] pl-3 text-left font-normal",
                                           !field.value &&
-                                            "text-muted-foreground"
+                                          "text-muted-foreground"
                                         )}
                                       >
                                         {field.value ? (
@@ -431,6 +429,79 @@ const EditBirdForm = () => {
                                           {cage.location}
                                         </SelectItem>
                                       ))}
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <div className="form-group">
+                          <FormField
+                            control={form.control}
+                            name="isAlive"
+                            render={({ field }) => (
+                              <FormItem>
+                                <Select
+                                  disabled={isLoading}
+                                  onValueChange={(selectedValue: any) => {
+                                    // Convert the selected string value to a boolean
+                                    const newValue = selectedValue === "true";
+                                    form.setValue("isAlive", newValue);
+                                  }}
+                                  value={field.value ? "true" : "false"}
+                                  defaultValue={field.value ? "true" : "false"}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Chọn trạng thái" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectLabel>Chọn trạng thái</SelectLabel>
+                                      <SelectItem value="true">Còn sống</SelectItem>
+                                      <SelectItem value="false">Đã chết</SelectItem>
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field }) => (
+                              <FormItem>
+                                <Select
+                                  disabled={isLoading}
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  defaultValue={field.value}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Chọn trạng thái" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectLabel>Chọn trạng thái</SelectLabel>
+                                      <SelectItem value="Nghi ngoi">Nghỉ ngơi</SelectItem>
+                                      <SelectItem value="De ban">
+                                        Để bán
+                                      </SelectItem>
+                                      <SelectItem value="Trong sinh san">
+                                        Trong sinh sản
+                                      </SelectItem>
                                     </SelectGroup>
                                   </SelectContent>
                                 </Select>

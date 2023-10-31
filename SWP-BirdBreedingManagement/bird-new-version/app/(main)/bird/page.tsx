@@ -24,6 +24,7 @@ const BirdPage = () => {
     mutationRate: bird?.mutationRate,
     isAlive: bird?.isAlive,
     image: bird.image,
+    status: bird.status,
     featherColor: bird.featherColor,
     weight: bird?.weight,
     hatchDate: bird.hatchDate

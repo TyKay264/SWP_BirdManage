@@ -20,6 +20,9 @@ const formSchema = z.object({
     username: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
+    password: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
 })
 const LoginForm = () => {
     // 1. Define your form.
@@ -27,6 +30,7 @@ const LoginForm = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             username: "",
+            password: ""
         },
     })
 
@@ -49,9 +53,9 @@ const LoginForm = () => {
                             name="username"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel>Tài khoản</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="shadcn" {...field} />
+                                        <Input placeholder="Nhập tài khoản" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -65,9 +69,9 @@ const LoginForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel>Mật khẩu</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="shadcn" {...field} />
+                                        <Input type="password" placeholder="Nhập mật khẩu" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -30,7 +30,7 @@ const NotificationBoard: React.FC<NotificationBoardProps> = ({ reproduction_proc
                                             />
                                         </div> */}
                                         <div className="media-body">
-                                            <h4 className="mb-0">ID vòng chim : {process.cageId}</h4>
+                                            <h4 className="mb-0">ID chim : {process.cageId}</h4>
                                             {/* <div>{bird.birdType.name}</div> */}
                                             <span>{process.pairingDate || "N/A"}</span>
                                         </div>
