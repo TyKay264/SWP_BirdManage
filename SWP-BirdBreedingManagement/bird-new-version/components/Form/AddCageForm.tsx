@@ -47,7 +47,7 @@ const locationsType: locationType[] = [
 const formSchema = z.object({
   // id: z.string().min(4),
   // cageType: z.string(),
-  location: z.string(),
+  location: z.string().min(1),
   // available: z.boolean(),
   // quantity: z.coerce.number(),
 });

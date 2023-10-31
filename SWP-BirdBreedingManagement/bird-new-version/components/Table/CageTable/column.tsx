@@ -13,6 +13,7 @@ export type CageColumn = {
   user?: string;
   location: string;
   quantity: number;
+  available: boolean;
 };
 
 export const columns: ColumnDef<CageColumn>[] = [
@@ -44,7 +45,7 @@ export const columns: ColumnDef<CageColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          ID
+          Mã lồng
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -59,7 +60,7 @@ export const columns: ColumnDef<CageColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          location
+          Vị trí
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -74,7 +75,7 @@ export const columns: ColumnDef<CageColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          quantity
+          Số lượng
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -89,7 +90,7 @@ export const columns: ColumnDef<CageColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          User
+          Người quản lí
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import Noimage from '../public/assets/images/noimage.jpg'
 
 interface BirdInitDetailProps {
   birdId?: string;
@@ -10,11 +11,11 @@ interface BirdInitDetailProps {
   image: string;
   hatchDate?: string;
   mutation?: string;
-  mutationRate?: string;
-  superReproduct?: string;
+  mutationRate?: number;
+  superReproduct?: number;
   isAlive?: string;
   featherColor?: string;
-  weight?: string;
+  weight?: number;
 }
 
 const BirdInitDetail = ({
@@ -30,27 +31,45 @@ const BirdInitDetail = ({
   featherColor,
   weight,
 }: BirdInitDetailProps) => {
+
   return (
-    <div className="w-full  border-2 h-[50%]">
+    <div className="w-full  border-2 h-[50%] ml-2">
       <div className="flex space-x-8">
         <div>
-          <Image
-            src={image}
-            alt="image"
-            height={130}
-            width={130}
-            className="rounded-lg"
-          />
+          {image ?
+            <Image
+              src={image}
+              alt="image"
+              height={130}
+              width={130}
+              className="rounded-lg"
+            /> :
+            <Image
+              src="/assets/images/noimage.jpg"
+              alt="image"
+              height={130}
+              width={130}
+              className="rounded-lg"
+            />}
         </div>
 
         <div className="flex flex-1 justify-between mt-2 ">
           <div className="">
-            <h2>1</h2>
-            <h2>2</h2>
+            <p><strong>ID chim:</strong> {birdId}</p>
+            <p><strong>Giới tính:</strong> {sex == "FEMALE" ? "Mái" : "Trống"}</p>
+            <p><strong>Tỉ lệ đột biến:</strong> {mutationRate != null
+              ? `${mutationRate}%`
+              : "Chưa có thông tin"}</p>
+            <p><strong>Tính trạng đột biến:</strong>   {mutation != null
+              ? `${mutation}%`
+              : "Chưa có thông tin"}</p>
           </div>
           <div className="">
-            <h2>3</h2>
-            <h2>4</h2>
+            <p><strong>Tỉ lệ sinh sản thành công:</strong> {superReproduct != null
+              ? `${superReproduct}%`
+              : "Chưa có thông tin"}</p>
+            <p><strong>Màu lông:</strong> {featherColor}</p>
+            <p><strong>Cân nặng:</strong> {weight} gam</p>
           </div>
         </div>
       </div>

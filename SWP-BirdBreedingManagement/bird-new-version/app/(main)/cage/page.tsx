@@ -16,6 +16,7 @@ const CagePage = () => {
     user: cage?.user?.fullName,
     location: cage.location,
     quantity: cage.quantity,
+    available: cage.available,
   }));
 
   if (!loading)

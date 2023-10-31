@@ -62,7 +62,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
   {
     accessorKey: "type",
     header: ({ column }) => {
-      return <div className="cursor-pointer">Bird Type</div>;
+      return <div className="cursor-pointer">Loài</div>;
     },
   },
   {
@@ -74,7 +74,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Sex
+          Giới tính
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -100,7 +100,6 @@ export const columns: ColumnDef<BirdColumn>[] = [
     //         </div>
     //     ),
     // },
-
     accessorKey: "location",
     header: ({ column }) => {
       return (
@@ -109,7 +108,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Location
+          Vị trí lồng
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -124,7 +123,7 @@ export const columns: ColumnDef<BirdColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          hatchDate
+          Ngày nở
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

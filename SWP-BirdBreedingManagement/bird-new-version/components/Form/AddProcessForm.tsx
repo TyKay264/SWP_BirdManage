@@ -56,7 +56,6 @@ const AddProcessForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       birdTypeName: "",
-      // purpose: "",
       cockId: "",
       henId: "",
       cageId: "",
@@ -175,7 +174,9 @@ const AddProcessForm = () => {
                                         >
                                           <strong>ID:</strong> {item.birdId}{" "}
                                           <strong> - Tỉ lệ đột biến:</strong>{" "}
-                                          {item.mutationRate}%{" "}
+                                          {item.mutationRate != null
+                                            ? `${item.mutationRate}%`
+                                            : "Chưa có thông tin"}{" "}
                                           <strong>
                                             {" "}
                                             - Tỉ lệ sinh sản thành công:
@@ -227,7 +228,9 @@ const AddProcessForm = () => {
                                         >
                                           <strong>ID:</strong> {item.birdId}{" "}
                                           <strong> - Tỉ lệ đột biến:</strong>{" "}
-                                          {item.mutationRate}%{" "}
+                                          {item.mutationRate != null
+                                            ? `${item.mutationRate}%`
+                                            : "Chưa có thông tin"}{" "}
                                           <strong>
                                             {" "}
                                             - Tỉ lệ sinh sản thành công:
@@ -284,7 +287,9 @@ const AddProcessForm = () => {
                                         >
                                           <strong>ID:</strong> {item.birdId}{" "}
                                           <strong> - Tỉ lệ đột biến:</strong>{" "}
-                                          {item.mutationRate}%{" "}
+                                          {item.mutationRate != null
+                                            ? `${item.mutationRate}%`
+                                            : "Chưa có thông tin"}{" "}
                                           <strong>
                                             {" "}
                                             - Tỉ lệ sinh sản thành công:
@@ -336,7 +341,9 @@ const AddProcessForm = () => {
                                         >
                                           <strong>ID:</strong> {item.birdId}{" "}
                                           <strong> - Tỉ lệ đột biến:</strong>{" "}
-                                          {item.mutationRate}%{" "}
+                                          {item.mutationRate != null
+                                            ? `${item.mutationRate}%`
+                                            : "Chưa có thông tin"}{" "}
                                           <strong>
                                             {" "}
                                             - Tỉ lệ sinh sản thành công:
@@ -413,33 +420,58 @@ const AddProcessForm = () => {
           </div>
 
           {selectedBirdType === "Chích chòe than" && (
-            <div className="md:w-[600px] flex-grow-0 flex flex-col justify-between space-y-2  ">
+            <div className="md:w-[600px] flex-grow-0 flex flex-col justify-between space-y-2 ">
               {showInfoBird && selectedBirdCockInfo && (
                 <BirdInitDetail
                   birdId={selectedBirdCockInfo.birdId}
                   image={selectedBirdCockInfo.image}
+                  mutationRate={selectedBirdCockInfo.mutationRate}
+                  mutation={selectedBirdCockInfo.mutation}
+                  superReproduct={selectedBirdCockInfo.superReproduct}
+                  featherColor={selectedBirdCockInfo.featherColor}
+                  weight={selectedBirdCockInfo.weight}
+                  sex={selectedBirdCockInfo.sex}
                 />
               )}
               {showInfoBird && selectedBirdHenInfo && (
                 <BirdInitDetail
                   birdId={selectedBirdHenInfo.birdId}
                   image={selectedBirdHenInfo.image}
+                  mutationRate={selectedBirdHenInfo.mutationRate}
+                  mutation={selectedBirdHenInfo.mutation}
+                  superReproduct={selectedBirdHenInfo.superReproduct}
+                  featherColor={selectedBirdHenInfo.featherColor}
+                  weight={selectedBirdHenInfo.weight}
+                  sex={selectedBirdHenInfo.sex}
                 />
               )}
             </div>
           )}
+
           {selectedBirdType === "Chích chòe lửa" && (
             <div className="md:w-[600px] flex-grow-0 flex flex-col justify-between space-y-2  ">
               {showInfoBird && selectedBirdCockInfo && (
                 <BirdInitDetail
                   birdId={selectedBirdCockInfo.birdId}
                   image={selectedBirdCockInfo.image}
+                  mutationRate={selectedBirdCockInfo.mutationRate}
+                  mutation={selectedBirdCockInfo.mutation}
+                  superReproduct={selectedBirdCockInfo.superReproduct}
+                  featherColor={selectedBirdCockInfo.featherColor}
+                  weight={selectedBirdCockInfo.weight}
+                  sex={selectedBirdCockInfo.sex}
                 />
               )}
               {showInfoBird && selectedBirdHenInfo && (
                 <BirdInitDetail
                   birdId={selectedBirdHenInfo.birdId}
                   image={selectedBirdHenInfo.image}
+                  mutationRate={selectedBirdHenInfo.mutationRate}
+                  mutation={selectedBirdHenInfo.mutation}
+                  superReproduct={selectedBirdHenInfo.superReproduct}
+                  featherColor={selectedBirdHenInfo.featherColor}
+                  weight={selectedBirdHenInfo.weight}
+                  sex={selectedBirdHenInfo.sex}
                 />
               )}
             </div>

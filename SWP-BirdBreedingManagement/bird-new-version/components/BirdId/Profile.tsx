@@ -57,22 +57,22 @@ const Profile = ({
 
               <div className="col-xl-8 ">
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">ID:</label>
+                  <label className="basis-[30%]">ID chim:</label>
                   <div className="grow pl-2.5">{id}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Bird Type:</label>
+                  <label className="basis-[30%]">Loài chim:</label>
                   <div className="grow pl-2.5">{bird_type}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Sex:</label>
+                  <label className="basis-[30%]">Giới tính:</label>
                   <div className="grow pl-2.5">{isMale}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Hatch Date:</label>
+                  <label className="basis-[30%]">Ngày nở:</label>
                   <div className="grow pl-2.5">{hatch_date}</div>
                 </div>
 
@@ -87,7 +87,7 @@ const Profile = ({
                 </div> */}
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%] ">Cage Id:</label>
+                  <label className="basis-[30%] ">Mã lồng:</label>
                   {cageid ? (
                     <div className="grow pl-2.5">{cageid}</div>
                   ) : (
@@ -96,7 +96,7 @@ const Profile = ({
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Alive:</label>
+                  <label className="basis-[30%]">Tình trạng:</label>
                   {isAlive ? (
                     <div className="grow pl-2.5 text-success">Còn sống</div>
                   ) : (
@@ -105,17 +105,17 @@ const Profile = ({
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Age Range:</label>
+                  <label className="basis-[30%]">Lứa tuổi:</label>
                   <div className="grow pl-2.5">{ageRange}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Tỉ lệ con non đã đột biến:</label>
-                  <div className="grow pl-2.5">{mutationRate}</div>
+                  <div className="grow pl-2.5">{mutationRate}%</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Mutation Note:</label>
+                  <label className="basis-[30%]">Tính trạng đột biến:</label>
                   {mutation ? (
                     <div className="grow pl-2.5">{mutation}</div>
                   ) : (
@@ -124,12 +124,12 @@ const Profile = ({
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Weight:</label>
+                  <label className="basis-[30%]">Cân nặng:</label>
                   <div className="grow pl-2.5">{weight} (g)</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Feather Color:</label>
+                  <label className="basis-[30%]">Màu lông:</label>
                   {featherColor ? (
                     <div className="grow pl-2.5">{featherColor}</div>
                   ) : (

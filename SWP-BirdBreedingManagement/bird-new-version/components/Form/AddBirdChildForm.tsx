@@ -44,14 +44,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { format, parseISO, parse } from "date-fns";
 
 const formSchema = z.object({
   eggStatus: z.string().min(1),
   sex: z.string(),
-  hatchDate: z.string(),
+  hatchDate: z.date(),
   weight: z.coerce.number(),
   image: z.string(),
+  eggLaidDate: z.string()
 });
 
 const AddBirdChildForm = () => {
@@ -69,20 +70,35 @@ const AddBirdChildForm = () => {
       image: "",
       eggStatus: "",
       weight: 0,
+      eggLaidDate: ""
     },
   });
+  const [parsedDate, setParsedDate] = useState<Date | null>(null);
 
   useEffect(() => {
+
     if (data && data.egg) {
+      const customFormat = "dd-MM-yyyy";
+      const parsedDateValue = parse(data.egg.eggLaidDate, customFormat, new Date());
+      if (!isNaN(parsedDateValue)) {
+        setParsedDate(parsedDateValue); // Set the parsed date in state
+        form.setValue("eggStatus", data.egg.eggStatus);
+      } else {
+        console.error("Invalid date format:", data.egg.eggLaidDate);
+      }
       form.setValue("eggStatus", data.egg.eggStatus);
     }
   }, [data, form]);
 
-  //console.log(data.egg.eggStatus)
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    //console.log(data.egg.reproductionId)
+    console.log(typeof data.egg.eggLaidDate)
+    const formatDate = parseISO(data.egg.eggLaidDate);
+    console.log(formatDate)
+    console.log(typeof data.egg.eggLaidDate)
+
     try {
       if (data && data.egg) {
         await axios.patch(
@@ -91,7 +107,7 @@ const AddBirdChildForm = () => {
         );
         form.reset();
         router.refresh();
-        // window.location.reload();
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -135,7 +151,7 @@ const AddBirdChildForm = () => {
                                   field.onChange(value);
                                   setIsDisabled(
                                     value === "In development" ||
-                                      value === "Broken"
+                                    value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -178,7 +194,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                                // disabled={isDisabled}
+                              // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />
@@ -248,13 +264,13 @@ const AddBirdChildForm = () => {
                           )}
                         />
                       </div>
-                      {/* 
+
                       <FormField
                         control={form.control}
                         name="hatchDate"
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
-                            <FormLabel>Date of birth</FormLabel>
+                            <FormLabel>Ngày sinh</FormLabel>
                             <Popover>
                               <PopoverTrigger asChild>
                                 <FormControl>
@@ -282,20 +298,18 @@ const AddBirdChildForm = () => {
                                   selected={field.value}
                                   onSelect={field.onChange}
                                   disabled={(date) =>
-                                    date > new Date() ||
-                                    date < new Date("1900-01-01")
+                                    (parsedDate && date < parsedDate) ||
+                                    date > new Date("2100-01-01")
                                   }
                                   initialFocus
                                 />
                               </PopoverContent>
                             </Popover>
-                            <FormDescription>
-                              Your date of birth is used to calculate your age.
-                            </FormDescription>
+
                             <FormMessage />
                           </FormItem>
                         )}
-                      /> */}
+                      />
 
                       <div className="form-group">
                         <FormField
@@ -303,7 +317,7 @@ const AddBirdChildForm = () => {
                           name="weight"
                           render={({ field }) => (
                             <FormItem>
-                              {/* <FormLabel>Khối lượng</FormLabel> */}
+                              <FormLabel>Khối lượng</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Nhập khối lượng"
