@@ -65,18 +65,20 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>Hành động</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => onOpen("ChangeCageForm", { egg: data })}
           >
-            <Edit className="mr-2 h-4 w-4" /> Cập nhật lồng
+            <Edit className="mr-2 h-4 w-4" /> Chuyển lồng
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onOpen("AddBirdChildForm", { egg: data })}
           >
             <Edit className="mr-2 h-4 w-4" /> Cập nhật trạng thái
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Xóa
-          </DropdownMenuItem>
+          {data.birdId && (
+            <DropdownMenuItem onClick={() => router.push(`/bird/${data.birdId}`)}>
+              <Edit className="mr-2 h-4 w-4" /> Xem hồ sơ chim
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </>
