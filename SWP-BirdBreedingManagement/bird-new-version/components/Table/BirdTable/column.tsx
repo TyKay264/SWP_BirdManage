@@ -27,21 +27,41 @@ export type BirdColumn = {
   weight: number;
 };
 export const columns: ColumnDef<BirdColumn>[] = [
+  // {
+  //   id: "Chọn",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={table.getIsAllPageRowsSelected()}
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  // },
   {
-    id: "Chọn",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
+    accessorKey: "image",
+    header: "Ảnh",
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
+      <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
+        {row.original.image ? <Image
+          src={row.original.image}
+          alt="image"
+          fill
+          className="rounded-full"
+        /> : <Image
+          src="/assets/images/download.png"
+          alt="image"
+          fill
+          className="rounded-full"
+        />}
+
+      </div>
     ),
   },
   {
@@ -66,6 +86,12 @@ export const columns: ColumnDef<BirdColumn>[] = [
     },
   },
   {
+    accessorKey: "ageRange",
+    header: ({ column }) => {
+      return <div className="cursor-pointer">Giai đoạn</div>;
+    },
+  },
+  {
     accessorKey: "sex",
     header: ({ column }) => {
       return (
@@ -80,26 +106,8 @@ export const columns: ColumnDef<BirdColumn>[] = [
       );
     },
   },
-  {
-    //     accessorKey: "image",
-    //     header: "Ảnh Bird",
-    //     cell: ({ row }) => (
-    //         <div className="flex items-center justify-center gap-x-2 relative min-h-[50px] w-[60px]">
-    //             {row.original.image ? <Image
-    //                 src={row.original.image}
-    //                 alt="image"
-    //                 fill
-    //                 className="rounded-full"
-    //             /> : <Image
-    //                 src="/assets/images/download.png"
-    //                 alt="image"
-    //                 fill
-    //                 className="rounded-full"
-    //             />}
 
-    //         </div>
-    //     ),
-    // },
+  {
     accessorKey: "location",
     header: ({ column }) => {
       return (
