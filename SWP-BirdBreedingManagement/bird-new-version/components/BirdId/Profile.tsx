@@ -54,8 +54,8 @@ const Profile = ({
             <div className="row">
               <div className="image col-xl-4">
                 <div className="flex justify-center items-center">
-                  <div className="w-[300px] h-[300px] mt-5">
-                    <img src={image} alt="image" className="rounded-md " />
+                  <div className="w-[300px] h-[300px] mt-3">
+                    <img src={image ? image : "/assets/images/noimage.jpg"} alt="image" className="rounded-md " />
                   </div>
                 </div>
               </div>
@@ -118,7 +118,11 @@ const Profile = ({
                   <label className="basis-[30%]">
                     Tỉ lệ con non đã đột biến:
                   </label>
-                  <div className="grow pl-2.5">{mutationRate}%</div>
+                  <div className="grow pl-1.5">{mutationRate ? (
+                    <div className="grow pl-1.5">{mutationRate}%</div>
+                  ) : (
+                    <div className="grow pl-1.5">Không có thông tin</div>
+                  )}</div>
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
@@ -126,7 +130,7 @@ const Profile = ({
                   {mutation ? (
                     <div className="grow pl-2.5">{mutation}</div>
                   ) : (
-                    <div className="grow pl-2.5">Không đột biến</div>
+                    <div className="grow pl-2.5">Không có đột biến</div>
                   )}
                 </div>
 

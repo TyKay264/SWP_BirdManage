@@ -25,6 +25,7 @@ export type BirdColumn = {
   image: string;
   featherColor: string;
   weight: number;
+  status: string;
 };
 export const columns: ColumnDef<BirdColumn>[] = [
   // {

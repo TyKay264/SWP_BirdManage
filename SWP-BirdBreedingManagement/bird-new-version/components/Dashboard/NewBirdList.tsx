@@ -30,9 +30,9 @@ const NewBirdList: React.FC<NewBirdListProps> = ({ top5Birds }) => {
                       />
                     </div>
                     <div className="media-body">
-                      <h4 className="mb-0">ID vòng chim : {bird.birdId}</h4>
+                      <h4 className="mb-0">ID chim : {bird.birdId}</h4>
                       <div>{bird.birdType.name}</div>
-                      <span>{bird.ageRange || "N/A"}</span>
+                      <span>{bird.ageRange || "Không có"}</span>
                     </div>
                   </div>
                   <Link key={bird.birdId} href={`/bird/${bird.birdId}`}>

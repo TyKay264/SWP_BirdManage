@@ -96,10 +96,10 @@ const AddBirdChildForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    console.log(typeof data.egg.eggLaidDate);
-    const formatDate = parseISO(data.egg.eggLaidDate);
-    console.log(formatDate);
-    console.log(typeof data.egg.eggLaidDate);
+    // console.log(typeof data.egg.eggLaidDate)
+    // const formatDate = parseISO(data.egg.eggLaidDate);
+    // console.log(formatDate)
+    // console.log(typeof data.egg.eggLaidDate)
 
     try {
       if (data && data.egg) {
@@ -153,7 +153,7 @@ const AddBirdChildForm = () => {
                                   field.onChange(value);
                                   setIsDisabled(
                                     value === "In development" ||
-                                      value === "Broken"
+                                    value === "Broken"
                                   );
                                 }}
                                 value={field.value}
@@ -196,7 +196,7 @@ const AddBirdChildForm = () => {
                                 endpoint="serverImage"
                                 value={field.value}
                                 onChange={field.onChange}
-                                // disabled={isDisabled}
+                              // disabled={isDisabled}
                               />
                             </FormControl>
                             <FormMessage />

@@ -27,18 +27,18 @@ const BirdCard = ({ birdRole, birdId, image, birdType }: BirdCardProps) => {
                 </div>
                 <div className="media-body">
                   <Link href={`/bird/${birdId}`}>
-                    <h2 className="mb-2">ID vòng: {birdId}</h2>
+                    <h2 className="mb-2">ID chim: {birdId}</h2>
                   </Link>
                   <p className="mb-md-2 mb-sm-4 mb-2">Loại : {birdType}</p>
                   <p className="mb-md-2 mb-sm-4 mb-2">Giới tính : {birdRole}</p>
 
-                  <div className="star-review">
+                  {/* <div className="star-review">
                     <i className="fa fa-star text-orange" />
                     <i className="fa fa-star text-orange" />
                     <i className="fa fa-star text-orange" />
                     <i className="fa fa-star text-orange" />
                     <i className="fa fa-star text-gray" />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -48,7 +48,7 @@ export const columns: ColumnDef<ProcessColumn>[] = [
           className="-ml-6"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          ID
+          ID quá trình
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

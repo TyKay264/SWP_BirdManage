@@ -49,6 +49,7 @@ export interface Bird {
   mother?: Bird;
   birdTypeName: string;
   descendants?: Bird;
+  status: string;
 }
 export interface Cage {
   cageId: string;
@@ -161,6 +162,7 @@ export type BirdColumn = {
   image: string;
   featherColor: string;
   weight: number;
+  status: string;
 };
 
 export type CageColumn = {
