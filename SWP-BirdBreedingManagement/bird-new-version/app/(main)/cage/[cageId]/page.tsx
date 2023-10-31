@@ -269,12 +269,12 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                               <div className="grow pl-2.5 pb-1.5 w-80">
                                 {FindCageById?.reproductionProcess?.pairingDate
                                   ? format(
-                                      new Date(
-                                        FindCageById?.reproductionProcess?.pairingDate
-                                      ),
-                                      "do-M-yyyy",
-                                      { locale: vi }
-                                    )
+                                    new Date(
+                                      FindCageById?.reproductionProcess?.pairingDate
+                                    ),
+                                    "do-M-yyyy",
+                                    { locale: vi }
+                                  )
                                   : "N/A"}
                               </div>
                             </div>
@@ -381,6 +381,20 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                 />
               )}
             </div> */}
+
+            {/* <div className="items widget-4 p-4 mb-4">
+              <div className="bootstrap-media">
+                <div className="d-flex media">
+                  <img className="mr-3 img fluid rounded" width={60} src="" alt=""></img>
+                  <div className="media-body">
+                    <a><h4 className="mt-0 mb-1">MR A</h4></a>
+                    <p>some things</p>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+
+
           </div>
         </div>
       </div>
