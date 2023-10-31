@@ -42,22 +42,22 @@ const BirdIdPage = () => {
                     hatch_date={
                       bird?.hatchDate
                         ? format(new Date(bird?.hatchDate), "do-M-yyyy", {
-                            locale: vi,
-                          })
+                          locale: vi,
+                        })
                         : "Chưa xác định"
                     }
                     swingBranchDate={
                       bird?.swingBranchDate
                         ? format(new Date(bird?.swingBranchDate), "do-M-yyyy", {
-                            locale: vi,
-                          })
+                          locale: vi,
+                        })
                         : "Chưa xác định"
                     }
                     adultBirdDate={
                       bird?.adultBirdDate
                         ? format(new Date(bird?.adultBirdDate), "do-M-yyyy", {
-                            locale: vi,
-                          })
+                          locale: vi,
+                        })
                         : "Chưa xác định"
                     }
                     father_id={bird?.father?.birdId}

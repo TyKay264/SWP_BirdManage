@@ -127,7 +127,13 @@ export interface DashBoard {
   totalSwingbranch: number;
   totalBaby: number;
   top5Birds: Bird[];
-  totalEggIn7Day?: string;
+  totalEggIn7Day: {
+    perDay: {
+      eggLaidDate: string;
+      totalSucessEgg: number;
+      totalFailEgg: number;
+    }[];
+  };
 }
 
 /******** COLUMN TABLE ********/

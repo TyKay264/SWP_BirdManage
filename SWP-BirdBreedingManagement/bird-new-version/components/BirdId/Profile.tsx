@@ -4,6 +4,7 @@ import BirdChild from "../BirdFamilyTree/BirdChild";
 import MainGeneration from "../BirdFamilyTree/MainGeneration";
 import Parent from "../BirdFamilyTree/Parent";
 import NotificationCard from "../CageId/NotificationCard";
+import Link from "next/link";
 
 type BirdType = {
   id?: string;
@@ -164,7 +165,10 @@ const Profile = ({
               <div className="fas fa-venus text-center "></div>
               <div>
                 <div className="text-center break-words ">
-                  ID CHIM BỐ :{father_id}{" "}
+                  ID CHIM BỐ :
+                  <Link href={`/bird/${father_id}`}>
+                    {father_id}{" "}
+                  </Link>
                 </div>
                 <div className="text-center break-words">
                   LOẠI : {bird_type}
@@ -188,7 +192,10 @@ const Profile = ({
               <div>
                 {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
                 <div className="text-center break-words">
-                  ID CHIM MẸ : {mother_id}{" "}
+                  ID CHIM MẸ :
+                  <Link href={`/bird/${father_id}`}>
+                    {mother_id}{" "}
+                  </Link>
                 </div>
                 <div className="text-center break-words">
                   LOẠI : {bird_type}
@@ -210,6 +217,9 @@ const Profile = ({
             <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center ml-[26%] mt-[1%] rounded-[15px] bg-yellow-200">
               <div className="text-center break-words mt-[15%]">
                 ID CHIM : {id}{" "}
+              </div>
+              <div className="text-center break-words">
+                --------------Chim hiện tại------------
               </div>
             </div>
           </div>

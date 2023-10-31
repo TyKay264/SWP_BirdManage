@@ -1,7 +1,8 @@
 "use client";
 import BreadScrum from "@/components/BreadScrum";
 import BoxList from "@/components/Dashboard/BoxList";
-import ColumnChart from "@/components/Dashboard/ColumnChart";
+import ColumnChartCustom from "@/components/Dashboard/ColumnChartCustom";
+// import ColumnChart from "@/components/Dashboard/ColumnChart";
 import NewBirdList from "@/components/Dashboard/NewBirdList";
 import PieChart from "@/components/Dashboard/PieChart";
 import WaveChart from "@/components/Dashboard/WaveChart";
@@ -11,6 +12,9 @@ import SideBar from "@/components/SideBar";
 import useDashBoard from "@/hooks/useDashBoard";
 import { DashBoard } from "@/type";
 import Image from "next/image";
+import React, { PureComponent } from 'react';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 export default function Home() {
   const { dashboard } = useDashBoard();
@@ -48,23 +52,43 @@ export default function Home() {
 
               <div className="row">
                 <div className="col-lg-8">
-                  <WaveChart />
+                  {/* <WaveChart /> */}
+                  <div className="card shadow widget1">
+                    <div className="card-header">
+                      <h4 className="card-title">Thống kê trứng</h4>
+                      <span className="subtitle">7 Ngày gần nhất</span>
+                    </div>
+                    <div className="card-body">
+                      <canvas id="chart1" width="100%" height={40} />
+                      <ColumnChartCustom totalEggIn7Day={formatDashboard.totalEggIn7Day || { perDay: [] }} />
+                    </div>
+                  </div>
+
                 </div>
                 <div className="col-lg-4">
                   <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
                 </div>
-                <div className="col-lg-6">
-                  <PieChart
-                    totalAdult={formatDashboard?.totalAdult ?? 0}
-                    totalSwingbranch={formatDashboard?.totalSwingbranch ?? 0}
-                    totalBaby={formatDashboard?.totalBaby ?? 0}
-                    totalEgg={formatDashboard?.totalEgg ?? 0}
-                  />
+
+                <div className="col-lg-6 h-50">
+                  <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
                 </div>
                 <div className="col-lg-6">
-                  <ColumnChart />
+                  <div className="h-30 w-30">
+                    <div className="">
+                      <PieChart
+                        totalAdult={formatDashboard?.totalAdult ?? 0}
+                        totalSwingbranch={formatDashboard?.totalSwingbranch ?? 0}
+                        totalBaby={formatDashboard?.totalBaby ?? 0}
+                        totalEgg={formatDashboard?.totalEgg ?? 0}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+              </div>{/* kết thúc chia row */}
+
+
+
             </div>
           </div>
         </div>
