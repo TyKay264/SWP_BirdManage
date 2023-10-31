@@ -32,6 +32,8 @@ export interface Bird {
   birdId: string;
   sex: string;
   hatchDate: Date; // Date;
+  swingBranchDate: Date;
+  adultBirdDate: Date;
   ageRange: string;
   mutation: string;
   mutationRate: number;
