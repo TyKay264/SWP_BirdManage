@@ -32,6 +32,8 @@ export interface Bird {
   birdId: string;
   sex: string;
   hatchDate: Date; // Date;
+  swingBranchDate: Date;
+  adultBirdDate: Date;
   ageRange: string;
   mutation: string;
   mutationRate: number;
@@ -113,6 +115,19 @@ export interface BirdTypeProccess {
   lifeExpectancy?: string;
   hen: Bird[];
   cock: Bird[];
+}
+
+export interface DashBoard {
+  totalBird: number;
+  totalMutation: number;
+  totalProcess: number;
+  totalEgg: number;
+  totalUser: number;
+  totalAdult: number;
+  totalSwingbranch: number;
+  totalBaby: number;
+  top5Birds: Bird[];
+  totalEggIn7Day?: string;
 }
 
 /******** COLUMN TABLE ********/

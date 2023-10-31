@@ -9,7 +9,9 @@ type BirdType = {
   id?: string;
   bird_type?: string;
   isMale?: string;
-  hatch_date?: string;
+  hatch_date: string;
+  swingBranchDate: string;
+  adultBirdDate: string;
   father_id?: string;
   mother_id?: string;
   cageid?: string;
@@ -27,6 +29,8 @@ const Profile = ({
   bird_type,
   isMale,
   hatch_date,
+  swingBranchDate,
+  adultBirdDate,
   father_id,
   mother_id,
   cageid,
@@ -110,7 +114,9 @@ const Profile = ({
                 </div>
 
                 <div className="flex justify-between items-center mb-2.5">
-                  <label className="basis-[30%]">Tỉ lệ con non đã đột biến:</label>
+                  <label className="basis-[30%]">
+                    Tỉ lệ con non đã đột biến:
+                  </label>
                   <div className="grow pl-2.5">{mutationRate}%</div>
                 </div>
 
@@ -201,7 +207,6 @@ const Profile = ({
               <div className="text-center break-words mt-[15%]">
                 ID CHIM : {id}{" "}
               </div>
-
             </div>
           </div>
         </div>
@@ -219,7 +224,11 @@ const Profile = ({
         </div> */}
 
         <div className="col-md-6 col-lg-4">
-          <NotificationCard />
+          <NotificationCard
+            hatch_date={hatch_date}
+            swingBranchDate={swingBranchDate}
+            adultBirdDate={adultBirdDate}
+          />
         </div>
       </div>
     </div>
