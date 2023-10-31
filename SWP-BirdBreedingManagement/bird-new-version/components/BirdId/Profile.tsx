@@ -189,7 +189,7 @@ const Profile = ({
                 {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
                 <div className="text-center break-words">
                   ID CHIM MẸ :
-                  <Link href={`/bird/${father_id}`}>
+                  <Link href={`/bird/${mother_id}`}>
                     {mother_id}{" "}
                   </Link>
                 </div>
