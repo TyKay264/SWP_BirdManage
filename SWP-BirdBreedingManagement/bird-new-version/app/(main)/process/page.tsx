@@ -32,6 +32,8 @@ const ProcessPage = () => {
     eggList: process.eggsList,
   }));
 
+
+
   return (
     <>
       <div id="main-wrapper" className="show">

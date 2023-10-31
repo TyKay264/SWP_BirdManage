@@ -15,24 +15,38 @@ import {
 import { useModal } from "@/hooks/useModal";
 import { EggColumn } from "../Table/EggTable/column";
 import EggClient from "../Table/EggTable/EggClient";
+import useCages from "@/hooks/useCage";
+import format from "date-fns/format";
+import vi from "date-fns/locale/vi";
 
 const ViewProcessForm = () => {
+  const { cages, loading } = useCages();
   const { isOpen, type, onClose, data } = useModal();
 
   const listEgg = data.process?.eggList;
 
   const isModalOpen = isOpen && type === "ViewProcessForm";
 
-  if (!listEgg) return null;
-
+  if (!listEgg) {
+    return null;
+  }
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
-    birdId: item.bird.birdId,
+    birdId: item.bird?.birdId,
+    cages: cages,
     reproductionId: item.reproductionId,
-    eggStatus: item.eggStatus,
-    eggLaidDate: item.eggLaidDate,
-    actEggHatchDate: item.actEggHatchDate,
-    actSwingBranch: item.actSwingBranch,
-    actAdultBirdDate: item.actAdultBirdDate,
+    eggStatus: item?.eggStatus,
+    eggLaidDate: item.eggLaidDate
+      ? format(new Date(item.eggLaidDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    expEggHatchDate: item.expEggHatchDate
+      ? format(new Date(item.expEggHatchDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    expSwingBranchDate: item.expSwingBranchDate
+      ? format(new Date(item.expSwingBranchDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    expAdultBirdDate: item.expAdultBirdDate
+      ? format(new Date(item.expAdultBirdDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
   return (
