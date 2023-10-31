@@ -134,6 +134,7 @@ export interface DashBoard {
       totalFailEgg: number;
     }[];
   };
+  reproduction_process: Reproduction_process[];
 }
 
 /******** COLUMN TABLE ********/

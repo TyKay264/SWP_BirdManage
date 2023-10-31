@@ -1,9 +1,11 @@
 "use client";
 import BreadScrum from "@/components/BreadScrum";
+import NotificationCard from "@/components/CageId/NotificationCard";
 import BoxList from "@/components/Dashboard/BoxList";
 import ColumnChartCustom from "@/components/Dashboard/ColumnChartCustom";
 // import ColumnChart from "@/components/Dashboard/ColumnChart";
 import NewBirdList from "@/components/Dashboard/NewBirdList";
+import NotificationBoard from "@/components/Dashboard/NotificationBoard";
 import PieChart from "@/components/Dashboard/PieChart";
 import WaveChart from "@/components/Dashboard/WaveChart";
 import Header from "@/components/Header";
@@ -30,6 +32,7 @@ export default function Home() {
     totalBaby: dashboard?.totalBaby,
     top5Birds: dashboard?.top5Birds,
     totalEggIn7Day: dashboard?.totalEggIn7Day,
+    reproduction_process: dashboard?.reproduction_process
   };
   console.log(formatDashboard.top5Birds);
   return (
@@ -71,6 +74,8 @@ export default function Home() {
 
                 <div className="col-lg-6 h-50">
                   <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
+
+                  <NotificationBoard reproduction_process={formatDashboard?.reproduction_process ?? []} />
                 </div>
                 <div className="col-lg-6">
                   <div className="h-30 w-30">
