@@ -73,9 +73,9 @@ export default function Home() {
                 </div>
 
                 <div className="col-lg-6 h-50">
-                  <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
+                  {/* <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
 
-                  <NotificationBoard reproduction_process={formatDashboard?.reproduction_process ?? []} />
+                  <NotificationBoard reproduction_process={formatDashboard?.reproduction_process ?? []} /> */}
                 </div>
                 <div className="col-lg-6">
                   <div className="h-30 w-30">

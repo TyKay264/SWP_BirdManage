@@ -192,7 +192,6 @@ export type EggColumn = {
   actEggHatchDate?: string;
   actSwingBranch?: string;
   actAdultBirdDate?: string;
-
   expEggHatchDate?: string;
   expSwingBranchDate?: string;
   expAdultBirdDate?: string;
