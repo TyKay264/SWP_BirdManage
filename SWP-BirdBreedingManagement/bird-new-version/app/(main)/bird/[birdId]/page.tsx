@@ -70,6 +70,12 @@ const BirdIdPage = () => {
                     weight={bird?.weight}
                     featherColor={bird?.featherColor}
                     image={bird?.image}
+                    grandfather_father_id={bird?.father?.father?.birdId}
+                    // grandfather_father_hatchDate={bird?.father?.father?.hatchDate}
+
+                    grandfather_mother_id={bird?.mother?.father?.birdId}
+                    grandmother_father_id={bird?.father?.mother?.birdId}
+                    grandmother_mother_id={bird?.mother?.mother?.birdId}
 
                   />
                 </div>
