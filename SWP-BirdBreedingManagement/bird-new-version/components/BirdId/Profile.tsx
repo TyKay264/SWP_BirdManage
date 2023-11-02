@@ -93,8 +93,23 @@ const Profile = ({
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Giới tính:</label>
-                  <div className="grow pl-2.5">{isMale}</div>
+                  <div className="grow pl-2.5">
+                    {isMale === "MALE" ? (
+                      <span>
+                        Chim trống <i className="fas fa-mars" style={{ color: 'blue' }}></i>
+                      </span>
+                    ) : isMale === "FEMALE" ? (
+                      <span>
+                        Chim mái <i className="fas fa-venus" style={{ color: 'red' }}></i>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
+
+
+
 
                 <div className="flex justify-between items-center mb-2.5">
                   <label className="basis-[30%]">Ngày nở:</label>
@@ -150,7 +165,7 @@ const Profile = ({
                   {mutation ? (
                     <div className="grow pl-2.5">{mutation}</div>
                   ) : (
-                    <div className="grow pl-2.5">Không có đột biến</div>
+                    <div className="grow pl-2.5">Chưa xác định</div>
                   )}
                 </div>
 
