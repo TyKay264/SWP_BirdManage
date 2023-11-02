@@ -23,6 +23,16 @@ type BirdType = {
   weight?: number;
   featherColor?: string;
   image?: string;
+  grandfather_father_id?: string;
+
+
+  grandfather_mother_id?: string;
+
+
+  grandmother_father_id?: string;
+
+
+  grandmother_mother_id?: string;
 };
 
 const Profile = ({
@@ -42,6 +52,16 @@ const Profile = ({
   weight,
   featherColor,
   image,
+  grandfather_father_id,
+
+
+  grandfather_mother_id,
+
+
+  grandmother_father_id,
+
+
+  grandmother_mother_id
 }: BirdType) => {
   return (
     <div className="card">
@@ -153,77 +173,135 @@ const Profile = ({
         </div>
       </div>
 
-      <div></div>
-      <div className="card-footer">
+
+      <div className="card">
         {/* <h3 className="card-title text-[red]">Sơ đồ phả hệ ( Family Tree )</h3> */}
         <div className="card-header mt-5">
           <h4 className="mt-3">Thông tin phả hệ</h4>
         </div>
-        <div className="flex align-baseline">
-          <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-blue-300 ">
-            <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
-              <div className="fas fa-venus text-center "></div>
+
+        <div className="flex flex-col items-center space-y-8 my-5">
+          {/* Grandparents Bird */}
+          <div className="flex space-x-8">
+            {/* Father's Father Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {grandfather_father_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Ông nội</div>
+            </div>
+            {/* Mother's Father Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {grandmother_father_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Bà nội</div>
+            </div>
+
+            {/* Father's Mother Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {grandfather_mother_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Ông ngoại</div>
+            </div>
+            {/* Mother's Mother Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {grandmother_mother_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Bà ngoại</div>
+            </div>
+          </div>
+          {/* Line connecting parents to current bird */}
+          <div className="w-1 h-24 bg-black mx-6"></div>
+          {/* Parents Bird */}
+          <div className="flex space-x-8">
+            {/* Father Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {father_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Cha</div>
+            </div>
+            {/* Mother Bird */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                {/* Bird content */}
+                <div>
+                  <div className="text-center break-words">
+                    ID: {mother_id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">Mẹ</div>
+            </div>
+          </div>
+          {/* Line connecting current bird to parents */}
+          <div className="w-1 h-8 bg-black mx-6"></div>
+          {/* Current Bird */}
+          <div className="flex items-center space-x-4">
+            <div className="border border-2 border-black w-48 h-48 rounded-full bg-green-300 flex items-center justify-center">
+              {/* Bird content */}
               <div>
-                <div className="text-center break-words ">
-                  ID CHIM BỐ :
-                  <Link href={`/bird/${father_id}`}>
-                    {father_id}{" "}
-                  </Link>
+                <div className="text-center break-words">
+                  ID: {id}
                 </div>
                 <div className="text-center break-words">
-                  LOẠI : {bird_type}
+                  LOẠI: {bird_type}
                 </div>
               </div>
             </div>
           </div>
-          {/* className="flex border-t-dashed border-[3px] border-black w-[25%] */}
-          <hr
-            style={{
-              display: "flex",
-              borderTop: "3px dashed black",
-              margin: "0 10px",
-              width: "20%",
-              marginTop: "9%",
-            }}
-          />
-          <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center rounded-[15px] bg-pink-200 ">
-            <div className="flex justify-content-center align-items-center mt-[9%] justify-evenly">
-              <div className="fas fa-mars text-center "></div>
-              <div>
-                {/* //onClick={() => Router.push(`/bird/${ID}`)} */}
-                <div className="text-center break-words">
-                  ID CHIM MẸ :
-                  <Link href={`/bird/${mother_id}`}>
-                    {mother_id}{" "}
-                  </Link>
-                </div>
-                <div className="text-center break-words">
-                  LOẠI : {bird_type}
-                </div>
-              </div>
-            </div>
-          </div>
+          <div className="text-center">Chim hiện tại</div>
         </div>
 
-        <div>
-          <div
-            style={{
-              borderLeft: "1px solid black",
-              height: "15vh",
-              marginLeft: "41%",
-            }}
-          />
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div className="border-t-dashed border-3 border-black w-[30%] h-[125px] justify-content-center align-items-center ml-[26%] mt-[1%] rounded-[15px] bg-yellow-200">
-              <div className="text-center break-words mt-[15%]">
-                ID CHIM : {id}{" "}
-              </div>
-              <div className="text-center break-words">
-                --------------Chim hiện tại------------
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+
       </div>
 
       <div className="row">
@@ -237,7 +315,7 @@ const Profile = ({
           <BirdChild />
         </div> */}
 
-        <div className="col-md-6 col-lg-4">
+        <div className="col-md-6 col-lg-4 mx-5">
           <NotificationCard
             hatch_date={hatch_date}
             swingBranchDate={swingBranchDate}
@@ -245,6 +323,7 @@ const Profile = ({
           />
         </div>
       </div>
+
     </div>
   );
 };
