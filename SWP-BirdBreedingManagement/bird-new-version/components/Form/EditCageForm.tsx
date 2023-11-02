@@ -133,7 +133,7 @@ const EditCageForm = () => {
                             <FormItem>
                               <FormLabel>Khu vực</FormLabel>
                               <Select
-                                disabled={data.cage.quantity !== 0}
+                                disabled={data.cage?.quantity !== 0}
                                 onValueChange={field.onChange}
                                 value={field.value}
                                 defaultValue={field.value}

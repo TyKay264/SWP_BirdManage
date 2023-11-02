@@ -79,7 +79,6 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
             {/* <AddBirdToSingleCage /> */}
 
             <AddBirdToSingleCage
-              cageId={FindCageById?.cageId}
             />
 
             {FindCageById?.bird?.map((item) => (

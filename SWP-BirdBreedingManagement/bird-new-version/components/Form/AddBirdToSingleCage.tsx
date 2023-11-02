@@ -40,13 +40,16 @@ import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useBirdNotCage from "@/hooks/useBirdNotCage";
 import { Button } from "../ui/button";
+import { useParams } from "next/navigation";
 
 
 const formSchema = z.object({
     birdId: z.string(),
 });
 
-const AddBirdToSingleCage = ({ cageId }) => {
+const AddBirdToSingleCage = () => {
+
+    const params = useParams()
 
     const { isOpen, type, onClose, data } = useModal();
     const isModalOpen = isOpen && type === "AddBirdToSingleCage";
@@ -67,7 +70,7 @@ const AddBirdToSingleCage = ({ cageId }) => {
         console.log(values);
         try {
             await axios.post(
-                `https://bird-swp.azurewebsites.net/api/cages/addbird/${cageId}`,
+                `https://bird-swp.azurewebsites.net/api/cages/addbird/${params.cageId}`,
                 values
             );
             form.reset();

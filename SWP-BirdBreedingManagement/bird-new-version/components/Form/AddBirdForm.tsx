@@ -89,7 +89,7 @@ const AddBirdForm = () => {
       birdTypeName: "",
       isAlive: true,
       sex: "",
-      hatchDate: "",
+      hatchDate: new Date(),
       cageId: "",
       ageRange: "",
       //mutationRate: 0,

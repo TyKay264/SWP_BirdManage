@@ -55,7 +55,7 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       number: "",
-      laidDate: "",
+      laidDate: new Date(),
     },
   });
 

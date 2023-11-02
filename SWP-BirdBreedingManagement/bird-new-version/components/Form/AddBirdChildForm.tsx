@@ -83,7 +83,7 @@ const AddBirdChildForm = () => {
         customFormat,
         new Date()
       );
-      if (!isNaN(parsedDateValue)) {
+      if (!isNaN(parsedDateValue.getTime())) {
         setParsedDate(parsedDateValue); // Set the parsed date in state
         form.setValue("eggStatus", data.egg.eggStatus);
       } else {

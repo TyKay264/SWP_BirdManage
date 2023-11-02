@@ -186,7 +186,7 @@ export type ProcessColumn = {
 export type EggColumn = {
   birdId: string;
   reproductionId: string;
-  eggLaidDate?: string;
+  eggLaidDate: string;
   eggStatus: string;
 
   actEggHatchDate?: string;
