@@ -25,16 +25,12 @@ type BirdType = {
   image?: string;
   grandfather_father_id?: string;
 
-
   grandfather_mother_id?: string;
-
 
   grandmother_father_id?: string;
 
-
   grandmother_mother_id?: string;
 };
-
 const Profile = ({
   id,
   bird_type,
@@ -54,16 +50,14 @@ const Profile = ({
   image,
   grandfather_father_id,
 
-
   grandfather_mother_id,
 
-
   grandmother_father_id,
-
 
   grandmother_mother_id
 }: BirdType) => {
   return (
+
     <div className="card">
       <div className="card-header">
         <h4 className="card-title ">Thông tin</h4>
@@ -198,121 +192,127 @@ const Profile = ({
         <div className="flex flex-col items-center space-y-8 my-5">
           {/* Grandparents Bird */}
           <div className="flex space-x-8">
-            {/* Father's Father Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {grandfather_father_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">Ông nội</div>
-            </div>
-            {/* Mother's Father Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {grandmother_father_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
+            {grandfather_father_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {grandfather_father_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
                   </div>
                 </div>
+                <div className="text-center">Ông nội</div>
               </div>
-              <div className="text-center">Bà nội</div>
-            </div>
-
-            {/* Father's Mother Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {grandfather_mother_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
+            )}
+            {grandmother_father_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {grandmother_father_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
                   </div>
                 </div>
+                <div className="text-center">Bà nội</div>
               </div>
-              <div className="text-center">Ông ngoại</div>
-            </div>
-            {/* Mother's Mother Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {grandmother_mother_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
+            )}
+            {grandfather_mother_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {grandfather_mother_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
                   </div>
                 </div>
+                <div className="text-center">Ông ngoại</div>
               </div>
-              <div className="text-center">Bà ngoại</div>
-            </div>
+            )}
+            {grandmother_mother_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {grandmother_mother_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">Bà ngoại</div>
+              </div>
+            )}
           </div>
           {/* Line connecting parents to current bird */}
-          <div className="w-1 h-24 bg-black mx-6"></div>
+          {(grandfather_father_id || grandfather_mother_id) && (
+            <div className="w-1 h-24 bg-black mx-6"></div>
+          )}
           {/* Parents Bird */}
           <div className="flex space-x-8">
-            {/* Father Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {father_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">Cha</div>
-            </div>
-            {/* Mother Bird */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
-                {/* Bird content */}
-                <div>
-                  <div className="text-center break-words">
-                    ID: {mother_id}
-                  </div>
-                  <div className="text-center break-words">
-                    LOẠI: {bird_type}
+            {father_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-blue-300 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {father_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
                   </div>
                 </div>
+                <div className="text-center">Cha</div>
               </div>
-              <div className="text-center">Mẹ</div>
-            </div>
+            )}
+            {mother_id && (
+              <div className="flex flex-col items-center space-y-4">
+                <div className="border border-2 border-black w-48 h-48 rounded-full bg-pink-200 flex items-center justify-center">
+                  <div>
+                    <div className="text-center break-words">
+                      ID: {mother_id}
+                    </div>
+                    <div className="text-center break-words">
+                      LOẠI: {bird_type}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">Mẹ</div>
+              </div>
+            )}
           </div>
           {/* Line connecting current bird to parents */}
-          <div className="w-1 h-8 bg-black mx-6"></div>
+          {(father_id || mother_id) && (
+            <div className="w-1 h-8 bg-black mx-6"></div>
+          )}
           {/* Current Bird */}
           <div className="flex items-center space-x-4">
-            <div className="border border-2 border-black w-48 h-48 rounded-full bg-green-300 flex items-center justify-center">
-              {/* Bird content */}
-              <div>
-                <div className="text-center break-words">
-                  ID: {id}
-                </div>
-                <div className="text-center break-words">
-                  LOẠI: {bird_type}
+            {id && (
+              <div className="border border-2 border-black w-48 h-48 rounded-full bg-green-300 flex items-center justify-center">
+                <div>
+                  <div className="text-center break-words">
+                    ID: {id}
+                  </div>
+                  <div className="text-center break-words">
+                    LOẠI: {bird_type}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="text-center">Chim hiện tại</div>
         </div>
+
+
 
 
 
