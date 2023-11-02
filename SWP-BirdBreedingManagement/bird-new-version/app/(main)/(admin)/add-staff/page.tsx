@@ -1,8 +1,10 @@
 import BreadScrum from "@/components/BreadScrum";
 import AddStaffForm from "@/components/Form/AddStaffForm";
+import { useAuth } from "@/context/authContext";
 import React from "react";
 
 const AddStaffPage = () => {
+  // const { login, logout, user } = useAuth();
   return (
     <div id="main-wrapper" className="show">
       <div className="content-body">

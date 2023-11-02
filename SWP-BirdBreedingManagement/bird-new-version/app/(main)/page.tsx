@@ -11,6 +11,7 @@ import WaveChart from "@/components/Dashboard/WaveChart";
 import Header from "@/components/Header";
 import NavHeader from "@/components/NavHeader";
 import SideBar from "@/components/SideBar";
+import { useAuth } from "@/context/authContext";
 import useDashBoard from "@/hooks/useDashBoard";
 import { DashBoard } from "@/type";
 import Image from "next/image";
@@ -20,6 +21,8 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 
 export default function Home() {
   const { dashboard } = useDashBoard();
+
+
 
   const formatDashboard = {
     totalBird: dashboard?.totalBird,

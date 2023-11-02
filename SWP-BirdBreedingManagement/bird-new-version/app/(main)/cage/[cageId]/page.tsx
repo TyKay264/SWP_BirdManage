@@ -18,6 +18,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const { cages, loading } = useCages();
@@ -26,10 +27,10 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
   //Data for process' info
   const failEggs = FindCageById?.birdReproduction?.filter(
-    (item) => item.eggStatus === "Broken"
+    (item) => item.eggStatus === "Hỏng"
   );
   const hatchedEggs = FindCageById?.birdReproduction?.filter(
-    (item) => item.eggStatus === "Hatched"
+    (item) => item.eggStatus === "Đã nở"
   );
 
   const listEgg = FindCageById?.birdReproduction?.filter(
@@ -74,6 +75,13 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               subTitle1="Tất Cả Lồng"
               subTitle2="Thông Tin Lồng"
             />
+
+            {/* <AddBirdToSingleCage /> */}
+
+            <AddBirdToSingleCage
+              cageId={FindCageById?.cageId}
+            />
+
             {FindCageById?.bird?.map((item) => (
               <BirdCard
                 key={item.birdId}

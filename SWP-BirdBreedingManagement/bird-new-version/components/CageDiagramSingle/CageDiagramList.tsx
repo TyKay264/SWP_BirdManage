@@ -4,6 +4,7 @@ import React from "react";
 import AddBirdChildForm from "../Form/AddBirdChildForm";
 import CageDiagramItem from "./CageDiagramItem";
 import { Cage } from "@/type";
+import AddBirdToSingleCage from "../Form/AddBirdToSingleCage";
 
 interface CageDiagramListProps {
   cages: Cage[];
@@ -15,7 +16,6 @@ const CageDiagramList = ({ cages }: CageDiagramListProps) => {
         <div className="widget-media list-doctors best-doctor">
           <div className="timeline row">
             <AddBirdChildForm />
-
             {cages.map((cage) => (
               <CageDiagramItem
                 key={cage.cageId}

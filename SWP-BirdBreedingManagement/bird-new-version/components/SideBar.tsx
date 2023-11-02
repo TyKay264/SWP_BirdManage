@@ -1,7 +1,15 @@
+"use client"
+import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import React from "react";
 
 const SideBar = () => {
+  const { user } = useAuth();
+
+  const isAdmin = user?.role === "ADMIN";
+  const isManager = user?.role === "MANAGER";
+  const isStaff = user?.role === "STAFF";
+
   return (
     <aside className="left-panel nicescroll-box">
       <nav className="navigation">
@@ -13,20 +21,25 @@ const SideBar = () => {
             </Link>
           </li>
 
+          {/* {isAdmin && ( */}
           <li className="has-submenu">
             <Link href="#" className="has-arrow mm-collapsed">
               <i className="fas fa-user-md" />
               <span className="nav-label">Nhân viên</span>
             </Link>
             <ul className="list-unstyled mm-collapse">
-              <li>
-                <Link href="/add-staff">Thêm nhân viên</Link>
-              </li>
+              {isAdmin && (
+                <li>
+                  <Link href="/add-staff">Thêm nhân viên</Link>
+                </li>
+              )}
               <li>
                 <Link href="/staff">Tất cả nhân viên</Link>
               </li>
             </ul>
           </li>
+          {/* )} */}
+
           <li className="has-submenu">
             <Link href="#" className="has-arrow mm-collapsed">
               <i className="fas fa-crow" />

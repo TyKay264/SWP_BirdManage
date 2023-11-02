@@ -9,7 +9,8 @@ export type ModalStyle =
   | "AddEggForm"
   | "AddBirdChildForm"
   | "ViewProcessForm"
-  | "ChangeCageForm";
+  | "ChangeCageForm"
+  | "AddBirdToSingleCage";
 
 interface ModalData {
   bird?: BirdColumn;

@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthProvider } from "@/context/authContext";
 import React, { useEffect, useState } from "react";
 import "./globals.css";
 
@@ -556,7 +557,12 @@ export default function RootLayout({
             </div>
           </div>
         ) : (
-          <div>{children}</div>
+          <div>
+            <AuthProvider>
+
+              {children}
+            </AuthProvider>
+          </div>
         )}
       </body>
     </html>

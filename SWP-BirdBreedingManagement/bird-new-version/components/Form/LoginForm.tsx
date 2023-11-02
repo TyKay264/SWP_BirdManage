@@ -2,7 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
+import * as z from "zod";
+import axios from "axios";
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -15,6 +17,9 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useAuth } from "@/context/authContext";
+import { useRouter } from "next/navigation";
+
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -25,6 +30,10 @@ const formSchema = z.object({
     }),
 })
 const LoginForm = () => {
+    const { login, user, logout } = useAuth();
+    console.log(user);
+
+    const router = useRouter()
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -35,11 +44,10 @@ const LoginForm = () => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
-    }
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        await login(values.username, values.password);
+        router.push("/")
+    };
 
     return (
         <div className="">

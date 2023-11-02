@@ -1,7 +1,11 @@
+'use client'
+
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NavHeader from "@/components/NavHeader";
 import SideBar from "@/components/SideBar";
+import { useAuth } from "@/context/authContext";
+import { useRouter } from "next/navigation";
 import ModalProvider from "@/provider/modal-provider";
 import ToastProvider from "@/provider/toast-provider";
 
@@ -12,6 +16,13 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  const router = useRouter();
+  const { user } = useAuth()
+
+  if (!user) {
+    router.push('/login-in')
+  }
   return (
     <div>
       <ToastProvider />

@@ -26,6 +26,7 @@ const CageDiagramItem = ({
   return (
     <div className="col-sm-6 col-lg-4">
       <Link href={`/cage/${cageId}`}>
+
         <div className="timeline-panel card p-4 mb-4">
           <div className="flex justify-between items-center mx-8">
             <div className="flex relative">

@@ -152,8 +152,8 @@ const AddBirdChildForm = () => {
                                 onValueChange={(value) => {
                                   field.onChange(value);
                                   setIsDisabled(
-                                    value === "In development" ||
-                                    value === "Broken"
+                                    value === "Đang phát triển" ||
+                                    value === "Hỏng"
                                   );
                                 }}
                                 value={field.value}
@@ -170,11 +170,11 @@ const AddBirdChildForm = () => {
                                     <SelectLabel>
                                       Cập nhật tình trạng trứng
                                     </SelectLabel>
-                                    <SelectItem value="Broken">Hỏng</SelectItem>
-                                    <SelectItem value="In development">
+                                    <SelectItem value="Hỏng">Hỏng</SelectItem>
+                                    <SelectItem value="Đang phát triển">
                                       Đang phát triển
                                     </SelectItem>
-                                    <SelectItem value="Hatched">
+                                    <SelectItem value="Đã nở">
                                       Đã nở
                                     </SelectItem>
                                   </SelectGroup>
@@ -302,7 +302,7 @@ const AddBirdChildForm = () => {
                                     onSelect={field.onChange}
                                     disabled={(date) =>
                                       (parsedDate && date < parsedDate) ||
-                                      date > new Date("2100-01-01")
+                                      date > new Date()
                                     }
                                     initialFocus
                                   />

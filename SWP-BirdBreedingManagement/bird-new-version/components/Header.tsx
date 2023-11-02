@@ -1,7 +1,10 @@
+"use client"
+import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import React from "react";
 
 const Header = () => {
+  const { user, logout } = useAuth();
   return (
     <div className="header">
       <header className="top-head container-fluid">
@@ -37,7 +40,7 @@ const Header = () => {
               <a
                 className="text-dark"
                 href="#!"
-                // onclick="javascript:toggleFullScreen()"
+              // onclick="javascript:toggleFullScreen()"
               >
                 <i className="fas fa-expand" />
               </a>
@@ -168,8 +171,8 @@ const Header = () => {
               <div className="account-control">
                 <a className="login header-profile" href="#" title="Sign in">
                   <div className="header-info">
-                    <span>Đăng Khoa</span>
-                    <small>Admin</small>
+                    <span>{user?.fullName}</span>
+                    <small>{user?.role}</small>
                   </div>
                   <img
                     src="https://via.placeholder.com/150/f8f8f8/2b2b2b"
@@ -178,17 +181,17 @@ const Header = () => {
                 </a>
                 <div className="account-dropdown-form dropdown-container">
                   <div className="form-content">
-                    <a href="doctor-settings.html">
+                    <a href={`/staff/${user?.userId}`}>
                       <i className="far fa-user" />
-                      <span className="ml-2">Profile</span>
+                      <span className="ml-2">Hồ sơ</span>
                     </a>
-                    <a href="#">
+                    {/* <a href="#">
                       <i className="far fa-envelope" />
                       <span className="ml-2">Inbox</span>
-                    </a>
+                    </a> */}
                     <a href="/login-in">
                       <i className="fas fa-sign-in-alt" />
-                      <span className="ml-2">Logout </span>
+                      <span className="ml-2" onClick={logout}>Logout</span>
                     </a>
                   </div>
                 </div>

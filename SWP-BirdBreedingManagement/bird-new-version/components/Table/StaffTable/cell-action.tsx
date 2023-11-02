@@ -17,12 +17,15 @@ import { StaffColumn, columns } from "./column";
 import { AlertModal } from "@/components/modals/alert-model";
 import axios from "axios";
 import { useModal } from "@/hooks/useModal";
+import { useAuth } from "@/context/authContext";
 
 interface CellActionProps {
   data: StaffColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+  const { user } = useAuth();
+  const isAdmin = user?.role === "ADMIN";
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -44,12 +47,13 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-          <DropdownMenuItem
-            onClick={() => onOpen("EditStaffForm", { staff: data })}
-          >
-            <Edit className="mr-2 h-4 w-4" /> Chỉnh xửa
-          </DropdownMenuItem>
+          {isAdmin && (
+            <DropdownMenuItem
+              onClick={() => onOpen("EditStaffForm", { staff: data })}
+            >
+              <Edit className="mr-2 h-4 w-4" /> Chỉnh xửa
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem onClick={() => router.push(`staff/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" /> Chi tiết
           </DropdownMenuItem>
