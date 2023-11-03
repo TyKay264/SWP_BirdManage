@@ -27,6 +27,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import useStaffs from "@/hooks/useStaffs";
 
 type locationType = {
   location: string;
@@ -49,11 +50,10 @@ const locationsType: locationType[] = [
 ];
 
 const formSchema = z.object({
-  // id: z.string().min(4),
-  // cageType: z.string(),
   location: z.string(),
   available: z.coerce.boolean(),
   quantity: z.coerce.number(),
+  userId: z.string(),
 });
 
 const EditCageForm = () => {
@@ -61,15 +61,15 @@ const EditCageForm = () => {
   //console.log(data);
   const isModalOpen = isOpen && type === "EditCageForm";
   const router = useRouter();
+  const { staffs } = useStaffs();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // id: "",
-      // cageType: "",
       location: "",
       available: false,
       quantity: 0,
+      userId: "",
     },
   });
 
@@ -199,7 +199,46 @@ const EditCageForm = () => {
                           )}
                         />
                       </div>
-
+                      <div className="form-group">
+                        <FormField
+                          control={form.control}
+                          name="userId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Thêm Nhân Viên Để Quản Lí</FormLabel>
+                              <Select
+                                disabled={isLoading}
+                                onValueChange={(value) => {
+                                  field.onChange(value);
+                                  form.setValue("userId", value);
+                                }}
+                                value={field.value}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Chọn nhân viên" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    <SelectLabel>Chọn nhân viên</SelectLabel>
+                                    {staffs.map((staff) => (
+                                      <SelectItem
+                                        key={staff.userId}
+                                        value={staff.userId}
+                                      >
+                                        {staff.fullName}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
 
                       <div className="form-group text-right ">
                         <button

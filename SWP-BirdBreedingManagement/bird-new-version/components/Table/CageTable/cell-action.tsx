@@ -57,9 +57,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => { }}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
-          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => onOpen("EditCageForm", { cage: data })}
           >
@@ -73,9 +70,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           >
             <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
           </DropdownMenuItem> */}
-          <DropdownMenuItem onClick={() => setOpen(true)}>
+          {/* <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Xóa
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

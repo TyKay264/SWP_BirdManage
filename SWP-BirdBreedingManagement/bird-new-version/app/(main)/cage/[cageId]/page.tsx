@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
 import SeparatePairForm from "@/components/Form/SeparatePairForm";
 import useCageId from "@/hooks/useCageId";
+import AddStaffMangeForm from "@/components/Form/AddStaffManageForm";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   // const { cages, loading } = useCages();
@@ -94,7 +95,11 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               subTitle2="Thông Tin Lồng"
             />
 
-            {/* <AddBirdToSingleCage /> */}
+            <div className="m-2">
+              <AddBirdToSingleCage />
+
+              <AddStaffMangeForm userId={cage?.user?.userId} />
+            </div>
 
             <AddBirdToSingleCage />
 

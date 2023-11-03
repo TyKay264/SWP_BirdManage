@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -32,6 +31,7 @@ const formSchema = z.object({
 })
 const LoginForm = () => {
     const { login, user, logout } = useAuth();
+
     console.log(user);
 
     const router = useRouter()
@@ -67,6 +67,10 @@ const LoginForm = () => {
                         />
                     </div>
 
+                    {form.formState.errors.username && (
+                        <p>{form.formState.errors.username.message}</p>
+                    )}
+
                     <div className="form-group">
                         <FormField
                             control={form.control}
@@ -82,6 +86,11 @@ const LoginForm = () => {
                             )}
                         />
                     </div>
+
+                    {form.formState.errors.password && (
+                        <p>{form.formState.errors.password.message}</p>
+                    )}
+
                     <Button type="submit">Đăng nhập</Button>
                 </form>
             </Form>

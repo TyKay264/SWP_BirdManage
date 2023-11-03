@@ -41,58 +41,65 @@ import { FileUpload } from "../FileUpload";
 import useBirdNotCage from "@/hooks/useBirdNotCage";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
+import useStaffs from "@/hooks/useStaffs";
 
 
 const formSchema = z.object({
-    birdId: z.string(),
+    userId: z.string(),
 });
 
-const AddBirdToSingleCage = () => {
+const AddStaffMangeForm = ({ userId }: any) => {
 
     const params = useParams()
 
     const { isOpen, type, onClose, data } = useModal();
-    const isModalOpen = isOpen && type === "AddBirdToSingleCage";
+    const isModalOpen = isOpen && type === "AddStaffMangeForm";
     // console.log(cageId)
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            birdId: ""
+            userId: ""
         },
     });
 
-    const { birds } = useBirdNotCage();
+    const { staffs } = useStaffs();
+    useEffect(() => {
+        console.log(data)
+        if (data) {
+            form.setValue("userId", userId);
+        }
+    }, [data, form, userId]);
 
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
+        console.log(userId)
         console.log(values);
         try {
-            await axios.post(
-                `https://bird-swp.azurewebsites.net/api/cages/addbird/${params.cageId}`,
+            await axios.patch(
+                `https://bird-swp.azurewebsites.net/api/cages/${params.cageId}`,
                 values
             );
             form.reset();
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
     };
+
+
 
     const isLoading = form.formState.isSubmitting;
 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="mb-2">Thêm chim</Button>
+                <Button variant="success" className="mb-2">Thêm nhân viên</Button>
             </DialogTrigger>
-            <DialogContent className="sm:min-w-[1000px] overflow-y-auto">
+            <DialogContent className="sm:min-w-[1000px] overflow-y-auto" style={{ maxHeight: '80vh' }}>
                 <DialogHeader>
-                    <DialogTitle>Thêm chim</DialogTitle>
-                    {/* <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription> */}
+                    <DialogTitle>Thêm nhân viên</DialogTitle>
                 </DialogHeader>
                 <div className="card">
                     <div className="card-header ">
@@ -108,33 +115,33 @@ const AddBirdToSingleCage = () => {
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
-                                                    name="birdId"
+                                                    name="userId"
                                                     render={({ field }) => (
                                                         <FormItem>
-                                                            <FormLabel>Thêm Chim</FormLabel>
+                                                            <FormLabel>Thêm Nhân Viên Quản Lí</FormLabel>
                                                             <Select
                                                                 disabled={isLoading}
                                                                 onValueChange={(value) => {
                                                                     field.onChange(value);
-                                                                    form.setValue("birdId", value);
+                                                                    form.setValue("userId", value);
                                                                 }}
                                                                 value={field.value}
                                                                 defaultValue={field.value}
                                                             >
                                                                 <FormControl>
                                                                     <SelectTrigger>
-                                                                        <SelectValue placeholder="Chọn chim thêm vào" />
+                                                                        <SelectValue placeholder="Chọn nhân viên" />
                                                                     </SelectTrigger>
                                                                 </FormControl>
                                                                 <SelectContent>
                                                                     <SelectGroup>
-                                                                        <SelectLabel>Chọn chim</SelectLabel>
-                                                                        {birds.map((bird) => (
+                                                                        <SelectLabel>Chọn nhân viên</SelectLabel>
+                                                                        {staffs.map((staff) => (
                                                                             <SelectItem
-                                                                                key={bird.birdId}
-                                                                                value={bird.birdId}
+                                                                                key={staff.userId}
+                                                                                value={staff.userId}
                                                                             >
-                                                                                {bird.birdId}
+                                                                                {staff.fullName}
                                                                             </SelectItem>
                                                                         ))}
                                                                     </SelectGroup>
@@ -152,7 +159,7 @@ const AddBirdToSingleCage = () => {
                                                     type="submit"
                                                     className="btn btn-primary float-end"
                                                 >
-                                                    Thêm Chim
+                                                    Thêm Người Quản Lý
                                                 </button>
                                             </div>
                                         </div>
@@ -167,4 +174,4 @@ const AddBirdToSingleCage = () => {
     );
 };
 
-export default AddBirdToSingleCage;
+export default AddStaffMangeForm;
