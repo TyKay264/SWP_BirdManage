@@ -23,8 +23,8 @@ export type EggColumn = {
   eggLaidDate: string;
 
   actEggHatchDate?: string;
-  // actSwingBranch?: string;
-  // actAdultBirdDate?: string;
+  actSwingBranchDate?: string;
+  actAdultBirdDate?: string;
 
   expEggHatchDate?: string;
   expSwingBranchDate?: string;
@@ -63,20 +63,20 @@ export const columns: ColumnDef<EggColumn>[] = [
     },
 
   },
-  {
-    accessorKey: "expEggHatchDate",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="-ml-6 "
-          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
-        >
-          Ngày nở (dự kiến)
-        </Button>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "expEggHatchDate",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         className="-ml-6 "
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+  //       >
+  //         Ngày nở (dự kiến)
+  //       </Button>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "actEggHatchDate",
     header: ({ column }) => {
@@ -86,7 +86,7 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Ngày nở (Thực tế)
+          Ngày nở
         </Button>
       );
     },
@@ -111,22 +111,41 @@ export const columns: ColumnDef<EggColumn>[] = [
                 <TooltipContent>
                   Ngày nở dự kiến
                 </TooltipContent>
+
               </Tooltip>
             </TooltipProvider>
 
-          ) : <div className="w-20 bg-green-300 h-12 rounded-md text-black">
-            <div className="w-full min-h-full flex items-center justify-center">
-              {row.original.actEggHatchDate}
-            </div>
-          </div>}
+          ) :
+            <TooltipProvider >
+              <Tooltip >
+                <TooltipTrigger asChild>
+                  <div className="w-20 bg-green-300 h-12 rounded-md text-black">
+                    <div className="w-full min-h-full flex items-center justify-center">
+                      <span className="">
+                        {row.original.actEggHatchDate}
+                      </span>
+                    </div>
+                  </div >
+                </TooltipTrigger>
+
+                <TooltipContent>
+                  Ngày nở thực tế
+                </TooltipContent>
+
+              </Tooltip>
+            </TooltipProvider>
+          }
+
 
         </>
 
       )
     }
   },
+
+
   {
-    accessorKey: "expSwingBranchDate",
+    accessorKey: "actSwingBranchDate",
     header: ({ column }) => {
       return (
         <Button
@@ -134,13 +153,64 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Chim chuyền (dự kiến)
+          Ngày chuyền cành
         </Button>
       );
     },
+    cell: ({ row }) => {
+
+      const isNotActSwingBranch = row.original.actSwingBranchDate === "N/A"
+      return (
+        <>
+          {isNotActSwingBranch ? (
+            <TooltipProvider >
+              <Tooltip >
+                <TooltipTrigger asChild>
+                  <div className="w-20 bg-yellow-300 h-12 rounded-md text-black">
+                    <div className="w-full min-h-full flex items-center justify-center">
+                      <span className="">
+                        {row.original.expSwingBranchDate}
+                      </span>
+                    </div>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  Ngày thành chim chuyền dự kiến
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+          ) : <TooltipProvider >
+            <Tooltip >
+              <TooltipTrigger asChild>
+                <div className="w-20 bg-green-300 h-12 rounded-md text-black">
+                  <div className="w-full min-h-full flex items-center justify-center">
+                    <span className="">
+                      {row.original.actSwingBranchDate}
+
+                    </span>
+                  </div>
+                </div >
+              </TooltipTrigger>
+
+              <TooltipContent>
+                Ngày trở thành chim chuyền thực tế
+              </TooltipContent>
+
+            </Tooltip>
+          </TooltipProvider>}
+
+
+
+        </>
+
+      )
+    }
   },
+
+
   {
-    accessorKey: "expAdultBirdDate",
+    accessorKey: "actAdultBirdDate",
     header: ({ column }) => {
       return (
         <Button
@@ -148,11 +218,75 @@ export const columns: ColumnDef<EggColumn>[] = [
           className="-ml-6 "
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Trưởng thành (dự kiến)
+          Ngày trưởng thành
         </Button>
       );
     },
+    cell: ({ row }) => {
+
+      const isNotActAdultDate = row.original.actAdultBirdDate === "N/A"
+      return (
+        <>
+          {isNotActAdultDate ? (
+            <TooltipProvider >
+              <Tooltip >
+                <TooltipTrigger asChild>
+                  <div className="w-20 bg-yellow-300 h-12 rounded-md text-black">
+                    <div className="w-full min-h-full flex items-center justify-center">
+                      <span className="">
+                        {row.original.expAdultBirdDate}
+                      </span>
+                    </div>
+                  </div>
+                </TooltipTrigger>
+
+                <TooltipContent>
+                  Ngày chim trưởng thành dự kiến
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+          ) : <TooltipProvider >
+            <Tooltip >
+              <TooltipTrigger asChild>
+                <div className="w-20 bg-green-300 h-12 rounded-md text-black">
+                  <div className="w-full min-h-full flex items-center justify-center">
+                    <span className="">
+                      {row.original.actAdultBirdDate}
+
+                    </span>
+                  </div>
+                </div >
+              </TooltipTrigger>
+
+              <TooltipContent>
+                Ngày chim trưởng thành thực tế
+              </TooltipContent>
+
+            </Tooltip>
+          </TooltipProvider>}
+
+        </>
+
+      )
+    }
   },
+
+
+  // {
+  //   accessorKey: "expAdultBirdDate",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         className="-ml-6 "
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+  //       >
+  //         Trưởng thành (dự kiến)
+  //       </Button>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "eggStatus",
     header: ({ column }) => {

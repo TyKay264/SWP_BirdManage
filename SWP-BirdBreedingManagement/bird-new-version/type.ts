@@ -45,6 +45,8 @@ export interface Bird {
   birdType: Birdtype;
   cage: Cage;
   actEggHatchDate?: string; // Date;
+  actSwingBranchDate?: string; // Date;
+  actAdultBirdDate?: string; // Date;
   cageId?: string;
   father?: Bird;
   mother?: Bird;

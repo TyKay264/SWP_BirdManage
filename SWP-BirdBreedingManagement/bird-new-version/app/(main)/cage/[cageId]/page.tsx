@@ -189,6 +189,12 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     actEggHatchDate: item.bird?.actEggHatchDate
       ? format(new Date(item.bird?.actEggHatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
+    actSwingBranchDate: item.bird?.actSwingBranchDate
+      ? format(new Date(item.bird?.actSwingBranchDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    actAdultBirdDate: item.bird?.actAdultBirdDate
+      ? format(new Date(item.bird?.actAdultBirdDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
   return (
