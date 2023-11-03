@@ -65,9 +65,10 @@ const SeparatePairForm = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
         console.log(values);
+        console.log(params.cageId)
         //console.log(params.cageId)
         try {
-            await axios.patch(
+            await axios.post(
                 `https://bird-swp.azurewebsites.net/api/reproductionprocess/separate/${params.cageId}`,
                 values
             );

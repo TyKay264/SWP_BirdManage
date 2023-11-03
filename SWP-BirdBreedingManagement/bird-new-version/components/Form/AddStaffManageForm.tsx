@@ -95,11 +95,11 @@ const AddStaffMangeForm = ({ userId }: any) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="success" className="mb-2">Thêm nhân viên</Button>
+                <Button variant="success" className="mb-2">Cập nhật nhân viên</Button>
             </DialogTrigger>
             <DialogContent className="sm:min-w-[1000px] overflow-y-auto" style={{ maxHeight: '80vh' }}>
                 <DialogHeader>
-                    <DialogTitle>Thêm nhân viên</DialogTitle>
+                    <DialogTitle>Cập nhật nhân viên</DialogTitle>
                 </DialogHeader>
                 <div className="card">
                     <div className="card-header ">
@@ -118,7 +118,7 @@ const AddStaffMangeForm = ({ userId }: any) => {
                                                     name="userId"
                                                     render={({ field }) => (
                                                         <FormItem>
-                                                            <FormLabel>Thêm Nhân Viên Quản Lí</FormLabel>
+                                                            <FormLabel>Cập Nhật Nhân Viên Quản Lí</FormLabel>
                                                             <Select
                                                                 disabled={isLoading}
                                                                 onValueChange={(value) => {

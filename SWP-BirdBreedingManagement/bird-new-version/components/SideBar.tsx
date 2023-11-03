@@ -21,7 +21,7 @@ const SideBar = () => {
             </Link>
           </li>
 
-          {isAdmin && (
+          {!isStaff && (
             <li className="has-submenu">
               <Link href="#" className="has-arrow mm-collapsed">
                 <i className="fas fa-user-md" />

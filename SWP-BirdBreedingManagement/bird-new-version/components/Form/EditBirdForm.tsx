@@ -80,7 +80,7 @@ const formSchema = z.object({
   weight: z.coerce.number(),
   featherColor: z.string(),
   image: z.string(),
-  status: z.string()
+  status: z.string().optional(),
 });
 
 const EditBirdForm = () => {

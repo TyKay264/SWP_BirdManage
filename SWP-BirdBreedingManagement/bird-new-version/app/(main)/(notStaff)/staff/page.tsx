@@ -13,6 +13,7 @@ import { useAuth } from "@/context/authContext";
 const StaffPage = () => {
   const { user } = useAuth();
   const isAdmin = user?.role === "ADMIN";
+  const isStaff = user?.role === "STAFF";
   // step 1 -> data
   const { staffs, loading } = useStaffs();
   // console.log(staffs)

@@ -101,7 +101,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               <AddStaffMangeForm userId={cage?.user?.userId} />
             </div>
 
-            <AddBirdToSingleCage />
+            {/* <AddBirdToSingleCage /> */}
 
             <div className="row">
               {cage?.bird?.map((item) => (
