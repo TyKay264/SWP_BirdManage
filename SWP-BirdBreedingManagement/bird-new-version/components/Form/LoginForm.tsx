@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 const formSchema = z.object({
@@ -31,6 +32,8 @@ const formSchema = z.object({
 })
 const LoginForm = () => {
     const { login, user, logout } = useAuth();
+    const [error, setError] = useState(null);
+
     console.log(user);
 
     const router = useRouter()
@@ -47,6 +50,7 @@ const LoginForm = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         await login(values.username, values.password);
         router.push("/")
+
     };
 
     return (
@@ -71,6 +75,10 @@ const LoginForm = () => {
                         />
                     </div>
 
+                    {form.formState.errors.username && (
+                        <p>{form.formState.errors.username.message}</p>
+                    )}
+
                     <div className="form-group">
                         <FormField
                             control={form.control}
@@ -86,7 +94,13 @@ const LoginForm = () => {
                             )}
                         />
                     </div>
+
+                    {form.formState.errors.password && (
+                        <p>{form.formState.errors.password.message}</p>
+                    )}
+
                     <Button type="submit">Đăng nhập</Button>
+                    {error && <p>{error}</p>}
                 </form>
             </Form>
         </div>

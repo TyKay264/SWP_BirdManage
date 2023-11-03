@@ -41,28 +41,29 @@ import { FileUpload } from "../FileUpload";
 import useBirdNotCage from "@/hooks/useBirdNotCage";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
+import useStaffs from "@/hooks/useStaffs";
 
 
 const formSchema = z.object({
-    birdId: z.string(),
+    fullName: z.string(),
 });
 
-const AddBirdToSingleCage = () => {
+const AddStaffMangeForm = () => {
 
     const params = useParams()
 
     const { isOpen, type, onClose, data } = useModal();
-    const isModalOpen = isOpen && type === "AddBirdToSingleCage";
+    const isModalOpen = isOpen && type === "AddStaffMangeForm";
     // console.log(cageId)
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            birdId: ""
+            fullName: ""
         },
     });
 
-    const { birds } = useBirdNotCage();
+    const { staffs } = useStaffs();
 
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -108,7 +109,7 @@ const AddBirdToSingleCage = () => {
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
-                                                    name="birdId"
+                                                    name="userId"
                                                     render={({ field }) => (
                                                         <FormItem>
                                                             <FormLabel>Thêm Chim</FormLabel>
@@ -116,7 +117,7 @@ const AddBirdToSingleCage = () => {
                                                                 disabled={isLoading}
                                                                 onValueChange={(value) => {
                                                                     field.onChange(value);
-                                                                    form.setValue("birdId", value);
+                                                                    form.setValue("userId", value);
                                                                 }}
                                                                 value={field.value}
                                                                 defaultValue={field.value}
@@ -129,12 +130,12 @@ const AddBirdToSingleCage = () => {
                                                                 <SelectContent>
                                                                     <SelectGroup>
                                                                         <SelectLabel>Chọn chim</SelectLabel>
-                                                                        {birds.map((bird) => (
+                                                                        {staffs.map((staff) => (
                                                                             <SelectItem
-                                                                                key={bird.birdId}
-                                                                                value={bird.birdId}
+                                                                                key={staff.fullName}
+                                                                                value={staff.fullName}
                                                                             >
-                                                                                {bird.birdId}
+                                                                                {staff.fullName}
                                                                             </SelectItem>
                                                                         ))}
                                                                     </SelectGroup>
@@ -152,7 +153,7 @@ const AddBirdToSingleCage = () => {
                                                     type="submit"
                                                     className="btn btn-primary float-end"
                                                 >
-                                                    Thêm Chim
+                                                    Thêm Người Quản Lý
                                                 </button>
                                             </div>
                                         </div>
@@ -167,4 +168,4 @@ const AddBirdToSingleCage = () => {
     );
 };
 
-export default AddBirdToSingleCage;
+export default AddStaffMangeForm;

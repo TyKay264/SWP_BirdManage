@@ -12,7 +12,8 @@ export type ModalStyle =
   | "ChangeCageForm"
   | "AddBirdToSingleCage"
   | "MoveCageForm"
-  | "SeparatePair";
+  | "SeparatePair"
+  | "AddStaffMangeForm";
 
 interface ModalData {
   bird?: BirdColumn;
