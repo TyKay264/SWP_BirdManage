@@ -8,8 +8,11 @@ import { StaffColumn } from "@/components/Table/StaffTable/column";
 
 import React from "react";
 import Loading from "@/components/LoadingComponent";
+import { useAuth } from "@/context/authContext";
 
 const StaffPage = () => {
+  const { user } = useAuth();
+  const isAdmin = user?.role === "ADMIN";
   // step 1 -> data
   const { staffs, loading } = useStaffs();
   // console.log(staffs)
@@ -49,14 +52,17 @@ const StaffPage = () => {
                         <div className="col-8">
                           <h4 className="card-title"> Danh Sách Nhân Viên</h4>
                         </div>
-                        <div className="col-4 float-end">
-                          <a
-                            href="/add-staff"
-                            className="btn btn-primary float-end"
-                          >
-                            Thêm Nhân Viên
-                          </a>
-                        </div>
+                        {isAdmin && (
+                          <div className="col-4 float-end">
+                            <a
+                              href="/add-staff"
+                              className="btn btn-primary float-end"
+                            >
+                              Thêm Nhân Viên
+                            </a>
+                          </div>
+                        )}
+
                       </div>
                     </div>
                     <div className="container">

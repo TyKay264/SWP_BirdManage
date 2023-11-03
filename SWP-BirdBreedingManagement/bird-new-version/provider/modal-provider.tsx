@@ -9,6 +9,8 @@ import ViewProcessForm from "@/components/Form/ViewProcessForm";
 import AddBirdChildForm from "@/components/Form/AddBirdChildForm";
 import ChangeCageForm from "@/components/Form/ChangeCageForm";
 import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
+import MoveCageForm from "@/components/Form/MoveCageForm";
+import SeparatePairForm from "@/components/Form/SeparatePairForm";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -20,7 +22,9 @@ const ModalProvider = () => {
   if (!isMounted) return null;
   return (
     <>
-      <AddBirdToSingleCage />
+      <SeparatePairForm />
+      <MoveCageForm />
+      {/* <AddBirdToSingleCage /> */}
       <ChangeCageForm />
       <EditStaffForm />
       <EditBirdForm />

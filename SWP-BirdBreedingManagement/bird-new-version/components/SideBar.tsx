@@ -21,24 +21,24 @@ const SideBar = () => {
             </Link>
           </li>
 
-          {/* {isAdmin && ( */}
-          <li className="has-submenu">
-            <Link href="#" className="has-arrow mm-collapsed">
-              <i className="fas fa-user-md" />
-              <span className="nav-label">Nhân viên</span>
-            </Link>
-            <ul className="list-unstyled mm-collapse">
-              {isAdmin && (
+          {isAdmin && (
+            <li className="has-submenu">
+              <Link href="#" className="has-arrow mm-collapsed">
+                <i className="fas fa-user-md" />
+                <span className="nav-label">Nhân viên</span>
+              </Link>
+              <ul className="list-unstyled mm-collapse">
+                {isAdmin && (
+                  <li>
+                    <Link href="/add-staff">Thêm nhân viên</Link>
+                  </li>
+                )}
                 <li>
-                  <Link href="/add-staff">Thêm nhân viên</Link>
+                  <Link href="/staff">Tất cả nhân viên</Link>
                 </li>
-              )}
-              <li>
-                <Link href="/staff">Tất cả nhân viên</Link>
-              </li>
-            </ul>
-          </li>
-          {/* )} */}
+              </ul>
+            </li>
+          )}
 
           <li className="has-submenu">
             <Link href="#" className="has-arrow mm-collapsed">

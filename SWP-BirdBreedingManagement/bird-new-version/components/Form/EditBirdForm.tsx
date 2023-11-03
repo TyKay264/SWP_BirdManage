@@ -76,7 +76,7 @@ const formSchema = z.object({
   hatchDate: z.date(),
   cageId: z.string().optional(),
   ageRange: z.string(),
-  mutation: z?.string(),
+  mutation: z?.string().optional(),
   weight: z.coerce.number(),
   featherColor: z.string(),
   image: z.string(),

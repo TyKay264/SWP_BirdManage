@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
+import SeparatePairForm from "@/components/Form/SeparatePairForm";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   const { cages, loading } = useCages();
@@ -54,6 +55,20 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
       //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
       await axios.patch(
         `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${FindCageById?.reproductionProcess?.processId}`
+      );
+      // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
+
+      router.push("/cage-diagram");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = async () => {
+    try {
+      //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
+      await axios.patch(
+        `https://bird-swp.azurewebsites.net/api/reproductionprocess/separate/${FindCageById?.reproductionProcess?.processId}`
       );
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 
@@ -183,6 +198,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
               birdId={item.bird?.birdId}
               image={item.bird?.image}
               birdType={item.bird?.birdType?.name}
+            // sex={item.bird?.sex}
             />
           ))}
 
@@ -261,11 +277,17 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     aria-labelledby="profile-tab"
                   >
                     <div className="card m-t-30">
-                      <div className="text-center mt-3 m-3">
-                        <Button variant="destructive" onClick={handleRemove}>
-                          Kết thúc quá trình
-                        </Button>
+                      <div className="flex text-center">
+                        <div className="text-center mt-3 m-3">
+                          <Button variant="destructive" onClick={handleRemove}>
+                            Kết thúc quá trình
+                          </Button>
+                        </div>
+                        <div className="text-center m-3">
+                          <SeparatePairForm />
+                        </div>
                       </div>
+
                       <div className="card-body">
                         <p className=" flex justify-between">
                           <div>
