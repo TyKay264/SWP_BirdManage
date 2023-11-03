@@ -45,10 +45,10 @@ import useStaffs from "@/hooks/useStaffs";
 
 
 const formSchema = z.object({
-    fullName: z.string(),
+    userId: z.string(),
 });
 
-const AddStaffMangeForm = () => {
+const AddStaffMangeForm = ({ userId }: any) => {
 
     const params = useParams()
 
@@ -59,41 +59,47 @@ const AddStaffMangeForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            fullName: ""
+            userId: ""
         },
     });
 
     const { staffs } = useStaffs();
+    useEffect(() => {
+        console.log(data)
+        if (data) {
+            form.setValue("userId", userId);
+        }
+    }, [data, form, userId]);
 
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         //TO DO xử lý form (api)
+        console.log(userId)
         console.log(values);
         try {
-            await axios.post(
-                `https://bird-swp.azurewebsites.net/api/cages/addbird/${params.cageId}`,
+            await axios.patch(
+                `https://bird-swp.azurewebsites.net/api/cages/${params.cageId}`,
                 values
             );
             form.reset();
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
     };
+
+
 
     const isLoading = form.formState.isSubmitting;
 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="mb-2">Thêm chim</Button>
+                <Button variant="success" className="mb-2">Thêm nhân viên</Button>
             </DialogTrigger>
-            <DialogContent className="sm:min-w-[1000px] overflow-y-auto">
+            <DialogContent className="sm:min-w-[1000px] overflow-y-auto" style={{ maxHeight: '80vh' }}>
                 <DialogHeader>
-                    <DialogTitle>Thêm chim</DialogTitle>
-                    {/* <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription> */}
+                    <DialogTitle>Thêm nhân viên</DialogTitle>
                 </DialogHeader>
                 <div className="card">
                     <div className="card-header ">
@@ -112,7 +118,7 @@ const AddStaffMangeForm = () => {
                                                     name="userId"
                                                     render={({ field }) => (
                                                         <FormItem>
-                                                            <FormLabel>Thêm Chim</FormLabel>
+                                                            <FormLabel>Thêm Nhân Viên Quản Lí</FormLabel>
                                                             <Select
                                                                 disabled={isLoading}
                                                                 onValueChange={(value) => {
@@ -124,16 +130,16 @@ const AddStaffMangeForm = () => {
                                                             >
                                                                 <FormControl>
                                                                     <SelectTrigger>
-                                                                        <SelectValue placeholder="Chọn chim thêm vào" />
+                                                                        <SelectValue placeholder="Chọn nhân viên" />
                                                                     </SelectTrigger>
                                                                 </FormControl>
                                                                 <SelectContent>
                                                                     <SelectGroup>
-                                                                        <SelectLabel>Chọn chim</SelectLabel>
+                                                                        <SelectLabel>Chọn nhân viên</SelectLabel>
                                                                         {staffs.map((staff) => (
                                                                             <SelectItem
-                                                                                key={staff.fullName}
-                                                                                value={staff.fullName}
+                                                                                key={staff.userId}
+                                                                                value={staff.userId}
                                                                             >
                                                                                 {staff.fullName}
                                                                             </SelectItem>
