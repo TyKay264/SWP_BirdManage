@@ -44,6 +44,7 @@ export interface Bird {
   weight: number;
   birdType: Birdtype;
   cage: Cage;
+  actEggHatchDate?: string; // Date;
   cageId?: string;
   father?: Bird;
   mother?: Bird;

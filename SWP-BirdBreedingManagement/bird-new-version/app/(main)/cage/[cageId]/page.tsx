@@ -20,26 +20,29 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
 import SeparatePairForm from "@/components/Form/SeparatePairForm";
+import useCageId from "@/hooks/useCageId";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
-  const { cages, loading } = useCages();
+  // const { cages, loading } = useCages();
+  const { cage, loading } = useCageId();
+
   const router = useRouter();
 
-  const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
+  // const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
   //Data for process' info
-  const failEggs = FindCageById?.birdReproduction?.filter(
+  const failEggs = cage?.birdReproduction?.filter(
     (item) => item.eggStatus === "Hỏng"
   );
-  const hatchedEggs = FindCageById?.birdReproduction?.filter(
+  const hatchedEggs = cage?.birdReproduction?.filter(
     (item) => item.eggStatus === "Đã nở"
   );
 
-  const listEgg = FindCageById?.birdReproduction?.filter(
+  const listEgg = cage?.birdReproduction?.filter(
     (item) =>
       item.reproductionRole === "EGG" || item.reproductionRole === "CHILD"
   );
 
-  const FilterCageByRole = FindCageById?.birdReproduction?.filter(
+  const FilterCageByRole = cage?.birdReproduction?.filter(
     (item) =>
       item.reproductionRole === "MOTHER" || item.reproductionRole === "FATHER"
   );
@@ -54,7 +57,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     try {
       //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
       await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${FindCageById?.reproductionProcess?.processId}`
+        `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${cage?.reproductionProcess?.processId}`
       );
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 
@@ -68,7 +71,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     try {
       //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
       await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/reproductionprocess/separate/${FindCageById?.reproductionProcess?.processId}`
+        `https://bird-swp.azurewebsites.net/api/reproductionprocess/separate/${cage?.reproductionProcess?.processId}`
       );
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 
@@ -78,8 +81,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     }
   };
 
-  console.log(FindCageById?.reproductionProcess?.processId);
-  if (!FindCageById?.reproductionProcess) {
+  console.log(cage?.reproductionProcess?.processId);
+  if (!cage?.reproductionProcess) {
     return (
       <div className="content-body">
         <div className="warper container-fluid">
@@ -93,17 +96,19 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
             {/* <AddBirdToSingleCage /> */}
 
-            <AddBirdToSingleCage
-            />
+            <AddBirdToSingleCage />
 
-            {FindCageById?.bird?.map((item) => (
-              <BirdCard
-                key={item.birdId}
-                birdId={item.birdId}
-                image={item.image}
-                birdType={item.birdType?.name}
-              />
-            ))}
+            <div className="row">
+              {cage?.bird?.map((item) => (
+                <BirdCard
+                  key={item.birdId}
+                  birdId={item.birdId}
+                  image={item.image}
+                  birdType={item.birdType?.name}
+                />
+              ))}
+            </div>
+
 
             <div className="row">
               <div className="col-lg-12">
@@ -134,11 +139,11 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                       <div className="card m-t-30">
                         <div className="card-body ">
                           <div className="col-md-6 col-lg-4">
-                            {FindCageById?.user && (
+                            {cage?.user && (
                               <SpStaff
-                                id={FindCageById.user.userId}
-                                name={FindCageById.user.fullName}
-                                role={FindCageById.user.role}
+                                id={cage.user.userId}
+                                name={cage.user.fullName}
+                                role={cage.user.role}
                               />
                             )}
                           </div>
@@ -160,7 +165,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   }
   const formatEggs: EggColumn[] = listEgg?.map((item) => ({
     birdId: item.bird?.birdId,
-    cages: cages,
+    cages: cage,
+    actexpEggHatchDate: item.actEggHatchDate,
     reproductionId: item.reproductionId,
     eggStatus: item?.eggStatus,
     eggLaidDate: item.eggLaidDate
@@ -174,6 +180,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
       : "N/A", // Provide a default value if hatchDate is undefined,
     expAdultBirdDate: item.expAdultBirdDate
       ? format(new Date(item.expAdultBirdDate), "do-M-yyyy", { locale: vi })
+      : "N/A", // Provide a default value if hatchDate is undefined,
+    actEggHatchDate: item.bird?.actEggHatchDate
+      ? format(new Date(item.bird?.actEggHatchDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
@@ -191,16 +200,19 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
             <Button variant="destructive" onClick={handleRemove}>Kết thúc quá trình</Button>
           </div> */}
 
-          {FilterCageByRole?.map((item) => (
-            <BirdCard
-              key={item.bird?.birdId}
-              birdRole={item.reproductionRole}
-              birdId={item.bird?.birdId}
-              image={item.bird?.image}
-              birdType={item.bird?.birdType?.name}
-            // sex={item.bird?.sex}
-            />
-          ))}
+          <div className="row">
+            {FilterCageByRole?.map((item) => (
+              <BirdCard
+                key={item.bird?.birdId}
+                birdRole={item.reproductionRole}
+                birdId={item.bird?.birdId}
+                image={item.bird?.image}
+                birdType={item.bird?.birdType?.name}
+              // sex={item.bird?.sex}
+              />
+
+            ))}
+          </div>
 
           <div className="row">
             <div className="col-lg-12">
@@ -259,11 +271,11 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     <div className="card m-t-30">
                       <div className="card-body ">
                         <div className="col-md-6 col-lg-4">
-                          {FindCageById?.user && (
+                          {cage?.user && (
                             <SpStaff
-                              id={FindCageById.user.userId}
-                              name={FindCageById.user.fullName}
-                              role={FindCageById.user.role}
+                              id={cage.user.userId}
+                              name={cage.user.fullName}
+                              role={cage.user.role}
                             />
                           )}
                         </div>
@@ -296,10 +308,10 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                                 NGÀY GHÉP CẶP :
                               </label>
                               <div className="grow pl-2.5 pb-1.5 w-80">
-                                {FindCageById?.reproductionProcess?.pairingDate
+                                {cage?.reproductionProcess?.pairingDate
                                   ? format(
                                     new Date(
-                                      FindCageById?.reproductionProcess?.pairingDate
+                                      cage?.reproductionProcess?.pairingDate
                                     ),
                                     "do-M-yyyy",
                                     { locale: vi }
@@ -313,7 +325,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                                 TỔNG SỐ TRỨNG:
                               </label>
                               <div className="grow pl-2.5 pb-1.5">
-                                {FindCageById?.reproductionProcess?.totalEgg}
+                                {cage?.reproductionProcess?.totalEgg}
                               </div>
                             </div>
 
@@ -340,7 +352,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                             <div className="flex justify-between items-center mb-2.5">
                               <label className="basis-[100%]">MÃ LỒNG :</label>
                               <div className="grow pl-2.5 pb-1.5">
-                                {FindCageById?.cageId}
+                                {cage?.cageId}
                               </div>
                             </div>
 
@@ -349,7 +361,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                                 ID QUÁ TRÌNH :
                               </label>
                               <div className="grow pl-2.5 pb-2 basis-[100%]">
-                                {FindCageById?.reproductionProcess.processId}
+                                {cage?.reproductionProcess.processId}
                               </div>
                             </div>
                           </div>

@@ -9,14 +9,23 @@ import { Button } from "@/components/ui/button";
 import { CellAction } from "./cell-action";
 import { Cage } from "@/type";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 export type EggColumn = {
   birdId: string;
   reproductionId: string;
-  eggLaidDate: string;
   eggStatus: string;
-  // actEggHatchDate?: string;
+  eggLaidDate: string;
+
+  actEggHatchDate?: string;
   // actSwingBranch?: string;
   // actAdultBirdDate?: string;
+
   expEggHatchDate?: string;
   expSwingBranchDate?: string;
   expAdultBirdDate?: string;
@@ -52,6 +61,7 @@ export const columns: ColumnDef<EggColumn>[] = [
         </Button>
       );
     },
+
   },
   {
     accessorKey: "expEggHatchDate",
@@ -66,6 +76,54 @@ export const columns: ColumnDef<EggColumn>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "actEggHatchDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="-ml-6 "
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+        >
+          Ngày nở (Thực tế)
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+
+      const isNotActHatchDate = row.original.actEggHatchDate === "N/A"
+      return (
+        <>
+          {isNotActHatchDate ? (
+            <TooltipProvider >
+              <Tooltip >
+                <TooltipTrigger asChild>
+                  <div className="w-20 bg-yellow-300 h-12 rounded-md text-black">
+                    <div className="w-full min-h-full flex items-center justify-center">
+                      <span className="">
+                        {row.original.expEggHatchDate}
+                      </span>
+                    </div>
+                  </div>
+                </TooltipTrigger>
+
+                <TooltipContent>
+                  Ngày nở dự kiến
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+          ) : <div className="w-20 bg-green-300 h-12 rounded-md text-black">
+            <div className="w-full min-h-full flex items-center justify-center">
+              {row.original.actEggHatchDate}
+            </div>
+          </div>}
+
+        </>
+
+      )
+    }
   },
   {
     accessorKey: "expSwingBranchDate",

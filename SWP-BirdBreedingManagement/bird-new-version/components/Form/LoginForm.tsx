@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 const formSchema = z.object({
@@ -34,7 +35,6 @@ const LoginForm = () => {
     console.log(user);
 
     const router = useRouter()
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -43,15 +43,11 @@ const LoginForm = () => {
         },
     })
 
-    // 2. Define a submit handler.
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        await login(values.username, values.password);
-        router.push("/")
+        login(values.username, values.password);
     };
-
     return (
         <div className="">
-
             <h4 className="title">Đăng nhập</h4>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

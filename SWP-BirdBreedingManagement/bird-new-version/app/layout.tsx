@@ -3,6 +3,7 @@
 import { AuthProvider } from "@/context/authContext";
 import React, { useEffect, useState } from "react";
 import "./globals.css";
+import ToastProvider from "@/provider/toast-provider";
 
 export default function RootLayout({
   children,
@@ -558,8 +559,8 @@ export default function RootLayout({
           </div>
         ) : (
           <div>
+            <ToastProvider />
             <AuthProvider>
-
               {children}
             </AuthProvider>
           </div>

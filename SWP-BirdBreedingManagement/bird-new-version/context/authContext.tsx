@@ -1,4 +1,8 @@
+'use client'
+
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 export type User = {
     userId: string;
@@ -26,7 +30,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const user = window.localStorage.getItem("user");
         return user ? JSON.parse(user) : null;
     });
-
+    const router = useRouter();
     const login = async (username: string, password: string) => {
         try {
             const response = await fetch(
@@ -39,11 +43,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     body: JSON.stringify({ username, password }),
                 }
             );
-            const user = await response.json();
-            setUser(user);
-            window.localStorage.setItem("user", JSON.stringify(user));
+            if (response.ok) {
+                const user = await response.json();
+                setUser(user);
+                window.localStorage.setItem("user", JSON.stringify(user));
+                toast.success("Đăng nhập thành công")
+                router.push('/')
+            } else {
+
+                console.log("Login failed. Please check your credentials.");
+                toast.error("Đăng nhập thất bại")
+            }
         } catch (error) {
             console.log(error);
+            toast.error("Đăng nhập thất bại")
+
         }
     };
 

@@ -25,7 +25,7 @@ export default function MainLayout({
   }
   return (
     <div>
-      <ToastProvider />
+
       <ModalProvider />
       <SideBar />
       <NavHeader />
