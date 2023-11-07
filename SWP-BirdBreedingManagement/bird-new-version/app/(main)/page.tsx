@@ -35,7 +35,8 @@ export default function Home() {
     totalBaby: dashboard?.totalBaby,
     top5Birds: dashboard?.top5Birds,
     totalEggIn7Day: dashboard?.totalEggIn7Day,
-    reproduction_process: dashboard?.reproduction_process
+    bird_reproduction: dashboard?.bird_reproduction,
+    reproduction_process: dashboard?.reproduction_process,
   };
   console.log(formatDashboard.top5Birds);
   return (
@@ -76,9 +77,9 @@ export default function Home() {
                 </div>
 
                 <div className="col-lg-6 h-50">
-                  {/* <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
+                  <NewBirdList top5Birds={formatDashboard?.top5Birds ?? []} />
 
-                  <NotificationBoard reproduction_process={formatDashboard?.reproduction_process ?? []} /> */}
+                  <NotificationBoard bird_reproduction={formatDashboard?.bird_reproduction ?? []} />
                 </div>
                 <div className="col-lg-6">
                   <div className="h-30 w-30">

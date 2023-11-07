@@ -98,7 +98,6 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
             <div className="m-2">
               <AddBirdToSingleCage />
 
-              <AddStaffMangeForm userId={cage?.user?.userId} />
             </div>
 
             {/* <AddBirdToSingleCage /> */}
@@ -144,6 +143,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                       <div className="card m-t-30">
                         <div className="card-body ">
                           <div className="col-md-6 col-lg-4">
+                            <AddStaffMangeForm userId={cage?.user?.userId} />
+
                             {cage?.user && (
                               <SpStaff
                                 id={cage.user.userId}
@@ -282,6 +283,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     <div className="card m-t-30">
                       <div className="card-body ">
                         <div className="col-md-6 col-lg-4">
+                          <AddStaffMangeForm userId={cage?.user?.userId} />
                           {cage?.user && (
                             <SpStaff
                               id={cage.user.userId}

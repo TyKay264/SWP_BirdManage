@@ -92,6 +92,12 @@ export interface Bird_reproduction {
   reproductionId: string;
   bird: Bird;
   processId?: string;
+
+  cageId?: string;
+  pairingDate?: string;
+  desc?: string;
+  nextDate?: string;
+
   reproductionRole?: string;
   eggLaidDate: string; // Date;
   actEggHatchDate?: string; // Date;
@@ -138,6 +144,7 @@ export interface DashBoard {
       totalFailEgg: number;
     }[];
   };
+  bird_reproduction: Bird_reproduction[];
   reproduction_process: Reproduction_process[];
 }
 
