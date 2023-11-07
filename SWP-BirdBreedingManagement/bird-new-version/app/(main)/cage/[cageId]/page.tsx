@@ -58,7 +58,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
     try {
       //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
       await axios.patch(
-        `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${cage?.reproductionProcess?.processId}`
+        `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${cage?.reproductionProcess?.processId}?emotion=hate`
       );
       // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 

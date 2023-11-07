@@ -28,11 +28,8 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 
 import {
@@ -74,13 +71,13 @@ const formSchema = z.object({
   sex: z.string().min(1),
   isAlive: z.coerce.boolean(),
   hatchDate: z.date(),
-  cageId: z.string().optional(),
+  cageId: z.string(),
   ageRange: z.string(),
-  mutation: z?.string().optional(),
+  mutation: z.string().nullable(),
   weight: z.coerce.number(),
   featherColor: z.string(),
   image: z.string(),
-  status: z.string().optional(),
+  status: z.string().nullable(),
 });
 
 const EditBirdForm = () => {
@@ -131,6 +128,7 @@ const EditBirdForm = () => {
     //TO DO xử lý form (api)
     console.log(values);
 
+
     if (data && data?.bird) {
       try {
         await axios.patch(
@@ -140,8 +138,8 @@ const EditBirdForm = () => {
         toast.success("Cập nhật chim thành công");
         await new Promise((resolve) => setTimeout(resolve, 2000));
         onClose();
-        form.reset();
-        window.location.reload();
+        // form.reset();
+        // window.location.reload();
       } catch (error) {
         console.log(error);
       }
@@ -484,8 +482,8 @@ const EditBirdForm = () => {
                                 <Select
                                   disabled={isLoading}
                                   onValueChange={field.onChange}
-                                  value={field.value}
-                                  defaultValue={field.value}
+                                  value={field.value || undefined}
+                                  defaultValue={field.value || undefined}
                                 >
                                   <FormControl>
                                     <SelectTrigger>
@@ -518,11 +516,11 @@ const EditBirdForm = () => {
                           name="mutation"
                           render={({ field }) => (
                             <FormItem>
-                              {/* <FormLabel>Tính trạng đột biến</FormLabel> */}
                               <FormControl>
                                 <Input
                                   placeholder="Nhập tính trạng đột biến"
                                   {...field}
+                                  value={field.value!}
                                   className="form-control"
                                 />
                               </FormControl>

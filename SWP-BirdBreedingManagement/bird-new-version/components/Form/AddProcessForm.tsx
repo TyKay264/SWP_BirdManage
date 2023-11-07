@@ -63,7 +63,6 @@ const AddProcessForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    //console.log("Submit button clicked");
     //TO DO xử lý form (api)
     console.log(values);
     try {
@@ -71,14 +70,22 @@ const AddProcessForm = () => {
         "https://bird-swp.azurewebsites.net/api/reproductionprocess/create",
         values
       );
-      console.log(values);
       form.reset();
       router.push(`/cage/${values.cageId}`);
-      // window.location.reload();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        alert(`Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`);
+        return await axios.post(
+          "https://bird-swp.azurewebsites.net/api/reproductionprocess/create?confirm=true",
+          values
+        );
+        form.reset();
+      } else {
+        console.error(error);
+      }
     }
   };
+
 
   const isLoading = form.formState.isSubmitting;
 
