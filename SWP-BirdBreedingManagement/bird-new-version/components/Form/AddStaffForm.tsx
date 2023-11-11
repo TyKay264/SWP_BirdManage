@@ -74,7 +74,7 @@ const AddStaffForm = () => {
 
       form.reset();
     } catch (error) {
-      toast.error("Email đã tồn tại");
+      toast.error("Tài khoản đã tồn tại");
       console.log(error);
     }
   };

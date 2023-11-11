@@ -21,12 +21,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { toast } from "react-toastify";
 
 import axios from "axios";
 import useBirdTypeProcess from "@/hooks/useBirdTypeProcess";
 import { Checkbox } from "../ui/checkbox";
 import { Bird } from "@/type";
 import BirdInitDetail from "../BirdInitDetail/BirdInitDetail";
+import { Button } from "../ui/button";
 
 const formSchema = z.object({
   birdTypeName: z.string().min(1),
@@ -75,11 +88,13 @@ const AddProcessForm = () => {
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
         alert(`Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`);
-        return await axios.post(
+        // alert("Cặp chim này không hợp nhau")
+        toast.error(`Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`);
+        await axios.post(
           "https://bird-swp.azurewebsites.net/api/reproductionprocess/create?confirm=true",
           values
         );
-        form.reset();
+        router.push(`/cage/${values.cageId}`);
       } else {
         console.error(error);
       }
