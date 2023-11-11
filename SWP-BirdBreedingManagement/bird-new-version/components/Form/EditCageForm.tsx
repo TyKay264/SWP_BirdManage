@@ -29,6 +29,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import useStaffs from "@/hooks/useStaffs";
 import { useQuery } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
 type locationType = {
   location: string;
   name: string;
@@ -88,13 +89,11 @@ const EditCageForm = () => {
         await refetch()
         form.reset();
         toast.success("Cập nhật lồng thành công");
-        await new Promise((resolve) => setTimeout(resolve, 3000));
         onClose();
-
-
         router.refresh();
       } catch (error) {
         console.log(error);
+        toast.error("Cập nhật lồng thất bại");
       }
     }
 
@@ -246,7 +245,7 @@ const EditCageForm = () => {
                           type="submit"
                           className="btn btn-primary float-end"
                         >
-                          Chỉnh sửa lồng
+                          {isLoading && <ClipLoader color="#3498db" size={12} />} Chỉnh sửa lồng
                         </button>
                       </div>
                     </div>
