@@ -121,7 +121,7 @@ export const columns: ColumnDef<EggColumn>[] = [
                 <TooltipTrigger asChild>
                   <div className="w-20 bg-green-300 h-12 rounded-md text-black">
                     <div className="w-full min-h-full flex items-center justify-center">
-                      <span className="">
+                      <span className="z-50">
                         {row.original.actEggHatchDate}
                       </span>
                     </div>

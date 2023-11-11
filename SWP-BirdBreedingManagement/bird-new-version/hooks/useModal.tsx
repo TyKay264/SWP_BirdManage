@@ -13,7 +13,8 @@ export type ModalStyle =
   | "AddBirdToSingleCage"
   | "MoveCageForm"
   | "SeparatePair"
-  | "AddStaffMangeForm";
+  | "AddStaffMangeForm"
+  | "DeleteProcess"
 
 interface ModalData {
   bird?: BirdColumn;
@@ -21,6 +22,7 @@ interface ModalData {
   cage?: CageColumn;
   process?: ProcessColumn;
   egg?: EggColumn;
+  processId?: string;
 }
 
 interface ModalStore {

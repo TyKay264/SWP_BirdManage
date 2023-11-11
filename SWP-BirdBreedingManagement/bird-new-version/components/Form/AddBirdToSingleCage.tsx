@@ -41,7 +41,7 @@ import { FileUpload } from "../FileUpload";
 import useBirdNotCage from "@/hooks/useBirdNotCage";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     birdId: z.string(),
@@ -55,6 +55,7 @@ const AddBirdToSingleCage = () => {
     const isModalOpen = isOpen && type === "AddBirdToSingleCage";
     // console.log(cageId)
     // 1. Define your form.
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -74,6 +75,7 @@ const AddBirdToSingleCage = () => {
                 values
             );
             form.reset();
+            router.refresh();
         } catch (error) {
             console.log(error);
         }

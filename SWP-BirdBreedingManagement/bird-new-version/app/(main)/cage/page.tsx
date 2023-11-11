@@ -5,13 +5,26 @@ import CageClient from "@/components/Table/CageTable/CageClient";
 import { CageColumn } from "@/components/Table/CageTable/column";
 import useCages from "@/hooks/useCage";
 import Loading from "@/components/LoadingComponent";
-
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Cage } from "@/type";
+import { fetchCages } from "@/apis/page";
 
 const CagePage = () => {
-  const { cages, loading } = useCages();
-  // console.log(cages);
-  const formatCages: CageColumn[] = cages.map((cage) => ({
+  // const { cages, loading } = useCages();
+  const { data: cages, isLoading: cageListLoading } = useQuery<Cage[]>({
+    queryKey: ["cages"],
+    queryFn: fetchCages,
+  });
+
+  if (cageListLoading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+  if (!cages) return null;
+  const formatCages: CageColumn[] = cages.map((cage: Cage) => ({
     cageId: cage.cageId,
     user: cage?.user?.fullName,
     location: cage.location,
@@ -19,12 +32,6 @@ const CagePage = () => {
     available: cage.available,
   }));
 
-  if (!loading)
-    return (
-      <div className="content-body h-[650px]">
-        <Loading />
-      </div>
-    );
   return (
     <>
       <div id="main-wrapper" className="show">

@@ -2,7 +2,7 @@
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import React from "react";
-
+import styles from '../app/style.module.css';
 const SideBar = () => {
   const { user } = useAuth();
 
@@ -11,7 +11,7 @@ const SideBar = () => {
   const isStaff = user?.role === "STAFF";
 
   return (
-    <aside className="left-panel nicescroll-box">
+    <aside className={`left-panel nicescroll-box ${styles.leftPanel}`}>
       <nav className="navigation">
         <ul className="list-unstyled main-menu">
           <li className="has-submenu active">

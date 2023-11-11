@@ -10,7 +10,6 @@ interface EggClientProps {
 
 const EggClient = ({ data }: EggClientProps) => {
   const [loading, setLoading] = useState(false);
-
   return (
     <div>
       <DataTable

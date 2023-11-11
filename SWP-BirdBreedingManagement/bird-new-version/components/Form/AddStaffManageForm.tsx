@@ -40,9 +40,8 @@ import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useBirdNotCage from "@/hooks/useBirdNotCage";
 import { Button } from "../ui/button";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import useStaffs from "@/hooks/useStaffs";
-
 
 const formSchema = z.object({
     userId: z.string(),
@@ -51,7 +50,7 @@ const formSchema = z.object({
 const AddStaffMangeForm = ({ userId }: any) => {
 
     const params = useParams()
-
+    const router = useRouter();
     const { isOpen, type, onClose, data } = useModal();
     const isModalOpen = isOpen && type === "AddStaffMangeForm";
     // console.log(cageId)
@@ -82,7 +81,7 @@ const AddStaffMangeForm = ({ userId }: any) => {
                 values
             );
             form.reset();
-            window.location.reload();
+            router.refresh()
         } catch (error) {
             console.log(error);
         }

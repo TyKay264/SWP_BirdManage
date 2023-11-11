@@ -33,7 +33,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 import useCageA from "@/hooks/useCageA";
-
+import { useRouter } from "next/navigation";
 // const birdtypeMap: Record<string, Birdtype> = {
 //   than: Birdtype,
 // };
@@ -80,6 +80,7 @@ const formSchema = z.object({
 const AddBirdForm = () => {
   //const { cages } = useCages();
   //console.log(cages)
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -114,6 +115,8 @@ const AddBirdForm = () => {
       //await axios.post("http://localhost:3001/birds", values);
       console.log(values);
       form.reset();
+      router.refresh();
+      router.push('/staff')
     } catch (error) {
       console.log(error);
     }

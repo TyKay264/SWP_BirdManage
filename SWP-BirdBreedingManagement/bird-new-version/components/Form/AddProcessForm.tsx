@@ -40,6 +40,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Bird } from "@/type";
 import BirdInitDetail from "../BirdInitDetail/BirdInitDetail";
 import { Button } from "../ui/button";
+import Loading from "../LoadingComponent";
 
 const formSchema = z.object({
   birdTypeName: z.string().min(1),
@@ -74,6 +75,12 @@ const AddProcessForm = () => {
       cageId: "",
     },
   });
+  if (!loading)
+    return (
+      <div className="">
+        <Loading />
+      </div>
+    );
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)

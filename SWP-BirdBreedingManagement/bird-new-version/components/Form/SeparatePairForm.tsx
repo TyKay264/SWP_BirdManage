@@ -40,7 +40,7 @@ import { FileUpload } from "../FileUpload";
 import useCageA from "@/hooks/useCageA";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 
 const formSchema = z.object({
@@ -49,6 +49,7 @@ const formSchema = z.object({
 
 const SeparatePairForm = () => {
     const params = useParams();
+    const router = useRouter();
     const { isOpen, type, onClose, data } = useModal();
     const isModalOpen = isOpen && type === "SeparatePair";
     // 1. Define your form.
@@ -73,6 +74,7 @@ const SeparatePairForm = () => {
                 values
             );
             form.reset();
+            router.refresh();
         } catch (error) {
             console.log(error);
         }

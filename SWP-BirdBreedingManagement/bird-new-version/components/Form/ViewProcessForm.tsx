@@ -18,21 +18,20 @@ import EggClient from "../Table/EggTable/EggClient";
 import useCages from "@/hooks/useCage";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
+import { Bird_reproduction } from "@/type";
 
 const ViewProcessForm = () => {
-  const { cages, loading } = useCages();
+
   const { isOpen, type, onClose, data } = useModal();
 
   const listEgg = data.process?.eggList;
 
   const isModalOpen = isOpen && type === "ViewProcessForm";
-
   if (!listEgg) {
     return null;
   }
-  const formatEggs: EggColumn[] = listEgg?.map((item) => ({
+  const formatEggs: EggColumn[] = listEgg?.map((item: Bird_reproduction) => ({
     birdId: item.bird?.birdId,
-    cages: cages,
     reproductionId: item.reproductionId,
     eggStatus: item?.eggStatus,
     eggLaidDate: item.eggLaidDate
@@ -51,7 +50,7 @@ const ViewProcessForm = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:min-w-[900px] max-h-[600px] text-sm overflow-y-auto">
+      <DialogContent className="sm:min-w-[1024px] max-h-[600px] text-sm overflow-y-auto overflow-x-auto">
         <DialogHeader>
           <DialogTitle>Thông tin quá trình</DialogTitle>
         </DialogHeader>

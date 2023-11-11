@@ -32,7 +32,7 @@ const useCageId = () => {
 
         //Gọi lại hàm để chạy
         fetchCages();
-    }, [params.cageId])
+    }, [params.cageId, cage])
 
     return { cage, loading }
 }

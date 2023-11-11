@@ -8,6 +8,7 @@ import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import ModalProvider from "@/provider/modal-provider";
 import ToastProvider from "@/provider/toast-provider";
+import { QueryProvider } from "@/provider/query-provider";
 
 // npx json-server -w data/data.json -p 3001
 
@@ -25,17 +26,18 @@ export default function MainLayout({
   }
   return (
     <div>
-
-      <ModalProvider />
-      <SideBar />
-      <NavHeader />
-      <Header />
-      <div className="flex flex-col">
-        <div className="flex-1">{children}</div>
-        <div className="">
-          <Footer />
+      <QueryProvider>
+        <ModalProvider />
+        <SideBar />
+        <NavHeader />
+        <Header />
+        <div className="flex flex-col">
+          <div className="flex-1">{children}</div>
+          <div className="">
+            <Footer />
+          </div>
         </div>
-      </div>
+      </QueryProvider>
     </div>
   );
 }

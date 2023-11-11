@@ -41,12 +41,12 @@ import { useModal } from "@/hooks/useModal";
 import { StaffRole } from "@/type";
 import { FileUpload } from "../FileUpload";
 import { toast } from "react-toastify";
-
+import { useMutation } from '@tanstack/react-query'
 const roleMap: Record<string, StaffRole> = {
   STAFF: StaffRole.STAFF,
   MANAGER: StaffRole.MANAGER,
 };
-
+import { useQuery } from "@tanstack/react-query";
 //console.log(roleMap)
 
 const rolearr = Object.entries(roleMap).map(([key, value]) => ({ key, value }));
@@ -64,6 +64,7 @@ const formSchema = z.object({
 
 const EditStaffForm = () => {
   const { isOpen, type, onClose, data } = useModal();
+  const { refetch } = useQuery({ queryKey: ["users"], });
 
   // console.log(data.staff.id);
   const isModalOpen = isOpen && type === "EditStaffForm";
@@ -90,6 +91,12 @@ const EditStaffForm = () => {
     }
   }, [data, form]);
 
+  // const updateStaff = async (values: z.infer<typeof formSchema>) => {
+  //   return axios.patch(`https://bird-swp.azurewebsites.net/api/users/${data.staff.id}`, values)
+  // }
+
+  // const { mutate } = useMutation(updateStaff)
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     //console.log(values)
@@ -102,13 +109,16 @@ const EditStaffForm = () => {
         );
 
         toast.success("Cập nhật nhân viên thành công");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
         onClose();
 
+        await refetch();
         form.reset();
-        window.location.reload();
+        router.refresh();
       } catch (error) {
         console.log(error);
+      } finally {
+        router.refresh();
       }
     }
   };

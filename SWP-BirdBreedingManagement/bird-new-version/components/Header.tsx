@@ -181,10 +181,10 @@ const Header = () => {
                 </a>
                 <div className="account-dropdown-form dropdown-container">
                   <div className="form-content">
-                    <a href={`/staff/${user?.userId}`}>
+                    <Link href={`/staff/${user?.userId}`}>
                       <i className="far fa-user" />
                       <span className="ml-2">Hồ sơ</span>
-                    </a>
+                    </Link>
                     {/* <a href="#">
                       <i className="far fa-envelope" />
                       <span className="ml-2">Inbox</span>

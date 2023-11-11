@@ -13,15 +13,32 @@ import NavHeader from "@/components/NavHeader";
 import SideBar from "@/components/SideBar";
 import { useAuth } from "@/context/authContext";
 import useDashBoard from "@/hooks/useDashBoard";
-import { DashBoard } from "@/type";
+import { Cage, DashBoard } from "@/type";
 import Image from "next/image";
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import { useQuery } from "@tanstack/react-query";
+import { fetchCages, fetchDataInDashBoard } from "@/apis/page";
+import Loading from "@/components/LoadingComponent";
 
 export default function Home() {
-  const { dashboard } = useDashBoard();
+  // const { dashboard } = useDashBoard();
 
+  const { data: dashboard, isLoading } = useQuery<DashBoard>({
+    queryKey: ["dashboard"],
+    queryFn: fetchDataInDashBoard,
+  });
+  const { data: cages, isLoading: cageListLoading } = useQuery<Cage[]>({
+    queryKey: ["cages"],
+    queryFn: fetchCages,
+  });
+
+  if (isLoading || cageListLoading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
 
 
   const formatDashboard = {

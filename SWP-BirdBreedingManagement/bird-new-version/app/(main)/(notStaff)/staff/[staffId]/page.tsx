@@ -1,5 +1,6 @@
 "use client";
 import BreadScrum from "@/components/BreadScrum";
+import Loading from "@/components/LoadingComponent";
 
 import Profile from "@/components/StaffId/Profile";
 import useStaffs from "@/hooks/useStaffs";
@@ -18,7 +19,7 @@ const StaffIdPage = ({ params }: StaffIdPageProps) => {
   const { staffs, loading } = useStaffs();
 
   if (!loading) {
-    return <div className="content-body">Loading</div>;
+    return <div className="content-body  h-[650px]"><Loading /></div>;
   }
 
   const IdFilter = staffs.find((item) => item.userId === params.staffId);

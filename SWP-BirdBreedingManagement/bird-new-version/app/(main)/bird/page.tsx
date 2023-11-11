@@ -9,11 +9,27 @@ import React from "react";
 import format from "date-fns/format";
 import vi from "date-fns/locale/vi";
 import Loading from "@/components/LoadingComponent";
-
+import { useQuery } from "@tanstack/react-query";
+import { fetchBirds } from "@/apis/page";
 const BirdPage = () => {
-  const { birds, loading } = useBirds();
+  // const { birds, loading } = useBirds();
 
-  const formatBirds: BirdColumn[] = birds.map((bird) => ({
+  const { data: birds, isLoading: birdListLoading } = useQuery<Bird[]>({
+    queryKey: ["birds"],
+    queryFn: fetchBirds,
+  });
+
+
+
+  if (birdListLoading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+
+  if (!birds) return null;
+  const formatBirds: BirdColumn[] = birds.map((bird: Bird) => ({
     birdId: bird.birdId,
     type: bird.birdTypeName,
     location: bird.cage?.location,
@@ -32,12 +48,7 @@ const BirdPage = () => {
       : "N/A", // Provide a default value if hatchDate is undefined,
   }));
 
-  if (!loading)
-    return (
-      <div className="content-body h-[650px]">
-        <Loading />
-      </div>
-    );
+
 
   return (
     <>

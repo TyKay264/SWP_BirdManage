@@ -9,16 +9,33 @@ import { StaffColumn } from "@/components/Table/StaffTable/column";
 import React from "react";
 import Loading from "@/components/LoadingComponent";
 import { useAuth } from "@/context/authContext";
-
+import { useQuery } from "@tanstack/react-query";
+import { Staff } from "@/type";
+import { fetchUsers } from "@/apis/page";
+import Link from "next/link";
 const StaffPage = () => {
   const { user } = useAuth();
   const isAdmin = user?.role === "ADMIN";
   const isStaff = user?.role === "STAFF";
   // step 1 -> data
-  const { staffs, loading } = useStaffs();
+  // const { staffs, loading } = useStaffs();
+
+  const { data: staffs, isLoading: userListLoading } = useQuery<Staff[]>({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+  });
+
+  if (userListLoading)
+    return (
+      <div className="content-body h-[650px]">
+        <Loading />
+      </div>
+    );
+
   // console.log(staffs)
   // lay ra 1 object
-  const formatStaffs: StaffColumn[] = staffs.map((staff) => ({
+  if (!staffs) return null
+  const formatStaffs: StaffColumn[] = staffs.map((staff: Staff) => ({
     id: staff.userId,
     username: staff.username,
     email: staff.email,
@@ -27,12 +44,6 @@ const StaffPage = () => {
     role: staff.role,
   }));
 
-  if (!loading)
-    return (
-      <div className="content-body h-[650px]">
-        <Loading />
-      </div>
-    );
 
   return (
     <>
@@ -55,12 +66,12 @@ const StaffPage = () => {
                         </div>
                         {isAdmin && (
                           <div className="col-4 float-end">
-                            <a
+                            <Link
                               href="/add-staff"
                               className="btn btn-primary float-end"
                             >
                               Thêm Nhân Viên
-                            </a>
+                            </Link>
                           </div>
                         )}
 

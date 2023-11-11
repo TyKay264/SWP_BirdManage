@@ -9,11 +9,24 @@ import React, { useEffect, useState } from "react";
 import NotificationCard from "@/components/CageId/NotificationCard";
 import useBirdId from "@/hooks/useBirdId";
 import Loading from "@/components/LoadingComponent";
+import { useQuery } from "@tanstack/react-query";
+import { Bird } from "@/type";
+import { fetchBirdById } from "@/apis/page";
 
-const BirdIdPage = () => {
-  const { bird, loading } = useBirdId();
+interface BirdIdPageParams {
+  params: {
+    birdId: string
+  }
+}
 
-  if (!loading)
+const BirdIdPage = ({ params }: BirdIdPageParams) => {
+
+  const { data: bird, isLoading: birdListLoading } = useQuery<Bird>({
+    queryKey: ["bird", params.birdId],
+    queryFn: () => fetchBirdById(params.birdId),
+  });
+
+  if (birdListLoading)
     return (
       <div className="content-body h-[650px]">
         <Loading />

@@ -38,7 +38,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
-
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
   number: z.string(),
   laidDate: z.date(),
@@ -49,7 +49,7 @@ interface AddEggFormProps {
 }
 
 const AddEggForm = ({ cageId }: AddEggFormProps) => {
-
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -69,7 +69,7 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
         values
       );
       form.reset();
-      window.location.reload();
+      router.refresh()
     } catch (error) {
       console.log(error);
     }

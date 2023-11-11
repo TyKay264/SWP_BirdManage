@@ -40,7 +40,7 @@ import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useCageA from "@/hooks/useCageA";
 import { Button } from "../ui/button";
-
+import { useRouter } from "next/navigation";
 
 
 const formSchema = z.object({
@@ -51,6 +51,8 @@ const MoveCageForm = ({ birdId }: any) => {
 
     const { isOpen, type, onClose, data } = useModal();
     const isModalOpen = isOpen && type === "MoveCageForm";
+
+    const router = useRouter()
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -72,7 +74,7 @@ const MoveCageForm = ({ birdId }: any) => {
                 values
             );
             form.reset();
-            window.location.reload();
+            router.refresh();
         } catch (error) {
             console.log(error);
         }

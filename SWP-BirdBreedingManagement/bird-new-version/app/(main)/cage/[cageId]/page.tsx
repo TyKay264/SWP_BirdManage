@@ -22,11 +22,12 @@ import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
 import SeparatePairForm from "@/components/Form/SeparatePairForm";
 import useCageId from "@/hooks/useCageId";
 import AddStaffMangeForm from "@/components/Form/AddStaffManageForm";
+import { useModal } from "@/hooks/useModal";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   // const { cages, loading } = useCages();
   const { cage, loading } = useCageId();
-
+  const { onOpen } = useModal();
   const router = useRouter();
 
   // const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
@@ -56,11 +57,9 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
 
   const handleRemove = async () => {
     try {
-      //https://bird-swp.azurewebsites.net/api/reproductionprocess/done/{id}
       await axios.patch(
         `https://bird-swp.azurewebsites.net/api/reproductionprocess/done/${cage?.reproductionProcess?.processId}?emotion=hate`
       );
-      // await axios.patch(`bird-swp.azurewebsites.net/api/cages/${params.cageId}`)
 
       router.push("/cage-diagram");
     } catch (error) {
@@ -304,7 +303,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     <div className="card m-t-30">
                       <div className="flex text-center">
                         <div className="text-center mt-3 m-3">
-                          <Button variant="destructive" onClick={handleRemove}>
+                          <Button variant="destructive" onClick={() => onOpen("DeleteProcess", { processId: cage?.reproductionProcess?.processId })}>
                             Kết thúc quá trình
                           </Button>
                         </div>

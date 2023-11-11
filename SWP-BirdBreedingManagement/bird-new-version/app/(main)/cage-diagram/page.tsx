@@ -5,19 +5,26 @@ import CageDiagramList from "@/components/CageDiagram/CageDiagramList";
 import Loading from "@/components/LoadingComponent";
 import useCages from "@/hooks/useCage";
 import React from "react";
-
+import { useQuery } from "@tanstack/react-query";
+import { fetchCages } from "@/apis/page";
+import { Cage } from "@/type";
 const CageDiagramPage = () => {
-  const { cages, loading } = useCages();
-  const CageFilterLocationB = cages.filter(
-    (cage) => cage.location.charAt(0) === "B"
-  );
-
-  if (!loading)
+  // const { cages, loading } = useCages();
+  const { data: cages, isLoading: cageListLoading } = useQuery<Cage[]>({
+    queryKey: ["cages"],
+    queryFn: fetchCages,
+  });
+  if (cageListLoading)
     return (
       <div className="content-body h-[650px]">
         <Loading />
       </div>
     );
+  if (!cages) return null;
+  const CageFilterLocationB = cages.filter(
+    (cage: Cage) => cage.location.charAt(0) === "B"
+  );
+
 
   return (
     <>

@@ -28,7 +28,7 @@ import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import useStaffs from "@/hooks/useStaffs";
-
+import { useQuery } from "@tanstack/react-query";
 type locationType = {
   location: string;
   name: string;
@@ -73,6 +73,7 @@ const EditCageForm = () => {
     },
   });
 
+  const { refetch } = useQuery({ queryKey: ["cages"], });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
@@ -88,10 +89,9 @@ const EditCageForm = () => {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         onClose();
         form.reset();
-        window.location.reload();
 
         router.refresh();
-        window.location.reload();
+        await refetch()
       } catch (error) {
         console.log(error);
       }

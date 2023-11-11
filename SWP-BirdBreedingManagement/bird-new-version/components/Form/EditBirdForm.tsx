@@ -47,7 +47,7 @@ import { useModal } from "@/hooks/useModal";
 import { FileUpload } from "../FileUpload";
 import useCageA from "@/hooks/useCageA";
 import { toast } from "react-toastify";
-
+import { useQuery } from "@tanstack/react-query";
 type BirdtypeCustom = {
   typeId: string;
   birdTypeName: string;
@@ -84,6 +84,9 @@ const EditBirdForm = () => {
   const { isOpen, type, onClose, data } = useModal();
   const isModalOpen = isOpen && type === "EditBirdForm";
   const { cages, loading } = useCageA();
+
+  const { refetch } = useQuery({ queryKey: ["birds"], });
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -138,6 +141,7 @@ const EditBirdForm = () => {
         toast.success("Cập nhật chim thành công");
         await new Promise((resolve) => setTimeout(resolve, 2000));
         onClose();
+        await refetch();
         // form.reset();
         // window.location.reload();
       } catch (error) {

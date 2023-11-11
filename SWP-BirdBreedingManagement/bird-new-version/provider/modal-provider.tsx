@@ -11,6 +11,7 @@ import ChangeCageForm from "@/components/Form/ChangeCageForm";
 import AddBirdToSingleCage from "@/components/Form/AddBirdToSingleCage";
 import MoveCageForm from "@/components/Form/MoveCageForm";
 import SeparatePairForm from "@/components/Form/SeparatePairForm";
+import { DeleteProcessModal } from "@/components/Form/DeleteProcessForm";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -31,6 +32,7 @@ const ModalProvider = () => {
       <EditCageForm />
       <ViewProcessForm />
       <AddBirdChildForm />
+      <DeleteProcessModal />
     </>
   );
 };
