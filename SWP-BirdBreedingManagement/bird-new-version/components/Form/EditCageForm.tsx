@@ -85,13 +85,14 @@ const EditCageForm = () => {
           `https://bird-swp.azurewebsites.net/api/cages/${data.cage.cageId}`,
           values
         );
-        toast.success("Cập nhật lồng thành công");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        onClose();
+        await refetch()
         form.reset();
+        toast.success("Cập nhật lồng thành công");
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        onClose();
+
 
         router.refresh();
-        await refetch()
       } catch (error) {
         console.log(error);
       }
