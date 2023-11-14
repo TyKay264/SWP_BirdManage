@@ -112,11 +112,10 @@ const AddBirdForm = () => {
         "https://bird-swp.azurewebsites.net/api/birds/create",
         values
       );
-      //await axios.post("http://localhost:3001/birds", values);
       console.log(values);
       form.reset();
       router.refresh();
-      router.push('/staff')
+      router.push('/bird')
     } catch (error) {
       console.log(error);
     }
