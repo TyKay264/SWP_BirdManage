@@ -9,11 +9,12 @@ interface BirdCardProps {
   birdId?: string;
   image?: string;
   birdType?: string;
+  showMoveBirdCage?: boolean;
   // sex?: string;
 }
 
 
-const BirdCard = ({ birdRole, birdId, image, birdType }: BirdCardProps) => {
+const BirdCard = ({ birdRole, birdId, image, birdType, showMoveBirdCage }: BirdCardProps) => {
   return (
     <div className="col-lg-3">
       <div className="card">
@@ -39,9 +40,10 @@ const BirdCard = ({ birdRole, birdId, image, birdType }: BirdCardProps) => {
                 </Link>
                 <p className="mb-md-2 mb-sm-4 mb-2">Loại : {birdType}</p>
                 {/* <p className="mb-md-2 mb-sm-4 mb-2">Giới tính : {sex}</p> */}
-                <div className="">
+                {showMoveBirdCage && <div className="">
                   <MoveCageForm birdId={birdId} />
-                </div>
+                </div>}
+
               </div>
 
             </div>

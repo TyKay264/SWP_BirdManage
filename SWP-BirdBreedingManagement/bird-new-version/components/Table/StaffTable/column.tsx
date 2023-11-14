@@ -14,8 +14,10 @@ export type StaffColumn = {
   email: string;
   fullName: string;
   createdAt?: string,
-  role: string
+  role: string,
+  userImage: string
 };
+
 
 export const columns: ColumnDef<StaffColumn>[] = [
   {
@@ -38,6 +40,7 @@ export const columns: ColumnDef<StaffColumn>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
+
       return (
         <Button
           variant="ghost"

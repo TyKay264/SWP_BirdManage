@@ -43,7 +43,8 @@ import useCageA from "@/hooks/useCageA";
 
 
 const formSchema = z.object({
-    cageId: z.string(),
+    // cageId: z.string(),
+    ageRange: z.string()
 });
 
 const ChangeCageForm = () => {
@@ -54,23 +55,27 @@ const ChangeCageForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            cageId: ""
+            // cageId: ""
+            ageRange: ""
         },
     });
 
-
-    const { cages } = useCageA();
+    // useEffect(() => {
+    //     if (data) {
+    //         form.setValue("ageRange", data.bird?.ageRange);
+    //     }
+    // }, [data, form]);
+    // console.log(data)
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        //TO DO xử lý form (api)
         console.log(values);
-        //console.log(data.bird.birdId)
         if (data && data?.egg) {
             try {
                 await axios.patch(
                     `https://bird-swp.azurewebsites.net/api/birds/${data.egg.birdId}`,
                     values
                 );
+                onClose();
                 form.reset();
             } catch (error) {
                 console.log(error);
@@ -85,10 +90,6 @@ const ChangeCageForm = () => {
             <DialogContent className="sm:min-w-[1000px]">
                 <DialogHeader>
                     <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
-                    {/* <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription> */}
                 </DialogHeader>
                 <div className="card">
                     <div className="card-header ">
@@ -100,38 +101,34 @@ const ChangeCageForm = () => {
                                 <form onSubmit={form.handleSubmit(onSubmit)}>
                                     <div className="row">
                                         <div className="col-xl-8">
-
                                             <div className="form-group">
                                                 <FormField
                                                     control={form.control}
-                                                    name="cageId"
+                                                    name="ageRange"
                                                     render={({ field }) => (
                                                         <FormItem>
+                                                            {/* <FormLabel>Lứa tuổi</FormLabel> */}
                                                             <Select
                                                                 disabled={isLoading}
-                                                                onValueChange={(value) => {
-                                                                    field.onChange(value);
-                                                                    form.setValue("cageId", value);
-                                                                }}
+                                                                onValueChange={field.onChange}
                                                                 value={field.value}
                                                                 defaultValue={field.value}
                                                             >
                                                                 <FormControl>
                                                                     <SelectTrigger>
-                                                                        <SelectValue placeholder="Chọn mã lồng" />
+                                                                        <SelectValue placeholder="Chọn lứa tuổi" />
                                                                     </SelectTrigger>
                                                                 </FormControl>
                                                                 <SelectContent>
                                                                     <SelectGroup>
-                                                                        <SelectLabel>Chọn mã lồng</SelectLabel>
-                                                                        {cages.map((cage) => (
-                                                                            <SelectItem
-                                                                                key={cage.cageId}
-                                                                                value={cage.cageId}
-                                                                            >
-                                                                                {cage.cageId}
-                                                                            </SelectItem>
-                                                                        ))}
+                                                                        <SelectLabel>Chọn lứa tuổi</SelectLabel>
+                                                                        <SelectItem value="Non">Non</SelectItem>
+                                                                        <SelectItem value="Chuyền">
+                                                                            Chuyền
+                                                                        </SelectItem>
+                                                                        <SelectItem value="Trưởng thành">
+                                                                            Trưởng thành
+                                                                        </SelectItem>
                                                                     </SelectGroup>
                                                                 </SelectContent>
                                                             </Select>

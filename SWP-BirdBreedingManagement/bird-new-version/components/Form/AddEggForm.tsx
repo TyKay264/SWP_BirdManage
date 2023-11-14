@@ -37,6 +37,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { Calendar } from "../ui/calendar";
+import { toast } from "react-toastify";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 const formSchema = z.object({
@@ -49,6 +50,7 @@ interface AddEggFormProps {
 }
 
 const AddEggForm = ({ cageId }: AddEggFormProps) => {
+  const { isOpen, type, onClose, data } = useModal();
   const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -68,6 +70,9 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
         `https://bird-swp.azurewebsites.net/api/birdreproductions/addegg/${cageId}`,
         values
       );
+      toast.success(`Thêm ${values.number} trứng vào quá trình thành công`);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      onClose();
       form.reset();
       router.refresh()
     } catch (error) {
@@ -78,7 +83,7 @@ const AddEggForm = ({ cageId }: AddEggFormProps) => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={onClose}>
       <DialogTrigger asChild>
         <div className="text-center mt-5">
           <Button variant="success" style={{ backgroundColor: 'dodgerblue', borderColor: 'dodgerblue' }}>

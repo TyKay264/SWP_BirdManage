@@ -1,7 +1,10 @@
+import { useAuth } from "@/context/authContext";
 import { Staff } from "@/type";
 import React from "react";
 
+
 const Profile = ({
+
   userId,
   username,
   email,
@@ -10,7 +13,10 @@ const Profile = ({
   createdBy,
   createdDate,
   role,
+  userImage
 }: Staff) => {
+  const { user } = useAuth();
+  const isAdmin = user?.role === "ADMIN";
   return (
     <div className="card">
       <div className="card-header">
@@ -22,19 +28,14 @@ const Profile = ({
             <div className="row">
               <div className="col-xl-4">
                 <div className="form-group row widget-3">
-                  <div className="form-input">
+                  {/* <div className="form-input">
                     <label className="labeltest" htmlFor="file-ip-1">
                       <span> ... </span>
                     </label>
-                    <input
-                      type="file"
-                      id="file-ip-1"
-                      accept="image/*"
-                      // onchange="showPreview(event);"
-                    />
-                    <div className="preview">
-                      <img id="file-ip-1-preview" src="#" alt="img" />
-                    </div>
+
+                  </div> */}
+                  <div className="w-[300px] h-[200px]">
+                    <img src={userImage ? userImage : "/assets/images/noimage.jpg"} alt="image" className="rounded-md " />
                   </div>
                 </div>
               </div>
@@ -55,20 +56,21 @@ const Profile = ({
                   <div className="grow pl-2.5">{email}</div>
                 </div>
 
-                <div className="flex justify-between mb-2.5;">
+                {isAdmin && <div className="flex justify-between mb-2.5;">
                   <label className="basis-[30%]">Password:</label>
                   <div className="grow pl-2.5">{password}</div>
-                </div>
+                </div>}
+
 
                 <div className="flex justify-between mb-2.5;">
                   <label className="basis-[30%]">Full Name:</label>
                   <div className="grow pl-2.5">{fullName}</div>
                 </div>
 
-                <div className="flex justify-between mb-2.5;">
+                {/* <div className="flex justify-between mb-2.5;">
                   <label className="basis-[30%]">Created By:</label>
                   <div className="grow pl-2.5">{createdBy}</div>
-                </div>
+                </div> */}
 
                 <div className="flex justify-between mb-2.5;">
                   <label className="basis-[30%]">Created Date:</label>

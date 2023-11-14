@@ -22,7 +22,9 @@ import { Bird_reproduction } from "@/type";
 
 const ViewProcessForm = () => {
 
+
   const { isOpen, type, onClose, data } = useModal();
+  console.log(data)
 
   const listEgg = data.process?.eggList;
 
@@ -47,6 +49,7 @@ const ViewProcessForm = () => {
       ? format(new Date(item.expAdultBirdDate), "do-M-yyyy", { locale: vi })
       : "N/A", // Provide a default value if hatchDate is undefined,
   }));
+
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>

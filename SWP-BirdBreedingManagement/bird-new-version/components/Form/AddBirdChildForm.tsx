@@ -96,7 +96,7 @@ const AddBirdChildForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
     console.log(values);
-    console.log(parsedDate)
+    // console.log(parsedDate)
 
     try {
       if (data && data.egg) {
@@ -104,9 +104,10 @@ const AddBirdChildForm = () => {
           `https://bird-swp.azurewebsites.net/api/birdreproductions/${data.egg.reproductionId}`,
           values
         );
+        onClose();
         form.reset();
         router.refresh();
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.log(error);

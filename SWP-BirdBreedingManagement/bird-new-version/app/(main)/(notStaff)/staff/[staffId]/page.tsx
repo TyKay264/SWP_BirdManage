@@ -46,6 +46,7 @@ const StaffIdPage = ({ params }: StaffIdPageProps) => {
               // created_by={IdFilter?.created_by}
               createdDate={IdFilter?.createdDate}
               role={IdFilter.role}
+              userImage={IdFilter.userImage}
             />
           </div>
         </div>

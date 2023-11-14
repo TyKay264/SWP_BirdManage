@@ -59,7 +59,7 @@ const formSchema = z.object({
   email: z.string().min(2),
   fullName: z.string().min(2),
   role: z.string().min(1),
-  // image: z.string()
+  userImage: z.string()
 });
 
 const EditStaffForm = () => {
@@ -77,7 +77,7 @@ const EditStaffForm = () => {
       email: "",
       fullName: "",
       role: "",
-      // image: ""
+      userImage: ""
     },
   });
 
@@ -87,7 +87,7 @@ const EditStaffForm = () => {
       form.setValue("email", data.staff.email);
       form.setValue("fullName", data.staff.fullName);
       form.setValue("role", data.staff.role);
-      // form.setValue("image", data.staff.image);
+      form.setValue("userImage", data.staff.userImage);
     }
   }, [data, form]);
 
@@ -96,6 +96,8 @@ const EditStaffForm = () => {
   // }
 
   // const { mutate } = useMutation(updateStaff)
+  console.log(data.staff)
+
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TO DO xử lý form (api)
@@ -109,7 +111,6 @@ const EditStaffForm = () => {
         );
 
         toast.success("Cập nhật nhân viên thành công");
-        // await new Promise((resolve) => setTimeout(resolve, 2000));
         onClose();
 
         await refetch();
@@ -146,9 +147,9 @@ const EditStaffForm = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="row">
                     <div className="col-xl-6">
-                      {/* <FormField
+                      <FormField
                         control={form.control}
-                        name="image"
+                        name="userImage"
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
@@ -161,7 +162,7 @@ const EditStaffForm = () => {
                             <FormMessage />
                           </FormItem>
                         )}
-                      /> */}
+                      />
                     </div>
 
                     <div className="col-xl-6">

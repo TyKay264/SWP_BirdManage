@@ -17,6 +17,7 @@ export interface Staff {
   createdBy?: string;
   createdDate?: string;
   role: StaffRole;
+  userImage: string;
 }
 
 export interface Birdtype {
@@ -156,6 +157,7 @@ export type StaffColumn = {
   fullName: string;
   createdAt?: string;
   role: string;
+  userImage: string;
 };
 
 export type BirdColumn = {

@@ -4,7 +4,7 @@ import BabyBirdCard from "@/components/CageId/BabyBirdCard";
 import BirdCard from "@/components/CageId/BirdCard";
 import NotificationCard from "@/components/CageId/NotificationCard";
 import ProcessCard from "@/components/CageId/ProcessCard";
-import React from "react";
+import React, { useContext, useState } from "react";
 import SpStaff from "@/components/CageId/SpStaff";
 import BreadScrum from "@/components/BreadScrum";
 import useCages from "@/hooks/useCage";
@@ -23,12 +23,17 @@ import SeparatePairForm from "@/components/Form/SeparatePairForm";
 import useCageId from "@/hooks/useCageId";
 import AddStaffMangeForm from "@/components/Form/AddStaffManageForm";
 import { useModal } from "@/hooks/useModal";
+import { useAuth } from "@/context/authContext";
 
 const CageIdPage = ({ params }: { params: { cageId: string } }) => {
   // const { cages, loading } = useCages();
   const { cage, loading } = useCageId();
   const { onOpen } = useModal();
   const router = useRouter();
+  const { user } = useAuth();
+  const isStaff = user?.role === "STAFF";
+
+  const [showMoveBirdCage, setShowMoveBirdCage] = useState(false);
 
   // const FindCageById = cages.find((cage) => cage.cageId === params.cageId);
   //Data for process' info
@@ -108,6 +113,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                   birdId={item.birdId}
                   image={item.image}
                   birdType={item.birdType?.name}
+                  showMoveBirdCage={!showMoveBirdCage}
                 />
               ))}
             </div>
@@ -142,7 +148,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                       <div className="card m-t-30">
                         <div className="card-body ">
                           <div className="col-md-6 col-lg-4">
-                            <AddStaffMangeForm userId={cage?.user?.userId} />
+                            {!isStaff && <AddStaffMangeForm userId={cage?.user?.userId} />
+                            }
 
                             {cage?.user && (
                               <SpStaff
@@ -219,6 +226,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                 birdId={item.bird?.birdId}
                 image={item.bird?.image}
                 birdType={item.bird?.birdType?.name}
+                showMoveBirdCage={showMoveBirdCage}
               // sex={item.bird?.sex}
               />
 
@@ -282,7 +290,8 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                     <div className="card m-t-30">
                       <div className="card-body ">
                         <div className="col-md-6 col-lg-4">
-                          <AddStaffMangeForm userId={cage?.user?.userId} />
+                          {!isStaff && <AddStaffMangeForm userId={cage?.user?.userId} />}
+
                           {cage?.user && (
                             <SpStaff
                               id={cage.user.userId}
@@ -290,6 +299,7 @@ const CageIdPage = ({ params }: { params: { cageId: string } }) => {
                               role={cage.user.role}
                             />
                           )}
+
                         </div>
                       </div>
                     </div>

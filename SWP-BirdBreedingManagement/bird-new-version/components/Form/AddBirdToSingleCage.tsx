@@ -14,7 +14,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { toast } from "react-toastify";
 import {
     Dialog,
     DialogContent,
@@ -74,7 +74,10 @@ const AddBirdToSingleCage = () => {
                 `https://bird-swp.azurewebsites.net/api/cages/addbird/${params.cageId}`,
                 values
             );
+            toast.success(`Cập nhật chim ${values.birdId} vào lồng mới ${params.cageId} thành công`);
+            await new Promise((resolve) => setTimeout(resolve, 2000));
             form.reset();
+            onClose();
             router.refresh();
         } catch (error) {
             console.log(error);
@@ -84,7 +87,7 @@ const AddBirdToSingleCage = () => {
     const isLoading = form.formState.isSubmitting;
 
     return (
-        <Dialog>
+        <Dialog onOpenChange={onClose}>
             <DialogTrigger asChild>
                 <Button variant="default" className="mb-2">Thêm chim</Button>
             </DialogTrigger>

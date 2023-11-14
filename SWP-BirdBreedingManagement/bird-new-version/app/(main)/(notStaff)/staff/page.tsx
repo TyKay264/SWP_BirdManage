@@ -42,6 +42,7 @@ const StaffPage = () => {
     fullName: staff.fullName,
     createdAt: staff.createdDate,
     role: staff.role,
+    userImage: staff.userImage,
   }));
 
 
