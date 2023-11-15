@@ -15,12 +15,11 @@ import { fetchBirdById } from "@/apis/page";
 
 interface BirdIdPageParams {
   params: {
-    birdId: string
-  }
+    birdId: string;
+  };
 }
 
 const BirdIdPage = ({ params }: BirdIdPageParams) => {
-
   const { data: bird, isLoading: birdListLoading } = useQuery<Bird>({
     queryKey: ["bird", params.birdId],
     queryFn: () => fetchBirdById(params.birdId),
@@ -55,22 +54,22 @@ const BirdIdPage = ({ params }: BirdIdPageParams) => {
                     hatch_date={
                       bird?.hatchDate
                         ? format(new Date(bird?.hatchDate), "do-M-yyyy", {
-                          locale: vi,
-                        })
+                            locale: vi,
+                          })
                         : "Chưa xác định"
                     }
                     swingBranchDate={
                       bird?.swingBranchDate
                         ? format(new Date(bird?.swingBranchDate), "do-M-yyyy", {
-                          locale: vi,
-                        })
+                            locale: vi,
+                          })
                         : "Chưa xác định"
                     }
                     adultBirdDate={
                       bird?.adultBirdDate
                         ? format(new Date(bird?.adultBirdDate), "do-M-yyyy", {
-                          locale: vi,
-                        })
+                            locale: vi,
+                          })
                         : "Chưa xác định"
                     }
                     father_id={bird?.father?.birdId}
@@ -89,7 +88,6 @@ const BirdIdPage = ({ params }: BirdIdPageParams) => {
                     grandfather_mother_id={bird?.mother?.father?.birdId}
                     grandmother_father_id={bird?.father?.mother?.birdId}
                     grandmother_mother_id={bird?.mother?.mother?.birdId}
-
                   />
                 </div>
               </div>

@@ -115,7 +115,7 @@ const AddBirdForm = () => {
       console.log(values);
       form.reset();
       router.refresh();
-      router.push('/bird')
+      router.push("/bird");
     } catch (error) {
       console.log(error);
     }
@@ -290,15 +290,11 @@ const AddBirdForm = () => {
                                   variant={"outline"}
                                   className={cn(
                                     "w-[240px] pl-3 text-left font-normal",
-                                    !field.value &&
-                                    "text-muted-foreground"
+                                    !field.value && "text-muted-foreground"
                                   )}
                                 >
                                   {field.value ? (
-                                    format(
-                                      new Date(field.value),
-                                      "dd-MM-yyyy"
-                                    )
+                                    format(new Date(field.value), "dd-MM-yyyy")
                                   ) : (
                                     <span>Chọn ngày sinh</span>
                                   )}
@@ -353,7 +349,10 @@ const AddBirdForm = () => {
                               <SelectGroup>
                                 <SelectLabel>Chọn mã lồng</SelectLabel>
                                 {cages.map((cage) => (
-                                  <SelectItem key={cage.cageId} value={cage.cageId}>
+                                  <SelectItem
+                                    key={cage.cageId}
+                                    value={cage.cageId}
+                                  >
                                     {cage.cageId}
                                   </SelectItem>
                                 ))}
@@ -474,7 +473,7 @@ const AddBirdForm = () => {
                       type="submit"
                       className="btn btn-primary float-end"
                     >
-                      Thêm Chích Chòe
+                      Thêm chim
                     </button>
                   </div>
                 </div>

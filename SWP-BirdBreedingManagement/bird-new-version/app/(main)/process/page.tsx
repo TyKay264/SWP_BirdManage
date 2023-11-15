@@ -6,18 +6,24 @@ import Loading from "@/components/LoadingComponent";
 import useProcesses from "@/hooks/useProcess";
 
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProces } from "@/apis/page";
 
 const ProcessPage = () => {
-  const { processes, loading } = useProcesses();
   // console.log(processes);
+  const { data: processes, isLoading } = useQuery({
+    queryKey: ["reproductionProcess"],
+    queryFn: fetchProces,
+  });
 
-  if (!loading)
+  if (isLoading)
     return (
       <div className="content-body h-[650px]">
         <Loading />
       </div>
     );
 
+  if (!processes) return null;
   // if (!processes) return null;
   const formatProcesses: ProcessColumn[] = processes.map((process) => ({
     id: process.processId,
@@ -25,14 +31,10 @@ const ProcessPage = () => {
     fatherId: process.cockId,
     cage: process.cageId,
     isDone: process.isDone,
-    // motherId: process.henReproduction.bird?.birdId,
-    // fatherId: process.cockReproduction.bird?.birdId,
-    // cage: process.cage.location,
+
     type: process.birdTypeName,
-    eggList: process.eggsList,
+    eggList: process?.eggsList,
   }));
-
-
 
   return (
     <>

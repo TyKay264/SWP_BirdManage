@@ -60,7 +60,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Copy className="mr-2 h-4 w-4" /> Copy Id
           </DropdownMenuItem> */}
           <DropdownMenuItem
-            onClick={() => onOpen("ViewProcessForm", { process: data })}
+            onClick={() => onOpen("ViewProcessForm", { processId: data.id })}
           >
             <Edit className="mr-2 h-4 w-4" /> Chi tiết
           </DropdownMenuItem>

@@ -45,9 +45,9 @@ export interface Bird {
   weight: number;
   birdType: Birdtype;
   cage: Cage;
-  actEggHatchDate?: string; // Date;
-  actSwingBranchDate?: string; // Date;
-  actAdultBirdDate?: string; // Date;
+  actEggHatchDate: string; // Date;
+  actSwingBranchDate: string; // Date;
+  actAdultBirdDate: string; // Date;
   cageId?: string;
   father?: Bird;
   mother?: Bird;
@@ -104,7 +104,7 @@ export interface Bird_reproduction {
   actEggHatchDate?: string; // Date;
   actSwingBranch?: string; // Date;
   actAdultBirdDate?: string; // Date;
-
+  actSwingBranchDate?: string;
   expEggHatchDate?: string; // DATE
   expSwingBranchDate?: string; // DATE
   expAdultBirdDate?: string; // DATE
@@ -203,6 +203,7 @@ export type EggColumn = {
 
   actEggHatchDate?: string;
   actSwingBranch?: string;
+  actSwingBranchDate?: string;
   actAdultBirdDate?: string;
   expEggHatchDate?: string;
   expSwingBranchDate?: string;

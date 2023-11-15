@@ -1,4 +1,10 @@
-import { BirdColumn, CageColumn, ProcessColumn, StaffColumn, EggColumn } from "@/type";
+import {
+  BirdColumn,
+  CageColumn,
+  ProcessColumn,
+  StaffColumn,
+  EggColumn,
+} from "@/type";
 import { create } from "zustand";
 
 export type ModalStyle =
@@ -14,7 +20,7 @@ export type ModalStyle =
   | "MoveCageForm"
   | "SeparatePair"
   | "AddStaffMangeForm"
-  | "DeleteProcess"
+  | "DeleteProcess";
 
 interface ModalData {
   bird?: BirdColumn;
