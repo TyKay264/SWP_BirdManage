@@ -12,7 +12,7 @@ import { fetchProces } from "@/apis/page";
 const ProcessPage = () => {
   // console.log(processes);
   const { data: processes, isLoading } = useQuery({
-    queryKey: ["reproductionProcess"],
+    queryKey: ["processss"],
     queryFn: fetchProces,
   });
 

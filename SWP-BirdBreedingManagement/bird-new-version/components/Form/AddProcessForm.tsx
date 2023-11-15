@@ -31,7 +31,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 import { toast } from "react-toastify";
 
 import axios from "axios";
@@ -41,6 +41,7 @@ import { Bird } from "@/type";
 import BirdInitDetail from "../BirdInitDetail/BirdInitDetail";
 import { Button } from "../ui/button";
 import Loading from "../LoadingComponent";
+import { useQuery } from "@tanstack/react-query";
 
 const formSchema = z.object({
   birdTypeName: z.string().min(1),
@@ -51,6 +52,7 @@ const formSchema = z.object({
 });
 
 const AddProcessForm = () => {
+  const { refetch } = useQuery({ queryKey: ["processss"] });
   const [selectedBirdType, setSelectedBirdType] = useState("");
   const [showInfoBird, setShowInfoBird] = useState(false);
   const [selectedBirdCockInfo, setSelectedBirdCockInfo] = useState<null | Bird>(
@@ -91,12 +93,17 @@ const AddProcessForm = () => {
         values
       );
       form.reset();
+      await refetch();
       router.push(`/cage/${values.cageId}`);
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
-        alert(`Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`);
+        alert(
+          `Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`
+        );
         // alert("Cặp chim này không hợp nhau")
-        toast.error(`Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`);
+        toast.error(
+          `Cặp chim ${values.cockId} và ${values.henId} có nguy cơ không hợp nhau`
+        );
         await axios.post(
           "https://bird-swp.azurewebsites.net/api/reproductionprocess/create?confirm=true",
           values
@@ -107,7 +114,6 @@ const AddProcessForm = () => {
       }
     }
   };
-
 
   const isLoading = form.formState.isSubmitting;
 
