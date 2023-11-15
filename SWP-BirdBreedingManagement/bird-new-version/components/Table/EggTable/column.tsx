@@ -93,7 +93,7 @@ export const columns: ColumnDef<EggColumn>[] = [
     cell: ({ row }) => {
 
       const isNotActHatchDate = row.original.actEggHatchDate === "N/A"
-      console.log(typeof row.original.expEggHatchDate)
+      //console.log(typeof row.original.expEggHatchDate)
       return (
         <>
           {isNotActHatchDate ? (

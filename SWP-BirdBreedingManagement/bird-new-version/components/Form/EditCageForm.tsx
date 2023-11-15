@@ -30,6 +30,7 @@ import { toast } from "react-toastify";
 import useStaffs from "@/hooks/useStaffs";
 import { useQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
+import { useAuth } from "@/context/authContext";
 type locationType = {
   location: string;
   name: string;
@@ -63,6 +64,8 @@ const EditCageForm = () => {
   const isModalOpen = isOpen && type === "EditCageForm";
   const router = useRouter();
   const { staffs } = useStaffs();
+  const { user } = useAuth();
+  const isStaff = user?.role === "STAFF";
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -172,7 +175,7 @@ const EditCageForm = () => {
                             <FormItem>
                               <FormLabel>Tình trạng</FormLabel>
                               <Select
-                                disabled={isLoading}
+                                disabled={data.cage?.quantity !== 0}
                                 onValueChange={(selectedValue: any) => {
                                   // Convert the selected string value to a boolean
                                   const newValue = selectedValue === "true";
@@ -199,7 +202,8 @@ const EditCageForm = () => {
                           )}
                         />
                       </div>
-                      <div className="form-group">
+
+                      {!isStaff && <div className="form-group">
                         <FormField
                           control={form.control}
                           name="userId"
@@ -238,7 +242,8 @@ const EditCageForm = () => {
                             </FormItem>
                           )}
                         />
-                      </div>
+                      </div>}
+
 
                       <div className="form-group text-right ">
                         <button
